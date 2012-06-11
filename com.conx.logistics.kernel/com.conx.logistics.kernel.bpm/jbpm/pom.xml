@@ -25,9 +25,9 @@
 		<module>jbpm.taskserver.persistence</module>
 		<module>jbpm.persistence.datasource</module>
 		<module>jbpm.bpmserver.persistence</module>
-  		<!-- <module>jbpm.core.mock</module> -->
   		<!-- <module>jpbm.bpmserver.tests</module> -->
   		<!-- <module>jpbm-osgi-bundles</module> -->
   		<module>jbpm.bpmserver.tests.standalone</module>
+  		<module>jbpm.core.mock</module>
 	</modules>
 </project>

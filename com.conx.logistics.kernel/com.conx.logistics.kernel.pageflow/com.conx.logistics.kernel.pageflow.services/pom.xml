@@ -21,6 +21,11 @@
 			<version>0.9.2-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>wizards-for-vaadin</artifactId>
+		   <version>0.4.4</version>
+		</dependency>
 		
 		<!-- ConX -->
 		<dependency>

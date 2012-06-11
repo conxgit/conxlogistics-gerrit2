@@ -28,7 +28,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	}
 	
 	/** EntityManagerFactories */
-	private final Map<String, List<IPageFlowPage>> pageCache = Collections
+	private static final Map<String, List<IPageFlowPage>> pageCache = Collections
 			.synchronizedMap(new HashMap<String, List<IPageFlowPage>>());	
 	
 	private List<IPageFlowPage> getPages(String processId) {
@@ -76,7 +76,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	@Override
 	public IPageFlowSession startPageFlowSession(String userId,
 			TaskDefinition td) {
-		IPageFlowSession session = new PageFlowSessionImpl(getPages(td.getProcessId()), bpmService.startNewProcess(userId, td.getProcessId()));
+		IPageFlowSession session = new PageFlowSessionImpl(getPages(td.getProcessId()));
 		sessions.add(session);
 		return session;
 	}	

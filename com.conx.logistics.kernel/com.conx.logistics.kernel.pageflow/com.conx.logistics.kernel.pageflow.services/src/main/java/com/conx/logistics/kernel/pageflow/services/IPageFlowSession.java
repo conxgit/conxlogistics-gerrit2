@@ -9,4 +9,7 @@ public interface IPageFlowSession {
 	public IBPMProcessInstance getBPMProcessInstance();
 	public List<IPageFlowPage> getPages();
 	public Component getWizardComponent();
+	public void nextPage();
+	public void previousPage();
+	public void abort();
 }

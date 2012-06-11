@@ -50,6 +50,7 @@
 		<module>drools-core</module>
 		<module>drools-persistence</module>
 		<module>javax.security.jacc</module>
+		<module>vaadin-addon-wizard</module>
 	</modules>
 	<build>
 		<plugins>

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.pageflow.services;version="1
  .0.0";uses:="com.conx.logistics.kernel.bpm.services,com.conx.logistic
- s.mdm.domain.task,com.vaadin.ui"
+ s.mdm.domain.task,com.vaadin.ui,org.vaadin.teemu.wizards"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -12,5 +12,5 @@ Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.services
 Import-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
  ,com.conx.logistics.mdm.domain.task;version="1.0.0",com.vaadin.ui;ver
- sion="[6.7.0,7.0.0)"
+ sion="[6.7.0,7.0.0)",org.vaadin.teemu.wizards;version="0.4.4"
 

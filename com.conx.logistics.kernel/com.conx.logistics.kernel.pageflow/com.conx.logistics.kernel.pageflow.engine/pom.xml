@@ -14,6 +14,11 @@
 			<artifactId>vaadin</artifactId>
 			<version>6.7.5</version>
 		</dependency>
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>wizards-for-vaadin</artifactId>
+		   <version>0.4.4</version>
+		</dependency>
 		
 		<!-- ConX -->
 		<dependency>

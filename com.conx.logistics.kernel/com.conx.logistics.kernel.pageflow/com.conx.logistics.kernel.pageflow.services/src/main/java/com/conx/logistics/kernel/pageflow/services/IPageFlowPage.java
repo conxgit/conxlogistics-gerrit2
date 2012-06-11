@@ -2,24 +2,53 @@ package com.conx.logistics.kernel.pageflow.services;
 
 import java.util.Map;
 
+import org.vaadin.teemu.wizards.WizardStep;
+
 import com.vaadin.data.Container;
 import com.vaadin.ui.Component;
 
-public interface IPageFlowPage {
-	
+public abstract class IPageFlowPage implements WizardStep {
 	public static final String PROCESS_ID = "PROCESS_ID"; // Process Id in BPMN
-//	public static final String TASK_ID = "TASK_ID"; // Task Id in BPMN
 	
-	public String getTaskId();
+	private IPageFlowSession session;
 	
-	public Component getPageComponent();
+	public void bindSession(IPageFlowSession session) {
+		this.session = session;
+	}
 	
-	public void setDataContainerMap(Map<String,Container> containerMap);
-	
-	public Map<String,Container> getDataContainerMap();
-	
-	public String getTitle();
+	public abstract String getTaskId();
 	
 	@Override
-	public boolean equals(Object o);
+	public abstract Component getContent();
+	
+	public abstract void setDataContainerMap(Map<String,Container> containerMap);
+	
+	public abstract Map<String,Container> getDataContainerMap();
+	
+	@Override
+	public abstract String getCaption();
+	
+	@Override
+	public boolean onBack() {
+		if (session != null) {
+			session.previousPage();
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean onAdvance() {
+		if (session != null) {
+			session.nextPage();
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof IPageFlowPage) {
+			return getTaskId().equals(((IPageFlowPage)o).getTaskId()); 
+		}
+		return false;
+	}
 }

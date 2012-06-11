@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>domain</module>
-  	<!-- <module>pageflow</module> -->
+  	<module>pageflow</module>
   	<module>workitems</module>
   </modules>
 </project>

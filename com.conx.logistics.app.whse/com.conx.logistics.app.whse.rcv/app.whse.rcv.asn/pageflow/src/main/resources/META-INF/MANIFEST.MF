@@ -11,5 +11,6 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
 Import-Package: com.conx.logistics.kernel.pageflow.services;version="1
- .0.0",com.vaadin.ui;version="[6.7.0,7.0.0)"
+ .0.0",com.vaadin.ui;version="[6.7.0,7.0.0)",org.vaadin.teemu.wizards;
+ version="0.4.4"
 

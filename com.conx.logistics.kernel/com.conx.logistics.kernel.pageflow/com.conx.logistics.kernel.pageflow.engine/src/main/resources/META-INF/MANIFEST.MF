@@ -1,10 +1,12 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.pageflow.engine;version="1.0
- .0"
+ .0";uses:="com.conx.logistics.kernel.bpm.services,com.conx.logistics.
+ kernel.pageflow.services,com.conx.logistics.mdm.domain.task,com.vaadi
+ n.ui"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.1.0.BUILD-20101220120024
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConX kernel PageFlow Engine
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
@@ -14,5 +16,5 @@ Import-Package: com.conx.logistics.kernel.bpm.impl.jbpm.core.mock;vers
  m.conx.logistics.kernel.pageflow.services;version="1.0.0",com.conx.lo
  gistics.mdm.domain.task;version="1.0.0",com.vaadin;version="[6.7.0,7.
  0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)",org.slf4j;version="[1.6.0
- ,1.7.0)"
+ ,1.7.0)",org.vaadin.teemu.wizards;version="0.4.4"
 
