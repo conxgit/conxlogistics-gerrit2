@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.conx.logistics</groupId>
+	<artifactId>com.conx.logistics.top-level-solution</artifactId>
+	<version>1.0.0</version>
+	<name>com.conx.logistics.top-level-solution</name>
+	<packaging>pom</packaging>
+	<description>com.conx.logistics.top-level-solution</description>
+	<modules>
+		<module>com.conx.logistics.testingframework</module>	
+		<module>com.conx.logistics.parent</module>
+		<module>com.conx.logistics.thirdparty</module>	
+		<module>com.conx.logistics.common</module>
+		<module>com.conx.logistics.mdm</module>	
+		<module>com.conx.logistics.kernel</module>
+		<module>com.conx.logistics.app.whse</module>		
+		<module>com.conx.logistics.web</module>
+		<module>com.conx.logistics.solution-plans</module>
+		<module>com.conx.logistics.distribution</module>
+	</modules>
+</project>

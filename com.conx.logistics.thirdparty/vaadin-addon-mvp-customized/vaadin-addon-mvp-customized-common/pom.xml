@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>com.conx.logistics.thirdparty.org.vaadin.addons.mvp-customized</artifactId>
+    <groupId>com.conx.logistics</groupId>
+    <version>0.9.2-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+  <artifactId>com.conx.logistics.thirdparty.org.vaadin.addons.mvp-common-customized</artifactId>
+  <name>MVP and UiBinder for Vaadin Customized</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
+  </dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.springsource.bundlor</groupId>
+				<artifactId>com.springsource.bundlor.maven</artifactId>
+				<executions>
+					<execution>
+						<id>build-manifest</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+						<phase>none</phase>
+						<configuration>
+							<inputPath>${project.build.directory}/${project.build.finalName}.${project.packaging}</inputPath>
+							<outputPath>${basedir}/src/main/resources</outputPath>
+							<!-- used to properly set-up versions for system packages -->
+							<osgiProfilePath>${basedir}/../../java6-server.profile</osgiProfilePath>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-bundle</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+						<phase>none</phase>
+						<configuration>
+							<inputPath>${project.build.directory}/${project.build.finalName}.${project.packaging}</inputPath>
+							<outputPath>${project.build.directory}/${project.build.finalName}.${project.packaging}</outputPath>
+							<!-- used to properly set-up versions for system packages -->
+							<osgiProfilePath>${basedir}/../../java6-server.profile</osgiProfilePath>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>  
+</project>

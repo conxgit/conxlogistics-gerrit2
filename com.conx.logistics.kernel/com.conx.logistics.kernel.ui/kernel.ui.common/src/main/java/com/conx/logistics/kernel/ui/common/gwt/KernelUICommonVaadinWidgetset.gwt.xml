@@ -1,0 +1,12 @@
+<module>
+	<!-- Inherit the default widget set -->
+	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
+
+    <inherits name="com.vaadin.addon.toolbar.widgetset.ToolbarWidgetset" />
+
+    <inherits name="org.vaadin.peter.contextmenu.ContextmenuWidgetset" />
+
+    <inherits name="org.vaadin.csstools.CssToolsWidgetset" />
+
+    <inherits name="org.vaadin.weelayout.WeelayoutWidgetset" />
+</module>

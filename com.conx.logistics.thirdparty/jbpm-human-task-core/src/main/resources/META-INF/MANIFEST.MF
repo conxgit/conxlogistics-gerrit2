@@ -1,0 +1,60 @@
+Manifest-Version: 1.0
+Export-Package: org.jbpm.eventmessaging;version="5.3.0.Final";uses:="o
+ rg.drools.task.service",org.jbpm.process.workitem.wsht;version="5.3.0
+ .Final";uses:="org.drools.runtime,org.drools.runtime.process,org.jbpm
+ .eventmessaging,org.jbpm.task,org.jbpm.task.service,org.jbpm.task.ser
+ vice.responsehandlers,org.jbpm.task.utils,org.slf4j",org.jbpm.task;ve
+ rsion="5.3.0.Final";uses:="javax.persistence,org.drools.runtime.proce
+ ss,org.jbpm.eventmessaging,org.jbpm.task.service,org.jbpm.task.servic
+ e.responsehandlers",org.jbpm.task.admin;version="5.3.0.Final";uses:="
+ org.drools.event,org.drools.event.process,org.jbpm.task.service.persi
+ stence",org.jbpm.task.event;version="5.3.0.Final";uses:="org.drools.e
+ vent,org.jbpm.eventmessaging,org.jbpm.task.service",org.jbpm.task.que
+ ry;version="5.3.0.Final";uses:="org.jbpm.task",org.jbpm.task.service;
+ version="5.3.0.Final";uses:="javax.naming,javax.naming.ldap,javax.per
+ sistence,org.drools,org.drools.runtime.process,org.drools.task.servic
+ e,org.jbpm.eventmessaging,org.jbpm.task,org.jbpm.task.admin,org.jbpm.
+ task.event,org.jbpm.task.service.persistence,org.jbpm.task.service.re
+ sponsehandlers,org.jbpm.task.utils,org.slf4j",org.jbpm.task.service.l
+ ocal;version="5.3.0.Final";uses:="org.drools.runtime,org.jbpm.eventme
+ ssaging,org.jbpm.task,org.jbpm.task.service",org.jbpm.task.service.pe
+ rsistence;version="5.3.0.Final";uses:="javax.persistence,org.drools.p
+ ersistence,org.jbpm.task,org.jbpm.task.admin,org.jbpm.task.service",o
+ rg.jbpm.task.service.responsehandlers;version="5.3.0.Final";uses:="or
+ g.drools.task.service,org.jbpm.eventmessaging,org.jbpm.task,org.jbpm.
+ task.service",org.jbpm.task.utils;version="5.3.0.Final";uses:="org.dr
+ ools.marshalling,org.drools.runtime,org.jbpm.task.service"
+Built-By: dev
+Tool: Bundlor 1.0.0.RELEASE
+Created-By: Apache Maven
+Bundle-Version: 5.3.0.Final
+Build-Jdk: 1.6.0_29
+Bundle-ManifestVersion: 2
+Bundle-Description: jBPM Human Task
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.jbpm.human-task-core
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: javax.activation;version="0",javax.jms;version="0",jav
+ ax.mail;version="0",javax.mail.internet;version="0",javax.mail.util;v
+ ersion="0",javax.naming;version="0",javax.naming.directory;version="0
+ ",javax.naming.ldap;version="0",javax.transaction;version="0",org.apa
+ che.mina.core.filterchain;version="2.0.2",org.apache.mina.core.future
+ ;version="2.0.2",org.apache.mina.core.service;version="2.0.2",org.apa
+ che.mina.core.session;version="2.0.2",org.apache.mina.filter.codec;ve
+ rsion="2.0.2",org.apache.mina.filter.codec.serialization;version="2.0
+ .2",org.apache.mina.filter.logging;version="2.0.2",org.apache.mina.tr
+ ansport.socket;version="2.0.2",org.apache.mina.transport.socket.nio;v
+ ersion="2.0.2",org.hibernate;version="3.6.0.Final",org.hibernate.cfg;
+ version="3.6.0.Final",org.hibernate.classic;version="3.6.0.Final",org
+ .hibernate.usertype;version="3.6.0.Final",org.hornetq.api.core;versio
+ n="0",org.hornetq.api.core.client;version="0",org.hornetq.core.config
+ ;version="0",org.hornetq.core.config.impl;version="0",org.hornetq.cor
+ e.remoting.impl.netty;version="0",org.hornetq.core.server;version="0"
+ ,org.jaxen;version="1.1.1",org.jaxen.jdom;version="1.1.1",org.jbpm.pr
+ ocess.workitem.email;version="0";resolution:="optional",org.mvel2;ver
+ sion="2.1",org.mvel2.compiler;version="2.1",org.mvel2.integration;ver
+ sion="2.1",org.mvel2.integration.impl;version="2.1",org.mvel2.templat
+ es;version="2.1",org.osgi.framework;version="0",org.slf4j;version="[1
+ .6.1,1.7.0)"
+Archiver-Version: Plexus Archiver
+

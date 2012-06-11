@@ -1,0 +1,52 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.client.web.app.servlet;version="1.0
+ .0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.vaadin,com.vaa
+ din.terminal.gwt.server,javax.servlet,javax.servlet.http,org.springfr
+ amework.beans.factory.annotation,org.springframework.stereotype,org.s
+ pringframework.transaction.annotation"
+Import-Bundle: com.springsource.org.apache.taglibs.standard;version="[
+ 1.1.2,1.3)"
+Bundle-ClassPath: .,WEB-INF/classes
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Logistics Vaadin Frontend
+Import-Library: org.springframework.spring;version="[3.0, 3.1)"
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.conx.logistics.web.client.vaadin
+Web-ContextPath: logistics
+Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
+ ",com.conx.logistics.kernel.system.dao.services.application;version="
+ [1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.mvp;version="[1.0.
+ 0,2.0.0)",com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)
+ ",com.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2
+ .0.0)",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",com.conx
+ .logistics.mdm.domain.application;version="[1.0.0,2.0.0)",com.vaadin;
+ version="[6.7.4,7.0.0)",com.vaadin.addon.jpacontainer;version="2.0.0"
+ ,com.vaadin.addon.jpacontainer.fieldfactory;version="2.0.0",com.vaadi
+ n.addon.jpacontainer.filter;version="2.0.0",com.vaadin.addon.jpaconta
+ iner.filter.util;version="2.0.0",com.vaadin.addon.jpacontainer.metada
+ ta;version="2.0.0",com.vaadin.addon.jpacontainer.provider;version="2.
+ 0.0",com.vaadin.addon.jpacontainer.util;version="2.0.0",com.vaadin.da
+ ta;version="[6.7.4,7.0.0)",com.vaadin.data.util;version="[6.7.4,7.0.0
+ )",com.vaadin.event;version="[6.7.4,7.0.0)",com.vaadin.terminal;versi
+ on="[6.7.4,7.0.0)",com.vaadin.terminal.gwt.client;version="[6.7.4,7.0
+ .0)",com.vaadin.terminal.gwt.client.ui;version="[6.7.4,7.0.0)",com.va
+ adin.terminal.gwt.server;version="[6.7.4,7.0.0)",com.vaadin.ui;versio
+ n="[6.7.4,7.0.0)",javax.persistence;version="[1.0.0, 3.0.0)",javax.pe
+ rsistence.criteria;version="[1.0.0, 3.0.0)",javax.servlet;version="[3
+ .0.0, 3.1.0)",javax.servlet.http;version="[3.0.0,3.1.0)",javax.servle
+ t.jsp.jstl.core;version="[1.2.0,2.0.0)",org.eclipse.virgo.web.dm;vers
+ ion="[3.0.0, 4.0.0)",org.slf4j;version="[1.6.1,1.6.1]",org.springfram
+ ework.beans.factory.annotation;version="[3.0, 3.1)",org.springframewo
+ rk.core.io;version="[3.0, 3.1)",org.springframework.stereotype;versio
+ n="[3.0, 3.1)",org.springframework.transaction.annotation;version="[3
+ .0, 3.1)",org.springframework.web.bind.annotation;version="[3.0, 3.1)
+ ",org.springframework.web.context;version="[3.0, 3.1)",org.springfram
+ ework.web.servlet;version="[3.0, 3.1)",org.springframework.web.servle
+ t.mvc.annotation;version="[3.0, 3.1)",org.vaadin.mvp.eventbus;version
+ ="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.annotation;version="0.9.2.S
+ NAPSHOT",org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",org.vaadin
+ .mvp.presenter.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uib
+ inder;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.annotation;ver
+ sion="0.9.2.SNAPSHOT"
+

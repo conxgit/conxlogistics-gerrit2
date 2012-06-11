@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.ui.common;version="1.0.0";us
+ es:="com.vaadin.terminal,com.vaadin.ui",com.conx.logistics.kernel.ui.
+ common.mvp;version="1.0.0";uses:="com.conx.logistics.kernel.system.da
+ o.services.application,com.conx.logistics.kernel.ui.common.ui.menu.ap
+ p,com.conx.logistics.kernel.ui.service,com.conx.logistics.kernel.ui.s
+ ervice.contribution,com.vaadin,com.vaadin.data,com.vaadin.data.util,c
+ om.vaadin.ui,javax.persistence,org.springframework.transaction,org.va
+ adin.mvp.eventbus,org.vaadin.mvp.eventbus.annotation,org.vaadin.mvp.p
+ resenter,org.vaadin.mvp.presenter.annotation",com.conx.logistics.kern
+ el.ui.common.mvp.view;version="1.0.0";uses:="com.vaadin.data,com.vaad
+ in.data.util,com.vaadin.terminal,com.vaadin.ui",com.conx.logistics.ke
+ rnel.ui.common.mvp.view.feature;version="1.0.0";uses:="com.conx.logis
+ tics.kernel.ui.common.mvp,com.conx.logistics.kernel.ui.common.ui.feat
+ ure,com.vaadin.ui",com.conx.logistics.kernel.ui.common.ui.feature;ver
+ sion="1.0.0";uses:="com.vaadin.data.util,com.vaadin.ui",com.conx.logi
+ stics.kernel.ui.common.ui.menu;version="1.0.0",com.conx.logistics.ker
+ nel.ui.common.ui.menu.app;version="1.0.0";uses:="com.conx.logistics.k
+ ernel.ui.common.ui.menu,com.vaadin.ui"
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.1.0.BUILD-20101220120024
+Bundle-Name: ConX kernel UI MVP Common
+Bundle-ManifestVersion: 2
+Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
+ ",com.conx.logistics.kernel.system.dao.services.application;version="
+ [1.0.0,2.0.0)",com.conx.logistics.kernel.ui.service;version="[1.0.0,2
+ .0.0)",com.conx.logistics.kernel.ui.service.contribution;version="[1.
+ 0.0,2.0.0)",com.conx.logistics.mdm.domain.application;version="[1.0.0
+ ,2.0.0)",com.vaadin;version="[6.7.0,7.0.0)",com.vaadin.addon.jpaconta
+ iner;version="2.0.0",com.vaadin.data;version="[6.7.0,7.0.0)",com.vaad
+ in.data.util;version="[6.7.0,7.0.0)",com.vaadin.terminal;version="[6.
+ 7.4,7.0.0)",com.vaadin.terminal.gwt.client;version="[6.7.4,7.0.0)",co
+ m.vaadin.terminal.gwt.client.ui;version="[6.7.4,7.0.0)",com.vaadin.te
+ rminal.gwt.server;version="[6.7.4,7.0.0)",com.vaadin.ui;version="[6.7
+ .0,7.0.0)",javax.persistence;version="[1.0.0, 3.0.0)",org.slf4j;versi
+ on="[1.6.1,1.6.1]",org.springframework.transaction;version="[3.0,3.1)
+ ",org.springframework.transaction.support;version="[3.0, 3.1)",org.va
+ adin.mvp.eventbus;version="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.an
+ notation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter;version="0
+ .9.2.SNAPSHOT",org.vaadin.mvp.presenter.annotation;version="0.9.2.SNA
+ PSHOT",org.vaadin.peter.contextmenu;version="3.1.0"
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.common
+

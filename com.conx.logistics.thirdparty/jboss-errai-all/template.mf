@@ -1,0 +1,35 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.1
+Bundle-Description: JBoss Arrai All
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: jboss-arrai-all
+Bundle-DocURL: http://www.jboss.org/
+Excluded-Exports: com.google.*,
+  org.apache.log4j.*
+Import-Package: 
+ javax.jms;version="0";resolution=optional,
+ javax.mail;version="0";resolution=optional,
+ javax.management;version="0",
+ javax.naming;version="0",
+ javax.security.auth;version="0",
+ javax.security.auth.callback;version="0",
+ javax.security.auth.login;version="0",
+ javax.security.auth.spi;version="0",
+ javax.servlet.http;version="0";resolution=optional,
+ javax.swing;version="0",
+ javax.swing.border;version="0",
+ javax.swing.event;version="0",
+ javax.swing.table;version="0",
+ javax.swing.text;version="0",
+ javax.swing.tree;version="0",
+ javax.xml.parsers;version="0",
+ org.apache.catalina;version="0";resolution=optional,
+ org.slf4j;version="[1.6.1,1.7.0)",
+ org.jboss.servlet.http;version="0";resolution=optional,
+ org.mvel2;version="2.1.0.drools16",
+ org.mvel2.templates;version="2.1.0.drools16",
+ org.mvel2.util;version="2.1.0.drools16",
+ org.w3c.dom;version="0",
+ org.xml.sax;version="0",
+ javax.servlet;version="0",
+ org.xml.sax.helpers;version="0"  

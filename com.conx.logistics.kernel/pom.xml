@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>com.conx.logistics.parent</artifactId>
+    <groupId>com.conx.logistics</groupId>
+    <version>1.0.0</version>
+    <relativePath>../com.conx.logistics.parent</relativePath>
+  </parent>
+  <artifactId>com.conx.logistics.kernel</artifactId>
+  <name>com.conx.logistics.kernel</name>
+  <description>com.conx.logistics.kernel</description>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>com.conx.logistics.kernel.bpm</module>
+  	<module>com.conx.logistics.kernel.ui</module>
+  	<module>com.conx.logistics.kernel.system</module>
+  	<module>com.conx.logistics.kernel.workspace</module>
+
+  	<module>com.conx.logistics.kernel.persistence.datasource</module>
+  	<module>com.conx.logistics.kernel.persistence.tm.jta</module>
+  	<module>
+  		com.conx.logistics.kernel.persistence.datasource.tests
+  	</module>
+  	<!-- <module>com.conx.logistics.kernel.pageflow</module>-->
+  </modules>
+</project>

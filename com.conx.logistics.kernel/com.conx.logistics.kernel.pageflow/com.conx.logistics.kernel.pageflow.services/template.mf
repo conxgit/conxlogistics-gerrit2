@@ -1,0 +1,13 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX kernel PageFlow Services
+Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.services
+Export-Template: com.conx.logistics.kernel.pageflow.services;version="1.0.0"
+Import-Template: com.conx.logistics.mdm.domain.task;version="1.0.0",
+  com.vaadin;version="[6.7.0,7.0.0)",
+  com.vaadin.ui;version="[6.7.0,7.0.0)",
+  org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT",
+  com.conx.logistics.kernel.ui.common.mvp;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.bpm.services;version="1.0.0"
+

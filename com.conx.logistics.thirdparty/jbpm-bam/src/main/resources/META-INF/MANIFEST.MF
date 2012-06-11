@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.jbpm.process.audit;version="5.3.0.Final";uses:="ja
+ vax.persistence,javax.transaction,org.drools,org.drools.audit,org.dro
+ ols.audit.event,org.drools.event,org.drools.runtime,org.hibernate"
+Built-By: dev
+Tool: Bundlor 1.0.0.RELEASE
+Created-By: Apache Maven
+Bundle-Version: 5.3.0.Final
+Build-Jdk: 1.6.0_29
+Bundle-ManifestVersion: 2
+Bundle-Description: jBPM BAM
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.jbpm.bam
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: javax.naming;version="0",javax.transaction;version="0"
+ ,org.drools;version="5.4.0.Final",org.drools.audit;version="5.4.0.Fin
+ al",org.drools.audit.event;version="5.4.0.Final",org.drools.common;ve
+ rsion="5.4.0.Final",org.drools.event;version="5.4.0.Final",org.drools
+ .impl;version="5.4.0.Final",org.drools.persistence;version="5.4.0.Fin
+ al",org.drools.persistence.jpa;version="5.4.0.Final",org.drools.persi
+ stence.map;version="5.4.0.Final",org.drools.runtime;version="5.4.0.Fi
+ nal",org.drools.runtime.process;version="5.4.0.Final",org.hibernate;v
+ ersion="3.6.0.Final",org.hibernate.cfg;version="3.6.0.Final",org.hibe
+ rnate.classic;version="3.6.0.Final",org.hibernate.usertype;version="3
+ .6.0.Final"
+Archiver-Version: Plexus Archiver
+

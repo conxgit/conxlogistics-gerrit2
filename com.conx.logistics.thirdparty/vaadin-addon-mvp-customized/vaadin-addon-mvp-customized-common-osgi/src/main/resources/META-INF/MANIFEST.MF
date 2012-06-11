@@ -1,0 +1,39 @@
+Manifest-Version: 1.0
+Export-Package: org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",org.vaadin.mvp
+ .eventbus.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter;version
+ ="0.9.2.SNAPSHOT";uses:="com.vaadin.ui,org.vaadin.mvp.eventbus,org.vaadin.mvp.
+ uibinder,org.vaadin.mvp.uibinder.event",org.vaadin.mvp.presenter.anno
+ tation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT";uses:=
+ "com.vaadin.ui,org.vaadin.mvp.uibinder.event",org.vaadin.mvp.uibinder
+ .annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.event;version="0.
+ 9.0";uses:="com.vaadin.data,com.vaadin.event,com.vaadin.ui",org.vaadi
+ n.mvp.uibinder.handler;version="0.9.2.SNAPSHOT";uses:="com.vaadin.ui,org.vaadi
+ n.mvp.uibinder,org.vaadin.mvp.uibinder.event,org.xml.sax,org.xml.sax.
+ helpers",org.vaadin.mvp.uibinder.resource;version="0.9.2.SNAPSHOT";uses:="org.
+ vaadin.mvp.uibinder"
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 0.9.2.SNAPSHOT
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: vaadin-addon-mvp-customized-common
+Import-Package: com.vaadin.ui;version="[6.7.4,7.0.0)",
+ com.vaadin.data.util.filter;version="[6.7.4,7.0.0)",
+ com.vaadin.data;version="[6.7.4,7.0.0)",
+ com.vaadin.event;version="[6.7.4,7.0.0)",
+ javax.xml.bind;version="0",
+ javax.xml.bind.annotation.adapters;version="0",
+ javax.xml.datatype;version="0",
+ javax.xml.namespace;version="0",
+ javax.xml.parsers;version="0",
+ javax.xml.transform;version="0",
+ javax.xml.transform.dom;version="0",
+ javax.xml.transform.stream;version="0",
+ org.apache.commons.lang;version="[2.0,3.0)",
+ org.w3c.dom;version="0",
+ org.xml.sax;version="0",
+ org.xml.sax.helpers;version="0",
+ org.slf4j;version="[1.6.1,1.6.1]"
+Archiver-Version: Plexus Archiver
+

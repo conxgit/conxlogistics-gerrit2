@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: vaadin-addon-toolbar
+Export-Template: com.vaadin.addon.toolbar.*;version="1.0.0"
+Require-Bundle: vaadin-addon-contextmenu;bundle-version="[3.1.0,3.2)"
+Import-Package:  
+  com.vaadin;version="[6.7.4,7.0.0)",
+  com.vaadin.data;version="[6.7.4,7.0.0)",
+  com.vaadin.data.util;version="[6.7.4,7.0.0)",
+  com.vaadin.data.util.filter;version="[6.7.4,7.0.0)",
+  com.vaadin.event;version="[6.7.4,7.0.0)",
+  com.vaadin.terminal;version="[6.7.4,7.0.0)",
+  com.vaadin.ui;version="[6.7.4,7.0.0)",
+  org.vaadin.peter.contextmenu;version="3.1.0",
+  javax.xml.bind;version="0",
+  javax.xml.bind.annotation.adapters;version="0",
+  javax.xml.datatype;version="0",
+  javax.xml.namespace;version="0",
+  javax.xml.parsers;version="0",
+  javax.xml.transform;version="0",
+  javax.xml.transform.dom;version="0",
+  javax.xml.transform.stream;version="0",
+  org.apache.commons.lang;version="[2.0,3.0)",
+  org.w3c.dom;version="0",
+  org.xml.sax;version="0"
+Excluded-Exports: 
+  VAADIN.*
+Archiver-Version: Plexus Archiver

@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>com.conx.logistics.kernel.system</artifactId>
+    <groupId>com.conx.logistics</groupId>
+    <version>1.0.0</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>com.conx.logistics.kernel.system.dao.datasource</artifactId>
+  <name>com.conx.logistics.kernel.system.dao.datasource</name>
+  <description>com.conx.logistics.kernel.system.dao.datasource</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.spring-library</artifactId>
+			<type>libd</type>
+		</dependency>
+		<dependency>
+			<groupId>org.junit</groupId>
+			<artifactId>com.springsource.org.junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql.jdbc</groupId>
+			<artifactId>com.springsource.com.mysql.jdbc</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mchange.c3p0</groupId>
+			<artifactId>com.springsource.com.mchange.v2.c3p0</artifactId>
+			<version>0.9.1</version>
+			<scope>provided</scope>
+		</dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
+                <scope>provided</scope>
+            </dependency>		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.springsource.bundlor</groupId>
+				<artifactId>com.springsource.bundlor.maven</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<failOnWarnings>true</failOnWarnings>
+					<!-- used to properly set-up versions for system packages -->
+					<osgiProfilePath>${basedir}/../../../java6-server.profile</osgiProfilePath>
+					<bundleVersion>${project.version}</bundleVersion>
+					<!-- point to a different output path - so manifest will be regenerated 
+						on each build and can be eyeballed if desired. Also for eclipse use, where 
+						manifest is always needed -->
+					<outputPath>${bundlor.manifest.output.path}</outputPath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-manifest</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>    
+</project>

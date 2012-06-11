@@ -1,0 +1,7 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX WMS RCV ASN Sub-Module PageFlow artifacts
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
+Import-Package: com.conx.logistics.kernel.pageflow.services;version="1.0.0",
+  com.vaadin.ui;version="[6.7.0,7.0.0)"
+

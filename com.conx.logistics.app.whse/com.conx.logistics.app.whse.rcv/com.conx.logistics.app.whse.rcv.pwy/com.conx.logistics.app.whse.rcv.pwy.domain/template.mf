@@ -1,0 +1,5 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX WMS RCV Putaway Sub-Module Domain Model
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.pwy.domain
+

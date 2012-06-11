@@ -1,0 +1,38 @@
+Manifest-Version: 1.0
+Export-Package: com.vaadin.addon.jpacontainer;version="2.0.0";uses:="c
+ om.vaadin.addon.jpacontainer.filter.util,com.vaadin.addon.jpacontaine
+ r.metadata,com.vaadin.data,com.vaadin.data.util.filter,javax.persiste
+ nce,javax.persistence.criteria",com.vaadin.addon.jpacontainer.fieldfa
+ ctory;version="2.0.0";uses:="com.vaadin.addon.jpacontainer,com.vaadin
+ .addon.jpacontainer.util,com.vaadin.data,com.vaadin.data.util,com.vaa
+ din.event,com.vaadin.terminal,com.vaadin.ui,javax.persistence",com.va
+ adin.addon.jpacontainer.filter;version="2.0.0";uses:="com.vaadin.data
+ ,com.vaadin.data.util.filter",com.vaadin.addon.jpacontainer.filter.ut
+ il;version="2.0.0";uses:="com.vaadin.addon.jpacontainer,com.vaadin.da
+ ta,javax.persistence.criteria",com.vaadin.addon.jpacontainer.metadata
+ ;version="2.0.0",com.vaadin.addon.jpacontainer.provider;version="2.0.
+ 0";uses:="com.vaadin.addon.jpacontainer,com.vaadin.addon.jpacontainer
+ .metadata,com.vaadin.data,javax.persistence,javax.persistence.criteri
+ a",com.vaadin.addon.jpacontainer.util;version="2.0.0";uses:="com.vaad
+ in.addon.jpacontainer,javax.persistence.criteria"
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 2.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: vaadin-addon-jpacontainer-agpl-3.0
+Import-Package: com.vaadin.data;version="[6.7.4,7.0.0)",com.vaadin.dat
+ a.util;version="[6.7.4,7.0.0)",com.vaadin.data.util.filter;version="[
+ 6.7.4,7.0.0)",com.vaadin.event;version="[6.7.4,7.0.0)",com.vaadin.ter
+ minal;version="[6.7.4,7.0.0)",com.vaadin.ui;version="[6.7.4,7.0.0)",j
+ avax.persistence;version="[1.0.0, 3.0.0)",javax.persistence.criteria;
+ version="[1.0.0, 3.0.0)",javax.persistence.metamodel;version="[1.0.0,
+  3.0.0)",javax.xml.bind;version="0",javax.xml.bind.annotation.adapter
+ s;version="0",javax.xml.datatype;version="0",javax.xml.namespace;vers
+ ion="0",javax.xml.parsers;version="0",javax.xml.transform;version="0"
+ ,javax.xml.transform.dom;version="0",javax.xml.transform.stream;versi
+ on="0",org.apache.commons.lang;version="[2.0,3.0)",org.w3c.dom;versio
+ n="0",org.xml.sax;version="0"
+Archiver-Version: Plexus Archiver
+

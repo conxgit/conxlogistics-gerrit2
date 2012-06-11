@@ -1,0 +1,2 @@
+# Module com.conx.logistics.kernel.ui.common.gwt.KernelUICommonVaadinWidgetset
+# RPC service class, partial path of RPC policy file

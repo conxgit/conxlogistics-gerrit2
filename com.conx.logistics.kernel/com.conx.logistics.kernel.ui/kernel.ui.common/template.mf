@@ -1,0 +1,45 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX kernel UI MVP Common
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.common
+Import-Template: com.conx.logistics.mdm.domain.application;version="[1.0.0,2.0.0)", 
+  com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.workspace.ui.*;version="[1.0.0,2.0.0)", 
+  com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.system.dao.services.application;version="[1.0.0,2.0.0)",
+  com.conx.logistics.common.utils;version="[1.0.0,2.0.0)",
+  com.vaadin;version="[6.7.0,7.0.0)",
+  com.vaadin.ui;version="[6.7.0,7.0.0)",
+  com.vaadin.data;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util.filter;version="[6.7.0,7.0.0)",
+  com.vaadin.terminal;version="[6.7.4,7.0.0)",
+  com.vaadin.terminal.gwt.server;version="[6.7.4,7.0.0)",
+  com.vaadin.terminal.gwt.client;version="[6.7.4,7.0.0)",
+  com.vaadin.terminal.gwt.client.ui;version="[6.7.4,7.0.0)",
+  org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.presenter.annotation;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT",
+  com.vaadin.addon.jpacontainer;version="2.0.0",
+  com.vaadin.addon.jpacontainer.provider;version="2.0.0",
+  org.vaadin.peter.contextmenu.client.ui;version="3.1.0",
+  org.vaadin.peter.contextmenu;version="3.1.0",
+  javax.persistence;version="[1.0.0, 3.0.0)",
+  javax.persistence.criteria;version="[1.0.0, 3.0.0)",
+  org.springframework.transaction;version="[3.0,3.1)",
+  org.springframework.transaction.support;version="[3.0, 3.1)",
+  org.springframework.osgi.extensions.annotation;version="[1.0.0,2.0.0)",  
+  org.slf4j;version="[1.6.1,1.6.1]" 
+Export-Template: com.conx.logistics.kernel.ui.common.*;version="1.0.0"
+Excluded-Exports: com.conx.logistics.kernel.ui.common.gwt.*
+Excluded-Imports: 
+ com.conx.logistics.kernel.ui.common.*,
+ org.apache.log4j,
+ org.springframework.test.*,
+ org.junit.*,
+ com.google.gwt.*
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<!-- export the workSpace bean to OSGi under the IPageFlowManager interface -->
+	<osgi:service ref="pageFlowImpl"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">
+		<osgi:service-properties>
+		    <entry key="code" value="KERNEL.PAGEFLOWENGINE.DEFAULT"/>
+		  </osgi:service-properties>		
+	</osgi:service>	
+	
+	<!-- Listen to IPageFlowPage registrations -->
+	<osgi:list id="pageRegistrations" cardinality="0..N" interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage" >
+		<osgi:listener ref="pageFlowImpl" bind-method="registerPageFlowPage" unbind-method="unregisterPageFlowPage"/>
+	</osgi:list>		
+</beans>

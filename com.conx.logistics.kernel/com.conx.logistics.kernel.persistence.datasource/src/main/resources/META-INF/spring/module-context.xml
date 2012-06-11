@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Application context definition for GreenPages JPA. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="kernelPersistenceJpaDataSource" class="bitronix.tm.resource.jdbc.PoolingDataSource"
+		init-method="init" destroy-method="close">
+		<property name="className"
+			value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
+		<property name="uniqueName" value="jdbc/conxlogisticsJPADS" />
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="32" />
+		<property name="acquisitionInterval" value="1" />
+		<property name="acquisitionTimeout" value="15" />
+		<property name="maxIdleTime" value="15" />
+		<property name="useTmJoin" value="true" />
+		<property name="deferConnectionRelease" value="true" />
+		<property name="automaticEnlistingEnabled" value="true" />
+		<property name="allowLocalTransactions" value="true" />
+		<property name="testQuery" value="SELECT current_timestamp" />
+		<property name="driverProperties">
+			<props>
+				<prop key="user">root</prop>
+				<prop key="password">root</prop>
+				<prop key="databaseName">conxlogistics</prop>
+				<prop key="serverName">localhost</prop>
+				<prop key="portNumber">3306</prop>
+				<prop key="url">jdbc:mysql://localhost/conxlogistics?autoReconnect=true</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

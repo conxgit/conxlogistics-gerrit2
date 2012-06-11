@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="defaultUnit" transaction-type="RESOURCE_LOCAL">
+		<!--  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+		<!-- General Entities -->
+		<class>com.conx.logistics.mdm.domain.application.BaseEntity</class>
+		<class>com.conx.logistics.mdm.domain.application.MultitenantBaseEntity</class>
+		<class>com.conx.logistics.mdm.domain.application.Application</class>
+		<class>com.conx.logistics.mdm.domain.application.Feature</class>	
+		<class>com.conx.logistics.mdm.domain.application.FeatureSet</class>	
+		<class>com.conx.logistics.mdm.domain.task.TaskDefinition</class>	
+		<properties>
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>			
+		</properties>		
+		<!-- PU properties -->
+		<!-- value="drop-and-create-tables" to build a new database on each run; 
+			value="create-tables" creates new tables if needed; value="none" makes no 
+			changes to the database -->
+		<!-- <properties> <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.MySQLPlatform"/> 
+			<property name="eclipselink.ddl-generation" value="none"/> <property name="eclipselink.ddl-generation.output-mode" 
+			value="database"/> <property name="eclipselink.weaving" value="static"/> 
+			</properties> -->
+		<!-- <property name="eclipselink.weaving" value="static"/> -->
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,49 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Bundle-Vendor: SpringSource
+Implementation-Version: 2.1.2
+Bundle-Version: 2.1.2
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: Bitronix Transaction Manager
+Bundle-ManifestVersion: 2
+Created-By: 1.4.2-92 (Apple Inc.)
+Bundle-SymbolicName: com.springsource.org.codehaus.btm
+Import-Package: javax.crypto;version="0",javax.crypto.spec;version="0"
+ ,javax.jms;version="0",javax.naming;version="0",javax.naming.spi;vers
+ ion="0",javax.rmi;version="0",javax.sql;version="0",javax.swing;versi
+ on="0",javax.swing.border;version="0",javax.swing.event;version="0",j
+ avax.swing.table;version="0",javax.swing.tree;version="0",javax.trans
+ action;version="0",javax.transaction.xa;version="0",org.slf4j;version
+ ="[1.5.2, 2.0.0)";resolution:="optional"
+Export-Package: bitronix.tm;version="2.1.2";uses:="bitronix.tm.interna
+ l,bitronix.tm.journal,bitronix.tm.recovery,bitronix.tm.resource,bitro
+ nix.tm.timer,bitronix.tm.twopc.executor,bitronix.tm.utils,javax.namin
+ g,javax.naming.spi,javax.transaction,javax.transaction.xa,org.slf4j",
+ bitronix.tm.gui;version="2.1.2";uses:="bitronix.tm,bitronix.tm.journa
+ l,javax.swing,javax.swing.event,javax.swing.table,javax.swing.tree",b
+ itronix.tm.internal;version="2.1.2";uses:="bitronix.tm,bitronix.tm.re
+ source.common,bitronix.tm.utils,javax.transaction,javax.transaction.x
+ a",bitronix.tm.jndi;version="2.1.2";uses:="javax.naming,javax.naming.
+ spi",bitronix.tm.journal;version="2.1.2";uses:="bitronix.tm.utils",bi
+ tronix.tm.recovery;version="2.1.2";uses:="bitronix.tm.internal,bitron
+ ix.tm.resource.common,bitronix.tm.utils,javax.transaction.xa",bitroni
+ x.tm.resource;version="2.1.2";uses:="bitronix.tm.recovery,bitronix.tm
+ .resource.common,bitronix.tm.utils,javax.naming,javax.naming.spi,java
+ x.transaction.xa",bitronix.tm.resource.common;version="2.1.2";uses:="
+ bitronix.tm,bitronix.tm.internal,bitronix.tm.recovery,javax.naming,ja
+ vax.transaction,javax.transaction.xa",bitronix.tm.resource.jdbc;versi
+ on="2.1.2";uses:="bitronix.tm.internal,bitronix.tm.recovery,bitronix.
+ tm.resource.common,bitronix.tm.utils,javax.naming,javax.sql,javax.tra
+ nsaction.xa,org.slf4j",bitronix.tm.resource.jdbc.lrc;version="2.1.2";
+ uses:="javax.sql,javax.transaction.xa",bitronix.tm.resource.jms;versi
+ on="2.1.2";uses:="bitronix.tm.internal,bitronix.tm.recovery,bitronix.
+ tm.resource.common,javax.jms,javax.naming,javax.transaction.xa,org.sl
+ f4j",bitronix.tm.resource.jms.lrc;version="2.1.2";uses:="javax.jms,ja
+ vax.transaction.xa",bitronix.tm.timer;version="2.1.2";uses:="bitronix
+ .tm,bitronix.tm.recovery,bitronix.tm.resource.common,bitronix.tm.util
+ s",bitronix.tm.twopc;version="2.1.2";uses:="bitronix.tm,bitronix.tm.i
+ nternal,bitronix.tm.twopc.executor,javax.transaction,javax.transactio
+ n.xa,org.slf4j",bitronix.tm.twopc.executor;version="2.1.2";uses:="bit
+ ronix.tm.internal,bitronix.tm.utils,javax.transaction.xa",bitronix.tm
+ .utils;version="2.1.2";uses:="bitronix.tm,javax.crypto,javax.transact
+ ion.xa"

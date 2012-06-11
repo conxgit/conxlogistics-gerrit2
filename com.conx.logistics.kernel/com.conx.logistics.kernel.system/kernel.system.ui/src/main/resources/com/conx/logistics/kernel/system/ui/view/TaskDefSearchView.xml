@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder xmlns:ui="urn:org.vaadin.mvp.uibinder" xmlns:m="urn:org.vaadin.mvp.uibinder.message"
+	xmlns:r="urn:org.vaadin.mvp.uibinder.resource" xmlns:e="urn:org.vaadin.mvp.uibinder.event"
+	xmlns:v="urn:import:com.vaadin.ui">
+
+	<v:VerticalLayout sizeFull="" ui:field="mainLayout">
+		<v:VerticalSplitPanel sizeFull="" ui:field="splitLayout">
+			<v:VerticalLayout sizeFull="" ui:field="gridLayout">
+				  <v:Table sizeFull="" ui:field="grid" />
+				  <v:HorizontalLayout spacing="true" ui:field="buttonLayout" height="20px">
+				    <v:Button caption="Create" styleName="small" e:click="createTaskDef" />
+				    <v:Button caption="Remove" styleName="small" e:click="removeTaskDef" />
+				  </v:HorizontalLayout>				
+			</v:VerticalLayout>
+			<v:VerticalLayout sizeFull="" ui:field="detailLayout">
+				<v:Form ui:field="taskDefForm">
+				</v:Form>
+				<v:HorizontalLayout spacing="true">
+					<v:Button caption="Edit" styleName="small" e:click="editTaskDef" enable="false"/>
+					<v:Button caption="Save" styleName="small" e:click="saveTaskDef" enable="false"/>
+					<v:Button caption="Cancel" styleName="small" e:click="cancelEditTaskDef" enable="false"/>
+				</v:HorizontalLayout>
+			</v:VerticalLayout>
+		</v:VerticalSplitPanel>
+	</v:VerticalLayout>
+
+</ui:UiBinder>

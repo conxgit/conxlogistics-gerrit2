@@ -1,0 +1,32 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 3.2.7.Final
+Bundle-Description: JBoss Netty
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.jboss.netty
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: org.springframework.beans.factory;version="[3.0,3.1)",
+  org.osgi.framework;version="0",
+  org.osgi.service.log;version="0",
+  org.osgi.util.tracker;version="0",
+  org.slf4j;version="[1.6.0,1.7.0)",
+  com.google.inject;version="0";resolution:=optional,
+  com.google.protobuf;version="0";resolution:=optional,
+  com.google.inject.binder;version="0";resolution:=optional,
+  org.apache.commons.logging;version="0";resolution:=optional,
+  org.apache.log4j;version="0";resolution:=optional,
+  javax.servlet;version="0";resolution:=optional,
+  javax.servlet.http;version="0";resolution:=optional,
+  org.jboss.logging;version="0";resolution:=optional,
+  org.jboss.xnio;version="0";resolution:=optional,
+  org.jboss.xnio.channels;version="0";resolution:=optional,
+  org.jboss.netty.channel;version="0";resolution:=optional,
+  org.jboss.netty.handler.codec.http.websocket;version="0";resolution:=optional,
+  org.jboss.netty.util;version="0";resolution:=optional
+Excluded-Exports: gnu.trove,
+  org.slf4j.*,
+  org.slf4j.spi.*,
+  javax.jms,
+  org.jboss.netty.channel,
+  org.jboss.netty.util
+
+

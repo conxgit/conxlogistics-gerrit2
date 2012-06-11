@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.system.dao.services.applicat
+ ion;version="1.0.0";uses:="com.conx.logistics.mdm.domain.application"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Kernel System DAO Services
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.system.dao.services
+Import-Package: com.conx.logistics.mdm.domain.application;version="[1.
+ 0.0,2.0.0)"
+

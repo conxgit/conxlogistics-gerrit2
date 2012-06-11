@@ -1,0 +1,7 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0
+Bundle-Description: Java Security JACC
+Bundle-SymbolicName: javax.security.jacc
+Import-Package: javax.servlet.http;version="[2.0.0,4.0.0)";resolution:=optional
+
+

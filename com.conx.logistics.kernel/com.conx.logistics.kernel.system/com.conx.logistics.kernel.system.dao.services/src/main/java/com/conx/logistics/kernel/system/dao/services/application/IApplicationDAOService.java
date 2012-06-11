@@ -1,0 +1,42 @@
+package com.conx.logistics.kernel.system.dao.services.application;
+
+import java.util.List;
+
+import com.conx.logistics.mdm.domain.application.Application;
+
+public interface IApplicationDAOService {
+	/**
+	 * System Control Panel App
+	 */
+	//== App
+	public static final String SYSTEM_CONTROL_PANEL_APP_NAME = "Control Panel";
+	public static final String SYSTEM_CONTROL_PANEL_APP_CODE = "KERNEL.CONTROLPANEL";
+	
+	//==== Modules Featureset
+	public static final String SYSTEM_CONTROL_PANEL_APP_MODMNGMT_NAME = "Application Management";
+	public static final String SYSTEM_CONTROL_PANEL_APP_MODMNGMT_CODE = "MODMNGMT";	
+	
+	//========= Modules :: Search Feature
+	public static final String SYSTEM_CONTROL_PANEL_APP_MODMNGMT_MODS_SEARCH_NAME = "Applications";
+	public static final String SYSTEM_CONTROL_PANEL_APP_MODMNGMT_MODS_SEARCH_CODE = "MODS.SEARCH";	
+	
+	//==== Workflow Management Featureset
+	public static final String SYSTEM_CONTROL_PANEL_APP_WFMNGMT_NAME = "Workflow Management";
+	public static final String SYSTEM_CONTROL_PANEL_APP_WFMNGMT_CODE = "WFMNGMT";
+	
+	//========= WorkTaskDef :: Search Feature
+	public static final String SYSTEM_CONTROL_PANEL_APP_WFMNGMT_WTDFS_SEARCH_NAME = "Task Definitions";
+	public static final String SYSTEM_CONTROL_PANEL_APP_WFMNGMT_WTDFS_SEARCH_CODE = "WTDFS.SEARCH";		
+	
+	public List<Application> getApplications();
+
+	public Application addApplication(Application app);
+
+	public void deleteApplication(Application app);
+
+	public Application updateApplication(Application app);
+
+	public Application getApplication(long id);
+
+	public Application provideControlPanelApplication();
+}

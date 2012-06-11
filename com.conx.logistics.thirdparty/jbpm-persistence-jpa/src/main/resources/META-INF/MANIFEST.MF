@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.jbpm.persistence;version="5.3.0.Final";uses:="java
+ x.persistence,org.drools.persistence,org.drools.persistence.jpa,org.d
+ rools.persistence.map,org.drools.runtime,org.jbpm.persistence.process
+ instance",org.jbpm.persistence.processinstance;version="5.3.0.Final";
+ uses:="javax.persistence,org.drools.common,org.drools.runtime,org.dro
+ ols.runtime.process,org.hibernate,org.hibernate.usertype,org.jbpm.pro
+ cess.instance,org.jbpm.process.instance.event"
+Built-By: dev
+Tool: Bundlor 1.0.0.RELEASE
+Created-By: Apache Maven
+Bundle-Version: 5.3.0.Final
+Build-Jdk: 1.6.0_29
+Bundle-ManifestVersion: 2
+Bundle-Description: jBPM Persistence
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.jbpm.persistence
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: org.drools.common;version="5.4.0.Final",org.drools.per
+ sistence;version="5.4.0.Final",org.drools.persistence.jpa;version="5.
+ 4.0.Final",org.drools.persistence.map;version="5.4.0.Final",org.drool
+ s.runtime;version="5.4.0.Final",org.drools.runtime.process;version="5
+ .4.0.Final",org.hibernate;version="3.6.0.Final",org.hibernate.usertyp
+ e;version="3.6.0.Final",org.jbpm.process.instance;version="5.3.0.SNAP
+ SHOT",org.jbpm.process.instance.event;version="5.3.0.SNAPSHOT"
+Archiver-Version: Plexus Archiver
+

@@ -1,0 +1,11 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.conx.logistics</groupId>
+	<version>1.0.0</version>
+	<artifactId>google</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>com.google.protobuf</module>
+	</modules>
+</project>

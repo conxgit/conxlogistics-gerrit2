@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.pageflow.engine;version="1.0
+ .0"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.1.0.BUILD-20101220120024
+Bundle-Name: ConX kernel PageFlow Engine
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.engine
+Import-Package: com.conx.logistics.kernel.bpm.impl.jbpm.core.mock;vers
+ ion="1.0.0",com.conx.logistics.kernel.bpm.services;version="1.0.0",co
+ m.conx.logistics.kernel.pageflow.services;version="1.0.0",com.conx.lo
+ gistics.mdm.domain.task;version="1.0.0",com.vaadin;version="[6.7.0,7.
+ 0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)",org.slf4j;version="[1.6.0
+ ,1.7.0)"
+

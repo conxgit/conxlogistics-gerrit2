@@ -1,0 +1,16 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX kernel UI :: UI Contribution Mananger
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.manager
+Import-Template: com.conx.logistics.kernel.ui.service.contribution.*;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.workspace.ui.contribution;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.system.dao.services.application;version="[1.0.0,2.0.0)",
+  com.conx.logistics.mdm.domain.application;version="[1.0.0,2.0.0)",
+  com.conx.logistics.common.utils;version="[1.0.0,2.0.0)",
+  com.vaadin;version="[6.7.0,7.0.0)",
+  com.vaadin.ui;version="[6.7.0,7.0.0)",
+  com.vaadin.data;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util;version="[6.7.0,7.0.0)",
+  org.slf4j;version="[1.6.1,1.6.1]"
+

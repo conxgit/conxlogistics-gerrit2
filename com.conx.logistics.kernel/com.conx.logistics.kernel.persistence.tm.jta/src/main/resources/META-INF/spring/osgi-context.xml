@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<!-- import the DataSource from OSGi -->
+	<!-- <osgi:reference id="dataSource" interface="javax.sql.DataSource" filter="(module=KERNEL.SYSTEM)"/> -->
+
+	<!-- export internal interfaces -->
+<!-- 	<osgi:service ref="applicationDao" interface="com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService"/> -->
+	<!-- KERNEL.TM.BITRONIX Transaction Manager -->
+	<osgi:service ref="btmConfig" interface="bitronix.tm.Configuration">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL.BITRONIX.CONFIG"/>
+		  </osgi:service-properties>	
+	</osgi:service>
+	
+	<!-- KERNEL.TM.JTA Transaction Manager -->
+	<osgi:service ref="JtaTransactionManager" interface="org.springframework.transaction.PlatformTransactionManager">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL.TM.JTA"/>
+		  </osgi:service-properties>	
+	</osgi:service>	
+	
+	<!-- KERNEL.TM Transaction Manager -->
+	<osgi:service ref="BitronixTransactionManager" interface="javax.transaction.TransactionManager">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL.TM"/>
+		  </osgi:service-properties>	
+	</osgi:service>		
+	
+	<!-- JNDI Template -->
+	<osgi:service ref="tmJndiTemplate" interface="org.springframework.jndi.JndiTemplate"/>
+</beans>

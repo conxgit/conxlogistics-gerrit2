@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: 1.6.0_30 (Sun Microsystems Inc.)
+Built-By: hudson
+Build-Jdk: 1.6.0_30
+Specification-Title: Drools :: Persistence :: JPA
+Specification-Version: 5.4.0-SNAPSHOT
+Specification-Vendor: JBoss by Red Hat
+Implementation-Title: Drools :: Persistence :: JPA
+Implementation-Version: 5.4.0-SNAPSHOT
+Implementation-Vendor-Id: org.drools
+Implementation-Vendor: JBoss by Red Hat
+Fragment-Host: org.drools.core;bundle-version="5.4.0.Final"
+Export-Package: org.drools.persistence;uses:="org.drools.persistence.info,org.drools.persistence.jpa.processinstance,org.slf4j,org.drools.persistence.jta,org.drools.persistence.jpa,javax.transaction";version="5.4.0.Final",
+  org.drools.persistence.jta;uses:="org.drools.persistence,javax.naming,javax.transaction,org.slf4j";version="5.4.0.Final",
+  org.drools.persistence.jpa.marshaller;uses:="javax.persistence,org.slf4j";version="5.4.0.Final",
+  org.drools.persistence.info;uses:="org.drools.persistence,javax.persistence";version="5.4.0.Final",
+  org.drools.persistence.osgi;uses:="org.osgi.framework";version="5.4.0.Final",
+  org.drools.persistence.map;uses:="org.drools.persistence,org.drools.persistence.info,org.slf4j";version="5.4.0.Final",
+  org.drools.persistence.jpa.processinstance;uses:="org.drools.persistence,org.drools.persistence.info";version="5.4.0.Final"
+Tool: Bnd-0.0.357
+Bundle-Name: Drools :: Persistence :: JPA
+Require-Bundle: org.drools.compiler;bundle-version="5.4.0.Final"
+Bundle-Vendor: JBoss by Red Hat
+DynamicImport-Package: *
+Bundle-Version: 5.4.0.Final
+Bnd-LastModified: 1338710157945
+Bundle-ManifestVersion: 2
+Bundle-Description: JPA implementation for Drools
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Import-Package: javax.naming,javax.persistence,javax.transaction,org.o
+ sgi.framework;version="1.5",org.slf4j;version="1.6"
+Bundle-SymbolicName: org.drools.persistence-jpa
+Bundle-DocURL: http://www.jboss.org/
+

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConX Kernel System DAO Services
+Bundle-SymbolicName: com.conx.logistics.kernel.system.dao.services
+Bundle-Vendor: ConX
+Bundle-Version: 1.0.0
+Export-Template: com.conx.logistics.kernel.system.dao.services.*;version="1.0.0"
+Import-Template: com.conx.logistics.mdm.domain.application.*;version="[1.0.0,2.0.0)"

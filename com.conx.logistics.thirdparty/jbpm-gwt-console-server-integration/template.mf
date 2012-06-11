@@ -1,0 +1,12 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 2.3.2.SNAPSHOT
+Bundle-Description: GWT Console Server Integration
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: gwt-console-server-integration
+Bundle-Name: JBPM GWT Console Server Integration
+Bundle-DocURL: http://www.jboss.org/
+Export-Package: org.jboss.bpm.console.server.integration;version="2.3.2.SNAPSHOT"
+Import-Package: org.apache.commons.logging;version="0";resolution:=optional,
+  org.jboss.errai.bus.server.annotations;version="0";resolution:=optional
+
+

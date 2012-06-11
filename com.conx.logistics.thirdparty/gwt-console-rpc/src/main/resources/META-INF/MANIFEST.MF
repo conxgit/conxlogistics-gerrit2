@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Export-Package: org.jboss.bpm.console.client.model;version="2.3.2.SNAP
+ SHOT";uses:="javax.xml.bind.annotation,org.jboss.errai.bus.server.ann
+ otations"
+Built-By: dev
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: JBPM GWT Console RPC
+Created-By: Apache Maven
+Bundle-Version: 2.3.2.SNAPSHOT
+Build-Jdk: 1.6.0_29
+Bundle-ManifestVersion: 2
+Bundle-Description: GWT Console Model
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: gwt-console-rpc
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: javax.xml.bind.annotation;version="0",org.jboss.errai.
+ bus.server.annotations;version="0";resolution:="optional"
+Archiver-Version: Plexus Archiver
+

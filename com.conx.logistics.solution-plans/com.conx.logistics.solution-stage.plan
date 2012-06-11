@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="com.conx.logistics.solution-stage.plan" version="1.0.0" scoped="false" atomic="true"
+        xmlns="http://www.eclipse.org/virgo/schema/plan"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+		        http://www.eclipse.org/virgo/schema/plan 
+		        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+
+	<!-- Drools & JBPM -->
+	<artifact type="bundle" name="org.drools.api" version="5.4.0.SNAPSHOT"/>
+	<artifact type="bundle" name="org.drools.core" version="5.4.0.SNAPSHOT"/>	
+	<artifact type="bundle" name="org.drools.internalapi" version="5.4.0.SNAPSHOT"/>
+	<artifact type="bundle" name="org.jbpm.flow.core" version="5.3.0.SNAPSHOT"/>
+	<artifact type="bundle" name="org.jbpm.flow.builder" version="5.3.0.SNAPSHOT"/>
+	<artifact type="bundle" name="org.drools.templates" version="5.4.0.SNAPSHOT"/>
+	<artifact type="bundle" name="org.drools.decisiontables" version="5.4.0.SNAPSHOT"/>
+	<artifact type="bundle" name="org.drools.persistence-jpa" version="5.4.0.SNAPSHOT"/>
+	
+	<!-- <artifact type="bundle" name="org.jbpm.human-task" version="5.3.0.SNAPSHOT"/> -->
+	
+	<!-- 
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.shared" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.persistence.jpa.hibernate" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver" version="1.0.0"/>
+	-->
+</plan>

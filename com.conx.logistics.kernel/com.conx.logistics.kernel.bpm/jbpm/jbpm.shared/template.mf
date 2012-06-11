@@ -1,0 +1,9 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: JBPM Shared
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.shared
+Import-Package: javax.xml.stream;version="0",
+ org.antlr.stringtemplate;version="[3.1.3,3.1.3]",
+ org.apache.commons.codec.binary;version="[1.4.0,1.4.0]",
+ org.apache.commons.io;version="[1.4.0,1.4.0]",
+ org.slf4j;version="[1.6.0,1.7.0)"

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Kernel System DAO 
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.system.dao.datasource
+Import-Package: com.mchange.v2.c3p0;version="0.9.1",com.mysql.jdbc;ver
+ sion="5.1.6",javax.sql;version="0",org.apache.commons.dbcp;version="[
+ 1.2.2.osgi, 1.2.2.osgi]",org.springframework.beans.factory.config;ver
+ sion="[3.0.5,3.1.0)",org.springframework.context;version="[3.0.5,3.1.
+ 0)"
+

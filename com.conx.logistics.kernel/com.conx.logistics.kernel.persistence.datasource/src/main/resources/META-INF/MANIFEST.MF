@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConXLogistics Kernel PoolingDataSource
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.persistence.datasource
+Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.journa
+ l;version="[2.1.0,2.2.0)",bitronix.tm.recovery;version="[2.1.0,2.2.0)
+ ",bitronix.tm.resource;version="[2.1.0,2.2.0)",bitronix.tm.resource.j
+ dbc;version="[2.1.0,2.2.0)",bitronix.tm.timer;version="[2.1.0,2.2.0)"
+ ,bitronix.tm.twopc.executor;version="[2.1.0,2.2.0)",bitronix.tm.utils
+ ;version="[2.1.0,2.2.0)",com.mysql.jdbc.jdbc2.optional;version="5.1.2
+ 0",javassist.util.proxy;version="3.12.0.GA",javax.naming;version="0",
+ javax.persistence;version="0",javax.persistence.criteria;version="0",
+ javax.sql;version="0",javax.transaction;version="0",javax.validation;
+ version="1.0.0.GA",org.springframework.beans.factory.annotation;versi
+ on="[3.0, 3.1)",org.springframework.context.weaving;version="[3.0, 3.
+ 1)",org.springframework.core.io;version="[3.0, 3.1)",org.springframew
+ ork.dao;version="[3.0, 3.1)",org.springframework.dao.annotation;versi
+ on="[3.0, 3.1)",org.springframework.jdbc.core;version="[3.0, 3.1)",or
+ g.springframework.orm.jpa;version="[3.0, 3.1)",org.springframework.or
+ m.jpa.vendor;version="[3.0, 3.1)",org.springframework.stereotype;vers
+ ion="[3.0, 3.1)",org.springframework.transaction;version="[3.0, 3.1)"
+ ,org.springframework.transaction.annotation;version="[3.0, 3.1)",org.
+ springframework.transaction.aspectj;version="[3.0, 3.1)",org.springfr
+ amework.transaction.jta;version="[3.0, 3.1)"
+

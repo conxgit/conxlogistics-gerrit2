@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: 1.6.0_30 (Sun Microsystems Inc.)
+Built-By: hudson
+Build-Jdk: 1.6.0_30
+Specification-Title: Knowledge Internal API
+Specification-Version: 5.4.0-SNAPSHOT
+Specification-Vendor: JBoss by Red Hat
+Implementation-Title: Knowledge Internal API
+Implementation-Version: 5.4.0-SNAPSHOT
+Implementation-Vendor-Id: org.drools
+Implementation-Vendor: JBoss by Red Hat
+Fragment-Host: org.drools.core;bundle-version="5.4.0.Final"
+Export-Package: org.drools.fluent;uses:="org.drools.command,org.drools
+ .simulation";version="5.4.0.Final",org.drools.simulation;uses:="or
+ g.drools.command";version="5.4.0.Final",org.drools.command;version
+ ="5.4.0.Final",org.drools.fluent.test;uses:="org.drools.command";v
+ ersion="5.4.0.Final",org.drools.event.rule;version="5.4.0.Final"
+Tool: Bnd-0.0.357
+Bundle-Name: Knowledge Internal API
+Bundle-Vendor: JBoss by Red Hat
+DynamicImport-Package: *
+Bundle-Version: 5.4.0.Final
+Bnd-LastModified: 1336968240279
+Bundle-ManifestVersion: 2
+Bundle-Description: The Drools and jBPM internal API which is NOT back
+ wards compatible between releases.
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.drools.internalapi;singleton:=true
+Bundle-DocURL: http://www.jboss.org/
+

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.pageflow.services;version="1
+ .0.0";uses:="com.conx.logistics.kernel.bpm.services,com.conx.logistic
+ s.mdm.domain.task,com.vaadin.ui"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX kernel PageFlow Services
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.services
+Import-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
+ ,com.conx.logistics.mdm.domain.task;version="1.0.0",com.vaadin.ui;ver
+ sion="[6.7.0,7.0.0)"
+

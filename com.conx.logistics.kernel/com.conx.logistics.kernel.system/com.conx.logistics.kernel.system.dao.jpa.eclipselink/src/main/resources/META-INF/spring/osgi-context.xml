@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<!-- import the DataSource from OSGi -->
+	<osgi:reference id="dataSource" interface="javax.sql.DataSource" filter="(module=KERNEL.SYSTEM)"/>
+
+	<!-- export internal interfaces -->
+	<osgi:service ref="applicationDao" interface="com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService"/>
+
+	<!-- KERNEL.SYSTEM Transaction Manager -->
+	<osgi:service ref="transactionManager" interface="org.springframework.transaction.PlatformTransactionManager">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL.SYSTEM"/>
+		  </osgi:service-properties>	
+	</osgi:service>
+	
+	<!-- KERNEL.SYSTEM EntityManagerFactory -->
+	<osgi:service ref = "entityManagerFactory" context-class-loader="service-provider" interface="javax.persistence.EntityManagerFactory">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL.SYSTEM"/>
+		</osgi:service-properties>		
+	</osgi:service>	
+</beans>

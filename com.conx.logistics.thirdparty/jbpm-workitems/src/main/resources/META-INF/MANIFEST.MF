@@ -1,0 +1,60 @@
+Manifest-Version: 1.0
+Export-Package: icons;version="5.3.0.Final",org.jbpm.process.workitem;
+ version="5.3.0.Final";uses:="org.drools.runtime,org.drools.runtime.pr
+ ocess",org.jbpm.process.workitem.archive;version="5.3.0.Final";uses:=
+ "org.drools.process.instance,org.drools.runtime.process",org.jbpm.pro
+ cess.workitem.email;version="5.3.0.Final";uses:="javax.mail,org.drool
+ s.process.instance,org.drools.runtime.process",org.jbpm.process.worki
+ tem.esb;version="5.3.0.Final";uses:="org.drools.runtime.process",org.
+ jbpm.process.workitem.exec;version="5.3.0.Final";uses:="org.drools.pr
+ ocess.instance,org.drools.runtime.process",org.jbpm.process.workitem.
+ finder;version="5.3.0.Final";uses:="org.drools.process.instance,org.d
+ rools.runtime.process",org.jbpm.process.workitem.ftp;version="5.3.0.F
+ inal";uses:="org.drools.process.instance,org.drools.runtime.process",
+ org.jbpm.process.workitem.google.calendar;version="5.3.0.Final";uses:
+ ="org.drools.runtime.process",org.jbpm.process.workitem.handler;versi
+ on="5.3.0.Final";uses:="org.drools.runtime,org.drools.runtime.process
+ ",org.jbpm.process.workitem.jabber;version="5.3.0.Final";uses:="org.d
+ rools.process.instance,org.drools.runtime.process",org.jbpm.process.w
+ orkitem.java;version="5.3.0.Final";uses:="org.drools.runtime.process"
+ ,org.jbpm.process.workitem.rest;version="5.3.0.Final";uses:="org.droo
+ ls.process.instance,org.drools.runtime.process",org.jbpm.process.work
+ item.rss;version="5.3.0.Final";uses:="org.drools.process.instance,org
+ .drools.runtime.process",org.jbpm.process.workitem.transform;version=
+ "5.3.0.Final";uses:="org.drools.process.instance,org.drools.runtime.p
+ rocess"
+Built-By: dev
+Tool: Bundlor 1.0.0.RELEASE
+Created-By: Apache Maven
+Bundle-Version: 5.3.0.Final
+Build-Jdk: 1.6.0_29
+Bundle-ManifestVersion: 2
+Bundle-Description: jBPM Workitems
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.jbpm.workitems
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: com.sun.syndication.feed.synd;version="[1.0,1.1)",com.
+ sun.syndication.io;version="[1.0,1.1)",javax.activation;version="0",j
+ avax.mail;version="1.4.1",javax.mail.internet;version="1.4.1",javax.m
+ ail.util;version="1.4.1",javax.persistence;version="0",javax.xml.pars
+ ers;version="0",org.apache.commons.compress.archivers;version="1.0",o
+ rg.apache.commons.compress.archivers.tar;version="1.0",org.apache.com
+ mons.compress.utils;version="1.0",org.apache.commons.exec;version="1.
+ 0.1",org.apache.commons.net.ftp;version="2.0.0",org.drools.common;ver
+ sion="5.4.0.Final",org.drools.persistence;version="5.4.0.Final",org.d
+ rools.persistence.jpa;version="5.4.0.Final",org.drools.persistence.ma
+ p;version="5.4.0.Final",org.drools.process.instance;version="5.4.0.Fi
+ nal",org.drools.process.instance.impl;version="5.4.0.Final",org.drool
+ s.runtime;version="5.4.0.Final",org.drools.runtime.process;version="5
+ .4.0.Final",org.drools.spi;version="5.4.0.Final",org.hibernate;versio
+ n="3.6.0.Final",org.hibernate.cfg;version="3.6.0.Final",org.hibernate
+ .classic;version="3.6.0.Final",org.hibernate.usertype;version="3.6.0.
+ Final",org.jaxen;version="1.1.1",org.jaxen.jdom;version="1.1.1",org.j
+ bpm.workflow.instance.node;version="5.3.0.SNAPSHOT",org.jivesoftware.
+ smack;version="3.1.0",org.jivesoftware.smack.packet;version="3.1.0",o
+ rg.mvel2;version="2.1",org.mvel2.compiler;version="2.1",org.mvel2.int
+ egration;version="2.1",org.mvel2.integration.impl;version="2.1",org.o
+ sgi.framework;version="0",org.w3c.dom;version="0",org.xml.sax;version
+ ="0"
+Archiver-Version: Plexus Archiver
+

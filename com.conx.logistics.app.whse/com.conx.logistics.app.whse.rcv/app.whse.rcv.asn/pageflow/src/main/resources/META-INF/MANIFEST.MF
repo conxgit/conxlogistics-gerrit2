@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.rcv.asn.pageflow.pages;ver
+ sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.v
+ aadin.ui"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS RCV ASN Sub-Module PageFlow artifacts
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
+Import-Package: com.conx.logistics.kernel.pageflow.services;version="1
+ .0.0",com.vaadin.ui;version="[6.7.0,7.0.0)"
+

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 1.0.1
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: commons-exec
+Export-Package: commons-exec
+Archiver-Version: Plexus Archiver

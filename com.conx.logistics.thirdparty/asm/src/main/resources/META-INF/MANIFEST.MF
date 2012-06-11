@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: org.objectweb.asm;version="3.3.1",org.objectweb.asm.si
+ gnature;version="3.3.1"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 3.3.1
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ASM
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: com.conx.logistics.thirdparty.asm
+Archiver-Version: Plexus Archiver
+

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.mdm.domain;version="1.0.0";uses:="j
+ avax.persistence",com.conx.logistics.mdm.domain.application;version="
+ 1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",com.co
+ nx.logistics.mdm.domain.organization;version="1.0.0";uses:="com.conx.
+ logistics.mdm.domain,javax.persistence",com.conx.logistics.mdm.domain
+ .task;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.conx.l
+ ogistics.mdm.domain.application,javax.persistence,javax.validation.co
+ nstraints"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Master Data Management Domain Model
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.mdm.domain
+Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
+ ",javax.persistence;version="[2.0.0,3.0.0)",javax.validation.constrai
+ nts;version="[1.0.0,2.0.0)"
+

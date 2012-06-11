@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Export-Package: org.hibernate.transaction.custom;version="1.0.0";uses:
+ ="javax.transaction,org.hibernate,org.hibernate.transaction"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConXLogistics Kernel Persistence JTA TM
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.persistence.tm.jta
+Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.jndi;v
+ ersion="[2.1.0,2.2.0)",bitronix.tm.journal;version="[2.1.0,2.2.0)",bi
+ tronix.tm.recovery;version="[2.1.0,2.2.0)",bitronix.tm.resource;versi
+ on="[2.1.0,2.2.0)",bitronix.tm.resource.jdbc;version="[2.1.0,2.2.0)",
+ bitronix.tm.timer;version="[2.1.0,2.2.0)",bitronix.tm.twopc.executor;
+ version="[2.1.0,2.2.0)",bitronix.tm.utils;version="[2.1.0,2.2.0)",com
+ .mysql.jdbc.jdbc2.optional;version="5.1.20",javassist.util.proxy;vers
+ ion="3.12.0.GA",javax.naming;version="0",javax.persistence;version="0
+ ",javax.persistence.criteria;version="0",javax.sql;version="0",javax.
+ transaction;version="0",javax.validation;version="1.0.0.GA",org.apach
+ e.xerces.jaxp;version="2.9.1",org.hibernate;version="3.6.0.Final",org
+ .hibernate.transaction;version="3.6.0.Final",org.hibernate.validator;
+ version="4.2.0.Final",org.springframework.beans.factory.annotation;ve
+ rsion="[3.0, 3.1)",org.springframework.context.weaving;version="[3.0,
+  3.1)",org.springframework.core.io;version="[3.0, 3.1)",org.springfra
+ mework.dao;version="[3.0, 3.1)",org.springframework.dao.annotation;ve
+ rsion="[3.0, 3.1)",org.springframework.jdbc.core;version="[3.0, 3.1)"
+ ,org.springframework.jndi;version="[3.0,3.1)",org.springframework.orm
+ .jpa;version="[3.0, 3.1)",org.springframework.orm.jpa.vendor;version=
+ "[3.0, 3.1)",org.springframework.stereotype;version="[3.0, 3.1)",org.
+ springframework.transaction;version="[3.0, 3.1)",org.springframework.
+ transaction.annotation;version="[3.0, 3.1)",org.springframework.trans
+ action.aspectj;version="[3.0, 3.1)",org.springframework.transaction.j
+ ta;version="[3.0, 3.1)"
+

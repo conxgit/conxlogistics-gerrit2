@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Export-Package: javassist;version="3.12.0.GA";uses:="javassist.bytecod
+ e,javassist.bytecode.annotation,javassist.compiler,javassist.compiler
+ .ast,javassist.expr",javassist.bytecode;version="3.12.0.GA";uses:="ja
+ vassist,javassist.bytecode.annotation",javassist.bytecode.analysis;ve
+ rsion="3.12.0.GA";uses:="javassist,javassist.bytecode",javassist.byte
+ code.annotation;version="3.12.0.GA";uses:="javassist,javassist.byteco
+ de",javassist.bytecode.stackmap;version="3.12.0.GA";uses:="javassist,
+ javassist.bytecode",javassist.compiler;version="3.12.0.GA";uses:="jav
+ assist,javassist.bytecode,javassist.compiler.ast",javassist.compiler.
+ ast;version="3.12.0.GA";uses:="javassist,javassist.compiler",javassis
+ t.convert;version="3.12.0.GA";uses:="javassist,javassist.bytecode",ja
+ vassist.expr;version="3.12.0.GA";uses:="javassist,javassist.bytecode,
+ javassist.compiler,javassist.compiler.ast",javassist.runtime;version=
+ "3.12.0.GA",javassist.scopedpool;version="3.12.0.GA";uses:="javassist
+ ",javassist.tools;version="3.12.0.GA",javassist.tools.reflect;version
+ ="3.12.0.GA";uses:="javassist",javassist.tools.rmi;version="3.12.0.GA
+ ";uses:="javassist,javassist.tools.web",javassist.tools.web;version="
+ 3.12.0.GA";uses:="javassist",javassist.util;version="3.12.0.GA";uses:
+ ="com.sun.jdi.connect,com.sun.jdi.event,com.sun.jdi.request",javassis
+ t.util.proxy;version="3.12.0.GA";uses:="javassist,javassist.bytecode"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 3.12.0.GA
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: com.conx.logistics.thirdparty.javassist
+Import-Package: com.sun.jdi;version="0";resolution:="optional",com.sun
+ .jdi.connect;version="0";resolution:="optional",com.sun.jdi.event;ver
+ sion="0";resolution:="optional",com.sun.jdi.request;version="0";resol
+ ution:="optional"
+Archiver-Version: Plexus Archiver
+

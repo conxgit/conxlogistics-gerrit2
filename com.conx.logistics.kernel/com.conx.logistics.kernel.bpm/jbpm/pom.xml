@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>com.conx.logistics.kernel.bpm</artifactId>
+		<groupId>com.conx.logistics</groupId>
+		<version>1.0.0</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>com.conx.logistics.kernel.bpm.impl.jbpm</artifactId>
+	<name>com.conx.logistics.kernel.bpm.impl.jbpm</name>
+	<description>com.conx.logistics.kernel.bpm.impl.jbpm</description>
+	<packaging>pom</packaging>
+	<modules>
+		<!-- <module>5.4.0-SNAPSHOT</module> -->
+		<!-- 
+		<module>com.conx.logistics.kernel.bpm.impl.jbpm.core</module>
+		<module>jbpm.persistence.jpa.hibernate</module>
+		<module>com.conx.logistics.kernel.bpm.impl.jbpm.shared</module>
+		-->
+		<module>jbpm.shared</module>
+		<module>jbpm.core</module>
+		<module>jbpm.taskserver</module>
+		<!-- <module>jbpm.taskserver.tests</module> -->
+		<module>jbpm.taskserver.persistence</module>
+		<module>jbpm.persistence.datasource</module>
+		<module>jbpm.bpmserver.persistence</module>
+  		<!-- <module>jbpm.core.mock</module> -->
+  		<!-- <module>jpbm.bpmserver.tests</module> -->
+  		<!-- <module>jpbm-osgi-bundles</module> -->
+  		<module>jbpm.bpmserver.tests.standalone</module>
+	</modules>
+</project>

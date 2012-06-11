@@ -1,0 +1,38 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 5.4.0.Final
+Bundle-Description: jBPM BAM
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-SymbolicName: org.jbpm.bam
+Bundle-DocURL: http://www.jboss.org/
+Import-Package: 
+  javax.persistence;version="0",
+  javax.transaction;version="0",
+  org.drools;version="5.4.0.Final",
+  org.drools.audit;version="5.4.0.Final",
+  org.drools.audit.event;version="5.4.0.Final",
+  org.drools.event;version="5.4.0.Final",
+  org.drools.impl;version="5.4.0.Final",
+  org.drools.persistence;version="5.4.0.Final",
+  org.drools.persistence.jpa;version="5.4.0.Final",
+  org.drools.persistence.map;version="5.4.0.Final",
+  org.drools.runtime;version="5.4.0.Final",
+  org.drools.common;version="5.4.0.Final",
+  org.drools.runtime;version="5.4.0.Final",
+  org.drools.runtime.process;version="5.4.0.Final",
+  org.hibernate;version="3.6.0.Final",
+  org.hibernate.usertype;version="3.6.0.Final",
+  org.hibernate.cfg;version="3.6.0.Final",
+  org.hibernate.classic;version="3.6.0.Final"
+Excluded-Imports: com.google.protobuf,
+  javax.persistence,
+  org.jbpm.marshalling.impl,
+  org.jbpm.process.instance,
+  org.jbpm.process.instance.event,
+  org.jbpm.process.instance.impl,
+  org.slf4j.impl,
+  org.slf4j
+Excluded-Exports: gnu.trove,
+  org.slf4j.*,
+  org.slf4j.spi.*
+
+

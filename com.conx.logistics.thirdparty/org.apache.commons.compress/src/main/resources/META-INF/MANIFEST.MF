@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.apache.commons.compress.archivers;version="1.0",or
+ g.apache.commons.compress.archivers.ar;version="1.0";uses:="org.apach
+ e.commons.compress.archivers",org.apache.commons.compress.archivers.c
+ pio;version="1.0";uses:="org.apache.commons.compress.archivers",org.a
+ pache.commons.compress.archivers.jar;version="1.0";uses:="org.apache.
+ commons.compress.archivers,org.apache.commons.compress.archivers.zip"
+ ,org.apache.commons.compress.archivers.tar;version="1.0";uses:="org.a
+ pache.commons.compress.archivers",org.apache.commons.compress.archive
+ rs.zip;version="1.0";uses:="org.apache.commons.compress.archivers",or
+ g.apache.commons.compress.changes;version="1.0";uses:="org.apache.com
+ mons.compress.archivers",org.apache.commons.compress.compressors;vers
+ ion="1.0",org.apache.commons.compress.compressors.bzip2;version="1.0"
+ ;uses:="org.apache.commons.compress.compressors",org.apache.commons.c
+ ompress.compressors.gzip;version="1.0";uses:="org.apache.commons.comp
+ ress.compressors",org.apache.commons.compress.utils;version="1.0";use
+ s:="org.apache.commons.compress.archivers"
+Build-Jdk: 1.6.0_29
+Built-By: Developer
+Bundle-Version: 1.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: Commons compress
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: commons-compress
+Archiver-Version: Plexus Archiver
+

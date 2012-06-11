@@ -1,0 +1,84 @@
+Manifest-Version: 1.0
+Export-Package: org.hibernate.ejb;version="3.6.0.Final";uses:="javax.n
+ aming,javax.naming.spi,javax.persistence,javax.persistence.criteria,j
+ avax.persistence.metamodel,javax.persistence.spi,javax.sql,javax.tran
+ saction,org.hibernate,org.hibernate.cfg,org.hibernate.connection,org.
+ hibernate.ejb.packaging,org.hibernate.ejb.util,org.hibernate.engine,o
+ rg.hibernate.event,org.hibernate.mapping,org.hibernate.proxy,org.hibe
+ rnate.transaction,org.hibernate.transaction.synchronization,org.hiber
+ nate.transform,org.hibernate.type,org.slf4j,org.xml.sax",org.hibernat
+ e.ejb.connection;version="3.6.0.Final";uses:="javax.sql,org.hibernate
+ ,org.hibernate.connection",org.hibernate.ejb.criteria;version="3.6.0.
+ Final";uses:="javax.persistence,javax.persistence.criteria,javax.pers
+ istence.metamodel,org.hibernate.ejb,org.hibernate.ejb.criteria.expres
+ sion,org.hibernate.type",org.hibernate.ejb.criteria.expression;versio
+ n="3.6.0.Final";uses:="javax.persistence.criteria,javax.persistence.m
+ etamodel,org.hibernate.ejb.criteria,org.hibernate.ejb.criteria.path",
+ org.hibernate.ejb.criteria.expression.function;version="3.6.0.Final";
+ uses:="javax.persistence.criteria,org.hibernate.ejb.criteria,org.hibe
+ rnate.ejb.criteria.expression",org.hibernate.ejb.criteria.path;versio
+ n="3.6.0.Final";uses:="javax.persistence.criteria,javax.persistence.m
+ etamodel,org.hibernate.ejb.criteria,org.hibernate.ejb.criteria.expres
+ sion,org.hibernate.persister.collection",org.hibernate.ejb.criteria.p
+ redicate;version="3.6.0.Final";uses:="javax.persistence.criteria,org.
+ hibernate.ejb.criteria,org.hibernate.ejb.criteria.expression,org.hibe
+ rnate.ejb.criteria.path",org.hibernate.ejb.event;version="3.6.0.Final
+ ";uses:="org.hibernate.annotations.common.reflection,org.hibernate.en
+ gine,org.hibernate.event,org.hibernate.event.def,org.hibernate.persis
+ ter.entity",org.hibernate.ejb.instrument;version="3.6.0.Final";uses:=
+ "javax.persistence.spi,org.hibernate.bytecode.util",org.hibernate.ejb
+ .metamodel;version="3.6.0.Final";uses:="javax.persistence.metamodel,o
+ rg.hibernate.engine,org.hibernate.mapping,org.hibernate.tuple.entity,
+ org.hibernate.type",org.hibernate.ejb.packaging;version="3.6.0.Final"
+ ;uses:="javax.persistence.spi,org.w3c.dom,org.xml.sax",org.hibernate.
+ ejb.transaction;version="3.6.0.Final";uses:="org.hibernate,org.hibern
+ ate.jdbc,org.hibernate.transaction",org.hibernate.ejb.util;version="3
+ .6.0.Final";uses:="javax.naming.event,javax.persistence,javax.persist
+ ence.spi,org.hibernate,org.hibernate.ejb,org.slf4j"
+Fragment-Host: com.conx.logistics.thirdparty.hibernate.core
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 3.6.0.Final
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven
+Bundle-SymbolicName: com.conx.logistics.thirdparty.hibernate.entityman
+ ager
+Import-Package: javassist.bytecode;version="[3.12.0, 4.0.0)";resolutio
+ n:="optional",javassist.bytecode.annotation;version="[3.12.0, 4.0.0)"
+ ;resolution:="optional",javax.naming;version="0",javax.naming.event;v
+ ersion="0",javax.naming.spi;version="0",javax.persistence;version="[2
+ ,3)",javax.persistence.criteria;version="[2,3)",javax.persistence.met
+ amodel;version="[2,3)",javax.persistence.spi;version="[2,3)",javax.sq
+ l;version="0",javax.transaction;version="0",javax.xml.parsers;version
+ ="0",javax.xml.transform;version="0",javax.xml.transform.dom;version=
+ "0",javax.xml.transform.stream;version="0",javax.xml.validation;versi
+ on="0",org.dom4j;version="[1.6.1, 2.0.0)",org.hibernate;version="3.6.
+ 0.Final",org.hibernate.annotations.common;version="3.2.0.Final",org.h
+ ibernate.annotations.common.reflection;version="3.2.0.Final",org.hibe
+ rnate.annotations.common.util;version="3.2.0.Final",org.hibernate.byt
+ ecode;version="3.6.0.Final",org.hibernate.bytecode.util;version="3.6.
+ 0.Final",org.hibernate.cfg;version="3.6.0.Final",org.hibernate.cfg.an
+ notations.reflection;version="3.6.0.Final",org.hibernate.classic;vers
+ ion="3.6.0.Final",org.hibernate.collection;version="3.6.0.Final",org.
+ hibernate.connection;version="3.6.0.Final",org.hibernate.dialect;vers
+ ion="3.6.0.Final",org.hibernate.engine;version="3.6.0.Final",org.hibe
+ rnate.engine.query;version="3.6.0.Final",org.hibernate.engine.query.s
+ ql;version="3.6.0.Final",org.hibernate.event;version="3.6.0.Final",or
+ g.hibernate.event.def;version="3.6.0.Final",org.hibernate.hql;version
+ ="3.6.0.Final",org.hibernate.impl;version="3.6.0.Final",org.hibernate
+ .intercept;version="3.6.0.Final",org.hibernate.jdbc;version="3.6.0.Fi
+ nal",org.hibernate.mapping;version="3.6.0.Final",org.hibernate.metada
+ ta;version="3.6.0.Final",org.hibernate.persister.collection;version="
+ 3.6.0.Final",org.hibernate.persister.entity;version="3.6.0.Final",org
+ .hibernate.property;version="3.6.0.Final",org.hibernate.proxy;version
+ ="3.6.0.Final",org.hibernate.secure;version="3.6.0.Final",org.hiberna
+ te.transaction;version="3.6.0.Final",org.hibernate.transaction.synchr
+ onization;version="3.6.0.Final",org.hibernate.transform;version="3.6.
+ 0.Final",org.hibernate.tuple;version="3.6.0.Final",org.hibernate.tupl
+ e.entity;version="3.6.0.Final",org.hibernate.type;version="3.6.0.Fina
+ l",org.hibernate.util;version="3.6.0.Final",org.hibernate.util.xml;ve
+ rsion="3.6.0.Final",org.slf4j;version="[1.5.6, 2.0.0)",org.w3c.dom;ve
+ rsion="0",org.xml.sax;version="0"
+Archiver-Version: Plexus Archiver
+
