@@ -21,7 +21,7 @@ Import-Package: org.drools.common;version="5.4.0.Final",org.drools.per
  4.0.Final",org.drools.persistence.map;version="5.4.0.Final",org.drool
  s.runtime;version="5.4.0.Final",org.drools.runtime.process;version="5
  .4.0.Final",org.hibernate;version="3.6.0.Final",org.hibernate.usertyp
- e;version="3.6.0.Final",org.jbpm.process.instance;version="5.3.0.SNAP
- SHOT",org.jbpm.process.instance.event;version="5.3.0.SNAPSHOT"
+ e;version="3.6.0.Final",org.jbpm.process.instance;version="5.3.0.Final",
+ org.jbpm.process.instance.event;version="5.3.0.Final"
 Archiver-Version: Plexus Archiver
 

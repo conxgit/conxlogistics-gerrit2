@@ -37,24 +37,36 @@ Bundle-DocURL: http://www.jboss.org/
 Import-Package: javax.activation;version="0",javax.jms;version="0",jav
  ax.mail;version="0",javax.mail.internet;version="0",javax.mail.util;v
  ersion="0",javax.naming;version="0",javax.naming.directory;version="0
- ",javax.naming.ldap;version="0",javax.transaction;version="0",org.apa
- che.mina.core.filterchain;version="2.0.2",org.apache.mina.core.future
- ;version="2.0.2",org.apache.mina.core.service;version="2.0.2",org.apa
- che.mina.core.session;version="2.0.2",org.apache.mina.filter.codec;ve
- rsion="2.0.2",org.apache.mina.filter.codec.serialization;version="2.0
- .2",org.apache.mina.filter.logging;version="2.0.2",org.apache.mina.tr
- ansport.socket;version="2.0.2",org.apache.mina.transport.socket.nio;v
- ersion="2.0.2",org.hibernate;version="3.6.0.Final",org.hibernate.cfg;
- version="3.6.0.Final",org.hibernate.classic;version="3.6.0.Final",org
- .hibernate.usertype;version="3.6.0.Final",org.hornetq.api.core;versio
- n="0",org.hornetq.api.core.client;version="0",org.hornetq.core.config
- ;version="0",org.hornetq.core.config.impl;version="0",org.hornetq.cor
- e.remoting.impl.netty;version="0",org.hornetq.core.server;version="0"
- ,org.jaxen;version="1.1.1",org.jaxen.jdom;version="1.1.1",org.jbpm.pr
- ocess.workitem.email;version="0";resolution:="optional",org.mvel2;ver
- sion="2.1",org.mvel2.compiler;version="2.1",org.mvel2.integration;ver
- sion="2.1",org.mvel2.integration.impl;version="2.1",org.mvel2.templat
- es;version="2.1",org.osgi.framework;version="0",org.slf4j;version="[1
- .6.1,1.7.0)"
+ ",javax.naming.ldap;version="0",javax.persistence;version="0",javax.t
+ ransaction;version="0",org.apache.mina.core.filterchain;version="2.0.
+ 2",org.apache.mina.core.future;version="2.0.2",org.apache.mina.core.s
+ ervice;version="2.0.2",org.apache.mina.core.session;version="2.0.2",o
+ rg.apache.mina.filter.codec;version="2.0.2",org.apache.mina.filter.co
+ dec.serialization;version="2.0.2",org.apache.mina.filter.logging;vers
+ ion="2.0.2",org.apache.mina.transport.socket;version="2.0.2",org.apac
+ he.mina.transport.socket.nio;version="2.0.2",org.drools;version="5.4.
+ 0.Final",org.drools.common;version="5.4.0.Final",org.drools.core.util
+ ;version="5.4.0.Final",org.drools.definition.process;version="5.4.0.F
+ inal",org.drools.event;version="5.4.0.Final",org.drools.event.process
+ ;version="5.4.0.Final",org.drools.marshalling;version="5.4.0.Final",o
+ rg.drools.marshalling.impl;version="5.4.0.Final",org.drools.persisten
+ ce;version="5.4.0.Final",org.drools.persistence.jpa;version="5.4.0.Fi
+ nal",org.drools.persistence.jta;version="5.4.0.Final",org.drools.pers
+ istence.map;version="5.4.0.Final",org.drools.process.instance.impl;ve
+ rsion="5.4.0.Final",org.drools.runtime;version="5.4.0.Final",org.droo
+ ls.runtime.process;version="5.4.0.Final",org.drools.task.service;vers
+ ion="5.4.0.Final",org.drools.time;version="5.4.0.Final",org.drools.ut
+ il;version="5.4.0.Final",org.hibernate;version="3.6.0.Final",org.hibe
+ rnate.cfg;version="3.6.0.Final",org.hibernate.classic;version="3.6.0.
+ Final",org.hibernate.usertype;version="3.6.0.Final",org.hornetq.api.c
+ ore;version="0",org.hornetq.api.core.client;version="0",org.hornetq.c
+ ore.config;version="0",org.hornetq.core.config.impl;version="0",org.h
+ ornetq.core.remoting.impl.netty;version="0",org.hornetq.core.server;v
+ ersion="0",org.jaxen;version="1.1.1",org.jaxen.jdom;version="1.1.1",o
+ rg.jbpm.process.workitem.email;version="0";resolution:="optional",org
+ .mvel2;version="2.1",org.mvel2.compiler;version="2.1",org.mvel2.integ
+ ration;version="2.1",org.mvel2.integration.impl;version="2.1",org.mve
+ l2.templates;version="2.1",org.osgi.framework;version="0",org.slf4j;v
+ ersion="[1.6.1,1.7.0)"
 Archiver-Version: Plexus Archiver
 

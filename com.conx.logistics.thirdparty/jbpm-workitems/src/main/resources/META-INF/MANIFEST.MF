@@ -50,11 +50,11 @@ Import-Package: com.sun.syndication.feed.synd;version="[1.0,1.1)",com.
  n="3.6.0.Final",org.hibernate.cfg;version="3.6.0.Final",org.hibernate
  .classic;version="3.6.0.Final",org.hibernate.usertype;version="3.6.0.
  Final",org.jaxen;version="1.1.1",org.jaxen.jdom;version="1.1.1",org.j
- bpm.workflow.instance.node;version="5.3.0.SNAPSHOT",org.jivesoftware.
- smack;version="3.1.0",org.jivesoftware.smack.packet;version="3.1.0",o
- rg.mvel2;version="2.1",org.mvel2.compiler;version="2.1",org.mvel2.int
- egration;version="2.1",org.mvel2.integration.impl;version="2.1",org.o
- sgi.framework;version="0",org.w3c.dom;version="0",org.xml.sax;version
- ="0"
+ bpm.workflow.instance.node;version="5.3.0.Final",org.jivesoftware.sma
+ ck;version="3.1.0",org.jivesoftware.smack.packet;version="3.1.0",org.
+ mvel2;version="2.1",org.mvel2.compiler;version="2.1",org.mvel2.integr
+ ation;version="2.1",org.mvel2.integration.impl;version="2.1",org.osgi
+ .framework;version="0",org.w3c.dom;version="0",org.xml.sax;version="0
+ "
 Archiver-Version: Plexus Archiver
 

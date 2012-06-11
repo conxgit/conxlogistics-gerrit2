@@ -1,39 +1,35 @@
 Manifest-Version: 1.0
-Export-Package: com.conx.logistics.kernel.system.dao.jpa.eclipselink.a
- pplication;version="1.0.0";uses:="com.conx.logistics.kernel.system.da
- o.services.application,com.conx.logistics.mdm.domain.application,java
- x.persistence,org.springframework.beans.factory.annotation,org.spring
- framework.stereotype,org.springframework.transaction.annotation"
-Built-By: dev
-Tool: Bundlor 1.0.0.RELEASE
-Bundle-Name: ConX Kernel System DAO Services EclipseLink Impl
-Created-By: Maven Integration for Eclipse
 Import-Bundle: org.eclipse.persistence.core;version="[2.3.2.v20111125-
  r10461,2.3.2.v20111125-r10461]",org.eclipse.persistence.jpa;version="
  [2.3.2.v20111125-r10461,2.3.2.v20111125-r10461]"
 Bundle-Vendor: ConX
-Bundle-Version: 1.0.0
 Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.1.0.BUILD-20101220120024
+Bundle-Name: ConX Kernel System DAO Services EclipseLink Impl
 Bundle-ManifestVersion: 2
-Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
- ",com.conx.logistics.kernel.system.dao.services.application;version="
- [1.0.0,2.0.0)",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
- com.conx.logistics.mdm.domain.application;version="[1.0.0,2.0.0)",com
- .conx.logistics.mdm.domain.task;version="[1.0.0,2.0.0)",com.mchange.v
- 2.c3p0;version="0.9.1",javax.persistence;version="[1.0.0, 3.0.0)",jav
- ax.persistence.criteria;version="[1.0.0, 3.0.0)",javax.sql;version="0
- ",org.osgi.framework;version="0",org.slf4j;version="[1.6.1,1.6.3)",or
- g.springframework.beans.factory.annotation;version="[3.0, 3.1)",org.s
- pringframework.context.weaving;version="[3.0, 3.1)",org.springframewo
- rk.core.io;version="[3.0, 3.1)",org.springframework.dao;version="[3.0
- , 3.1)",org.springframework.dao.annotation;version="[3.0, 3.1)",org.s
- pringframework.jdbc.core;version="[3.0, 3.1)",org.springframework.orm
- .jpa;version="[3.0, 3.1)",org.springframework.orm.jpa.vendor;version=
- "[3.0, 3.1)",org.springframework.osgi.context;version="0",org.springf
- ramework.stereotype;version="[3.0, 3.1)",org.springframework.transact
- ion;version="[3.0, 3.1)",org.springframework.transaction.annotation;v
- ersion="[3.0, 3.1)",org.springframework.transaction.aspectj;version="
- [3.0, 3.1)"
+Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.system.dao.jpa.eclipsel
  ink
+Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
+ ",com.conx.logistics.kernel.system.dao.jpa.eclipselink.application,co
+ m.conx.logistics.kernel.system.dao.services.application;version="[1.0
+ .0,2.0.0)",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",com.
+ conx.logistics.mdm.domain.application;version="[1.0.0,2.0.0)",com.con
+ x.logistics.mdm.domain.task;version="[1.0.0,2.0.0)",com.mchange.v2.c3
+ p0;version="0.9.1",javax.persistence;version="[1.0.0, 3.0.0)",javax.p
+ ersistence.criteria;version="[1.0.0, 3.0.0)",javax.sql;version="0",or
+ g.osgi.framework;version="0",org.slf4j;version="[1.6.1,1.6.3)",org.sp
+ ringframework.beans.factory.annotation;version="[3.0, 3.1)",org.sprin
+ gframework.context.weaving;version="[3.0, 3.1)",org.springframework.c
+ ore.io;version="[3.0, 3.1)",org.springframework.dao;version="[3.0, 3.
+ 1)",org.springframework.dao.annotation;version="[3.0, 3.1)",org.sprin
+ gframework.jdbc.core;version="[3.0, 3.1)",org.springframework.orm.jpa
+ ;version="[3.0, 3.1)",org.springframework.orm.jpa.vendor;version="[3.
+ 0, 3.1)",org.springframework.osgi.context;version="0",org.springframe
+ work.stereotype;version="[3.0, 3.1)",org.springframework.transaction;
+ version="[3.0, 3.1)",org.springframework.transaction.annotation;versi
+ on="[3.0, 3.1)",org.springframework.transaction.aspectj;version="[3.0
+ , 3.1)"
 

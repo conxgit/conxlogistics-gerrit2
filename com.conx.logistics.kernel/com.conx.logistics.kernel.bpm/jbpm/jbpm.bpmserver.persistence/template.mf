@@ -4,11 +4,11 @@ Bundle-Name: JBPM BPMerver Persistence in Hibernate
 Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.bpmserver.persistence
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3.6.0.Final";import-scope:=application,
  com.conx.logistics.thirdparty.hibernate.annotations.commons;version="3.2.0.Final";import-scope:=application
-Import-Package: org.drools.persistence.info;version="[5.4.0.SNAPSHOT,5.4.0.SNAPSHOT]",
-  org.jbpm.persistence.processinstance;version="[5.3.0.SNAPSHOT,5.3.0.SNAPSHOT]",
-  org.jbpm.task;version="[5.3.0.SNAPSHOT,5.3.0.SNAPSHOT]",
-  org.jbpm.task.query;version="[5.3.0.SNAPSHOT,5.3.0.SNAPSHOT]",
-  org.jbpm.process.audit;version="[5.3.0.SNAPSHOT,5.3.0.SNAPSHOT]",
+Import-Package: org.drools.persistence.info;version="[5.4.0.Final,5.4.0.Final]",
+  org.jbpm.persistence.processinstance;version="[5.3.0.Final,5.3.0.Final]",
+  org.jbpm.task;version="[5.3.0.Final,5.3.0.Final]",
+  org.jbpm.task.query;version="[5.3.0.Final,5.3.0.Final]",
+  org.jbpm.process.audit;version="[5.3.0.Final,5.3.0.Final]",
   bitronix.tm.journal;version="[2.1.0,2.2.0)",
   bitronix.tm.utils;version="[2.1.0,2.2.0)",
   bitronix.tm;version="[2.1.0,2.2.0)",
