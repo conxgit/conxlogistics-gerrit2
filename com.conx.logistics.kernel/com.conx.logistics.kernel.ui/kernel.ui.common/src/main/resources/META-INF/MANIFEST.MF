@@ -25,7 +25,7 @@ Export-Package: com.conx.logistics.kernel.ui.common;version="1.0.0";us
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.0.0.RELEASE
+Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel UI MVP Common
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
