@@ -21,7 +21,7 @@ import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="SYSApplicationModule")
+@Table(name="sysapplicationModule")
 public class ApplicationModule extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

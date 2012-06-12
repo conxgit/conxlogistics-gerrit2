@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.conx.logistics.mdm.domain.BaseEntity;
 
 @Entity
-@Table(name="SYSApplication")
+@Table(name="sysapplication")
 public class Application extends BaseEntity {
 	
     private String themeIconPath;

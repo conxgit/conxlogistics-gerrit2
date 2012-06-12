@@ -1,4 +1,4 @@
-package com.conx.logistics.mdm.domain.organization;
+package com.conx.logistics.mdm.domain.product;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +12,11 @@ import javax.persistence.Version;
 
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 
+
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="reforganization")
-public class Organization extends MultitenantBaseEntity {
+@Table(name="mdmproductmaster")
+public class ProductMaster extends MultitenantBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

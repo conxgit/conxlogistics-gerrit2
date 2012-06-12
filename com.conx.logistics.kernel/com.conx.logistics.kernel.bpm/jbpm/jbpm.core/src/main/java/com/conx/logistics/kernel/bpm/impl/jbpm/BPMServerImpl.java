@@ -56,6 +56,10 @@ import org.drools.runtime.EnvironmentName;
 import org.drools.runtime.KnowledgeSessionConfiguration;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.process.ProcessInstance;
+import org.jboss.bpm.console.client.model.ProcessDefinitionRef;
+import org.jboss.bpm.console.client.model.ProcessInstanceRef;
+import org.jboss.bpm.console.client.model.ProcessInstanceRef.RESULT;
+import org.jboss.bpm.console.client.model.ProcessInstanceRef.STATE;
 import org.jbpm.process.audit.JPAWorkingMemoryDbLogger;
 import org.jbpm.process.workitem.wsht.CommandBasedWSHumanTaskHandler;
 import org.jbpm.process.workitem.wsht.SyncWSHumanTaskHandler;
@@ -560,16 +564,84 @@ public class BPMServerImpl implements IBPMService {
 		}			
 		return null;
 	}
+	
+	
 
 	@Override
 	public IBPMProcessInstance getProcessInstance(String processId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public Map<String, IBPMTask> getProcessTasks(String processId) {
 		// TODO Auto-generated method stub
 		return null;
+	}	
+
+
+	/**
+	 * Process Management methods
+	 */
+	@Override
+	public List<ProcessDefinitionRef> getProcessDefinitions() {
+		return getProcessManager().getProcessDefinitions();
+	}
+
+	@Override
+	public ProcessDefinitionRef getProcessDefinition(String definitionId) {
+		return getProcessManager().getProcessDefinition(definitionId);
+	}
+
+	@Override
+	public List<ProcessDefinitionRef> removeProcessDefinition(
+			String definitionId) {
+		return getProcessManager().removeProcessDefinition(definitionId);
+	}
+
+	@Override
+	public List<ProcessInstanceRef> getProcessInstances(String definitionId) {
+		return getProcessManager().getProcessInstances(definitionId);
+	}
+
+	@Override
+	public ProcessInstanceRef newInstance(String definitionId) {
+		return getProcessManager().newInstance(definitionId);
+	}
+
+	@Override
+	public ProcessInstanceRef newInstance(String definitionId,
+			Map<String, Object> processVars) {
+		return getProcessManager().newInstance(definitionId, processVars);
+	}
+
+	@Override
+	public void setProcessState(String instanceId, STATE nextState) {
+		getProcessManager().setProcessState(instanceId, nextState);
+	}
+
+	@Override
+	public Map<String, Object> getInstanceData(String instanceId) {
+		return getProcessManager().getInstanceData(instanceId);
+	}
+
+	@Override
+	public void setInstanceData(String instanceId, Map<String, Object> data) {
+		getProcessManager().getInstanceData(instanceId);
+	}
+
+	@Override
+	public void signalExecution(String executionId, String signal) {
+		getProcessManager().signalExecution(executionId, signal);
+	}
+
+	@Override
+	public void deleteInstance(String instanceId) {
+		getProcessManager().deleteInstance(instanceId);
+	}
+
+	@Override
+	public void endInstance(String instanceId, RESULT result) {
+		getProcessManager().endInstance(instanceId, result);
 	}
 }

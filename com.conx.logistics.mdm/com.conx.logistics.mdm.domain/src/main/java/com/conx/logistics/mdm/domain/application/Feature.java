@@ -21,7 +21,7 @@ import com.conx.logistics.mdm.domain.BaseEntity;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@Table(name="SYSFeature")
+@Table(name="sysfeature")
 public class Feature extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
