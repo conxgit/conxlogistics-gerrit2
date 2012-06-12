@@ -28,6 +28,6 @@
   		<!-- <module>jpbm.bpmserver.tests</module> -->
   		<!-- <module>jpbm-osgi-bundles</module> -->
   		<module>jbpm.bpmserver.tests.standalone</module>
-  		<module>jbpm.core.mock</module>
+  		<!-- <module>jbpm.core.mock</module> -->
 	</modules>
 </project>
