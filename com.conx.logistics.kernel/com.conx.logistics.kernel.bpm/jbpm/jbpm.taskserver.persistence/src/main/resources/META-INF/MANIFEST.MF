@@ -1,4 +1,7 @@
 Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.per
+ sistence;version="1.0.0";uses:="javax.transaction,org.hibernate,org.h
+ ibernate.transaction"
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a
@@ -6,7 +9,7 @@ Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.1.0.BUILD-20101220120024
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: JBPM TaskServer Persistence in Hibernate
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
@@ -24,20 +27,19 @@ Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.journa
  version="1.0.0.GA",org.drools.persistence.info;version="[5.4.0.Final,
  5.4.0.Final]",org.hibernate;version="3.6.0.Final",org.hibernate.ejb;v
  ersion="3.6.0.Final",org.hibernate.transaction;version="3.6.0.Final",
- org.hibernate.transaction.custom;version="1.0.0",org.hibernate.valida
- tor;version="4.2.0.Final",org.jbpm.persistence.processinstance;versio
- n="[5.3.0.Final,5.3.0.Final]",org.jbpm.process.audit;version="[5.3.0.
- Final,5.3.0.Final]",org.jbpm.task;version="[5.3.0.Final,5.3.0.Final]"
- ,org.jbpm.task.query;version="[5.3.0.Final,5.3.0.Final]",org.jsoup;ve
- rsion="1.5.2",org.springframework.beans.factory.annotation;version="[
- 3.0, 3.1)",org.springframework.context.weaving;version="[3.0, 3.1)",o
- rg.springframework.core.io;version="[3.0, 3.1)",org.springframework.d
- ao;version="[3.0, 3.1)",org.springframework.dao.annotation;version="[
- 3.0, 3.1)",org.springframework.jdbc.core;version="[3.0, 3.1)",org.spr
- ingframework.orm.jpa;version="[3.0, 3.1)",org.springframework.orm.jpa
- .vendor;version="[3.0, 3.1)",org.springframework.stereotype;version="
- [3.0, 3.1)",org.springframework.transaction;version="[3.0, 3.1)",org.
- springframework.transaction.annotation;version="[3.0, 3.1)",org.sprin
- gframework.transaction.aspectj;version="[3.0, 3.1)",org.springframewo
- rk.transaction.jta;version="[3.0, 3.1)"
+ org.hibernate.validator;version="4.2.0.Final",org.jbpm.persistence.pr
+ ocessinstance;version="[5.3.0.Final,5.3.0.Final]",org.jbpm.process.au
+ dit;version="[5.3.0.Final,5.3.0.Final]",org.jbpm.task;version="[5.3.0
+ .Final,5.3.0.Final]",org.jbpm.task.query;version="[5.3.0.Final,5.3.0.
+ Final]",org.jsoup;version="1.5.2",org.springframework.beans.factory.a
+ nnotation;version="[3.0, 3.1)",org.springframework.context.weaving;ve
+ rsion="[3.0, 3.1)",org.springframework.core.io;version="[3.0, 3.1)",o
+ rg.springframework.dao;version="[3.0, 3.1)",org.springframework.dao.a
+ nnotation;version="[3.0, 3.1)",org.springframework.jdbc.core;version=
+ "[3.0, 3.1)",org.springframework.orm.jpa;version="[3.0, 3.1)",org.spr
+ ingframework.orm.jpa.vendor;version="[3.0, 3.1)",org.springframework.
+ stereotype;version="[3.0, 3.1)",org.springframework.transaction;versi
+ on="[3.0, 3.1)",org.springframework.transaction.annotation;version="[
+ 3.0, 3.1)",org.springframework.transaction.aspectj;version="[3.0, 3.1
+ )",org.springframework.transaction.jta;version="[3.0, 3.1)"
 

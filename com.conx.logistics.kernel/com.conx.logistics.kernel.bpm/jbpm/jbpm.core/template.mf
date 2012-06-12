@@ -79,4 +79,5 @@ Excluded-Imports:
  org.apache.commons.codec.binary,
  org.apache.commons.io,
  org.mvel2,
- org.mvel2.compiler
+ org.mvel2.compiler,
+ com.conx.logistics.kernel.bpm.impl.jbpm

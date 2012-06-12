@@ -1,4 +1,7 @@
 Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm.bpmserver.pers
+ istence;version="1.0.0";uses:="javax.transaction,org.hibernate,org.hi
+ bernate.transaction"
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a
