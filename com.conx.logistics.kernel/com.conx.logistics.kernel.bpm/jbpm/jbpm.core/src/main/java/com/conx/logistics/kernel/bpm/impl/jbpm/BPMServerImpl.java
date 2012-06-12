@@ -539,46 +539,6 @@ public class BPMServerImpl implements IBPMService {
 		}			
 	}    	
 	
-	/**
-	 * Services
-	 */
-
-	@Override
-	public IBPMProcessInstance startNewProcess(String userId, String processId) {
-		try {
-			getProcessManager().getProcessDefinition(processId);
-		} 
-		catch (Exception e)
-		{
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			String stacktrace = sw.toString();
-			logger.error(stacktrace);
-		}	
-		catch (Error e)
-		{
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			String stacktrace = sw.toString();
-			logger.error(stacktrace);
-		}			
-		return null;
-	}
-	
-	
-
-	@Override
-	public IBPMProcessInstance getProcessInstance(String processId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public Map<String, IBPMTask> getProcessTasks(String processId) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
-
 
 	/**
 	 * Process Management methods
@@ -643,5 +603,10 @@ public class BPMServerImpl implements IBPMService {
 	@Override
 	public void endInstance(String instanceId, RESULT result) {
 		getProcessManager().endInstance(instanceId, result);
+	}
+
+	@Override
+	public ProcessInstanceRef getProcessInstance(String instanceId) {
+		return getProcessManager().getProcessInstance(instanceId);
 	}
 }
