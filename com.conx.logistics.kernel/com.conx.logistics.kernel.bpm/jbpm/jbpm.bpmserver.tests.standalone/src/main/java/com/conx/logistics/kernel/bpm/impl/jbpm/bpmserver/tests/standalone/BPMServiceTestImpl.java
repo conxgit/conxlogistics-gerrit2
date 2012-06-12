@@ -12,7 +12,7 @@ public class BPMServiceTestImpl {
 	public void setBpmService(IBPMService bpmService) {
 		try {
 			this.bpmService = bpmService;
-			bpmService.startNewProcess("","");
+			//bpmService.startNewProcess("","");
 			System.out.println("Test");
 		} 
 		catch (Exception e)
