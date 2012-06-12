@@ -24,6 +24,10 @@
 	<osgi:service ref="bpmServer" interface="com.conx.logistics.kernel.bpm.services.IBPMService">
 	</osgi:service>		
 	
+	<!-- Force TaskService to start first -->
+	<osgi:reference id="bpmTaskService" cardinality="1..1" interface="com.conx.logistics.kernel.bpm.services.IBPMTaskService">
+	</osgi:reference>	
+	
 	<!-- Listen to WorkItemHandler registrations -->
 	<osgi:list id="wihRegistrations" cardinality="0..N" interface="org.drools.process.instance.WorkItemHandler">
 		<osgi:listener ref="bpmServer" bind-method="registerWIH" unbind-method="unregisterWIH"/>

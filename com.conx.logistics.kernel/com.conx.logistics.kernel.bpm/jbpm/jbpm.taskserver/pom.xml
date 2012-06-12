@@ -9,6 +9,13 @@
 	</parent>
 	<artifactId>com.conx.logistics.kernel.bpm.impl.jbpm.taskserver</artifactId>
 	<dependencies>
+		<!-- ConX -->
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.kernel.bpm.services</artifactId>
+			<version>1.0.0</version>
+		</dependency>		
+				
 		<!-- Drools/JBPM -->
                 <!--
 		<dependency>

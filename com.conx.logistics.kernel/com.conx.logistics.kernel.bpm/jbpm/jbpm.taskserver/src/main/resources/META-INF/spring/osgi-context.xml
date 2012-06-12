@@ -12,5 +12,8 @@
 	<tx:annotation-driven transaction-manager="kernelSystemBPMTransManager"/>
 	
 	<osgi:reference id="jbpmTaskEMF" interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL.SYSTEM.BPM.TASK)">
-	</osgi:reference>		
+	</osgi:reference>	
+	
+	<osgi:service ref="humanTaskServer" interface="com.conx.logistics.kernel.bpm.services.IBPMTaskService">
+	</osgi:service>		
 </beans>

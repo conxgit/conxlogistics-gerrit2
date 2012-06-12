@@ -4,6 +4,7 @@ Bundle-Name: JBPM Core
 Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver
 Import-Package: 
  com.conx.logistics.kernel.bpm.impl.jbpm.shared.utils;version="1.0.0",
+ com.conx.logistics.kernel.bpm.services;version="1.0.0",
  org.drools;version="[5.4.0,5.5.0)",
  org.drools.agent;version="[5.4.0,5.5.0)",
  org.drools.builder ;version="[5.4.0,5.5.0)",

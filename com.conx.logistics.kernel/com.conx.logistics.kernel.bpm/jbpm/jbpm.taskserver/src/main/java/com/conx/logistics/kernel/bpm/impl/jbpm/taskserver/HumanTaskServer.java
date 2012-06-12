@@ -29,7 +29,9 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-public class HumanTaskServer {
+import com.conx.logistics.kernel.bpm.services.IBPMTaskService;
+
+public class HumanTaskServer implements IBPMTaskService {
 	private static Logger logger = LoggerFactory
 			.getLogger(HumanTaskServer.class);
 
