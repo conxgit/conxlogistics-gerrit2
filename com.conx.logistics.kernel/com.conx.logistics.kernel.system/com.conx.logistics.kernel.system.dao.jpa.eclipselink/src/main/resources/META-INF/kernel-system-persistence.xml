@@ -7,6 +7,7 @@
 		<!-- General Entities -->
 		<class>com.conx.logistics.mdm.domain.application.BaseEntity</class>
 		<class>com.conx.logistics.mdm.domain.application.MultitenantBaseEntity</class>
+		<class>com.conx.logistics.mdm.domain.organization.Organization</class>
 		<class>com.conx.logistics.mdm.domain.application.Application</class>
 		<class>com.conx.logistics.mdm.domain.application.Feature</class>	
 		<class>com.conx.logistics.mdm.domain.application.FeatureSet</class>	
