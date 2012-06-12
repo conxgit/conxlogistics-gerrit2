@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
+ ;uses:="org.jboss.bpm.console.client.model"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0

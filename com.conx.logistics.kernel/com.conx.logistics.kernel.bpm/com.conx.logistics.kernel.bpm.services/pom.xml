@@ -37,5 +37,31 @@
   	</plugins>
   </build>  
   <dependencies>
+      <dependency>
+        <groupId>com.conx.logistics</groupId>
+        <artifactId>com.conx.logistics.thirdparty.gwt-console-rpc</artifactId>
+      </dependency> 
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>knowledge-api</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>knowledge-internal-api</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.drools</groupId>
+        <artifactId>drools-core</artifactId>
+      </dependency>  
+      <dependency>
+        <groupId>org.jbpm</groupId>
+        <artifactId>jbpm-bam</artifactId>
+        <exclusions>
+          <exclusion>
+            <artifactId>hibernate-core</artifactId>
+            <groupId>org.hibernate</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>           
   </dependencies>
 </project>

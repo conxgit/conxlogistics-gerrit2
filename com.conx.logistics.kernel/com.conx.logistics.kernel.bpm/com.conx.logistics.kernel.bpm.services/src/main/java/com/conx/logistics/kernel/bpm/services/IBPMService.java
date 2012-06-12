@@ -13,15 +13,7 @@ import org.jboss.bpm.console.client.model.ProcessInstanceRef.RESULT;
 import org.jboss.bpm.console.client.model.ProcessInstanceRef.STATE;
 import org.jbpm.process.audit.ProcessInstanceLog;
 
-import com.conx.logistics.kernel.bpm.impl.jbpm.core.Transform;
-
 public interface IBPMService {
-	public IBPMProcessInstance startNewProcess(String userId, String processId);
-
-	public IBPMProcessInstance getProcessInstance(String processId);
-
-	public Map<String, IBPMTask> getProcessTasks(String processId);
-
 	/**
 	 * process Management methods
 	 */
