@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Application context definition for GreenPages JPA. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+			
+	<!-- Database Properties -->
+	<bean id="hibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+	            <prop key="hibernate.transaction.manager_lookup_class">com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.persistence.CustomBTMTransactionManagerLookup</prop>
+	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	            <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+	            <prop key="hibernate.current_session_context_class">jta</prop>
+	            <prop key="hibernate.connection.release_mode">after_statement</prop>
+	            <prop key="hibernate.hbm2ddl.auto">create</prop>	
+	            <prop key="hibernate.connection.autocommit">false</prop>
+	            <prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+<!-- 	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:databasePlatform="org.hibernate.dialect.MySQLDialect" p:showSql="true">
+		<property name="generateDdl" value="false" />
+	</bean>	 -->
+	
+
+	<bean id="dynamicConfiguration"
+		class="com.conx.logistics.kernel.persistence.dynaconfiguration.DynamicConfiguration"
+		depends-on="btmConfig">
+		<!-- 
+			Need to create a proxy because of, I guess, some mysterious circular
+			dependency which requires this bean to exist before it can be initialized. 
+		-->
+		<aop:scoped-proxy/>
+		<property name="datasource" ref="kernelPersistenceJpaDataSource"/>
+		<property name="hibernateProperties" ref="hibernateProperties" />
+	</bean>
+	
+	<bean id="dynamicSessionFactory"
+		class="com.conx.logistics.kernel.persistence.dynaconfiguration.DynamicSessionFactory"
+		depends-on="dynamicConfiguration">
+		<property name="configuration" ref="dynamicConfiguration"/>
+	</bean>	
+	
+	<bean id="confBundleTracker"
+		class="com.conx.logistics.kernel.persistence.dynaconfiguration.ConfigurationBundleTracker"
+		depends-on="dynamicSessionFactory">
+		<property name="dynamicConfiguration" ref="dynamicConfiguration"/>
+	</bean>				
+</beans>

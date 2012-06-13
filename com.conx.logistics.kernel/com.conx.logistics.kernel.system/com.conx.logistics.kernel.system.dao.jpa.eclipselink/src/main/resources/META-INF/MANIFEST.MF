@@ -2,10 +2,11 @@ Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.system.dao.jpa.eclipselink.a
  pplication;version="1.0.0";uses:="com.conx.logistics.kernel.system.da
  o.services.application,com.conx.logistics.mdm.domain.application,java
- x.persistence,org.springframework.beans.factory.annotation,org.spring
- framework.stereotype,org.springframework.transaction.annotation"
+ x.persistence,org.junit,org.junit.runner,org.springframework.beans.fa
+ ctory.annotation,org.springframework.stereotype,org.springframework.t
+ est.context,org.springframework.transaction.annotation"
 Built-By: dev
-Tool: Bundlor 1.0.0.RELEASE
+Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX Kernel System DAO Services EclipseLink Impl
 Created-By: Maven Integration for Eclipse
 Import-Bundle: org.eclipse.persistence.core;version="[2.3.2.v20111125-

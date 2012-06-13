@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.persistence.dynaconfiguratio
+ n;version="1.0.0";uses:="com.conx.logistics.kernel.persistence.servic
+ es,javax.sql,org.hibernate,org.osgi.framework,org.slf4j,org.springfra
+ mework.beans.factory"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Kernel Dynamic Persistence  Configurator
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.persistence.dynaconfigu
+ ration
+Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",com.conx.logistics
+ .kernel.persistence.services;version="1.0.0",javax.persistence;versio
+ n="0",javax.sql;version="0",org.hibernate;version="3.6.0.Final",org.h
+ ibernate.cfg;version="3.6.0.Final",org.osgi.framework;version="0",org
+ .slf4j;version="[1.6.1,1.7.0)",org.springframework.beans.factory;vers
+ ion="[3.0, 3.1)",org.springframework.beans.factory.config;version="[3
+ .0, 3.1)"
+

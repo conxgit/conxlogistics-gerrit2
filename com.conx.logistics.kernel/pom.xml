@@ -22,5 +22,7 @@
   		com.conx.logistics.kernel.persistence.datasource.tests
   	</module>
   	<module>com.conx.logistics.kernel.pageflow</module>
+  	<module>persistence.dynaconfiguration</module>
+  	<module>persistence.services</module>
   </modules>
 </project>

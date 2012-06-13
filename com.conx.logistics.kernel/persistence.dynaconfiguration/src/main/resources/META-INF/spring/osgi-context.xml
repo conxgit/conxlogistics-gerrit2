@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<osgi:reference id="btmConfig" interface="bitronix.tm.Configuration" filter="(module=KERNEL.BITRONIX.CONFIG)">
+	</osgi:reference>
+	
+	<osgi:reference id="kernelPersistenceJpaDataSource" interface="javax.sql.DataSource" filter="(module=KERNEL.MAIN)">
+	</osgi:reference>		
+	
+	<!-- KERNEL EntityManagerFactory -->
+	<osgi:service ref = "dynamicSessionFactory" context-class-loader="service-provider" interface="javax.persistence.EntityManagerFactory">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL"/>
+		</osgi:service-properties>		
+	</osgi:service>	
+	
+	<!-- Listen to PersistenceBundle registrations -->
+	<osgi:list id="bundleConfigurations" cardinality="0..N" interface="com.conx.logistics.kernel.persistence.services.IPersistenceConfugurationBundle">
+		<osgi:listener ref="bpmServer" bind-method="registerConfigurationBundle" unbind-method="unregisterConfigurationBundle"/>
+	</osgi:list>	
+</beans>
