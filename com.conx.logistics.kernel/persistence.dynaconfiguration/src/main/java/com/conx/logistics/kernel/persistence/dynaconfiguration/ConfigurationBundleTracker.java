@@ -11,7 +11,7 @@ public class ConfigurationBundleTracker {
 	
 	enum UpdateAction { ADD, REMOVE };
 	
-	private static DynamicConfiguration dynamicConfiguration;
+	private DynamicConfiguration dynamicConfiguration;
 	
 	private static Logger logger = LoggerFactory.getLogger(ConfigurationBundleTracker.class);
 	
@@ -21,15 +21,14 @@ public class ConfigurationBundleTracker {
 	public void stop() {
 	}
 
-	public static void setDynamicConfiguration(
+	public void setDynamicConfiguration(
 			DynamicConfiguration dynamicConfiguration) {
-		ConfigurationBundleTracker.dynamicConfiguration = dynamicConfiguration;
+		this.dynamicConfiguration = dynamicConfiguration;
 	}
 
 	public void registerConfigurationBundle(IPersistenceConfugurationBundle confBundle,
 											Map properties) {
-		Map<String, Object> props = confBundle.getProperties();
-		String mappedClassList = (String)props.get("mappedClassList");
+		String mappedClassList = (String)properties.get("mappedClassList");
 		Bundle osgiBundle = confBundle.getBundle();
 		try {
 			logger.info("registerConfigurationBundle: " + osgiBundle.getSymbolicName());
@@ -42,8 +41,7 @@ public class ConfigurationBundleTracker {
 	
 	public void unregisterConfigurationBundle(IPersistenceConfugurationBundle confBundle,
 											  Map properties) {
-		Map<String, Object> props = confBundle.getProperties();
-		String mappedClassList = (String)props.get("mappedClassList");
+		String mappedClassList = (String)properties.get("mappedClassList");
 		Bundle osgiBundle = confBundle.getBundle();
 		try {
 			logger.info("unregisterConfigurationBundle: " + osgiBundle.getSymbolicName());

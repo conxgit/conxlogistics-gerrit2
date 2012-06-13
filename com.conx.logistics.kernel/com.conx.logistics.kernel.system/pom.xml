@@ -12,7 +12,7 @@
   <description>com.conx.logistics.kernel.system</description>
   <modules>
   	<module>com.conx.logistics.kernel.system.dao.services</module>
-  	<module>com.conx.logistics.kernel.system.dao.jpa.eclipselink</module>
+  	<!-- <module>com.conx.logistics.kernel.system.dao.jpa.eclipselink</module>-->
   	<module>com.conx.logistics.kernel.system.dao.datasource</module>
   	<module>kernel.system.ui</module>
   </modules>

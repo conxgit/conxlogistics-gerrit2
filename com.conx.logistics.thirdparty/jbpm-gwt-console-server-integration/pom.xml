@@ -16,6 +16,10 @@
 			<version>2.3.2-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
+					<groupId>org.jboss.bpm</groupId>
+					<artifactId>gwt-console-rpc</artifactId>				
+				</exclusion>
+				<exclusion>
 					<groupId>com.google.code.gson</groupId>
 					<artifactId>gson</artifactId>
 				</exclusion>

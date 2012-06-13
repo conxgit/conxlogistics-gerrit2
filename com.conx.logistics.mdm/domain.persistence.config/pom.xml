@@ -7,10 +7,13 @@
 		<version>1.0.0</version>
 		<relativePath>..</relativePath>
 	</parent>
-	<artifactId>com.conx.logistics.mdm.domain</artifactId>
-	<name>com.conx.logistics.mdm.domain</name>
-	<description>com.conx.logistics.mdm.domain</description>
+	<artifactId>com.conx.logistics.mdm.domain.persistence.config</artifactId>
 	<dependencies>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.mdm.domain</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.conx.logistics</groupId>
 			<artifactId>com.conx.logistics.kernel.persistence.services</artifactId>
@@ -19,31 +22,6 @@
 		<dependency>
 			<groupId>org.springframework.osgi</groupId>
 			<artifactId>org.springframework.osgi.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.conx.logistics</groupId>
-			<artifactId>com.conx.logistics.common.utils</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>com.springsource.javax.persistence</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.spring-library</artifactId>
-			<type>libd</type>
-		</dependency>
-		<dependency>
-			<groupId>org.junit</groupId>
-			<artifactId>com.springsource.org.junit</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

@@ -22,6 +22,6 @@
 	
 	<!-- Listen to PersistenceBundle registrations -->
 	<osgi:list id="bundleConfigurations" cardinality="0..N" interface="com.conx.logistics.kernel.persistence.services.IPersistenceConfugurationBundle">
-		<osgi:listener ref="bpmServer" bind-method="registerConfigurationBundle" unbind-method="unregisterConfigurationBundle"/>
+		<osgi:listener ref="persistenceUnitManager" bind-method="registerConfigurationBundle" unbind-method="unregisterConfigurationBundle"/>
 	</osgi:list>	
 </beans>

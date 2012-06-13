@@ -12,5 +12,6 @@
   <description>com.conx.logistics.mdm</description>
   <modules>
   	<module>com.conx.logistics.mdm.domain</module>
+  	<module>domain.persistence.config</module>
   </modules>
 </project>

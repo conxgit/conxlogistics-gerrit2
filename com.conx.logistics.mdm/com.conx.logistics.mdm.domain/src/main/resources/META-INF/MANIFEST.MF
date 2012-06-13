@@ -2,11 +2,14 @@ Manifest-Version: 1.0
 Export-Package: com.conx.logistics.mdm.domain;version="1.0.0";uses:="j
  avax.persistence",com.conx.logistics.mdm.domain.application;version="
  1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",com.co
- nx.logistics.mdm.domain.organization;version="1.0.0";uses:="com.conx.
- logistics.mdm.domain,javax.persistence",com.conx.logistics.mdm.domain
- .task;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.conx.l
- ogistics.mdm.domain.application,javax.persistence,javax.validation.co
- nstraints"
+ nx.logistics.mdm.domain.commercialrecord;version="1.0.0";uses:="com.c
+ onx.logistics.mdm.domain,javax.persistence",com.conx.logistics.mdm.do
+ main.organization;version="1.0.0";uses:="com.conx.logistics.mdm.domai
+ n,javax.persistence",com.conx.logistics.mdm.domain.product;version="1
+ .0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",com.con
+ x.logistics.mdm.domain.task;version="1.0.0";uses:="com.conx.logistics
+ .mdm.domain,com.conx.logistics.mdm.domain.application,javax.persisten
+ ce,javax.validation.constraints"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0

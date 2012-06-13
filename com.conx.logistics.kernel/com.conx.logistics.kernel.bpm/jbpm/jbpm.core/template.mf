@@ -44,7 +44,7 @@ Import-Package:
  org.jbpm.process.builder;version="[5.3.0,5.4.0)",
  org.jbpm.process.instance;version="[5.3.0,5.4.0)",
  org.jboss.bpm.console.client.model;version="2.3.2.SNAPSHOT",
- org.jboss.bpm.console.server.integration;version="0",
+ org.jboss.bpm.console.server.integration;version="2.3.2.SNAPSHOT",
  org.jbpm.process.instance.context.variable;version="[5.3.0,5.4.0)",
  org.jbpm.process.instance.impl;version="[5.3.0,5.4.0)",
  org.jbpm.workflow.core.node;version="[5.3.0,5.4.0)",

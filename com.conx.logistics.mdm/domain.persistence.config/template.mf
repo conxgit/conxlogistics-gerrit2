@@ -1,0 +1,14 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX Master Data Management Domain Model Pers Config
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfigu
+ ration
+Bundle-SymbolicName: com.conx.logistics.mdm.domain.persistence.config
+Import-Template: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)",
+ com.conx.logistics.mdm.domain.*;version="1.0.0",
+ com.conx.logistics.kernel.persistence.services;version="1.0.0",
+ org.osgi.framework;version="0",
+ org.springframework.osgi.context;version="0",
+ javax.persistence.*;version="[2.0.0,3.0.0)",
+ javax.validation.constraints;version="[1.0.0,2.0.0)"
+ 
