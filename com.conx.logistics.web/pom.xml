@@ -11,7 +11,9 @@
   <name>com.conx.logistics.web</name>
   <description>com.conx.logistics.web</description>
   <modules>
+    <!-- 
   	<module>com.conx.logistics.web.client.vaadin</module>
   	<module>com.conx.logistics.web.client.vaadin.mock</module>
+  	-->
   </modules>
 </project>

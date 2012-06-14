@@ -16,12 +16,4 @@ import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table(name="rcvasn")
 public class ASN extends MultitenantBaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-    
-    @Version
-    @Column(name = "version")
-    private Integer version;
 }

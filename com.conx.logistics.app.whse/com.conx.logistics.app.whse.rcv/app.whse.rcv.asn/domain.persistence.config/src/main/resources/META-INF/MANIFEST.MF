@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.mdm.domain.persistence.config;versi
+ on="1.0.0";uses:="com.conx.logistics.kernel.persistence.services,org.
+ osgi.framework,org.springframework.osgi.context"
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS RCV ASN Sub-Module Pers Config
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain.persis
+ tence.config
+

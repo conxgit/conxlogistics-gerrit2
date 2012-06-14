@@ -30,7 +30,7 @@
 	</bean>
 	
 
-    <bean id="entityManagerFactory"
+    <bean id="conxLogisticsManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="btmConfig">
         <property name="persistenceUnitName" value="pu"/>
         <property name="persistenceUnitManager" ref="pusPersistenceUnitManager"/>

@@ -10,6 +10,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>com.conx.logistics.kernel.pageflow.services</module>
-  	<module>com.conx.logistics.kernel.pageflow.engine</module>
+  	<!-- <module>com.conx.logistics.kernel.pageflow.engine</module> -->
   </modules>
 </project>

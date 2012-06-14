@@ -8,8 +8,8 @@
 	<osgi:service ref="newASNWIH"
 		interface="org.drools.process.instance.WorkItemHandler">
 		<osgi:service-properties>
-			<entry key="PROCESS_ID" value="whse.rcv.asn.test" />
-			<entry key="WORKITEM_ID" value="newasn" />
+			<entry key="PROCESS_ID" value="whse.rcv.asn.CreateNewASNByOrg" />
+			<entry key="TASK_NAME" value="CreateNewASN" />
 		</osgi:service-properties>
 	</osgi:service>
 </beans>

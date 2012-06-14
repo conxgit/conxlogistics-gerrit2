@@ -14,7 +14,7 @@
 	</osgi:reference>		
 	
 	<!-- KERNEL EntityManagerFactory -->
-	<osgi:service ref = "entityManagerFactory" context-class-loader="service-provider" interface="javax.persistence.EntityManagerFactory">
+	<osgi:service ref = "conxLogisticsManagerFactory" context-class-loader="service-provider" interface="javax.persistence.EntityManagerFactory">
 		<osgi:service-properties>
 		    <entry key="module" value="KERNEL"/>
 		</osgi:service-properties>		
