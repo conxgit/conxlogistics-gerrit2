@@ -16,7 +16,6 @@ import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
 import com.conx.logistics.mdm.domain.application.Application;
 import com.conx.logistics.mdm.domain.application.Feature;
-import com.conx.logistics.mdm.domain.application.Organization;
 import com.conx.logistics.mdm.domain.organization.Organization;
 
 public class OrganizationDAOImpl implements IOrganizationDAOService {
