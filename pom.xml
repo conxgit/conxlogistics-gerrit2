@@ -18,5 +18,6 @@
 		<module>com.conx.logistics.web</module>
 		<module>com.conx.logistics.solution-plans</module>
 		<module>com.conx.logistics.distribution</module>
+		<module>com.conx.logistics.reference</module>
 	</modules>
 </project>

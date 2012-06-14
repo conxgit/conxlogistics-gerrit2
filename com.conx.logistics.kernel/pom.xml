@@ -24,5 +24,6 @@
   	<module>com.conx.logistics.kernel.pageflow</module>
   	<module>persistence.dynaconfiguration</module>
   	<module>persistence.services</module>
+  	<module>com.conx.logistics.data</module>
   </modules>
 </project>

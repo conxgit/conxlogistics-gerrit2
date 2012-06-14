@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.mdm.dao.services.impl;version="1.0.
+ 0";uses:="com.conx.logistics.mdm.dao.services,javax.persistence"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX MDM DAO Services Impl
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.mdm.dao.services.impl
+Import-Package: com.conx.logistics.mdm.dao.services;version="1.0.0",ja
+ vax.persistence;version="0",javax.transaction;version="0",org.slf4j;v
+ ersion="[1.6.1,1.7.0)",org.springframework.dao.annotation;version="[3
+ .0,3.1)",org.springframework.transaction;version="[3.0,3.1)",org.spri
+ ngframework.transaction.jta;version="[3.0,3.1)"
+

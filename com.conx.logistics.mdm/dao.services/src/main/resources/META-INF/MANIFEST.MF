@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.mdm.dao.services;version="1.0.0"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX MDM DAO Services
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.mdm.dao.services
+

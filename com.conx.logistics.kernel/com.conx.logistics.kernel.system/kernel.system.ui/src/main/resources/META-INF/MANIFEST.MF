@@ -1,17 +1,14 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.system.data;version="1.0.0";
- uses:="com.vaadin.addon.jpacontainer,javax.persistence",com.conx.logi
- stics.kernel.system.ui;version="1.0.0";uses:="com.conx.logistics.kern
- el.ui.common.mvp,com.conx.logistics.kernel.ui.common.ui.feature,com.c
- onx.logistics.mdm.domain.application,com.vaadin.addon.jpacontainer,co
- m.vaadin.event,com.vaadin.ui,org.vaadin.mvp.eventbus.annotation,org.v
- aadin.mvp.presenter,org.vaadin.mvp.presenter.annotation",com.conx.log
- istics.kernel.system.ui.contribution;version="1.0.0";uses:="com.conx.
- logistics.kernel.ui.service.contribution,com.vaadin,com.vaadin.ui,org
- .vaadin.mvp.uibinder",com.conx.logistics.kernel.system.ui.navigation;
- version="1.0.0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.co
- nx.logistics.mdm.domain.application,com.vaadin.addon.jpacontainer,com
- .vaadin.data,com.vaadin.ui,org.vaadin.mvp.eventbus,org.vaadin.mvp.eve
+ uses:="javax.persistence",com.conx.logistics.kernel.system.ui;version
+ ="1.0.0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.conx.logi
+ stics.kernel.ui.common.ui.feature,com.vaadin.ui,org.vaadin.mvp.eventb
+ us.annotation,org.vaadin.mvp.presenter,org.vaadin.mvp.presenter.annot
+ ation",com.conx.logistics.kernel.system.ui.contribution;version="1.0.
+ 0";uses:="com.conx.logistics.kernel.ui.service.contribution,com.vaadi
+ n,com.vaadin.ui,org.vaadin.mvp.uibinder",com.conx.logistics.kernel.sy
+ stem.ui.navigation;version="1.0.0";uses:="com.conx.logistics.kernel.u
+ i.common.mvp,com.vaadin.ui,org.vaadin.mvp.eventbus,org.vaadin.mvp.eve
  ntbus.annotation,org.vaadin.mvp.presenter,org.vaadin.mvp.presenter.an
  notation",com.conx.logistics.kernel.system.ui.navigation.view;version
  ="1.0.0";uses:="com.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.
@@ -26,24 +23,18 @@ Bundle-Name: ConX kernel UI :: Control Panel
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.system.ui
-Import-Package: com.conx.logistics.kernel.ui.common.data.container;ver
- sion="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.mvp;version=
- "[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.mvp.view.feature;
- version="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.ui.featur
- e;version="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.ui.form
- .field;version="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.service.c
- ontribution;version="[1.0.0,2.0.0)",com.conx.logistics.mdm.domain.app
- lication;version="[1.0.0,2.0.0)",com.conx.logistics.mdm.domain.task;v
- ersion="[1.0.0,2.0.0)",com.vaadin;version="[6.7.0,7.0.0)",com.vaadin.
- addon.jpacontainer;version="2.0.0",com.vaadin.addon.jpacontainer.prov
- ider;version="2.0.0",com.vaadin.data;version="[6.7.0,7.0.0)",com.vaad
- in.data.util;version="[6.7.0,7.0.0)",com.vaadin.data.util.filter;vers
- ion="[6.7.0,7.0.0)",com.vaadin.event;version="[6.7.0,7.0.0)",com.vaad
- in.ui;version="[6.7.0,7.0.0)",javax.persistence;version="[1.0.0, 3.0.
- 0)",org.slf4j;version="[1.6.1,1.6.1]",org.vaadin.mvp.eventbus;version
- ="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.annotation;version="0.9.2.S
- NAPSHOT",org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",org.vaadin
- .mvp.presenter.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uib
- inder;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.annotation;ver
- sion="0.9.2.SNAPSHOT"
+Import-Package: com.conx.logistics.kernel.ui.common.mvp;version="[1.0.
+ 0,2.0.0)",com.conx.logistics.kernel.ui.common.mvp.view.feature;versio
+ n="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.ui.feature;vers
+ ion="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.service.contribution
+ ;version="[1.0.0,2.0.0)",com.vaadin;version="[6.7.0,7.0.0)",com.vaadi
+ n.addon.jpacontainer;version="2.0.0",com.vaadin.data;version="[6.7.0,
+ 7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.vaadin.ui;ve
+ rsion="[6.7.0,7.0.0)",javax.persistence;version="[1.0.0, 3.0.0)",org.
+ slf4j;version="[1.6.1,1.6.1]",org.vaadin.mvp.eventbus;version="0.9.2.
+ SNAPSHOT",org.vaadin.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT"
+ ,org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.pre
+ senter.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;ve
+ rsion="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.annotation;version="0.
+ 9.2.SNAPSHOT"
 

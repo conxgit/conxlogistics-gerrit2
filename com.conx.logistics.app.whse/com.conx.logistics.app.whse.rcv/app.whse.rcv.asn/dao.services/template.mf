@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConX WHSE ASN Sub-Module
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.dao.services
+Bundle-Vendor: ConX
+Bundle-Version: 1.0.0
+Import-Package: 
+  com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0"

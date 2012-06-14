@@ -13,5 +13,7 @@
   <modules>
   	<module>com.conx.logistics.mdm.domain</module>
   	<module>domain.persistence.config</module>
+  	<module>dao.services</module>
+  	<module>dao.services.impl</module>
   </modules>
 </project>

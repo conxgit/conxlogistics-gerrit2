@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.rcv.asn.dao.services;versi
+ on="1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.domain"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WHSE ASN Sub-Module
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.dao.services
+Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
+ 0.0"
+
