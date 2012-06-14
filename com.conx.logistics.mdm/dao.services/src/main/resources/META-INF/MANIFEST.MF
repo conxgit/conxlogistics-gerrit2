@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
-Export-Package: com.conx.logistics.mdm.dao.services;version="1.0.0"
+Export-Package: com.conx.logistics.mdm.dao.services;version="1.0.0";us
+ es:="com.conx.logistics.mdm.domain.organization"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -9,4 +10,5 @@ Bundle-Name: ConX MDM DAO Services
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.dao.services
+Import-Package: com.conx.logistics.mdm.domain.organization
 

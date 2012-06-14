@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.persistence.services;version
+ ="1.0.0";uses:="org.osgi.framework"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Kernel Persistence Services
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.persistence.services
+Import-Package: org.osgi.framework;version="0"
+
