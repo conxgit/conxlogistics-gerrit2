@@ -14,14 +14,16 @@
 	</osgi:reference>		
 	
 	<!-- KERNEL EntityManagerFactory -->
-	<osgi:service ref = "dynamicSessionFactory" context-class-loader="service-provider" interface="javax.persistence.EntityManagerFactory">
+	<osgi:service ref = "entityManagerFactory" context-class-loader="service-provider" interface="javax.persistence.EntityManagerFactory">
 		<osgi:service-properties>
 		    <entry key="module" value="KERNEL"/>
 		</osgi:service-properties>		
 	</osgi:service>	
 	
 	<!-- Listen to PersistenceBundle registrations -->
+	<!-- 
 	<osgi:list id="bundleConfigurations" cardinality="0..N" interface="com.conx.logistics.kernel.persistence.services.IPersistenceConfugurationBundle">
 		<osgi:listener ref="persistenceUnitManager" bind-method="registerConfigurationBundle" unbind-method="unregisterConfigurationBundle"/>
-	</osgi:list>	
+	</osgi:list>
+	-->	
 </beans>

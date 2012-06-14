@@ -4,10 +4,13 @@ Export-Package: com.conx.logistics.kernel.persistence.dynaconfiguratio
  es,javax.sql,javax.transaction,org.hibernate,org.hibernate.transactio
  n,org.osgi.framework,org.slf4j,org.springframework.beans.factory",com
  .conx.logistics.kernel.persistence.orm.jpa;version="1.0.0";uses:="com
- .conx.logistics.kernel.persistence.services,javax.sql,org.springframe
- work.beans.factory,org.springframework.beans.factory.annotation,org.s
- pringframework.context,org.springframework.context.weaving,org.spring
- framework.orm.jpa,org.springframework.orm.jpa.persistenceunit"
+ .conx.logistics.kernel.persistence.services,javax.persistence,javax.s
+ ql,org.springframework.beans.factory,org.springframework.beans.factor
+ y.annotation,org.springframework.context,org.springframework.context.
+ weaving,org.springframework.orm.jpa,org.springframework.orm.jpa.persi
+ stenceunit",com.conx.logistics.kernel.persistence.orm.jpa.multipu;ver
+ sion="1.0.0";uses:="javax.sql,org.springframework.beans.factory.annot
+ ation,org.springframework.orm.jpa.persistenceunit"
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a
@@ -49,9 +52,10 @@ Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.journa
  ramework.dao.annotation;version="[3.0, 3.1)",org.springframework.jdbc
  .core;version="[3.0, 3.1)",org.springframework.orm.jpa;version="[3.0,
   3.1)",org.springframework.orm.jpa.persistenceunit;version="[3.0, 3.1
- )",org.springframework.orm.jpa.vendor;version="[3.0, 3.1)",org.spring
- framework.stereotype;version="[3.0, 3.1)",org.springframework.transac
- tion;version="[3.0, 3.1)",org.springframework.transaction.annotation;
- version="[3.0, 3.1)",org.springframework.transaction.aspectj;version=
- "[3.0, 3.1)",org.springframework.transaction.jta;version="[3.0, 3.1)"
+ )",org.springframework.orm.jpa.support;version="[3.0, 3.1)",org.sprin
+ gframework.orm.jpa.vendor;version="[3.0, 3.1)",org.springframework.st
+ ereotype;version="[3.0, 3.1)",org.springframework.transaction;version
+ ="[3.0, 3.1)",org.springframework.transaction.annotation;version="[3.
+ 0, 3.1)",org.springframework.transaction.aspectj;version="[3.0, 3.1)"
+ ,org.springframework.transaction.jta;version="[3.0, 3.1)"
 

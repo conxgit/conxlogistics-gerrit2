@@ -16,12 +16,6 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class FeatureSet extends Feature {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    protected Long id;
-       
-    
     public FeatureSet()
     {
     }

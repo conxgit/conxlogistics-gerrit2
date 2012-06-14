@@ -20,25 +20,12 @@ import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table(name="sysapplicationsubmodule")
 public class ApplicationSubModule extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;	
 
-    @ManyToOne(targetEntity = ApplicationModule.class, fetch = FetchType.EAGER)
-    @JoinColumn
+    @ManyToOne(targetEntity = ApplicationModule.class)
     private ApplicationModule parentModule;    
 	
     public ApplicationSubModule(ApplicationModule parentModule, String smPrefix)//e.g. PTWY
     {
     	setCode(parentModule.getCode()+"."+smPrefix);
     }
-    
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 }

@@ -10,6 +10,7 @@ Export-Package: com.conx.logistics.mdm.domain;version="1.0.0";uses:="j
  x.logistics.mdm.domain.task;version="1.0.0";uses:="com.conx.logistics
  .mdm.domain,com.conx.logistics.mdm.domain.application,javax.persisten
  ce,javax.validation.constraints"
+DynamicImport-Package: *
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -18,6 +19,7 @@ Bundle-Name: ConX Master Data Management Domain Model
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.domain
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
  ",javax.persistence;version="[2.0.0,3.0.0)",javax.validation.constrai
  nts;version="[1.0.0,2.0.0)"

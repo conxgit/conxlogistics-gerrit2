@@ -14,14 +14,6 @@ import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="MDMTask")
+@Table(name="mdmtask")
 public class Task extends MultitenantBaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-    
-    @Version
-    @Column(name = "version")
-    private Integer version;
 }

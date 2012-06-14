@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="pu-platform">
+		<class>com.conx.logistics.mdm.domain.BaseEntity</class>
+		<class>com.conx.logistics.mdm.domain.MultitenantBaseEntity</class>
+		<class>com.conx.logistics.mdm.domain.organization.Organization</class>
+		<class>com.conx.logistics.mdm.domain.application.Application</class>
+		<class>com.conx.logistics.mdm.domain.application.Feature</class>	
+		<class>com.conx.logistics.mdm.domain.application.FeatureSet</class>	
+		<class>com.conx.logistics.mdm.domain.task.TaskDefinition</class>	
+	</persistence-unit>
+</persistence>

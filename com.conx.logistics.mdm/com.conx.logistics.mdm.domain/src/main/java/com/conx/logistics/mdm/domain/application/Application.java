@@ -17,8 +17,7 @@ public class Application extends BaseEntity {
     private String themeIconPath;
     
 
-    @OneToMany(targetEntity = FeatureSet.class, mappedBy="parentApplication", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn
+    @OneToMany(targetEntity = Feature.class, mappedBy="parentApplication", cascade=CascadeType.ALL)
     private List<Feature> features;  
 
     public Application()

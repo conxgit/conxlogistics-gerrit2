@@ -23,21 +23,15 @@ import com.conx.logistics.mdm.domain.BaseEntity;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="sysfeature")
 public class Feature extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    protected Long id;	
-    
-    @ManyToOne(targetEntity = Application.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Application.class)
     @JoinColumn
     protected Application parentApplication;    
     
-    @ManyToOne(targetEntity = Feature.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Feature.class)
     @JoinColumn
     protected Feature parentFeature;   
     
-    @OneToMany(targetEntity = Feature.class, mappedBy="parentFeature", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn
+    @OneToMany(targetEntity = Feature.class, mappedBy="parentFeature", cascade=CascadeType.ALL)
     private List<Feature> childFeatures;  
     
     protected boolean featureSet = false;

@@ -19,12 +19,12 @@ import com.conx.logistics.mdm.domain.application.Application;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="MDMTaskDefinition")
+@Table(name="mdmtaskdefinition")
 public class TaskDefinition extends MultitenantBaseEntity {
     private String bpmn2ProcDefURL;
     private String processId;
     
-    @ManyToOne(targetEntity = Application.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Application.class)
     @JoinColumn
     @NotNull
     protected Application parentApplication;     
