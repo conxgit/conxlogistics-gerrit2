@@ -13,35 +13,36 @@ Export-Package: com.conx.logistics.kernel.ui.common;version="1.0.0";us
  onx.logistics.kernel.ui.common.mvp.view;version="1.0.0";uses:="com.va
  adin.data,com.vaadin.data.util,com.vaadin.terminal,com.vaadin.ui",com
  .conx.logistics.kernel.ui.common.mvp.view.feature;version="1.0.0";use
- s:="com.conx.logistics.kernel.ui.common.mvp,com.vaadin.ui",com.conx.l
- ogistics.kernel.ui.common.ui.feature;version="1.0.0";uses:="com.vaadi
- n.data.util,com.vaadin.ui",com.conx.logistics.kernel.ui.common.ui.for
- m.field;version="1.0.0";uses:="com.conx.logistics.kernel.ui.common.da
- ta.container,com.vaadin.data,com.vaadin.ui",com.conx.logistics.kernel
- .ui.common.ui.menu;version="1.0.0",com.conx.logistics.kernel.ui.commo
- n.ui.menu.app;version="1.0.0";uses:="com.conx.logistics.kernel.ui.com
- mon.ui.menu,com.vaadin.ui"
-Build-Jdk: 1.6.0_29
-Built-By: dev
+ s:="com.conx.logistics.kernel.ui.common.mvp,com.conx.logistics.mdm.do
+ main.application,com.vaadin.ui",com.conx.logistics.kernel.ui.common.u
+ i.feature;version="1.0.0";uses:="com.vaadin.data.util,com.vaadin.ui",
+ com.conx.logistics.kernel.ui.common.ui.form.field;version="1.0.0";use
+ s:="com.conx.logistics.kernel.ui.common.data.container,com.vaadin.dat
+ a,com.vaadin.ui",com.conx.logistics.kernel.ui.common.ui.menu;version=
+ "1.0.0",com.conx.logistics.kernel.ui.common.ui.menu.app;version="1.0.
+ 0";uses:="com.conx.logistics.kernel.ui.common.ui.menu,com.vaadin.ui"
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel UI MVP Common
 Bundle-ManifestVersion: 2
-Created-By: Maven Integration for Eclipse
+Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
+ ",com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",com.co
+ nx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.0.0)",c
+ om.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",com.conx.logisti
+ cs.mdm.domain.application;version="[1.0.0,2.0.0)",com.vaadin;version=
+ "[6.7.0,7.0.0)",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaa
+ din.addon.jpacontainer.provider;version="2.0.0",com.vaadin.data;versi
+ on="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.v
+ aadin.data.util.filter;version="[6.7.0,7.0.0)",com.vaadin.terminal;ve
+ rsion="[6.7.4,7.0.0)",com.vaadin.terminal.gwt.client;version="[6.7.4,
+ 7.0.0)",com.vaadin.terminal.gwt.client.ui;version="[6.7.4,7.0.0)",com
+ .vaadin.terminal.gwt.server;version="[6.7.4,7.0.0)",com.vaadin.ui;ver
+ sion="[6.7.0,7.0.0)",javax.persistence;version="[1.0.0, 3.0.0)",org.s
+ lf4j;version="[1.6.1,1.6.1]",org.springframework.transaction;version=
+ "[3.0,3.1)",org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",org.vaad
+ in.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.pr
+ esenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.annotation;
+ version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.SNAPS
+ HOT",org.vaadin.peter.contextmenu;version="3.1.0"
 Bundle-SymbolicName: com.conx.logistics.kernel.ui.common
-Import-Package: com.conx.logistics.kernel.ui.service;version="[1.0.0,2
- .0.0)",com.conx.logistics.kernel.ui.service.contribution;version="[1.
- 0.0,2.0.0)",com.vaadin;version="[6.7.0,7.0.0)",com.vaadin.addon.jpaco
- ntainer;version="2.0.0",com.vaadin.data;version="[6.7.0,7.0.0)",com.v
- aadin.data.util;version="[6.7.0,7.0.0)",com.vaadin.terminal;version="
- [6.7.4,7.0.0)",com.vaadin.terminal.gwt.client;version="[6.7.4,7.0.0)"
- ,com.vaadin.terminal.gwt.client.ui;version="[6.7.4,7.0.0)",com.vaadin
- .terminal.gwt.server;version="[6.7.4,7.0.0)",com.vaadin.ui;version="[
- 6.7.0,7.0.0)",javax.persistence;version="[1.0.0, 3.0.0)",org.slf4j;ve
- rsion="[1.6.1,1.6.1]",org.springframework.transaction;version="[3.0,3
- .1)",org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",org.vaadin.mvp.
- eventbus.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter
- ;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.annotation;version
- ="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT",or
- g.vaadin.peter.contextmenu;version="3.1.0"
 
