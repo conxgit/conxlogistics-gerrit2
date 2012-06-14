@@ -76,12 +76,12 @@ public class OrganizationDAOImpl implements IOrganizationDAOService {
 
 	@Override
 	public void delete(Organization record) {
-		em.remove(app);
+		em.remove(record);
 	}
 
 	@Override
 	public Organization update(Organization record) {
-		return em.merge(app);
+		return em.merge(record);
 	}
 
 
