@@ -10,5 +10,6 @@ Bundle-Name: ConX MDM DAO Services
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.dao.services
-Import-Package: com.conx.logistics.mdm.domain.organization
+Import-Package: com.conx.logistics.mdm.domain.organization;version="1.
+ 0.0"
 
