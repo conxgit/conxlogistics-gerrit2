@@ -18,7 +18,8 @@
 	
 			
 	<!-- export internal interfaces -->
-	<osgi:service ref="countryDao" interface="ICountryDAOService"/>
+	<osgi:service ref="addressDao" interface="com.conx.logistics.mdm.dao.services.IAddressDAOService"/>
+	<osgi:service ref="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>
 	<osgi:service ref="countryStateDao" interface="com.conx.logistics.mdm.dao.services.ICountryStateDAOService"/>
 	<osgi:service ref="orgDao" interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
 	<osgi:service ref="unlocoDao" interface="com.conx.logistics.mdm.dao.services.IUnlocoDAOService"/>

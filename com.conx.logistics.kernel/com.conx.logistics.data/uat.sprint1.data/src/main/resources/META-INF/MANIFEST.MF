@@ -11,7 +11,7 @@ Bundle-Name: ConX UAT Data for Sprint 1
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.data.uat.sprint1.data
-Import-Package: com.conx.logistics.mdm.constants;version="1.0.0",com.c
+Import-Package: com.conx.logistics.mdm.domain.constants;version="1.0.0",com.c
  onx.logistics.mdm.dao.services;version="1.0.0",com.conx.logistics.mdm
  .domain.application;version="1.0.0",com.conx.logistics.mdm.domain.com
  mercialrecord;version="1.0.0",com.conx.logistics.mdm.domain.geolocati

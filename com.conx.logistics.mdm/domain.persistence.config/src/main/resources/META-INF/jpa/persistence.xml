@@ -5,10 +5,15 @@
 	<persistence-unit name="pu-platform">
 		<class>com.conx.logistics.mdm.domain.BaseEntity</class>
 		<class>com.conx.logistics.mdm.domain.MultitenantBaseEntity</class>
-		<class>com.conx.logistics.mdm.domain.organization.Organization</class>
 		<class>com.conx.logistics.mdm.domain.application.Application</class>
 		<class>com.conx.logistics.mdm.domain.application.Feature</class>	
 		<class>com.conx.logistics.mdm.domain.application.FeatureSet</class>	
+		<class>com.conx.logistics.mdm.domain.geolocation.Address</class>
+		<class>com.conx.logistics.mdm.domain.geolocation.AddressCapability</class>
+		<class>com.conx.logistics.mdm.domain.geolocation.Country</class>
+		<class>com.conx.logistics.mdm.domain.geolocation.CountryState</class>
+		<class>com.conx.logistics.mdm.domain.geolocation.Unloco</class>
+		<class>com.conx.logistics.mdm.domain.organization.Organization</class>		
 		<class>com.conx.logistics.mdm.domain.task.TaskDefinition</class>	
 	</persistence-unit>
 </persistence>

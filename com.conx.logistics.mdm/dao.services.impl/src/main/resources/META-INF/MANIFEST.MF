@@ -3,7 +3,9 @@ Export-Package: com.conx.logistics.mdm.dao.services.impl;version="1.0.
  0";uses:="com.conx.logistics.mdm.dao.services,com.conx.logistics.mdm.
  domain.geolocation,com.conx.logistics.mdm.domain.organization,javax.p
  ersistence,org.springframework.beans.factory.annotation,org.springfra
- mework.stereotype,org.springframework.transaction.annotation"
+ mework.stereotype,org.springframework.transaction.annotation",org.spr
+ ingframework.dao.support;version="1.0.0";uses:="org.springframework.d
+ ao,org.springframework.orm.jpa"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -20,11 +22,14 @@ Import-Package: com.conx.logistics.common.utils;version="1.0.0",com.co
  n;version="1.0.0",com.conx.logistics.mdm.domain.organization;version=
  "1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.con
  x.logistics.mdm.domain.task;version="1.0.0",javax.persistence;version
- ="0",javax.transaction;version="0",org.slf4j;version="[1.6.1,1.7.0)",
- org.springframework.beans.factory.annotation;version="[3.0,3.1)",org.
- springframework.dao.annotation;version="[3.0,3.1)",org.springframewor
- k.stereotype;version="[3.0,3.1)",org.springframework.transaction;vers
- ion="[3.0,3.1)",org.springframework.transaction.annotation;version="[
- 3.0,3.1)",org.springframework.transaction.aspectj;version="[3.0,3.1)"
- ,org.springframework.transaction.jta;version="[3.0,3.1)"
+ ="0",javax.transaction;version="0",org.hibernate.hql.ast;version="3.6
+ .0.Final",org.slf4j;version="[1.6.1,1.7.0)",org.springframework.beans
+ .factory.annotation;version="[3.0,3.1)",org.springframework.dao,org.s
+ pringframework.dao.annotation;version="[3.0,3.1)",org.springframework
+ .dao.support,org.springframework.orm.jpa,org.springframework.orm.jpa.
+ vendor;version="[3.0,3.1)",org.springframework.stereotype;version="[3
+ .0,3.1)",org.springframework.transaction;version="[3.0,3.1)",org.spri
+ ngframework.transaction.annotation;version="[3.0,3.1)",org.springfram
+ ework.transaction.aspectj;version="[3.0,3.1)",org.springframework.tra
+ nsaction.jta;version="[3.0,3.1)",antlr;version="2.7.6"
 

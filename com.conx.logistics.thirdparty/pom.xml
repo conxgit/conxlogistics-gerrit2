@@ -51,6 +51,7 @@
 		<module>drools-persistence</module>
 		<module>javax.security.jacc</module>
 		<module>vaadin-addon-wizard</module>
+		<module>hibernate-core-custom</module>
 	</modules>
 	<build>
 		<plugins>

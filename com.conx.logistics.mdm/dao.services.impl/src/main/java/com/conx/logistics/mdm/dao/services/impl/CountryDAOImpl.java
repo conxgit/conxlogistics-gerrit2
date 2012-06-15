@@ -15,12 +15,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.conx.logistics.common.utils.Validator;
-import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
-import com.conx.logistics.mdm.domain.organization.Organization;
+import com.conx.logistics.mdm.dao.services.ICountryDAOService;
+import com.conx.logistics.mdm.domain.geolocation.Country;
+import com.conx.logistics.mdm.domain.geolocation.CountryState;
+import com.conx.logistics.mdm.domain.geolocation.Unloco;
 
 @Transactional
 @Repository
-public class OrganizationDAOImpl implements IOrganizationDAOService {
+public class CountryDAOImpl implements ICountryDAOService {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());	
     /**
      * Spring will inject a managed JPA {@link EntityManager} into this field.
@@ -33,22 +35,22 @@ public class OrganizationDAOImpl implements IOrganizationDAOService {
 	}
 
 	@Override
-	public Organization get(long id) {
-		return em.getReference(Organization.class, id);
+	public Country get(long id) {
+		return em.getReference(Country.class, id);
 	}    
 
 	@Override
-	public List<Organization> getAll() {
-		return em.createQuery("select o from com.conx.logistics.mdm.domain.organization.Organization o record by o.id",Organization.class).getResultList();
+	public List<Country> getAll() {
+		return em.createQuery("select o from com.conx.logistics.mdm.domain.geolocation.Country o record by o.id",Country.class).getResultList();
 	}
 	
 	@Override
-	public Organization getByCode(String code) {
-		Organization org = null;
+	public Country getByCode(String code) {
+		Country org = null;
 		
 		try
 		{
-			TypedQuery<Organization> q = em.createQuery("select o from com.conx.logistics.mdm.domain.organization.Organization o WHERE o.code = :code",Organization.class);
+			TypedQuery<Country> q = em.createQuery("select o from com.conx.logistics.mdm.domain.geolocation.Country o WHERE o.code = :code",Country.class);
 			q.setParameter("code", code);
 						
 			org = q.getSingleResult();
@@ -56,10 +58,7 @@ public class OrganizationDAOImpl implements IOrganizationDAOService {
 		catch(NoResultException e){}
 		catch(Exception e)
 		{
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			String stacktrace = sw.toString();
-			logger.error(stacktrace);
+			e.printStackTrace();
 		}
 		catch(Error e)
 		{
@@ -73,26 +72,26 @@ public class OrganizationDAOImpl implements IOrganizationDAOService {
 	}	
 
 	@Override
-	public Organization add(Organization record) {
+	public Country add(Country record) {
 		record = em.merge(record);
 		
 		return record;
 	}
 
 	@Override
-	public void delete(Organization record) {
+	public void delete(Country record) {
 		em.remove(record);
 	}
 
 	@Override
-	public Organization update(Organization record) {
+	public Country update(Country record) {
 		return em.merge(record);
 	}
 
 
 	@Override
-	public Organization provide(Organization record) {
-		Organization existingRecord = getByCode(record.getCode());
+	public Country provide(Country record) {
+		Country existingRecord = getByCode(record.getCode());
 		if (Validator.isNull(existingRecord))
 		{		
 			record = update(record);
@@ -105,4 +104,19 @@ public class OrganizationDAOImpl implements IOrganizationDAOService {
 		}
 		return record;
 	}
+	
+	@Override
+	public Country provide(String code, String name) {
+		Country res = null;
+		if ((res = getByCode(code)) == null)
+		{
+			Country country = new Country();
+
+			country.setCode(code);
+			country.setName(name);
+
+			res = add(country);
+		}
+		return res;
+	}	
 }

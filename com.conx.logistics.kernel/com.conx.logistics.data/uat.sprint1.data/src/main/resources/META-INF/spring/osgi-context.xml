@@ -16,4 +16,8 @@
 	
 	<!-- BUSINESS SERVICES -->
 	<osgi:reference id="orgDao" interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
+	<osgi:reference id="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>	
+	<osgi:reference id="countryStateDao" interface="com.conx.logistics.mdm.dao.services.ICountryStateDAOService"/>	
+	<osgi:reference id="unlocoDao" interface="com.conx.logistics.mdm.dao.services.IUnlocoDAOService"/>
+	<osgi:reference id="addressDao" interface="com.conx.logistics.mdm.dao.services.IAddressDAOService"/>
 </beans>

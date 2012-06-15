@@ -2,6 +2,7 @@ Bundle-ManifestVersion: 2
 Bundle-Version: 1.0.0
 Bundle-Name: ConX WMS RCV ASN Sub-Module Domain Model
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Import-Package:   javax.persistence;version="0",
   com.conx.logistics.mdm.domain;version="1.0.0"
 

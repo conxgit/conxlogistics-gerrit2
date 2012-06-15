@@ -4,22 +4,22 @@ Export-Package: com.conx.logistics.mdm.domain;version="1.0.0";uses:="j
  1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",com.co
  nx.logistics.mdm.domain.commercialrecord;version="1.0.0";uses:="com.c
  onx.logistics.mdm.domain,javax.persistence",com.conx.logistics.mdm.do
- main.organization;version="1.0.0";uses:="com.conx.logistics.mdm.domai
- n,javax.persistence",com.conx.logistics.mdm.domain.product;version="1
- .0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",com.con
- x.logistics.mdm.domain.task;version="1.0.0";uses:="com.conx.logistics
- .mdm.domain,com.conx.logistics.mdm.domain.application,javax.persisten
- ce,javax.validation.constraints"
+ main.constants;version="1.0.0",com.conx.logistics.mdm.domain.geolocat
+ ion;version="1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persis
+ tence",com.conx.logistics.mdm.domain.organization;version="1.0.0";use
+ s:="com.conx.logistics.mdm.domain,com.conx.logistics.mdm.domain.geolo
+ cation,javax.persistence",com.conx.logistics.mdm.domain.product;versi
+ on="1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",co
+ m.conx.logistics.mdm.domain.task;version="1.0.0";uses:="com.conx.logi
+ stics.mdm.domain,com.conx.logistics.mdm.domain.application,javax.pers
+ istence,javax.validation.constraints"
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Build-Jdk: 1.6.0_29
 Built-By: dev
+Bundle-Version: 1.0.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConX Master Data Management Domain Model
-Created-By: Maven Integration for Eclipse
-Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
-Bundle-Version: 1.0.0
-Build-Jdk: 1.6.0_29
 Bundle-ManifestVersion: 2
-Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
- ",javax.persistence;version="[2.0.0,3.0.0)",javax.validation.constrai
- nts;version="[1.0.0,2.0.0)"
+Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.domain
 

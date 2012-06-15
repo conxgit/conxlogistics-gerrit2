@@ -12,10 +12,16 @@
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	<!-- ========================= TRRANSCTION MANAGEMENT ========================= -->
-<!-- 	<bean id="globalTransactionManagerId" class="org.springframework.transaction.jta.JtaTransactionManager">
+	<!-- 
+	<bean id="globalTransactionManagerId" class="org.springframework.transaction.jta.JtaTransactionManager">
 	    <property name="transactionManager" ref="globalTransactionManager" />
 	    <property name="userTransaction" ref="globalTransactionManager" />
-	</bean> -->
+	</bean>
+	 -->
+	
+	<bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    	<property name="entityManagerFactory" ref="conxLogisticsManagerFactory"/>
+  	</bean>
 	
 
 	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
@@ -38,13 +44,25 @@
 		Post-processor to perform exception translation on @Repository classes (from native
 		exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
 	-->
+	<!-- 
+	<bean id="dialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+	<bean class="org.springframework.dao.support.custom.CustomPersistenceExceptionTranslator">
+		<property name="jpaDialect" ref="dialect"></property>
+	</bean>
+	-->
+	<!--
+		Post-processor to perform exception translation on @Repository classes (from native
+		exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
+	-->
 	<!-- <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
-
+	
+		
 	<!--
 		Will automatically be transactional due to @Transactional.
 		EntityManager will be auto-injected due to @PersistenceContext.
 		PersistenceExceptions will be auto-translated due to @Repository.
 	-->
+	<bean id="addressDao" class="com.conx.logistics.mdm.dao.services.impl.AddressDAOImpl"/>
 	<bean id="countryDao" class="com.conx.logistics.mdm.dao.services.impl.CountryDAOImpl"/>
 	<bean id="countryStateDao" class="com.conx.logistics.mdm.dao.services.impl.CountryStateDAOImpl"/>
 	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>

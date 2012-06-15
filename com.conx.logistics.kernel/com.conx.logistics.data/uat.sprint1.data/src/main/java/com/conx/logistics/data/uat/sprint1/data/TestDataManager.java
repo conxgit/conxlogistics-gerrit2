@@ -40,7 +40,19 @@ public class TestDataManager {
 	public void setOrgDaoService(IOrganizationDAOService orgDaoService) {
 		this.orgDaoService = orgDaoService;
 	}
-
+	public void setCountryDaoService(ICountryDAOService countryDaoService) {
+		this.countryDaoService = countryDaoService;
+	}
+	public void setCountryStateDaoService(
+			ICountryStateDAOService countryStateDaoService) {
+		this.countryStateDaoService = countryStateDaoService;
+	}
+	public void setUnlocoDaoService(IUnlocoDAOService unlocoDaoService) {
+		this.unlocoDaoService = unlocoDaoService;
+	}
+	public void setAddressDaoService(IAddressDAOService addressDaoService) {
+		this.addressDaoService = addressDaoService;
+	}
 	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
 		this.conxlogisticsEMF = conxlogisticsEMF;
 	}
@@ -70,7 +82,6 @@ public class TestDataManager {
 			Organization record = this.orgDaoService.getByCode("TESCUS1");
 			if (record == null)
 			{
-			
 				/**
 				 * Org Data: TD ORG 1.0, 4.0, 6.0, 7.0
 				 */
@@ -101,28 +112,28 @@ public class TestDataManager {
 				Organization tescus1 = new Organization();
 				tescus1.setName("Test Customer 1");
 				tescus1.setCode("TESCUS1");
-				tescus1 = this.orgDaoService.add(record);
+				tescus1 = this.orgDaoService.add(tescus1);
 				Address tescus1_addr = addressDaoService.provide(Organization.class.getName(),tescus1.getId(),"123 Main St	Suite 1",null,null,null,"USDFW",null,us.getCode(),us.getName(),null,null);
 				tescus1.setMainAddress(tescus1_addr);
-				tescus1 = this.orgDaoService.update(record);
+				tescus1 = this.orgDaoService.update(tescus1);
 
 				//------------ 4.0-TESCAR1:		
 				Organization tescar1 = new Organization();
 				tescar1.setName("Test Carrier 1");
 				tescar1.setCode("TESCAR1");
-				tescar1 = this.orgDaoService.add(record);
+				tescar1 = this.orgDaoService.add(tescar1);
 				Address tescar1_addr = addressDaoService.provide(Organization.class.getName(),tescar1.getId(),"123 Main St	Suite 1",null,null,null,"USDFW",null,us.getCode(),us.getName(),null,null);
 				tescar1.setMainAddress(tescar1_addr);
-				tescar1 = this.orgDaoService.update(record);
+				tescar1 = this.orgDaoService.update(tescar1);
 				
 				//------------ 6.0-TESLOC1:		
 				Organization tesloc1 = new Organization();
 				tesloc1.setName("Test Location 1");
 				tesloc1.setCode("TESLOC1");
-				tesloc1 = this.orgDaoService.add(record);
+				tesloc1 = this.orgDaoService.add(tesloc1);
 				Address tesloc1_addr = addressDaoService.provide(Organization.class.getName(),tesloc1.getId(),"7 West Penn St",null,null,null,"USNTN",null,us.getCode(),us.getName(),null,null);
 				tesloc1.setMainAddress(tesloc1_addr);
-				tesloc1 = this.orgDaoService.update(record);					
+				tesloc1 = this.orgDaoService.update(tesloc1);					
 				
 				this.globalTransactionManager.commit(status);
 			}

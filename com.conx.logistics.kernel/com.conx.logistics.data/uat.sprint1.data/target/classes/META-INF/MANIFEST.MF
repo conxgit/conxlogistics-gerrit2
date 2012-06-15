@@ -11,14 +11,14 @@ Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConX UAT Data for Sprint 1
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: com.conx.logistics.data.uat.sprint1.data
-Import-Package: com.conx.logistics.mdm.constants;version="1.0.0",com.c
- onx.logistics.mdm.dao.services;version="1.0.0",com.conx.logistics.mdm
- .domain.application;version="1.0.0",com.conx.logistics.mdm.domain.com
- mercialrecord;version="1.0.0",com.conx.logistics.mdm.domain.geolocati
- on;version="1.0.0",com.conx.logistics.mdm.domain.organization;version
- ="1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.co
- nx.logistics.mdm.domain.task;version="1.0.0",javax.persistence;versio
- n="0",org.slf4j;version="[1.6.1,1.7.0)",org.springframework.transacti
- on;version="[3.0,3.1)",org.springframework.transaction.support;versio
- n="[3.0,3.1)"
+Import-Package: com.conx.logistics.mdm.domain.constants;version="1.0.0
+ ",com.conx.logistics.mdm.dao.services;version="1.0.0",com.conx.logist
+ ics.mdm.domain.application;version="1.0.0",com.conx.logistics.mdm.dom
+ ain.commercialrecord;version="1.0.0",com.conx.logistics.mdm.domain.ge
+ olocation;version="1.0.0",com.conx.logistics.mdm.domain.organization;
+ version="1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0"
+ ,com.conx.logistics.mdm.domain.task;version="1.0.0",javax.persistence
+ ;version="0",org.slf4j;version="[1.6.1,1.7.0)",org.springframework.tr
+ ansaction;version="[3.0,3.1)",org.springframework.transaction.support
+ ;version="[3.0,3.1)"
 
