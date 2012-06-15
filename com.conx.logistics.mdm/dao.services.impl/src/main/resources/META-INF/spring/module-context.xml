@@ -12,10 +12,11 @@
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	<!-- ========================= TRRANSCTION MANAGEMENT ========================= -->
-	<bean id="globalTransactionManagerId" class="org.springframework.transaction.jta.JtaTransactionManager">
+<!-- 	<bean id="globalTransactionManagerId" class="org.springframework.transaction.jta.JtaTransactionManager">
 	    <property name="transactionManager" ref="globalTransactionManager" />
 	    <property name="userTransaction" ref="globalTransactionManager" />
-	</bean>
+	</bean> -->
+	
 
 	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
 
@@ -31,21 +32,18 @@
 		Instruct Spring to perform declarative transaction management
 		automatically on annotated classes.
 	-->
-	<tx:annotation-driven mode="aspectj"/>
+	<tx:annotation-driven mode="aspectj" transaction-manager="globalTransactionManager"/>
 
 	<!--
 		Post-processor to perform exception translation on @Repository classes (from native
 		exceptions such as JPA PersistenceExceptions to Spring's DataAccessException hierarchy).
 	-->
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
+	<!-- <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/> -->
 
 	<!--
 		Will automatically be transactional due to @Transactional.
 		EntityManager will be auto-injected due to @PersistenceContext.
 		PersistenceExceptions will be auto-translated due to @Repository.
 	-->
-	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl">
-		<property name="em" ref="conxLogisticsManagerFactory"/>
-	</bean>
+	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>
 </beans>

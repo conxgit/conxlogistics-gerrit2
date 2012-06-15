@@ -11,6 +11,8 @@ import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
@@ -18,6 +20,8 @@ import com.conx.logistics.mdm.domain.application.Application;
 import com.conx.logistics.mdm.domain.application.Feature;
 import com.conx.logistics.mdm.domain.organization.Organization;
 
+@Transactional
+@Repository
 public class OrganizationDAOImpl implements IOrganizationDAOService {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());	
     /**
