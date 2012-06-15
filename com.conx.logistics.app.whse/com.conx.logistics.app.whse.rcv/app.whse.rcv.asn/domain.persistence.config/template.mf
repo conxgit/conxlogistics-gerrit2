@@ -3,4 +3,5 @@ Bundle-Version: 1.0.0
 Bundle-Name: ConX WMS RCV ASN Sub-Module Pers Config
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain.persistence.config
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0"
 

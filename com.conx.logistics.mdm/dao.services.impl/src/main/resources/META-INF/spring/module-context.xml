@@ -39,6 +39,7 @@
 	-->
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
+
 	<!--
 		Will automatically be transactional due to @Transactional.
 		EntityManager will be auto-injected due to @PersistenceContext.

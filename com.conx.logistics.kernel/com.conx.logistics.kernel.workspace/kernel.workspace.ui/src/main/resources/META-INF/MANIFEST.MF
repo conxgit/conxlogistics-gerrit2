@@ -15,7 +15,7 @@ Export-Package: com.conx.logistics.kernel.workspace.ui;version="1.0.0"
  ="com.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.uibinder.annot
  ation"
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.0.0.RELEASE
+Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel User Workspace :: Basic Profile View
 Bundle-ManifestVersion: 2
 Import-Package: com.conx.logistics.kernel.ui.common.mvp;version="[1.0.

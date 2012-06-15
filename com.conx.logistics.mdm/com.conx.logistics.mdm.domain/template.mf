@@ -2,7 +2,6 @@ Bundle-ManifestVersion: 2
 Bundle-Version: 1.0.0
 Bundle-Name: ConX Master Data Management Domain Model
 Bundle-SymbolicName: com.conx.logistics.mdm.domain
-DynamicImport-Package: *
 Export-Template: com.conx.logistics.mdm.domain.*;version="1.0.0"
 Import-Template: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)",
  javax.persistence.*;version="[2.0.0,3.0.0)",

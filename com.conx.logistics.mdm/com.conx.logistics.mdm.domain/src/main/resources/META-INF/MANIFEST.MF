@@ -14,7 +14,6 @@ Built-By: dev
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConX Master Data Management Domain Model
 Created-By: Maven Integration for Eclipse
-DynamicImport-Package: *
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Bundle-Version: 1.0.0
 Build-Jdk: 1.6.0_29
