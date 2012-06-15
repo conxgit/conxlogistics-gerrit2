@@ -39,26 +39,27 @@ import org.jbpm.task.Task;
 import org.jbpm.task.TaskService;
 import org.jbpm.task.query.TaskSummary;
 import org.jbpm.task.service.ContentData;
-import org.jbpm.task.service.responsehandlers.BlockingTaskOperationResponseHandler;
 
-public class TaskManagement extends SessionInitializer implements org.jboss.bpm.console.server.integration.TaskManagement {
+import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
+
+public class TaskManagement implements org.jboss.bpm.console.server.integration.TaskManagement {
 	
 	private static int clientCounter = 0;
     
 	private TaskService service;
+	private BPMServerImpl bpmService;
 	
-	public TaskManagement () {
+	public TaskManagement (BPMServerImpl bpmService) {
 	    super();
+	    this.bpmService = bpmService;
 	}
 	
 	public void connect() {
-
 	    if (service == null) {
 	        
-    	    Properties jbpmConsoleProperties = StatefulKnowledgeSessionUtil.getJbpmConsoleProperties();   
+    	    Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
             service = TaskClientFactory.newInstance(jbpmConsoleProperties, "org.jbpm.integration.console.TaskManagement"+clientCounter);
             clientCounter++;
-       
 	    }
 		
 	}
@@ -88,11 +89,14 @@ public class TaskManagement extends SessionInitializer implements org.jboss.bpm.
 		}
 		
 	}
-
+	
+	public void assignAllTasks(String userId) {
+		connect();
+		service.claimNextAvailable(userId, "");
+	}
+	
 	public void completeTask(long taskId, Map data, String userId) {
 		connect();
-		
-		service.start(taskId, userId);
 		
 		ContentData contentData = null;
 		if (data != null) {
@@ -111,7 +115,6 @@ public class TaskManagement extends SessionInitializer implements org.jboss.bpm.
 		}
   
 		service.complete(taskId, userId, contentData);
-		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -129,7 +132,6 @@ public class TaskManagement extends SessionInitializer implements org.jboss.bpm.
 		// assignTask with null parameter instead
 		connect(); 
 		service.release(taskId, userId);
-		 
 	}
 
 	public List<TaskRef> getAssignedTasks(String idRef) {

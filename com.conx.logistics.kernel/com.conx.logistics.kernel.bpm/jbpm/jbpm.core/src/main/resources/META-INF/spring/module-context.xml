@@ -12,6 +12,7 @@
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	<bean id="bpmServer" class="com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl"  init-method="start" destroy-method="stop">
 		<property name="jbpmEMF" ref="jbpmEMF"/>
+		<property name="jbpmTaskEMF" ref="jbpmTaskEMF"/>
 		<property name="globalTransactionManager" ref="globalTransactionManager"/>
 		<property name="globalJPATransManager" ref="globalJPATransManager"/>
 		<property name="jndiTemplate" ref="tmJndiTemplate"/>

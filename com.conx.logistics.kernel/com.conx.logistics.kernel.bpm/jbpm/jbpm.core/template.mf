@@ -38,6 +38,7 @@ Import-Package:
  org.jbpm.process.core.impl;version="[5.3.0,5.4.0)",
  org.jbpm.process.core.context.exception;version="[5.3.0,5.4.0)",
  org.jbpm.process.core.context.swimlane;version="[5.3.0,5.4.0)",
+ org.jbpm.task.service.persistence;version="[5.3.0,5.4.0)",
  org.jbpm.bpmn2;version="[5.3.0,5.4.0)",
  org.jbpm.marshalling.impl;version="[5.3.0,5.4.0)",
  org.jbpm.process.audit;version="[5.3.0,5.4.0)",

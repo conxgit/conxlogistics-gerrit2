@@ -1,15 +1,18 @@
 package com.conx.logistics.kernel.pageflow.engine;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jboss.bpm.console.client.model.ProcessInstanceRef;
+import org.jbpm.task.query.TaskSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.conx.logistics.kernel.bpm.impl.jbpm.core.mock.BPMServiceFactory;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
@@ -24,11 +27,37 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	
 	public PageFlowEngineImpl() {
 		this.sessions = new ArrayList<IPageFlowSession>();
-		this.bpmService = BPMServiceFactory.getBPMService();
+	}
+	
+	@SuppressWarnings("unused")
+	public void setBpmService(IBPMService bpmService) {
+		try {
+			this.bpmService = bpmService;
+			//bpmService.startNewProcess("","");
+			System.out.println("Test");
+		} 
+		catch (Exception e)
+		{
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+		}	
+		catch (Error e)
+		{
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+		}		
+	}
+	
+	public void start() {
+	}
+	
+	public void stop() {
 	}
 	
 	/** EntityManagerFactories */
-	private static final Map<String, List<IPageFlowPage>> pageCache = Collections
+	private final Map<String, List<IPageFlowPage>> pageCache = Collections
 			.synchronizedMap(new HashMap<String, List<IPageFlowPage>>());	
 	
 	private List<IPageFlowPage> getPages(String processId) {
@@ -50,7 +79,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	}
 
 	public void registerPageFlowPage(
-			IPageFlowPage page, Map properties) {
+			IPageFlowPage page, Map<String, Object> properties) {
 		String processId = (String)properties.get(IPageFlowPage.PROCESS_ID);
 		logger.debug("registerPageFlowPage("+processId+")");		
 		List<IPageFlowPage> list = this.pageCache.get(processId);
@@ -64,7 +93,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	}
 
 	public void unregisterPageFlowPage(
-			IPageFlowPage page, Map properties) {
+			IPageFlowPage page, Map<String, Object> properties) {
 		String processId = (String)properties.get(IPageFlowPage.PROCESS_ID);
 		logger.debug("unregisterPageFlowPage("+processId+")");	
 		List<IPageFlowPage> list = this.pageCache.get(processId);
@@ -74,9 +103,9 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	}
 
 	@Override
-	public IPageFlowSession startPageFlowSession(String userId,
-			TaskDefinition td) {
-		IPageFlowSession session = new PageFlowSessionImpl(getPages(td.getProcessId()));
+	public IPageFlowSession startPageFlowSession(String userId, TaskDefinition td) {
+		ProcessInstanceRef pi = bpmService.newInstance(td.getProcessId());
+		IPageFlowSession session = new PageFlowSessionImpl(pi, userId, getPages(td.getProcessId()), this.bpmService);
 		sessions.add(session);
 		return session;
 	}	

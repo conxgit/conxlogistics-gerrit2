@@ -16,7 +16,7 @@ public abstract class IPageFlowPage implements WizardStep {
 		this.session = session;
 	}
 	
-	public abstract String getTaskId();
+	public abstract String getTaskName();
 	
 	@Override
 	public abstract Component getContent();
@@ -47,7 +47,7 @@ public abstract class IPageFlowPage implements WizardStep {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof IPageFlowPage) {
-			return getTaskId().equals(((IPageFlowPage)o).getTaskId()); 
+			return getTaskName().equals(((IPageFlowPage)o).getTaskName()); 
 		}
 		return false;
 	}

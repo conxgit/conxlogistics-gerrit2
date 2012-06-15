@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.1.0.BUILD-20101220120024
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: JBPM Core
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse

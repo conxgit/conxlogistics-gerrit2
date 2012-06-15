@@ -32,11 +32,15 @@ public class ManagementFactory extends org.jboss.bpm.console.server.integration.
 	}
 
 	public TaskManagement createTaskManagement() {
-		return new TaskManagement();
+		return new TaskManagement(this.bpmService);
 	}
 
 	public UserManagement createUserManagement() {
 		return new UserManagement();
+	}
+	
+	public HumanTaskService createHumanTaskService() {
+		return new HumanTaskService(this.bpmService);
 	}
 
 }

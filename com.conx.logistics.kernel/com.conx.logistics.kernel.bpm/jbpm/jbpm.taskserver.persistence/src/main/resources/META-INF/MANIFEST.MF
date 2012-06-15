@@ -1,4 +1,7 @@
 Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.per
+ sistence;version="1.0.0";uses:="javax.transaction,org.hibernate,org.h
+ ibernate.transaction"
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a
@@ -6,7 +9,7 @@ Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.1.0.BUILD-20101220120024
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: JBPM TaskServer Persistence in Hibernate
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse

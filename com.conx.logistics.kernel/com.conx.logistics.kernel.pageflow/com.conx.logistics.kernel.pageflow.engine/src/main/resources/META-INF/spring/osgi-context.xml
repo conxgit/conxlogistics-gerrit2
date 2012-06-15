@@ -4,16 +4,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
 	xmlns:osgi="http://www.springframework.org/schema/osgi">
-
 	<!-- export the workSpace bean to OSGi under the IPageFlowManager interface -->
 	<osgi:service ref="pageFlowImpl"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">
 		<osgi:service-properties>
 		    <entry key="code" value="KERNEL.PAGEFLOWENGINE.DEFAULT"/>
 		  </osgi:service-properties>		
 	</osgi:service>	
-	
 	<!-- Listen to IPageFlowPage registrations -->
 	<osgi:list id="pageRegistrations" cardinality="0..N" interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage" >
 		<osgi:listener ref="pageFlowImpl" bind-method="registerPageFlowPage" unbind-method="unregisterPageFlowPage"/>
-	</osgi:list>		
+	</osgi:list>
+	<!-- Subscribe to BpmServerInstance -->
+	<osgi:reference id="bpmService" cardinality="1..1" interface="com.conx.logistics.kernel.bpm.services.IBPMService">
+	</osgi:reference>
 </beans>

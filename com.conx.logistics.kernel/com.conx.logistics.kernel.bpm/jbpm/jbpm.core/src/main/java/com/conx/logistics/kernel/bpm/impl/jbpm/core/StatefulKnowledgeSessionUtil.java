@@ -334,6 +334,7 @@ public class StatefulKnowledgeSessionUtil {
      * @param ksession The (stateful) knowledge session .
      */
     private static void registerWorkItemHandler( StatefulKnowledgeSession ksession, Properties consoleProperties ) { 
+    	/*
         if ("Local".equalsIgnoreCase(consoleProperties.getProperty("jbpm.console.task.service.strategy", TaskClientFactory.DEFAULT_TASK_SERVICE_STRATEGY))) {
             TaskService taskService = HumanTaskService.getService();
             SyncWSHumanTaskHandler handler = new SyncWSHumanTaskHandler(new LocalTaskService(taskService), ksession);
@@ -346,7 +347,7 @@ public class StatefulKnowledgeSessionUtil {
             ksession.getWorkItemManager().registerWorkItemHandler( "Human Task", handler);
             handler.connect();
         }
-        
+        */
     }
     /**
      * This method attaches an agenda event listener to the given knowledge session .

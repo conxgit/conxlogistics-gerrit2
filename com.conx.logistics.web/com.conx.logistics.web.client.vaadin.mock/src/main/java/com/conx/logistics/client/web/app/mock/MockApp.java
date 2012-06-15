@@ -25,7 +25,7 @@ public class MockApp extends Application {
 		
 		TaskDefinition td = new TaskDefinition();
 		td.setBpmn2ProcDefURL("");
-		td.setProcessId("whse.rcv.asn");
+		td.setProcessId("whse.rcv.asn.CreateNewASNByOrg");
 		
 		pfs = defaultPageFlowEngine.startPageFlowSession("skeswa", td);
 		
@@ -39,6 +39,8 @@ public class MockApp extends Application {
 	}
 
 	public void setDefaultPageFlowEngine(IPageFlowManager defaultPageFlowEngine) {
-		this.defaultPageFlowEngine = defaultPageFlowEngine;
+		if (this.defaultPageFlowEngine == null) {
+			this.defaultPageFlowEngine = defaultPageFlowEngine;
+		}
 	}
 }

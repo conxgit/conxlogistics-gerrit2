@@ -10,7 +10,7 @@ import com.vaadin.ui.Label;
 public class TestTaskPage extends IPageFlowPage {
 
 	@Override
-	public String getTaskId() {
+	public String getTaskName() {
 		return "_169593DB-444E-493C-8B7F-AF32BB82B64A";
 	}
 

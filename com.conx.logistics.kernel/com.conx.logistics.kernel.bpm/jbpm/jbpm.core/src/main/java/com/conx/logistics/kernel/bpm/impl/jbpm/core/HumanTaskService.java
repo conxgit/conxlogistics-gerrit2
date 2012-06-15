@@ -36,13 +36,22 @@ import org.mvel2.MVEL;
 import org.mvel2.ParserContext;
 import org.mvel2.compiler.ExpressionCompiler;
 
+import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
+import com.conx.logistics.kernel.bpm.services.IBPMService;
+
 public class HumanTaskService {
 	
 	private static TaskService INSTANCE;
+	private BPMServerImpl bpmService;
 	
-	public static TaskService getService() {
+	public HumanTaskService(BPMServerImpl bpmService) {
+		// TODO Auto-generated constructor stub
+		this.bpmService = bpmService;
+	}
+
+	public TaskService getService() {
 		if (INSTANCE == null) {
-	        EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.jbpm.task");
+	        EntityManagerFactory emf = bpmService.getJbpmTaskEMF();
 	        TaskService taskService = new TaskService(emf, SystemEventListenerFactory.getSystemEventListener());
 	        TaskServiceSession taskSession = taskService.createSession();
 	        // Add users

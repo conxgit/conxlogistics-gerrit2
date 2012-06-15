@@ -1,17 +1,19 @@
 Manifest-Version: 1.0
-Built-By: dev
-Build-Jdk: 1.6.0_29
-Created-By: Maven Integration for Eclipse
 Export-Package: com.conx.logistics.data.uat.sprint1.data;version="1.0.
  0";uses:="com.conx.logistics.mdm.dao.services,javax.persistence,org.s
  pringframework.transaction"
 Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_29
+Built-By: dev
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConX UAT Data for Sprint 1
 Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.data.uat.sprint1.data
-Import-Package: com.conx.logistics.mdm.dao.services;version="1.0.0",ja
- vax.persistence;version="0",org.slf4j;version="[1.6.1,1.7.0)",org.spr
- ingframework.transaction;version="[3.0,3.1)"
+Import-Package: com.conx.logistics.mdm.dao.services;version="1.0.0",co
+ m.conx.logistics.mdm.domain.organization;version="1.0.0",javax.persis
+ tence;version="0",org.slf4j;version="[1.6.1,1.7.0)",org.springframewo
+ rk.transaction;version="[3.0,3.1)",org.springframework.transaction.su
+ pport;version="[3.0,3.1)"
 

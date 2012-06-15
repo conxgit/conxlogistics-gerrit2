@@ -6,6 +6,6 @@
 		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
 	xmlns:osgi="http://www.springframework.org/schema/osgi">
-	<osgi:reference id="defaultPageFlowEngine"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">		
+	<osgi:reference id="defaultPageFlowEngine" cardinality="1..1" interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">		
 	</osgi:reference>		
 </beans>
