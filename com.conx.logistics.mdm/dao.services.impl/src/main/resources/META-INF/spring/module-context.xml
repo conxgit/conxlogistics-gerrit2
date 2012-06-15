@@ -45,5 +45,8 @@
 		EntityManager will be auto-injected due to @PersistenceContext.
 		PersistenceExceptions will be auto-translated due to @Repository.
 	-->
+	<bean id="countryDao" class="com.conx.logistics.mdm.dao.services.impl.CountryDAOImpl"/>
+	<bean id="countryStateDao" class="com.conx.logistics.mdm.dao.services.impl.CountryStateDAOImpl"/>
 	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>
+	<bean id="unlocoDao" class="com.conx.logistics.mdm.dao.services.impl.UnlocoDAOImpl"/>
 </beans>

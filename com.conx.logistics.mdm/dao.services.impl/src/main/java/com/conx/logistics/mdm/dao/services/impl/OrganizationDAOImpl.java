@@ -16,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
-import com.conx.logistics.mdm.domain.application.Application;
-import com.conx.logistics.mdm.domain.application.Feature;
 import com.conx.logistics.mdm.domain.organization.Organization;
 
 @Transactional
@@ -41,7 +39,7 @@ public class OrganizationDAOImpl implements IOrganizationDAOService {
 
 	@Override
 	public List<Organization> getAll() {
-		return em.createQuery("select o from Organization o order by o.id",Organization.class).getResultList();
+		return em.createQuery("select o from Organization o record by o.id",Organization.class).getResultList();
 	}
 	
 	@Override

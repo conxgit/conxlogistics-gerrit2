@@ -1,7 +1,9 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.mdm.dao.services.impl;version="1.0.
  0";uses:="com.conx.logistics.mdm.dao.services,com.conx.logistics.mdm.
- domain.organization,javax.persistence"
+ domain.geolocation,com.conx.logistics.mdm.domain.organization,javax.p
+ ersistence,org.springframework.beans.factory.annotation,org.springfra
+ mework.stereotype,org.springframework.transaction.annotation"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -13,10 +15,16 @@ Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.dao.services.impl
 Import-Package: com.conx.logistics.common.utils;version="1.0.0",com.co
  nx.logistics.mdm.dao.services;version="1.0.0",com.conx.logistics.mdm.
- domain.organization;version="1.0.0",javax.persistence;version="0",jav
- ax.transaction;version="0",org.slf4j;version="[1.6.1,1.7.0)",org.spri
- ngframework.dao.annotation;version="[3.0,3.1)",org.springframework.tr
- ansaction;version="[3.0,3.1)",org.springframework.transaction.aspectj
- ;version="[3.0,3.1)",org.springframework.transaction.jta;version="[3.
- 0,3.1)"
+ domain.application;version="1.0.0",com.conx.logistics.mdm.domain.comm
+ ercialrecord;version="1.0.0",com.conx.logistics.mdm.domain.geolocatio
+ n;version="1.0.0",com.conx.logistics.mdm.domain.organization;version=
+ "1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.con
+ x.logistics.mdm.domain.task;version="1.0.0",javax.persistence;version
+ ="0",javax.transaction;version="0",org.slf4j;version="[1.6.1,1.7.0)",
+ org.springframework.beans.factory.annotation;version="[3.0,3.1)",org.
+ springframework.dao.annotation;version="[3.0,3.1)",org.springframewor
+ k.stereotype;version="[3.0,3.1)",org.springframework.transaction;vers
+ ion="[3.0,3.1)",org.springframework.transaction.annotation;version="[
+ 3.0,3.1)",org.springframework.transaction.aspectj;version="[3.0,3.1)"
+ ,org.springframework.transaction.jta;version="[3.0,3.1)"
 

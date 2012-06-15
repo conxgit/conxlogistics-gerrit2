@@ -13,7 +13,15 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.conx.logistics.mdm.dao.services.IAddressDAOService;
+import com.conx.logistics.mdm.dao.services.ICountryDAOService;
+import com.conx.logistics.mdm.dao.services.ICountryStateDAOService;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
+import com.conx.logistics.mdm.dao.services.IUnlocoDAOService;
+import com.conx.logistics.mdm.domain.geolocation.Address;
+import com.conx.logistics.mdm.domain.geolocation.Country;
+import com.conx.logistics.mdm.domain.geolocation.CountryState;
+import com.conx.logistics.mdm.domain.geolocation.Unloco;
 import com.conx.logistics.mdm.domain.organization.Organization;
 
 public class TestDataManager {
@@ -24,6 +32,10 @@ public class TestDataManager {
 	private PlatformTransactionManager globalTransactionManager;
 	
 	private IOrganizationDAOService orgDaoService;
+	private ICountryDAOService countryDaoService;
+	private ICountryStateDAOService countryStateDaoService;
+	private IUnlocoDAOService unlocoDaoService;
+	private IAddressDAOService addressDaoService;
 	
 	public void setOrgDaoService(IOrganizationDAOService orgDaoService) {
 		this.orgDaoService = orgDaoService;
@@ -55,16 +67,65 @@ public class TestDataManager {
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 		TransactionStatus status = this.globalTransactionManager.getTransaction(def);			
 		try {
+			Organization record = this.orgDaoService.getByCode("TESCUS1");
+			if (record == null)
+			{
 			
-			/**
-			 * Org Data: TD ORG 1.0, 4.0, 6.0, 7.0
-			 */
-			Organization record = new Organization();
-			record.setName("Test Customer 1");
-			record.setCode("TESCUS1");
-			record = this.orgDaoService.provide(record);
-			
-			this.globalTransactionManager.commit(status);	
+				/**
+				 * Org Data: TD ORG 1.0, 4.0, 6.0, 7.0
+				 */
+				//-- Unlocos: 
+				Country de = countryDaoService.provide("DE", "Germany");
+				CountryState csdefra = countryStateDaoService.provide("HE","Hessen", de.getId());
+				Unloco defra = unlocoDaoService.provide("DEFRA", "", "Frankfurt am Main", de.getId(), csdefra.getId());
+				
+				Country gb = countryDaoService.provide("GB", "United Kingdom");
+				CountryState csgbhlr = countryStateDaoService.provide("GTL","Greater London", de.getId());
+				Unloco gbhlr = unlocoDaoService.provide("GBLHR", "", "Heathrow Apt/London	LHR", de.getId(), csdefra.getId());				
+				
+				Country us = countryDaoService.provide("US", "United States");
+				CountryState csusbwi = countryStateDaoService.provide("MD","Maryland", us.getId());
+				Unloco usbwi = unlocoDaoService.provide("USBWI", "", "Washington-Baltimore Int Apt", de.getId(), csdefra.getId());				
+				
+				CountryState csusdfw = countryStateDaoService.provide("TX","Texas", us.getId());
+				Unloco usdfw = unlocoDaoService.provide("USDFW", "", "Dallas-Fort Worth Int Apt", de.getId(), csdefra.getId());	
+				
+				CountryState csusntn = countryStateDaoService.provide("MA","Massachusetts", us.getId());
+				Unloco usntn = unlocoDaoService.provide("USNTN", "", "Newton", de.getId(), csdefra.getId());					
+				
+				CountryState csussfo = countryStateDaoService.provide("CA","California", us.getId());
+				Unloco ussfo = unlocoDaoService.provide("USSFO", "", "San Francisco", de.getId(), csdefra.getId());
+				
+				//-- Orgs:
+				//------------ 1.0-TESCUS1:
+				Organization tescus1 = new Organization();
+				tescus1.setName("Test Customer 1");
+				tescus1.setCode("TESCUS1");
+				tescus1 = this.orgDaoService.add(record);
+				Address tescus1_addr = addressDaoService.provide(Organization.class.getName(),tescus1.getId(),"123 Main St	Suite 1",null,null,null,"USDFW",null,us.getCode(),us.getName(),null,null);
+				tescus1.setMainAddress(tescus1_addr);
+				tescus1 = this.orgDaoService.update(record);
+
+				//------------ 4.0-TESCAR1:		
+				Organization tescar1 = new Organization();
+				tescar1.setName("Test Carrier 1");
+				tescar1.setCode("TESCAR1");
+				tescar1 = this.orgDaoService.add(record);
+				Address tescar1_addr = addressDaoService.provide(Organization.class.getName(),tescar1.getId(),"123 Main St	Suite 1",null,null,null,"USDFW",null,us.getCode(),us.getName(),null,null);
+				tescar1.setMainAddress(tescar1_addr);
+				tescar1 = this.orgDaoService.update(record);
+				
+				//------------ 6.0-TESLOC1:		
+				Organization tesloc1 = new Organization();
+				tesloc1.setName("Test Location 1");
+				tesloc1.setCode("TESLOC1");
+				tesloc1 = this.orgDaoService.add(record);
+				Address tesloc1_addr = addressDaoService.provide(Organization.class.getName(),tesloc1.getId(),"7 West Penn St",null,null,null,"USNTN",null,us.getCode(),us.getName(),null,null);
+				tesloc1.setMainAddress(tesloc1_addr);
+				tesloc1 = this.orgDaoService.update(record);					
+				
+				this.globalTransactionManager.commit(status);
+			}
 		} 
 		catch (Exception e) 
 		{
