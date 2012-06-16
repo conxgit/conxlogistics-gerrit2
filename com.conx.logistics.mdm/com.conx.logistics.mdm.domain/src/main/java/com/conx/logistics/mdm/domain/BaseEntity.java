@@ -53,6 +53,8 @@ public class BaseEntity  extends SuperBaseEntity implements Serializable {
     private String description;
     
     private String portalId;
+    
+    private Long dlFolderId;    
 
 	public Long getId() {
 		return this.id;
@@ -173,5 +175,12 @@ public class BaseEntity  extends SuperBaseEntity implements Serializable {
 	public void setPortalId(String portalId) {
 		this.portalId = portalId;
 	}
-    
+
+	public Long getDlFolderId() {
+		return dlFolderId;
+	}
+
+	public void setDlFolderId(Long dlFolderId) {
+		this.dlFolderId = dlFolderId;
+	}
 }

@@ -75,7 +75,7 @@ public class Product extends MultitenantBaseEntity {
 
     @OneToOne(targetEntity = CommercialRecord.class, fetch = FetchType.LAZY)
     @JoinColumn
-    private CommercialRecord commercialRecord;
+    private CommercialRecord commercialRecord;   
 
     private Integer innerPackCount;
 
@@ -91,5 +91,173 @@ public class Product extends MultitenantBaseEntity {
 
     private Double volume;
 
-    private Boolean hasAvailableInventory;       
+    private Boolean hasAvailableInventory;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	public ProductUnitConversion getPalletUnitConvesion() {
+		return palletUnitConvesion;
+	}
+
+	public void setPalletUnitConvesion(ProductUnitConversion palletUnitConvesion) {
+		this.palletUnitConvesion = palletUnitConvesion;
+	}
+
+	public PackUnit getInnerPackUnit() {
+		return innerPackUnit;
+	}
+
+	public void setInnerPackUnit(PackUnit innerPackUnit) {
+		this.innerPackUnit = innerPackUnit;
+	}
+
+	public PackUnit getOuterPackUnit() {
+		return outerPackUnit;
+	}
+
+	public void setOuterPackUnit(PackUnit outerPackUnit) {
+		this.outerPackUnit = outerPackUnit;
+	}
+
+	public WeightUnit getWeightUnit() {
+		return weightUnit;
+	}
+
+	public void setWeightUnit(WeightUnit weightUnit) {
+		this.weightUnit = weightUnit;
+	}
+
+	public DimUnit getDimUnit() {
+		return dimUnit;
+	}
+
+	public void setDimUnit(DimUnit dimUnit) {
+		this.dimUnit = dimUnit;
+	}
+
+	public DimUnit getVolUnit() {
+		return volUnit;
+	}
+
+	public void setVolUnit(DimUnit volUnit) {
+		this.volUnit = volUnit;
+	}
+
+	public ProductMaster getProductMaster() {
+		return productMaster;
+	}
+
+	public void setProductMaster(ProductMaster productMaster) {
+		this.productMaster = productMaster;
+	}
+
+	public Commodity getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
+
+	public Organization getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Organization supplier) {
+		this.supplier = supplier;
+	}
+
+	public ProductType getProductType() {
+		return productType;
+	}
+
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
+	}
+
+	public CommercialRecord getCommercialRecord() {
+		return commercialRecord;
+	}
+
+	public void setCommercialRecord(CommercialRecord commercialRecord) {
+		this.commercialRecord = commercialRecord;
+	}
+
+	public Integer getInnerPackCount() {
+		return innerPackCount;
+	}
+
+	public void setInnerPackCount(Integer innerPackCount) {
+		this.innerPackCount = innerPackCount;
+	}
+
+	public Integer getOuterPackCount() {
+		return outerPackCount;
+	}
+
+	public void setOuterPackCount(Integer outerPackCount) {
+		this.outerPackCount = outerPackCount;
+	}
+
+	public Double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	public Double getLen() {
+		return len;
+	}
+
+	public void setLen(Double len) {
+		this.len = len;
+	}
+
+	public Double getWidth() {
+		return width;
+	}
+
+	public void setWidth(Double width) {
+		this.width = width;
+	}
+
+	public Double getHeight() {
+		return height;
+	}
+
+	public void setHeight(Double height) {
+		this.height = height;
+	}
+
+	public Double getVolume() {
+		return volume;
+	}
+
+	public void setVolume(Double volume) {
+		this.volume = volume;
+	}
+
+	public Boolean getHasAvailableInventory() {
+		return hasAvailableInventory;
+	}
+
+	public void setHasAvailableInventory(Boolean hasAvailableInventory) {
+		this.hasAvailableInventory = hasAvailableInventory;
+	}       
 }

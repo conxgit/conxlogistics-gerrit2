@@ -18,11 +18,17 @@ import com.conx.logistics.mdm.dao.services.ICountryDAOService;
 import com.conx.logistics.mdm.dao.services.ICountryStateDAOService;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
 import com.conx.logistics.mdm.dao.services.IUnlocoDAOService;
+import com.conx.logistics.mdm.dao.services.product.IProductDAOService;
+import com.conx.logistics.mdm.domain.constants.DimUnitCustomCONSTANTS;
+import com.conx.logistics.mdm.domain.constants.PackUnitCustomCONSTANTS;
+import com.conx.logistics.mdm.domain.constants.ProductTypeCustomCONSTANTS;
+import com.conx.logistics.mdm.domain.constants.WeightUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.geolocation.Country;
 import com.conx.logistics.mdm.domain.geolocation.CountryState;
 import com.conx.logistics.mdm.domain.geolocation.Unloco;
 import com.conx.logistics.mdm.domain.organization.Organization;
+import com.conx.logistics.mdm.domain.product.Product;
 
 public class TestDataManager {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());	
@@ -36,6 +42,8 @@ public class TestDataManager {
 	private ICountryStateDAOService countryStateDaoService;
 	private IUnlocoDAOService unlocoDaoService;
 	private IAddressDAOService addressDaoService;
+	
+	private IProductDAOService productDaoService;
 	
 	public void setOrgDaoService(IOrganizationDAOService orgDaoService) {
 		this.orgDaoService = orgDaoService;
@@ -133,7 +141,17 @@ public class TestDataManager {
 				tesloc1 = this.orgDaoService.add(tesloc1);
 				Address tesloc1_addr = addressDaoService.provide(Organization.class.getName(),tesloc1.getId(),"7 West Penn St",null,null,null,"USNTN",null,us.getCode(),us.getName(),null,null);
 				tesloc1.setMainAddress(tesloc1_addr);
-				tesloc1 = this.orgDaoService.update(tesloc1);					
+				tesloc1 = this.orgDaoService.update(tesloc1);	
+				
+				
+				/**
+				 * Prod Data: TD PRD 2.0, 3.0, 4.0
+				 */
+				//-- PRD 2.0
+				Product prd2 = productDaoService.provide("fooite1", "banana's",ProductTypeCustomCONSTANTS.TYPE_Food_Item,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
+				Product prd3 = productDaoService.provide("hazmat1", "Jet Fuel",ProductTypeCustomCONSTANTS.TYPE_Hazardous_Material,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
+				Product prd4 = productDaoService.provide("textil1", "Clothing",ProductTypeCustomCONSTANTS.TYPE_Textiles,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
+				
 				
 				this.globalTransactionManager.commit(status);
 			}

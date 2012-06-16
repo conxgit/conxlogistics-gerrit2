@@ -3,16 +3,25 @@ Export-Package: com.conx.logistics.mdm.domain;version="1.0.0";uses:="j
  avax.persistence",com.conx.logistics.mdm.domain.application;version="
  1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",com.co
  nx.logistics.mdm.domain.commercialrecord;version="1.0.0";uses:="com.c
- onx.logistics.mdm.domain,javax.persistence",com.conx.logistics.mdm.do
- main.constants;version="1.0.0",com.conx.logistics.mdm.domain.geolocat
- ion;version="1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persis
- tence",com.conx.logistics.mdm.domain.organization;version="1.0.0";use
- s:="com.conx.logistics.mdm.domain,com.conx.logistics.mdm.domain.geolo
- cation,javax.persistence",com.conx.logistics.mdm.domain.product;versi
- on="1.0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence",co
- m.conx.logistics.mdm.domain.task;version="1.0.0";uses:="com.conx.logi
- stics.mdm.domain,com.conx.logistics.mdm.domain.application,javax.pers
- istence,javax.validation.constraints"
+ onx.logistics.mdm.domain,com.conx.logistics.mdm.domain.currency,com.c
+ onx.logistics.mdm.domain.metadata,javax.persistence",com.conx.logisti
+ cs.mdm.domain.constants;version="1.0.0",com.conx.logistics.mdm.domain
+ .currency;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.co
+ nx.logistics.mdm.domain.geolocation,javax.persistence",com.conx.logis
+ tics.mdm.domain.geolocation;version="1.0.0";uses:="com.conx.logistics
+ .mdm.domain,javax.persistence",com.conx.logistics.mdm.domain.metadata
+ ;version="1.0.0";uses:="javax.persistence,org.springframework.format.
+ annotation",com.conx.logistics.mdm.domain.organization;version="1.0.0
+ ";uses:="com.conx.logistics.mdm.domain,com.conx.logistics.mdm.domain.
+ geolocation,javax.persistence",com.conx.logistics.mdm.domain.product;
+ version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.conx.logisti
+ cs.mdm.domain.commercialrecord,com.conx.logistics.mdm.domain.organiza
+ tion,javax.persistence",com.conx.logistics.mdm.domain.referencenumber
+ ;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.conx.logist
+ ics.mdm.domain.metadata,javax.persistence",com.conx.logistics.mdm.dom
+ ain.task;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.con
+ x.logistics.mdm.domain.application,javax.persistence,javax.validation
+ .constraints"
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -22,4 +31,6 @@ Bundle-Name: ConX Master Data Management Domain Model
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.domain
+Import-Package: org.springframework.format.annotation;version="[2.0.0,
+ 3.0.0)"
 
