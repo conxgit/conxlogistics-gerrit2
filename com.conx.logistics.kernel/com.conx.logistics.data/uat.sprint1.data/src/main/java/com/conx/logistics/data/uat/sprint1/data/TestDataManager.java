@@ -18,7 +18,12 @@ import com.conx.logistics.mdm.dao.services.ICountryDAOService;
 import com.conx.logistics.mdm.dao.services.ICountryStateDAOService;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
 import com.conx.logistics.mdm.dao.services.IUnlocoDAOService;
+import com.conx.logistics.mdm.dao.services.product.IDimUnitDAOService;
+import com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService;
 import com.conx.logistics.mdm.dao.services.product.IProductDAOService;
+import com.conx.logistics.mdm.dao.services.product.IProductTypeDAOService;
+import com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService;
+import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService;
 import com.conx.logistics.mdm.domain.constants.DimUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.constants.PackUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.constants.ProductTypeCustomCONSTANTS;
@@ -43,7 +48,13 @@ public class TestDataManager {
 	private IUnlocoDAOService unlocoDaoService;
 	private IAddressDAOService addressDaoService;
 	
+	private IPackUnitDAOService packUnitDaoService;
+	private IDimUnitDAOService dimUnitDaoService;
+	private IWeightUnitDAOService weightUnitDaoService;
+	private IProductTypeDAOService productTypeDaoService;
 	private IProductDAOService productDaoService;
+	
+	private IReferenceNumberTypeDAOService referenceNumberTypeDaoService;
 	
 	public void setOrgDaoService(IOrganizationDAOService orgDaoService) {
 		this.orgDaoService = orgDaoService;
@@ -60,6 +71,28 @@ public class TestDataManager {
 	}
 	public void setAddressDaoService(IAddressDAOService addressDaoService) {
 		this.addressDaoService = addressDaoService;
+	}
+	
+	public void setProductDaoService(IProductDAOService productDaoService) {
+		this.productDaoService = productDaoService;
+	}
+	public void setReferenceNumberTypeDaoService(
+			IReferenceNumberTypeDAOService referenceNumberTypeDaoService) {
+		this.referenceNumberTypeDaoService = referenceNumberTypeDaoService;
+	}
+	
+	public void setPackUnitDaoService(IPackUnitDAOService packUnitDaoService) {
+		this.packUnitDaoService = packUnitDaoService;
+	}
+	public void setDimUnitDaoService(IDimUnitDAOService dimUnitDaoService) {
+		this.dimUnitDaoService = dimUnitDaoService;
+	}
+	public void setWeightUnitDaoService(IWeightUnitDAOService weightUnitDaoService) {
+		this.weightUnitDaoService = weightUnitDaoService;
+	}
+	public void setProductTypeDaoService(
+			IProductTypeDAOService productTypeDaoService) {
+		this.productTypeDaoService = productTypeDaoService;
 	}
 	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
 		this.conxlogisticsEMF = conxlogisticsEMF;
@@ -148,10 +181,19 @@ public class TestDataManager {
 				 * Prod Data: TD PRD 2.0, 3.0, 4.0
 				 */
 				//-- PRD 2.0
+				packUnitDaoService.provideDefaults();
+				dimUnitDaoService.provideDefaults();
+				weightUnitDaoService.provideDefaults();
+				productTypeDaoService.provideDefaults();
+				referenceNumberTypeDaoService.provideDefaults();
 				Product prd2 = productDaoService.provide("fooite1", "banana's",ProductTypeCustomCONSTANTS.TYPE_Food_Item,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				Product prd3 = productDaoService.provide("hazmat1", "Jet Fuel",ProductTypeCustomCONSTANTS.TYPE_Hazardous_Material,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				Product prd4 = productDaoService.provide("textil1", "Clothing",ProductTypeCustomCONSTANTS.TYPE_Textiles,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				
+				/**
+				 * Ref IDs: TD RIDTYP 2.0, 3.0, 4.0
+				 */
+				referenceNumberTypeDaoService.provideDefaults();
 				
 				this.globalTransactionManager.commit(status);
 			}

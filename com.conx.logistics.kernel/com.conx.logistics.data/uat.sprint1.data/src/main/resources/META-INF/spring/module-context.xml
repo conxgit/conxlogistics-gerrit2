@@ -13,12 +13,18 @@
 
 	<bean id="humanTaskServer" class="com.conx.logistics.data.uat.sprint1.data.TestDataManager" init-method="start" destroy-method="stop">
 		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="globalTransactionManager" ref="globalTransManager"></property>
+				
+		<property name="addressDaoService" ref="addressDao"></property>
 		<property name="countryDaoService" ref="countryDao"></property>
 		<property name="countryStateDaoService" ref="countryStateDao"></property>
-		<property name="unlocoDaoService" ref="unlocoDao"></property>
-		<property name="addressDaoService" ref="addressDao"></property>
+		<property name="dimUnitDaoService" ref="dimUnitDao"></property>
 		<property name="orgDaoService" ref="orgDao"></property>
-		<property name="globalTransactionManager" ref="globalTransManager"></property>
+		<property name="productDaoService" ref="productDao"></property>
+		<property name="productTypeDaoService" ref="productTypeDao"></property>
+		<property name="referenceNumberTypeDaoService" ref="referenceNumberTypeDao"></property>
+		<property name="unlocoDaoService" ref="unlocoDao"></property>
+		<property name="weightUnitDaoService" ref="weightUnitDao"></property>
 	</bean>
 	
 	

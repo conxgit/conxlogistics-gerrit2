@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.data.uat.sprint1.data;version="1.0.
- 0";uses:="com.conx.logistics.mdm.dao.services,javax.persistence,org.s
- pringframework.transaction"
+ 0";uses:="com.conx.logistics.mdm.dao.services,com.conx.logistics.mdm.
+ dao.services.product,com.conx.logistics.mdm.dao.services.referencenum
+ ber,javax.persistence,org.springframework.transaction"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -12,13 +13,15 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.data.uat.sprint1.data
 Import-Package: com.conx.logistics.mdm.dao.services;version="1.0.0",co
- m.conx.logistics.mdm.dao.services.product,com.conx.logistics.mdm.doma
- in.application;version="1.0.0",com.conx.logistics.mdm.domain.commerci
- alrecord;version="1.0.0",com.conx.logistics.mdm.domain.constants;vers
- ion="1.0.0",com.conx.logistics.mdm.domain.geolocation;version="1.0.0"
- ,com.conx.logistics.mdm.domain.organization;version="1.0.0",com.conx.
- logistics.mdm.domain.product;version="1.0.0",com.conx.logistics.mdm.d
- omain.task;version="1.0.0",javax.persistence;version="0",org.slf4j;ve
- rsion="[1.6.1,1.7.0)",org.springframework.transaction;version="[3.0,3
- .1)",org.springframework.transaction.support;version="[3.0,3.1)"
+ m.conx.logistics.mdm.dao.services.product;version="1.0.0",com.conx.lo
+ gistics.mdm.dao.services.referencenumber;version="1.0.0",com.conx.log
+ istics.mdm.domain.application;version="1.0.0",com.conx.logistics.mdm.
+ domain.commercialrecord;version="1.0.0",com.conx.logistics.mdm.domain
+ .constants;version="1.0.0",com.conx.logistics.mdm.domain.geolocation;
+ version="1.0.0",com.conx.logistics.mdm.domain.organization;version="1
+ .0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.conx.
+ logistics.mdm.domain.task;version="1.0.0",javax.persistence;version="
+ 0",org.slf4j;version="[1.6.1,1.7.0)",org.springframework.transaction;
+ version="[3.0,3.1)",org.springframework.transaction.support;version="
+ [3.0,3.1)"
 

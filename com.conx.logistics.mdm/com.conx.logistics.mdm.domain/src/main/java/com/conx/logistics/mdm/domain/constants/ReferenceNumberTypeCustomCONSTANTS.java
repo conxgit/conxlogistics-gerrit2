@@ -13,7 +13,16 @@ public class ReferenceNumberTypeCustomCONSTANTS extends BaseEntityCustomCONSTANT
 	public static final String TYPE_OTHER = "OTHER";
 	public static final String TYPE_OTHER_NAME = "Other Number";	
 	
-	public static final String entityMetadataCode = "entityMetadataCode";
-	public static final String entityMetadataName = "entityMetadataName";
+	public static final String TYPE_CarrierId = "CarrierId";
+	public static final String TYPE_CarrierId_NAME = "CarrierId";
+	
+	public static final String TYPE_NO_REF = "NoRef";
+	public static final String TYPE_NO_REF_NAME = "No Reference ID Assigned";
+	
+	public static final String TYPE_BOL = "BOL";
+	public static final String TYPE_BOL_NAME = "Bill of Ladin";	
+	
+	public static final String TYPE_ConXGeneric = "ConXGeneric";
+	public static final String TYPE_ConXGeneric_NAME = "ConXGeneric";		
 }
 

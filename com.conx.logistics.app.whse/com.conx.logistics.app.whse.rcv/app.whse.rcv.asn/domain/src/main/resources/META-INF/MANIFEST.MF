@@ -1,6 +1,12 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
- 0.0";uses:="com.conx.logistics.mdm.domain,javax.persistence"
+ 0.0";uses:="com.conx.logistics.app.whse.rcv.asn.shared.type,com.conx.
+ logistics.mdm.domain,com.conx.logistics.mdm.domain.commercialrecord,c
+ om.conx.logistics.mdm.domain.geolocation,com.conx.logistics.mdm.domai
+ n.organization,com.conx.logistics.mdm.domain.product,javax.persistenc
+ e,org.springframework.format.annotation",com.conx.logistics.app.whse.
+ rcv.asn.shared.type;version="1.0.0"
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -9,6 +15,10 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module Domain Model
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain
-Import-Package: com.conx.logistics.mdm.domain;version="1.0.0",javax.pe
- rsistence;version="0"
+Import-Package: com.conx.logistics.mdm.domain;version="1.0.0",com.conx
+ .logistics.mdm.domain.commercialrecord;version="1.0.0",com.conx.logis
+ tics.mdm.domain.geolocation;version="1.0.0",com.conx.logistics.mdm.do
+ main.organization;version="1.0.0",com.conx.logistics.mdm.domain.produ
+ ct;version="1.0.0",javax.persistence;version="0",org.springframework.
+ format.annotation;version="[3.0,3.1)"
 

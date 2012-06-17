@@ -67,7 +67,7 @@ public class ProductDAOImpl implements IProductDAOService {
     private ICountryDAOService countryUnitDao;
     
     @Autowired
-    private IPackUnitDAOService packunitDao;
+    private IPackUnitDAOService packUnitDao;
     
     @Autowired
     private IDimUnitDAOService dimUnitDao;
@@ -231,7 +231,7 @@ public class ProductDAOImpl implements IProductDAOService {
     		
     		
     		//--Inner pack unit
-    		PackUnit innerPackUnit = packunitDao.provide(innerPackUnitCode, innerPackUnitCode);
+    		PackUnit innerPackUnit = packUnitDao.provide(innerPackUnitCode, innerPackUnitCode);
     		prod.setInnerPackUnit(innerPackUnit);
     		
     		//--Weight unit

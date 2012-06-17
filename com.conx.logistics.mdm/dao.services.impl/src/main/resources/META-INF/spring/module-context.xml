@@ -65,6 +65,11 @@
 	<bean id="addressDao" class="com.conx.logistics.mdm.dao.services.impl.AddressDAOImpl"/>
 	<bean id="countryDao" class="com.conx.logistics.mdm.dao.services.impl.CountryDAOImpl"/>
 	<bean id="countryStateDao" class="com.conx.logistics.mdm.dao.services.impl.CountryStateDAOImpl"/>
+	<bean id="dimUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.DimUnitDAOImpl"/>	
 	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>
+	<bean id="referenceNumberTypeDao" class="com.conx.logistics.mdm.dao.services.impl.product.PackUnitDAOImpl"/>
+	<bean id="packUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductTypeDAOImpl"/>	
+	<bean id="productTypeDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberTypeDAOImpl"/>	
 	<bean id="unlocoDao" class="com.conx.logistics.mdm.dao.services.impl.UnlocoDAOImpl"/>
+	<bean id="weightUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.WeightUnitDAOImpl"/>
 </beans>

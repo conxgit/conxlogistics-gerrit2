@@ -6,7 +6,9 @@ Export-Package: com.conx.logistics.mdm.dao.services;version="1.0.0";us
  vices.currency;version="1.0.0";uses:="com.conx.logistics.mdm.domain.c
  urrency,com.conx.logistics.mdm.domain.geolocation",com.conx.logistics
  .mdm.dao.services.product;version="1.0.0";uses:="com.conx.logistics.m
- dm.domain.product"
+ dm.domain.product",com.conx.logistics.mdm.dao.services.referencenumbe
+ r;version="1.0.0";uses:="com.conx.logistics.mdm.domain.referencenumbe
+ r"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -22,5 +24,6 @@ Import-Package: com.conx.logistics.mdm.domain.application;version="1.0
  cs.mdm.domain.geolocation;version="1.0.0",com.conx.logistics.mdm.doma
  in.metadata;version="1.0.0",com.conx.logistics.mdm.domain.organizatio
  n;version="1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.
- 0",com.conx.logistics.mdm.domain.task;version="1.0.0"
+ 0",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",com.
+ conx.logistics.mdm.domain.task;version="1.0.0"
 
