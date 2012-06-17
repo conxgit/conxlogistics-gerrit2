@@ -13,8 +13,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="mdentitymetadata")
-public class EntityMetadata {
+@Table(name="mdmentitymetadata")
+public class DefaultEntityMetadata {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
