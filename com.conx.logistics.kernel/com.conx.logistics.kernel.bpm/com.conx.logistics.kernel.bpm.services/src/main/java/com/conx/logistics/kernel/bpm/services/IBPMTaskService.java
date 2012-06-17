@@ -1,5 +1,7 @@
 package com.conx.logistics.kernel.bpm.services;
 
-public interface IBPMTaskService {
+import org.jbpm.task.service.TaskService;
 
+public interface IBPMTaskService {
+	public TaskService createHumanTaskService();
 }

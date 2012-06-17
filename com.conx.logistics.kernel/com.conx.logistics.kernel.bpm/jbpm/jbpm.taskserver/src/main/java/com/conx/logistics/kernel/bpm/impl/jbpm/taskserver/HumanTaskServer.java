@@ -123,5 +123,11 @@ public class HumanTaskServer implements IBPMTaskService {
 			PlatformTransactionManager kernelSystemBPMTransManager) {
 		this.globalJTATransManager = kernelSystemBPMTransManager;
 	}
+
+	@Override
+	public TaskService createHumanTaskService() {
+		TaskService taskService = new TaskService(emfOrgJbpmTask,SystemEventListenerFactory.getSystemEventListener());
+		return taskService;
+	}
 	
 }

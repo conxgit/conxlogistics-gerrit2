@@ -51,6 +51,8 @@ public class HumanTaskService {
 
 	public TaskService getService() {
 		if (INSTANCE == null) {
+			INSTANCE = this.bpmService.getLocalHumanTaskServer().createHumanTaskService();
+			/*
 	        EntityManagerFactory emf = bpmService.getJbpmTaskEMF();
 	        TaskService taskService = new TaskService(emf, SystemEventListenerFactory.getSystemEventListener());
 	        TaskServiceSession taskSession = taskService.createSession();
@@ -69,6 +71,7 @@ public class HumanTaskService {
 	        taskSession.dispose();
 	        System.out.println("Task service running and started correctly !");
 	        INSTANCE = taskService;
+	        */
 		}
 		return INSTANCE;
 	}

@@ -16,5 +16,6 @@
 		<property name="globalTransactionManager" ref="globalTransactionManager"/>
 		<property name="globalJPATransManager" ref="globalJPATransManager"/>
 		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+		<property name="localHumanTaskServer" ref="bpmTaskService"/>
 	</bean>
 </beans>

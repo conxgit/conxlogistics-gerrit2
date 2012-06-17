@@ -76,6 +76,7 @@ import com.conx.logistics.kernel.bpm.impl.jbpm.core.TaskClientFactory;
 import com.conx.logistics.kernel.bpm.impl.jbpm.core.TaskManagement;
 import com.conx.logistics.kernel.bpm.impl.jbpm.shared.utils.GuvnorConnectionUtils;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
+import com.conx.logistics.kernel.bpm.services.IBPMTaskService;
 
 public class BPMServerImpl implements IBPMService {
 	private static final Logger logger = LoggerFactory
@@ -104,8 +105,18 @@ public class BPMServerImpl implements IBPMService {
 
 	private TaskManagement taskManager;
 
-	private HumanTaskService humanTaskManager;		
+	private HumanTaskService humanTaskManager;	
 	
+	private IBPMTaskService localHumanTaskServer;
+	
+	public IBPMTaskService getLocalHumanTaskServer() {
+		return localHumanTaskServer;
+	}
+
+	public void setLocalHumanTaskServer(IBPMTaskService localHumanTaskServer) {
+		this.localHumanTaskServer = localHumanTaskServer;
+	}
+
 	public void setJbpmEMF(EntityManagerFactory jbpmEMF) {
 		this.jbpmEMF = jbpmEMF;
 	}

@@ -10,5 +10,9 @@
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-	<bean id="newASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.InitNewASNWIH"/>		
+	<bean id="newASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.InitNewASNWIH"/>	
+	<bean id="acceptASNRefNumsWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.InitNewASNWIH"/>
+	<bean id="acceptASNLinesWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLinesWIH"/>
+	<bean id="acceptASNLocalTransWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLocalTransWIH"/>	
+	<bean id="acceptASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNWIH"/>
 </beans>

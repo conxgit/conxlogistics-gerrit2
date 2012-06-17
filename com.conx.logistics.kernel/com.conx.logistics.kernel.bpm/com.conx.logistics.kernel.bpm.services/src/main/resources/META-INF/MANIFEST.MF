@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
- ;uses:="javax.persistence,org.jboss.bpm.console.client.model"
+ ;uses:="javax.persistence,org.jboss.bpm.console.client.model,org.jbpm
+ .task.service"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -12,5 +13,6 @@ Bundle-SymbolicName: com.conx.logistics.kernel.bpm.services
 Import-Package: javax.persistence;version="0",org.drools.definition.pr
  ocess;version="[5.4.0,5.5.0)",org.drools.runtime.process;version="[5.
  4.0,5.5.0)",org.jboss.bpm.console.client.model;version="2.3.2.SNAPSHO
- T",org.jbpm.process.audit;version="[5.3.0,5.4.0)"
+ T",org.jbpm.process.audit;version="[5.3.0,5.4.0)",org.jbpm.task.servi
+ ce;version="[5.3.0,5.4.0)"
 
