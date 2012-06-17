@@ -16,7 +16,8 @@
 	
 	<!-- BUSINESS SERVICES -->
 	<osgi:reference id="addressDao" interface="com.conx.logistics.mdm.dao.services.IAddressDAOService"/>	
-	<osgi:reference id="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>	
+	<osgi:reference id="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>
+	<osgi:reference id="currencyUnitDao" interface="com.conx.logistics.mdm.dao.services.currency.ICurrencyUnitDAOService"/>	
 	<osgi:reference id="countryStateDao" interface="com.conx.logistics.mdm.dao.services.ICountryStateDAOService"/>	
 	<osgi:reference id="dimUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IDimUnitDAOService"/>
 	<osgi:reference id="orgDao" interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
@@ -24,6 +25,6 @@
 	<osgi:reference id="packUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService"/>
 	<osgi:reference id="productTypeDao" interface="com.conx.logistics.mdm.dao.services.product.IProductTypeDAOService"/>
 	<osgi:reference id="referenceNumberTypeDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService"/>
-	<osgi:reference id="unlocoDao" interface="com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService"/>
-	<osgi:reference id="weightUnitDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService"/>
+	<osgi:reference id="unlocoDao" interface="com.conx.logistics.mdm.dao.services.IUnlocoDAOService"/>
+	<osgi:reference id="weightUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService"/>
 </beans>

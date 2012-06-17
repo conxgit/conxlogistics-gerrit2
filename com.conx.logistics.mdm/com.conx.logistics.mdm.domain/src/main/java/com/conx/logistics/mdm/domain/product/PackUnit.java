@@ -17,12 +17,4 @@ import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table(name="refpackunit")
 public class PackUnit extends MultitenantBaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-    
-    @Version
-    @Column(name = "version")
-    private Integer version;
 }

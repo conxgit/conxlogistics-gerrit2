@@ -20,39 +20,30 @@ import com.conx.logistics.mdm.domain.organization.Organization;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="refproduct")
+@Table(name="mdmproduct")
 public class Product extends MultitenantBaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-    
-    @Version
-    @Column(name = "version")
-    private Integer version;
-    
 
-    @OneToOne(targetEntity = ProductUnitConversion.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = ProductUnitConversion.class)
     @JoinColumn
     private ProductUnitConversion palletUnitConvesion;
 
-    @OneToOne(targetEntity = PackUnit.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = PackUnit.class)
     @JoinColumn
     private PackUnit innerPackUnit;
 
-    @OneToOne(targetEntity = PackUnit.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = PackUnit.class)
     @JoinColumn
     private PackUnit outerPackUnit;
 
-    @OneToOne(targetEntity = WeightUnit.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = WeightUnit.class)
     @JoinColumn
     private WeightUnit weightUnit;
 
-    @OneToOne(targetEntity = DimUnit.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = DimUnit.class)
     @JoinColumn
     private DimUnit dimUnit;
 
-    @OneToOne(targetEntity = DimUnit.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = DimUnit.class)
     @JoinColumn
     private DimUnit volUnit;
 
@@ -60,20 +51,20 @@ public class Product extends MultitenantBaseEntity {
     @JoinColumn
     private ProductMaster productMaster;
 
-    @ManyToOne(targetEntity = Commodity.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Commodity.class)
     @JoinColumn
     private Commodity commodity;
 
-    @ManyToOne(targetEntity = Organization.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Organization.class)
     @JoinColumn
     private Organization supplier;
 
 
-    @ManyToOne(targetEntity = ProductType.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = ProductType.class)
     @JoinColumn
     private ProductType productType;
 
-    @OneToOne(targetEntity = CommercialRecord.class, fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = CommercialRecord.class)
     @JoinColumn
     private CommercialRecord commercialRecord;   
 
@@ -92,22 +83,6 @@ public class Product extends MultitenantBaseEntity {
     private Double volume;
 
     private Boolean hasAvailableInventory;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
 
 	public ProductUnitConversion getPalletUnitConvesion() {
 		return palletUnitConvesion;

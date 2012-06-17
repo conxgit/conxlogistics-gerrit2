@@ -9,6 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.IEntityMetadataDAOService;
-import com.conx.logistics.mdm.domain.metadata.EntityMetadata;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 
 @Transactional
 @Repository
@@ -30,33 +34,39 @@ public class EntityMetadataDAOImpl implements IEntityMetadataDAOService {
     @PersistenceContext
     private EntityManager em;	
     
-    @Autowired
-    private IEntityMetadataDAOService countryDao;
-    
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
 
 	@Override
-	public EntityMetadata get(long id) {
-		return em.getReference(EntityMetadata.class, id);
+	public DefaultEntityMetadata get(long id) {
+		return em.getReference(DefaultEntityMetadata.class, id);
 	}    
 
 	@Override
-	public List<EntityMetadata> getAll() {
-		return em.createQuery("select o from com.conx.logistics.mdm.domain.metadata.EntityMetadata o record by o.id",EntityMetadata.class).getResultList();
+	public List<DefaultEntityMetadata> getAll() {
+		return em.createQuery("select o from com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata o record by o.id",DefaultEntityMetadata.class).getResultList();
 	}
 	
 	@Override
-	public EntityMetadata getByClass(Class entityClass) {
-		EntityMetadata record = null;
+	public DefaultEntityMetadata getByClass(Class entityClass) {
+		DefaultEntityMetadata record = null;
 		
 		try
 		{
-			TypedQuery<EntityMetadata> q = em.createQuery("select o from com.conx.logistics.mdm.domain.metadata.EntityMetadata o WHERE o.entityJavaSimpleType = :entityJavaSimpleType",EntityMetadata.class);
-			q.setParameter("entityJavaSimpleType", entityClass.getSimpleName());
-						
-			record = q.getSingleResult();
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+			CriteriaQuery<DefaultEntityMetadata> query = builder.createQuery(DefaultEntityMetadata.class);
+			Root<DefaultEntityMetadata> rootEntity = query.from(DefaultEntityMetadata.class);
+			ParameterExpression<String> p = builder.parameter(String.class);
+			query.select(rootEntity).where(builder.equal(rootEntity.get("entityJavaSimpleType"), p));
+
+			TypedQuery<DefaultEntityMetadata> typedQuery = em.createQuery(query);
+			typedQuery.setParameter(p, entityClass.getSimpleName());
+			
+			return typedQuery.getSingleResult();
+			//TypedQuery<DefaultEntityMetadata> q = em.createQuery("select DISTINCT  o from com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata o WHERE o.entityJavaSimpleType = :entityJavaSimpleType",DefaultEntityMetadata.class);
+			//q.setParameter("entityJavaSimpleType", entityClass.getSimpleName());
+			//record = q.getSingleResult();
 		}
 		catch(NoResultException e){}
 		catch(Exception e)
@@ -75,29 +85,29 @@ public class EntityMetadataDAOImpl implements IEntityMetadataDAOService {
 	}	
 
 	@Override
-	public EntityMetadata add(EntityMetadata record) {
+	public DefaultEntityMetadata add(DefaultEntityMetadata record) {
 		record = em.merge(record);
 		
 		return record;
 	}
 
 	@Override
-	public void delete(EntityMetadata record) {
+	public void delete(DefaultEntityMetadata record) {
 		em.remove(record);
 	}
 
 	@Override
-	public EntityMetadata update(EntityMetadata record) {
+	public DefaultEntityMetadata update(DefaultEntityMetadata record) {
 		return em.merge(record);
 	}
 
 
 	@Override
-	public EntityMetadata provide(Class entityClass) {
-		EntityMetadata existingRecord = getByClass(entityClass);
+	public DefaultEntityMetadata provide(Class entityClass) {
+		DefaultEntityMetadata existingRecord = getByClass(entityClass);
 		if (Validator.isNull(existingRecord))
 		{		
-			existingRecord = new EntityMetadata();
+			existingRecord = new DefaultEntityMetadata();
 			existingRecord.setDateCreated(new Date());
 			existingRecord.setDateLastUpdated(new Date());
 			existingRecord.setEntityJavaSimpleType(entityClass.getSimpleName());
@@ -109,7 +119,7 @@ public class EntityMetadataDAOImpl implements IEntityMetadataDAOService {
 	}
 
 	@Override
-	public EntityMetadata provide(EntityMetadata record) throws ClassNotFoundException {
+	public DefaultEntityMetadata provide(DefaultEntityMetadata record) throws ClassNotFoundException {
 		return provide(Class.forName(record.getEntityJavaType()));
 	}
 }

@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService;
 import com.conx.logistics.mdm.domain.constants.ReferenceNumberTypeCustomCONSTANTS;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 
 @Transactional
@@ -40,7 +45,7 @@ public class ReferenceNumberTypeDAOImpl implements IReferenceNumberTypeDAOServic
 
 	@Override
 	public List<ReferenceNumberType> getAll() {
-		return em.createQuery("select o from com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberType o record by o.id",ReferenceNumberType.class).getResultList();
+		return em.createQuery("select o from com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType o record by o.id",ReferenceNumberType.class).getResultList();
 	}
 	
 	@Override
@@ -49,10 +54,20 @@ public class ReferenceNumberTypeDAOImpl implements IReferenceNumberTypeDAOServic
 		
 		try
 		{
-			TypedQuery<ReferenceNumberType> q = em.createQuery("select o from com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberType o WHERE o.code = :code",ReferenceNumberType.class);
-			q.setParameter("code", code);
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+			CriteriaQuery<ReferenceNumberType> query = builder.createQuery(ReferenceNumberType.class);
+			Root<ReferenceNumberType> rootEntity = query.from(ReferenceNumberType.class);
+			ParameterExpression<String> p = builder.parameter(String.class);
+			query.select(rootEntity).where(builder.equal(rootEntity.get("code"), p));
+
+			TypedQuery<ReferenceNumberType> typedQuery = em.createQuery(query);
+			typedQuery.setParameter(p, code);
+			
+			org = typedQuery.getSingleResult();			
+			//TypedQuery<ReferenceNumberType> q = em.createQuery("select o from com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType o WHERE o.code = :code",ReferenceNumberType.class);
+			//q.setParameter("code", code);
 						
-			org = q.getSingleResult();
+			//org = q.getSingleResult();
 		}
 		catch(NoResultException e){}
 		catch(Exception e)

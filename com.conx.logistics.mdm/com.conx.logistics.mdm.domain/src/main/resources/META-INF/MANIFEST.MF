@@ -31,6 +31,4 @@ Bundle-Name: ConX Master Data Management Domain Model
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.mdm.domain
-Import-Package: org.springframework.format.annotation;version="[2.0.0,
- 3.0.0)"
 

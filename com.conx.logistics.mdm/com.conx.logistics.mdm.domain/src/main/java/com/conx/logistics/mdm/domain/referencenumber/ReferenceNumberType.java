@@ -11,21 +11,21 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
-import com.conx.logistics.mdm.domain.metadata.EntityMetadata;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="mdreferencenumbertype")
+@Table(name="mdmreferencenumbertype")
 public class ReferenceNumberType extends MultitenantBaseEntity implements Serializable {
-    @OneToOne(targetEntity = EntityMetadata.class)
+    @OneToOne(targetEntity = DefaultEntityMetadata.class)
     @JoinColumn
-    private EntityMetadata entityMetadata;
+    private DefaultEntityMetadata entityMetadata;
 
-	public EntityMetadata getEntityMetadata() {
+	public DefaultEntityMetadata getEntityMetadata() {
 		return entityMetadata;
 	}
 
-	public void setEntityMetadata(EntityMetadata entityMetadata) {
+	public void setEntityMetadata(DefaultEntityMetadata entityMetadata) {
 		this.entityMetadata = entityMetadata;
 	}
 }

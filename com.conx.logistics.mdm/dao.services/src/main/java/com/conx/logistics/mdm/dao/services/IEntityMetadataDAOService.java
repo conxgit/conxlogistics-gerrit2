@@ -2,22 +2,22 @@ package com.conx.logistics.mdm.dao.services;
 
 import java.util.List;
 
-import com.conx.logistics.mdm.domain.metadata.EntityMetadata;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 
 public interface IEntityMetadataDAOService {
-	public EntityMetadata get(long id);
+	public DefaultEntityMetadata get(long id);
 	
-	public List<EntityMetadata> getAll();
+	public List<DefaultEntityMetadata> getAll();
 	
-	public EntityMetadata getByClass(Class entityClass);	
+	public DefaultEntityMetadata getByClass(Class entityClass);	
 
-	public EntityMetadata add(EntityMetadata record);
+	public DefaultEntityMetadata add(DefaultEntityMetadata record);
 
-	public void delete(EntityMetadata record);
+	public void delete(DefaultEntityMetadata record);
 
-	public EntityMetadata update(EntityMetadata record);
+	public DefaultEntityMetadata update(DefaultEntityMetadata record);
 	
-	public EntityMetadata provide(EntityMetadata record) throws ClassNotFoundException;
+	public DefaultEntityMetadata provide(DefaultEntityMetadata record) throws ClassNotFoundException;
 	
-	public EntityMetadata provide(Class entityClass);	
+	public DefaultEntityMetadata provide(Class entityClass);	
 }

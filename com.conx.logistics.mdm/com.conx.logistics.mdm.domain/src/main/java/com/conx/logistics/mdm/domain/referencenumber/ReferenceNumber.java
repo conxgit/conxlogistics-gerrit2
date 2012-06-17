@@ -15,27 +15,27 @@ import javax.persistence.Table;
 
 
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
-import com.conx.logistics.mdm.domain.metadata.EntityMetadata;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="mdreferencenumber")
+@Table(name="mdmreferencenumber")
 public class ReferenceNumber extends MultitenantBaseEntity implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<ReferenceNumber> childReferenceNumbers = new java.util.HashSet<ReferenceNumber>();
 
-    @OneToOne(targetEntity = ReferenceNumber.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = ReferenceNumber.class)
     @JoinColumn
     private ReferenceNumber parentReferenceNumber;
 
-    @ManyToOne(targetEntity = ReferenceNumberType.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = ReferenceNumberType.class)
     @JoinColumn
     private ReferenceNumberType type;
     
-    @OneToOne(targetEntity = EntityMetadata.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = DefaultEntityMetadata.class)
     @JoinColumn
-    private EntityMetadata entityMetadata;      
+    private DefaultEntityMetadata entityMetadata;      
 
     private Long entityPK;
 

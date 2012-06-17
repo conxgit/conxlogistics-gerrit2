@@ -33,7 +33,7 @@ import com.conx.logistics.mdm.domain.commercialrecord.CommercialValue;
 import com.conx.logistics.mdm.domain.constants.CurrencyUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.currency.CurrencyUnit;
 import com.conx.logistics.mdm.domain.geolocation.Country;
-import com.conx.logistics.mdm.domain.metadata.EntityMetadata;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 import com.conx.logistics.mdm.domain.product.Commodity;
 import com.conx.logistics.mdm.domain.product.DimUnit;
 import com.conx.logistics.mdm.domain.product.PackUnit;
@@ -74,13 +74,6 @@ public class ProductDAOImpl implements IProductDAOService {
     
     @Autowired
     private IWeightUnitDAOService weightUnitDao;
-    
-    
-    @Autowired
-    private ICommodityDAOService commodityDao;    
-    
-    @Autowired
-    private IProductDAOService productDao;
     
     @Autowired
     private IProductTypeDAOService productTypeDao;   
@@ -210,18 +203,19 @@ public class ProductDAOImpl implements IProductDAOService {
     		prod.setCode(productCode);
     		prod.setName(productCode);
     		prod.setDescription(productDescription);
+    		prod = add(prod);
     		
     		/**
     		 * Commercial Record
     		 */
     		CommercialRecord cr = new CommercialRecord();
-    		EntityMetadata emd = entityMetadataDao.provide(Product.class);
+    		DefaultEntityMetadata emd = entityMetadataDao.provide(Product.class);
     		cr.setParentEntityMetadata(emd);
     		cr.setParentEntityId(prod.getId());
     		cr = commercialRecordDao.add(cr);
     		
-    		Country us = countryUnitDao.provide(CurrencyUnitCustomCONSTANTS.CURRENCY_USD_COUNTRY_CODE, CurrencyUnitCustomCONSTANTS.CURRENCY_USD_COUNTRY_NAME);
-    		CurrencyUnit curr = currencyUnitDao.provide(CurrencyUnitCustomCONSTANTS.CURRENCY_USD_CODE,CurrencyUnitCustomCONSTANTS.CURRENCY_USD_NAME,us);
+    		//Country us = countryUnitDao.provide(CurrencyUnitCustomCONSTANTS.CURRENCY_USD_COUNTRY_CODE, CurrencyUnitCustomCONSTANTS.CURRENCY_USD_COUNTRY_NAME);
+    		CurrencyUnit curr = currencyUnitDao.getByCode(CurrencyUnitCustomCONSTANTS.CURRENCY_USD_CODE);
     		CommercialValue cv = new CommercialValue();
     		cv.setCurrency(curr);
     		cv.setParentCommercialRecord(cr);
@@ -247,14 +241,14 @@ public class ProductDAOImpl implements IProductDAOService {
     		prod.setVolUnit(volUnit);
     		
     		//-- Commodity 
-    		Commodity commodity = commodityDao.provide(commodityCode, commodityCode);
-    		prod.setCommodity(commodity);
+    		//Commodity commodity = commodityDao.provide(commodityCode, commodityCode);
+    		//prod.setCommodity(commodity);
     		
     		//-- Product Type
     		ProductType pt = productTypeDao.getByCode(productTypeCode);
     		prod.setProductType(pt);
     		
-    		prod = productDao.add(prod);
+    		prod = add(prod);
     		
     	}
     	return prod;

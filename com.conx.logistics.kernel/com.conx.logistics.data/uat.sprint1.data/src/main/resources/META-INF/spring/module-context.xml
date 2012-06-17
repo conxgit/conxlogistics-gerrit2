@@ -18,8 +18,10 @@
 		<property name="addressDaoService" ref="addressDao"></property>
 		<property name="countryDaoService" ref="countryDao"></property>
 		<property name="countryStateDaoService" ref="countryStateDao"></property>
+		<property name="currencyUnitDaoService" ref="currencyUnitDao"></property>
 		<property name="dimUnitDaoService" ref="dimUnitDao"></property>
 		<property name="orgDaoService" ref="orgDao"></property>
+		<property name="packUnitDaoService" ref="packUnitDao"></property>
 		<property name="productDaoService" ref="productDao"></property>
 		<property name="productTypeDaoService" ref="productTypeDao"></property>
 		<property name="referenceNumberTypeDaoService" ref="referenceNumberTypeDao"></property>

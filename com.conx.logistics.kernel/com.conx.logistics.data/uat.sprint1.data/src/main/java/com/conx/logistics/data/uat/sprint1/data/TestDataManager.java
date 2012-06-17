@@ -18,6 +18,7 @@ import com.conx.logistics.mdm.dao.services.ICountryDAOService;
 import com.conx.logistics.mdm.dao.services.ICountryStateDAOService;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
 import com.conx.logistics.mdm.dao.services.IUnlocoDAOService;
+import com.conx.logistics.mdm.dao.services.currency.ICurrencyUnitDAOService;
 import com.conx.logistics.mdm.dao.services.product.IDimUnitDAOService;
 import com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService;
 import com.conx.logistics.mdm.dao.services.product.IProductDAOService;
@@ -53,6 +54,7 @@ public class TestDataManager {
 	private IWeightUnitDAOService weightUnitDaoService;
 	private IProductTypeDAOService productTypeDaoService;
 	private IProductDAOService productDaoService;
+	private ICurrencyUnitDAOService currencyUnitDAOService;
 	
 	private IReferenceNumberTypeDAOService referenceNumberTypeDaoService;
 	
@@ -93,6 +95,10 @@ public class TestDataManager {
 	public void setProductTypeDaoService(
 			IProductTypeDAOService productTypeDaoService) {
 		this.productTypeDaoService = productTypeDaoService;
+	}
+	public void setCurrencyUnitDaoService(
+			ICurrencyUnitDAOService currencyUnitDAOService) {
+		this.currencyUnitDAOService = currencyUnitDAOService;
 	}
 	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
 		this.conxlogisticsEMF = conxlogisticsEMF;
@@ -186,6 +192,7 @@ public class TestDataManager {
 				weightUnitDaoService.provideDefaults();
 				productTypeDaoService.provideDefaults();
 				referenceNumberTypeDaoService.provideDefaults();
+				currencyUnitDAOService.provideDefaults();
 				Product prd2 = productDaoService.provide("fooite1", "banana's",ProductTypeCustomCONSTANTS.TYPE_Food_Item,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				Product prd3 = productDaoService.provide("hazmat1", "Jet Fuel",ProductTypeCustomCONSTANTS.TYPE_Hazardous_Material,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				Product prd4 = productDaoService.provide("textil1", "Clothing",ProductTypeCustomCONSTANTS.TYPE_Textiles,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);

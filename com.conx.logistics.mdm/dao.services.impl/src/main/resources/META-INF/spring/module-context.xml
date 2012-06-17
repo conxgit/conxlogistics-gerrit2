@@ -63,13 +63,18 @@
 		PersistenceExceptions will be auto-translated due to @Repository.
 	-->
 	<bean id="addressDao" class="com.conx.logistics.mdm.dao.services.impl.AddressDAOImpl"/>
+	<bean id="commercialRecordDao" class="com.conx.logistics.mdm.dao.services.impl.CommercialRecordDAOImpl"/>
+	<bean id="commercialValueDao" class="com.conx.logistics.mdm.dao.services.impl.CommercialValueDAOImpl"/>
 	<bean id="countryDao" class="com.conx.logistics.mdm.dao.services.impl.CountryDAOImpl"/>
 	<bean id="countryStateDao" class="com.conx.logistics.mdm.dao.services.impl.CountryStateDAOImpl"/>
+	<bean id="currencyDao" class="com.conx.logistics.mdm.dao.services.impl.currency.CurrencyUnitDAOImpl"/>
 	<bean id="dimUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.DimUnitDAOImpl"/>	
+	<bean id="entityMetadataDao" class="com.conx.logistics.mdm.dao.services.impl.EntityMetadataDAOImpl"/>
 	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>
-	<bean id="referenceNumberTypeDao" class="com.conx.logistics.mdm.dao.services.impl.product.PackUnitDAOImpl"/>
-	<bean id="packUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductTypeDAOImpl"/>	
-	<bean id="productTypeDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberTypeDAOImpl"/>	
+	<bean id="referenceNumberTypeDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberTypeDAOImpl"/>
+	<bean id="packUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.PackUnitDAOImpl"/>	
+	<bean id="productDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductDAOImpl"/>	
+	<bean id="productTypeDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductTypeDAOImpl"/>	
 	<bean id="unlocoDao" class="com.conx.logistics.mdm.dao.services.impl.UnlocoDAOImpl"/>
 	<bean id="weightUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.WeightUnitDAOImpl"/>
 </beans>

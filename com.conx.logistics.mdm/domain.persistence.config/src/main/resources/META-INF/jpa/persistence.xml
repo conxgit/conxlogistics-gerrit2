@@ -8,12 +8,26 @@
 		<class>com.conx.logistics.mdm.domain.application.Application</class>
 		<class>com.conx.logistics.mdm.domain.application.Feature</class>	
 		<class>com.conx.logistics.mdm.domain.application.FeatureSet</class>	
+		<class>com.conx.logistics.mdm.domain.commercialrecord.CommercialRecord</class>
+		<class>com.conx.logistics.mdm.domain.commercialrecord.CommercialValue</class>
+		<class>com.conx.logistics.mdm.domain.currency.CurrencyUnit</class>
 		<class>com.conx.logistics.mdm.domain.geolocation.Address</class>
 		<class>com.conx.logistics.mdm.domain.geolocation.AddressCapability</class>
 		<class>com.conx.logistics.mdm.domain.geolocation.Country</class>
 		<class>com.conx.logistics.mdm.domain.geolocation.CountryState</class>
 		<class>com.conx.logistics.mdm.domain.geolocation.Unloco</class>
-		<class>com.conx.logistics.mdm.domain.organization.Organization</class>		
+		<class>com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata</class>
+		<class>com.conx.logistics.mdm.domain.organization.Organization</class>
+		<class>com.conx.logistics.mdm.domain.product.Commodity</class>	
+		<class>com.conx.logistics.mdm.domain.product.DimUnit</class>	
+		<class>com.conx.logistics.mdm.domain.product.PackUnit</class>
+		<class>com.conx.logistics.mdm.domain.product.Product</class>
+		<class>com.conx.logistics.mdm.domain.product.ProductType</class>
+		<class>com.conx.logistics.mdm.domain.product.ProductMaster</class>
+		<class>com.conx.logistics.mdm.domain.product.ProductUnitConversion</class>
+		<class>com.conx.logistics.mdm.domain.product.WeightUnit</class>
+		<class>com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber</class>
+		<class>com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType</class>
 		<class>com.conx.logistics.mdm.domain.task.TaskDefinition</class>	
 	</persistence-unit>
 </persistence>

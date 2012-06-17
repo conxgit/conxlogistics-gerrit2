@@ -12,16 +12,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
-import com.conx.logistics.mdm.domain.metadata.EntityMetadata;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Table(name="mdmcommercialrecord")
 public class CommercialRecord extends MultitenantBaseEntity {
-    @OneToOne(targetEntity = EntityMetadata.class)
+    @OneToOne(targetEntity = DefaultEntityMetadata.class)
     @JoinColumn
-    private EntityMetadata parentEntityMetadata; 
+    private DefaultEntityMetadata parentEntityMetadata; 
     
     private long parentEntityId;
     
@@ -43,11 +43,11 @@ public class CommercialRecord extends MultitenantBaseEntity {
 
     private Long ownerEntityId;
 
-	public EntityMetadata getParentEntityMetadata() {
+	public DefaultEntityMetadata getParentEntityMetadata() {
 		return parentEntityMetadata;
 	}
 
-	public void setParentEntityMetadata(EntityMetadata parentEntityMetadata) {
+	public void setParentEntityMetadata(DefaultEntityMetadata parentEntityMetadata) {
 		this.parentEntityMetadata = parentEntityMetadata;
 	}
 
