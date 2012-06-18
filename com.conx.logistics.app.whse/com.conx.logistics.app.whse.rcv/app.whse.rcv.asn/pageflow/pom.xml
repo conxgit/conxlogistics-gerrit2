@@ -22,6 +22,12 @@
 			<artifactId>vaadin</artifactId>
 			<version>6.7.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>
+				com.conx.logistics.thirdparty.vaadin-addon-jpacontainer-agpl-3.0
+			</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.pageflow.pages;ver
  sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.v
- aadin.ui"
+ aadin.data,com.vaadin.ui"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -11,6 +11,10 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
 Import-Package: com.conx.logistics.kernel.pageflow.services;version="1
- .0.0",com.vaadin.ui;version="[6.7.0,7.0.0)",org.vaadin.teemu.wizards;
- version="0.4.4"
+ .0.0",com.conx.logistics.mdm.domain.organization;version="1.0.0",com.
+ conx.logistics.mdm.domain.product;version="1.0.0",com.vaadin.addon.jp
+ acontainer;version="2.0.0",com.vaadin.data;version="[6.7.0,7.0.0)",co
+ m.vaadin.data.util;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.
+ 7.0,7.0.0)",javax.persistence;version="0",org.vaadin.teemu.wizards;ve
+ rsion="0.4.4"
 

@@ -2,6 +2,8 @@ package com.conx.logistics.kernel.pageflow.services;
 
 import java.util.Map;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.vaadin.teemu.wizards.WizardStep;
 
 import com.vaadin.data.Container;
@@ -11,6 +13,7 @@ public abstract class IPageFlowPage implements WizardStep {
 	public static final String PROCESS_ID = "PROCESS_ID"; // Process Id in BPMN
 	
 	private IPageFlowSession session;
+	protected EntityManagerFactory emf;
 	
 	public void bindSession(IPageFlowSession session) {
 		this.session = session;
@@ -20,6 +23,10 @@ public abstract class IPageFlowPage implements WizardStep {
 	
 	@Override
 	public abstract Component getContent();
+	
+	public void setEntityManagerFactory(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
 	
 	public abstract void setDataContainerMap(Map<String,Container> containerMap);
 	

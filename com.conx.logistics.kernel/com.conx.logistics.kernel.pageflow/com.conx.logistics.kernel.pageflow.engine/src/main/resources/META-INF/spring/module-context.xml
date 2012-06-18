@@ -12,5 +12,7 @@
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	<bean id="pageFlowImpl" class="com.conx.logistics.kernel.pageflow.engine.PageFlowEngineImpl" init-method="start" destroy-method="stop">
 		<property name="bpmService" ref="bpmService"/>
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="globalTransactionManager" ref="globalTransManager"></property>
 	</bean>
 </beans>

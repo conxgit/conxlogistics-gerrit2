@@ -8,10 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.bpm.console.client.model.ProcessInstanceRef;
-import org.jbpm.task.query.TaskSummary;
+import javax.persistence.EntityManagerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
@@ -23,6 +24,8 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	private IBPMService bpmService;
+	private EntityManagerFactory conxlogisticsEMF;
+	private PlatformTransactionManager globalTransactionManager;
 	private List<IPageFlowSession> sessions;
 	
 	public PageFlowEngineImpl() {
@@ -104,9 +107,26 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 
 	@Override
 	public IPageFlowSession startPageFlowSession(String userId, TaskDefinition td) {
-		ProcessInstanceRef pi = bpmService.newInstance(td.getProcessId());
-		IPageFlowSession session = new PageFlowSessionImpl(pi, userId, getPages(td.getProcessId()), this.bpmService);
+//		ProcessInstanceRef pi = bpmService.newInstance(td.getProcessId());
+		IPageFlowSession session = new PageFlowSessionImpl(null, userId, getPages(td.getProcessId()), this.bpmService, conxlogisticsEMF);
 		sessions.add(session);
 		return session;
+	}
+
+	public EntityManagerFactory getConxlogisticsEMF() {
+		return conxlogisticsEMF;
+	}
+
+	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
+		this.conxlogisticsEMF = conxlogisticsEMF;
+	}
+
+	public PlatformTransactionManager getGlobalTransactionManager() {
+		return globalTransactionManager;
+	}
+
+	public void setGlobalTransactionManager(
+			PlatformTransactionManager globalTransactionManager) {
+		this.globalTransactionManager = globalTransactionManager;
 	}	
 }

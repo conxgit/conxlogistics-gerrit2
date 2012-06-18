@@ -14,6 +14,18 @@ import com.conx.logistics.mdm.domain.geolocation.Address;
 public class Organization extends MultitenantBaseEntity {
     @ManyToOne(targetEntity = Address.class)
     private Address mainAddress;
+    @ManyToOne(targetEntity = Address.class)
+    private Address shippingAddress;
+    @ManyToOne(targetEntity = Address.class)
+    private Address receivingAddress;
+    @ManyToOne(targetEntity = Address.class)
+    private Address billingAddress;
+    @ManyToOne(targetEntity = Address.class)
+    private Address pickupAddress;
+    @ManyToOne(targetEntity = Address.class)
+    private Address deliveryAddress;
+    @ManyToOne(targetEntity = Address.class)
+    private Address adHocAddress;
 
 	public Address getMainAddress() {
 		return mainAddress;
@@ -21,5 +33,53 @@ public class Organization extends MultitenantBaseEntity {
 
 	public void setMainAddress(Address mainAddress) {
 		this.mainAddress = mainAddress;
+	}
+
+	public Address getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(Address shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public Address getReceivingAddress() {
+		return receivingAddress;
+	}
+
+	public void setReceivingAddress(Address receivingAddress) {
+		this.receivingAddress = receivingAddress;
+	}
+
+	public Address getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public Address getPickupAddress() {
+		return pickupAddress;
+	}
+
+	public void setPickupAddress(Address pickupAddress) {
+		this.pickupAddress = pickupAddress;
+	}
+
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	public Address getAdHocAddress() {
+		return adHocAddress;
+	}
+
+	public void setAdHocAddress(Address adHocAddress) {
+		this.adHocAddress = adHocAddress;
 	}	
 }

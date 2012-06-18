@@ -4,5 +4,11 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module PageFlow artifacts
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
 Import-Package: com.conx.logistics.kernel.pageflow.services;version="1.0.0",
   com.vaadin.ui;version="[6.7.0,7.0.0)",
-  org.vaadin.teemu.wizards;version="0.4.4"
+  com.vaadin.data;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util;version="[6.7.0,7.0.0)",
+  org.vaadin.teemu.wizards;version="0.4.4",
+  com.conx.logistics.mdm.domain.organization;version="1.0.0",
+  com.vaadin.addon.jpacontainer;version="2.0.0",
+  javax.persistence;version="0",
+  com.conx.logistics.mdm.domain.product;version="1.0.0"
 

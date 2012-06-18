@@ -1,14 +1,11 @@
 package com.conx.logistics.kernel.pageflow.engine;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
 
 import org.jboss.bpm.console.client.model.ProcessInstanceRef;
-import org.jbpm.task.query.TaskSummary;
-import org.jbpm.workflow.core.node.HumanTaskNode;
 import org.vaadin.teemu.wizards.Wizard;
 
 import com.conx.logistics.kernel.bpm.services.IBPMProcessInstance;
@@ -18,30 +15,33 @@ import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.vaadin.ui.Component;
 
 public class PageFlowSessionImpl implements IPageFlowSession {
-	private static final int WAIT_DELAY = 500;
+//	private static final int WAIT_DELAY = 500;
 	
-	private Map<String, IPageFlowPage> pages;
-	private ProcessInstanceRef bpmInstance;
+//	private Map<String, IPageFlowPage> pages;
+//	private ProcessInstanceRef bpmInstance;
 	private Wizard wizard;
-	private IBPMService bpmService;
-	private List<HumanTaskNode> tasks;
-	private HumanTaskNode currentTaskNode;
+//	private IBPMService bpmService;
+//	private List<HumanTaskNode> tasks;
+//	private HumanTaskNode currentTaskNode;
+	private List<IPageFlowPage> pageList;
+	private EntityManagerFactory emf;
 	
-	public PageFlowSessionImpl(ProcessInstanceRef processInstance, String userId, List<IPageFlowPage> pageList, IBPMService bpmService){
-		this.bpmService = bpmService;
-		this.bpmInstance = processInstance;
-		this.tasks = bpmService.getProcessHumanTaskNodes(processInstance.getDefinitionId());
+	public PageFlowSessionImpl(ProcessInstanceRef processInstance, String userId, List<IPageFlowPage> pageList, IBPMService bpmService, EntityManagerFactory emf) {
+//		this.bpmService = bpmService;
+//		this.bpmInstance = processInstance;
+//		this.tasks = bpmService.getProcessHumanTaskNodes(processInstance.getDefinitionId());
 //		tasks.get(0).get
-		registerPages(pageList);
-		
+//		registerPages(pageList);
+		this.emf = emf;
+		this.pageList = pageList;
 		try {
 			createWizard();
-			waitForNextTask();
+//			waitForNextTask();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	private TaskSummary waitForNextTask() throws Exception {
 		List<TaskSummary> tasks = new ArrayList<TaskSummary>();
 		int count = 0;
@@ -65,8 +65,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 	}
 	
 	private void showPage() {
-		//TODO implement
-	}
+	} */
 
 	@Override
 	public IBPMProcessInstance getBPMProcessInstance() {
@@ -75,7 +74,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 
 	@Override
 	public Collection<IPageFlowPage> getPages() {
-		return pages.values();
+		return pageList;
 	}
 
 	@Override
@@ -94,26 +93,22 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 	@Override
 	public void abort() {
 	}
-	
+	/*
 	private void registerPages(List<IPageFlowPage> pageList) {
 		pages = new HashMap<String, IPageFlowPage>();
 		for (IPageFlowPage page : pageList) {
 			pages.put(page.getTaskName(), page);
 		}
 	}
-	
+	*/
 	private void createWizard() throws Exception {
 		wizard = new Wizard();
 		wizard.setSizeFull();
-		if (pages != null) {
-			IPageFlowPage page;
-			for (HumanTaskNode node : tasks) {
-				page = pages.get(node.getName());
-				if (page != null) {
-					wizard.addStep(page);
-				} else {
-					throw new Exception("Invalid page list");
-				}
+		if (pageList != null) {
+			for (IPageFlowPage page : pageList) {
+				page.setEntityManagerFactory(emf);
+				page.getContent();
+				wizard.addStep(page);
 			}
 		}
 	}
