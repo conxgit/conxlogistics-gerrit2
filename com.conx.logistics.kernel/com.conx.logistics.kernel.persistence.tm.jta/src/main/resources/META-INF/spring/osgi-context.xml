@@ -29,7 +29,14 @@
 		<osgi:service-properties>
 		    <entry key="module" value="KERNEL.TM"/>
 		  </osgi:service-properties>	
-	</osgi:service>		
+	</osgi:service>	
+	
+	<!-- KERNEL.USER Transaction Manager -->
+	<osgi:service ref="BitronixTransactionManager" interface="javax.transaction.UserTransaction">
+		<osgi:service-properties>
+		    <entry key="module" value="KERNEL.UTM"/>
+		  </osgi:service-properties>	
+	</osgi:service>			
 	
 	<!-- JNDI Template -->
 	<osgi:service ref="tmJndiTemplate" interface="org.springframework.jndi.JndiTemplate"/>

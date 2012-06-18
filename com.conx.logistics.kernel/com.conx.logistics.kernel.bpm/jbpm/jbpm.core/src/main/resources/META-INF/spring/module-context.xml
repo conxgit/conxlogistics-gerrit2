@@ -14,6 +14,7 @@
 		<property name="jbpmEMF" ref="jbpmEMF"/>
 		<property name="jbpmTaskEMF" ref="jbpmTaskEMF"/>
 		<property name="globalTransactionManager" ref="globalTransactionManager"/>
+		<property name="globalUserTransaction" ref="globalUserTransaction"/>
 		<property name="globalJPATransManager" ref="globalJPATransManager"/>
 		<property name="jndiTemplate" ref="tmJndiTemplate"/>
 		<property name="localHumanTaskServer" ref="bpmTaskService"/>

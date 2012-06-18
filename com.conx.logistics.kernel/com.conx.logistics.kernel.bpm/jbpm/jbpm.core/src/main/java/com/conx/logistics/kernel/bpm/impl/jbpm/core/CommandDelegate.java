@@ -53,7 +53,7 @@ public class CommandDelegate {
 	private BPMServerImpl bpmService;
 
     /**
-     * The methods in this class are purposefully static and no instance of this class should be initialized.
+     * The methods in this class are purposefully and no instance of this class should be initialized.
      */
     public CommandDelegate(BPMServerImpl bpmService) {
     	this.bpmService = bpmService;
@@ -110,25 +110,25 @@ public class CommandDelegate {
      * This method is not supported by jBPM and will throw a {@link UnsupportedOperationException}.
      * @param processId
      */
-    public static void removeProcess(String processId) {
+    public void removeProcess(String processId) {
         throw new UnsupportedOperationException();
     }
     
-    public static ProcessInstanceLog getProcessInstanceLog(String processInstanceId) {
-        return JPAProcessInstanceDbLog.findProcessInstance(new Long(processInstanceId));
+    public ProcessInstanceLog getProcessInstanceLog(String processInstanceId) {
+        return this.bpmService.getJpaProcessInstanceDbLog().findProcessInstance(new Long(processInstanceId));
     }
 
-    public static List<ProcessInstanceLog> getProcessInstanceLogsByProcessId(String processId) {
-        return JPAProcessInstanceDbLog.findProcessInstances(processId);
+    public List<ProcessInstanceLog> getProcessInstanceLogsByProcessId(String processId) {
+        return this.bpmService.getJpaProcessInstanceDbLog().findProcessInstances(processId);
     }
     
-    public static List<ProcessInstanceLog> getActiveProcessInstanceLogsByProcessId(String processId) {
-        return JPAProcessInstanceDbLog.findActiveProcessInstances(processId);
+    public List<ProcessInstanceLog> getActiveProcessInstanceLogsByProcessId(String processId) {
+        return this.bpmService.getJpaProcessInstanceDbLog().findActiveProcessInstances(processId);
     }
     
     public ProcessInstanceLog startProcess(String processId, Map<String, Object> parameters) {
         long processInstanceId = getSession().startProcess(processId, parameters).getId();
-        return JPAProcessInstanceDbLog.findProcessInstance(processInstanceId);
+        return this.bpmService.getJpaProcessInstanceDbLog().findProcessInstance(processInstanceId);
     }
     
     public void abortProcessInstance(String processInstanceIdString) {
@@ -180,7 +180,7 @@ public class CommandDelegate {
 
         GenericCommand<Void> setProcInstVariablesCommand = new GenericCommand<Void>() {
             public Void execute(Context context) {
-                StatefulKnowledgeSession ksession = ((KnowledgeCommandContext) context).getStatefulKnowledgesession();
+                StatefulKnowledgeSession ksession = CommandDelegate.this.bpmService.getKsession();
                 ProcessInstance processInstance = ksession.getProcessInstance(new Long(processInstanceId));
                 if (processInstance != null) {
                     VariableScopeInstance variableScope = (VariableScopeInstance) 
@@ -232,7 +232,7 @@ public class CommandDelegate {
         return null;
     }
     
-    protected static Collection<NodeInstance> collectActiveNodeInstances(Collection<NodeInstance> activeNodes) {
+    protected Collection<NodeInstance> collectActiveNodeInstances(Collection<NodeInstance> activeNodes) {
         Collection<NodeInstance> activeNodesComposite = new ArrayList<NodeInstance>();
         for (NodeInstance nodeInstance : activeNodes) {
             if (nodeInstance instanceof CompositeNodeInstance) {

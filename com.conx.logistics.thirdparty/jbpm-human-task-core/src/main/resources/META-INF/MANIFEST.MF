@@ -58,15 +58,15 @@ Import-Package: javax.activation;version="0",javax.jms;version="0",jav
  ion="5.4.0.Final",org.drools.time;version="5.4.0.Final",org.drools.ut
  il;version="5.4.0.Final",org.hibernate;version="3.6.0.Final",org.hibe
  rnate.cfg;version="3.6.0.Final",org.hibernate.classic;version="3.6.0.
- Final",org.hibernate.usertype;version="3.6.0.Final",org.hornetq.api.c
- ore;version="0",org.hornetq.api.core.client;version="0",org.hornetq.c
- ore.config;version="0",org.hornetq.core.config.impl;version="0",org.h
- ornetq.core.remoting.impl.netty;version="0",org.hornetq.core.server;v
- ersion="0",org.jaxen;version="1.1.1",org.jaxen.jdom;version="1.1.1",o
- rg.jbpm.process.workitem.email;version="0";resolution:="optional",org
- .mvel2;version="2.1",org.mvel2.compiler;version="2.1",org.mvel2.integ
- ration;version="2.1",org.mvel2.integration.impl;version="2.1",org.mve
- l2.templates;version="2.1",org.osgi.framework;version="0",org.slf4j;v
- ersion="[1.6.1,1.7.0)"
+ Final",org.hibernate.proxy;version="3.6.0.Final",org.hibernate.userty
+ pe;version="3.6.0.Final",org.hornetq.api.core;version="0",org.hornetq
+ .api.core.client;version="0",org.hornetq.core.config;version="0",org.
+ hornetq.core.config.impl;version="0",org.hornetq.core.remoting.impl.n
+ etty;version="0",org.hornetq.core.server;version="0",org.jaxen;versio
+ n="1.1.1",org.jaxen.jdom;version="1.1.1",org.jbpm.process.workitem.em
+ ail;version="0";resolution:="optional",org.mvel2;version="2.1",org.mv
+ el2.compiler;version="2.1",org.mvel2.integration;version="2.1",org.mv
+ el2.integration.impl;version="2.1",org.mvel2.templates;version="2.1",
+ org.osgi.framework;version="0",org.slf4j;version="[1.6.1,1.7.0)"
 Archiver-Version: Plexus Archiver
 

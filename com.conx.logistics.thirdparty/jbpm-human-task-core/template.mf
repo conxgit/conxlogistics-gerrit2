@@ -48,6 +48,7 @@ Import-Package:
   org.apache.mina.transport.socket;version="2.0.2",
   org.apache.mina.transport.socket.nio;version="2.0.2",
   org.hibernate;version="3.6.0.Final",
+  org.hibernate.proxy;version="3.6.0.Final",
   org.hibernate.cfg;version="3.6.0.Final",
   org.hornetq.api.core;version="0",
   org.hornetq.api.core.client;version="0",
@@ -64,13 +65,7 @@ Import-Package:
   org.jaxen;version="1.1.1",
   org.jaxen.jdom;version="1.1.1",  
   org.osgi.framework;version="0",  
-  org.slf4j;version="[1.6.1,1.7.0)"  
-Excluded-Imports: com.google.protobuf,
-  org.jbpm.marshalling.impl,
-  org.jbpm.process.instance,
-  org.jbpm.process.instance.event,
-  org.jbpm.process.instance.impl,
-  org.slf4j.impl
+  org.slf4j;version="[1.6.1,1.7.0)"
 Excluded-Exports: gnu.trove,
   org.slf4j.*,
   org.slf4j.spi.*

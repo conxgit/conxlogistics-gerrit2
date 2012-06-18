@@ -1,16 +1,29 @@
 package com.conx.logistics.client.web.app.mock;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+
 import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.mdm.domain.task.TaskDefinition;
 import com.vaadin.Application;
 import com.vaadin.ui.Window;
 
+@Service
+@Transactional
 public class MockApp extends Application {
 	private static final long serialVersionUID = -5470222303880854277L;
 	private IPageFlowSession pfs;
 	private IPageFlowManager defaultPageFlowEngine;
 	
+	@Autowired
+	private PlatformTransactionManager globalJtaTransactionManager;
+
 	public void start() {
 	}
 	
@@ -26,7 +39,20 @@ public class MockApp extends Application {
 		td.setBpmn2ProcDefURL("");
 		td.setProcessId("whse.rcv.asn.CreateNewASNByOrg");
 		
-		pfs = defaultPageFlowEngine.startPageFlowSession("skeswa", td);
+		//DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		//def.setName("web.app.mock");
+		//def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		//TransactionStatus status = this.globalJtaTransactionManager.getTransaction(def);		
+		try
+		{
+			pfs = defaultPageFlowEngine.startPageFlowSession("skeswa", td);
+			//this.globalJtaTransactionManager.commit(status);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			//this.globalJtaTransactionManager.rollback(status);
+		}
 		
 		w.addComponent(pfs.getWizardComponent());
 		

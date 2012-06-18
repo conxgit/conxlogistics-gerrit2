@@ -24,7 +24,6 @@
 		class="bitronix.tm.TransactionManagerServices" depends-on="btmConfig"
 		destroy-method="shutdown" />
 
-
 	<!-- Spring JtaTransactionManager -->
 	<bean id="JtaTransactionManager"
 		class="org.springframework.transaction.jta.JtaTransactionManager">

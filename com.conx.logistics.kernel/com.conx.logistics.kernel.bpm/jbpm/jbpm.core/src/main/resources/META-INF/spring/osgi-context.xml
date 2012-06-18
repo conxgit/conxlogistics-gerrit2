@@ -15,6 +15,9 @@
 	<osgi:reference id="globalTransactionManager" interface="javax.transaction.TransactionManager" filter="(module=KERNEL.TM)">
 	</osgi:reference>	
 	
+	<osgi:reference id="globalUserTransaction" interface="javax.transaction.UserTransaction" filter="(module=KERNEL.UTM)">
+	</osgi:reference>		
+	
 	<osgi:reference id="jbpmEMF" interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL.SYSTEM.BPM)">
 	</osgi:reference>	
 	

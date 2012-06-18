@@ -18,6 +18,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import javax.naming.Context;
+import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.transaction.TransactionManager;
@@ -68,6 +69,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.conx.logistics.kernel.bpm.impl.jbpm.bam.CustomJPAProcessInstanceDbLog;
 import com.conx.logistics.kernel.bpm.impl.jbpm.core.HumanTaskService;
 import com.conx.logistics.kernel.bpm.impl.jbpm.core.ManagementFactory;
 import com.conx.logistics.kernel.bpm.impl.jbpm.core.ProcessGraphManagement;
@@ -77,6 +79,8 @@ import com.conx.logistics.kernel.bpm.impl.jbpm.core.TaskManagement;
 import com.conx.logistics.kernel.bpm.impl.jbpm.shared.utils.GuvnorConnectionUtils;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.bpm.services.IBPMTaskService;
+
+import bitronix.tm.jndi.BitronixInitialContextFactory;
 
 public class BPMServerImpl implements IBPMService {
 	private static final Logger logger = LoggerFactory
@@ -92,6 +96,7 @@ public class BPMServerImpl implements IBPMService {
 	private EntityManagerFactory jbpmTaskEMF;
 	
 	private TransactionManager globalTransactionManager;
+	private UserTransaction globalUserTransaction;
 	private PlatformTransactionManager globalJPATransManager;
 	private JndiTemplate jndiTemplate;
 
@@ -99,6 +104,8 @@ public class BPMServerImpl implements IBPMService {
 
 	private ProcessManagement processManager;
 	private ProcessGraphManagement processGraphManager;
+	
+	private CustomJPAProcessInstanceDbLog jpaProcessInstanceDbLog;
 	
 	private final Map<String, Map<String,WorkItemHandler>> wihCache = Collections
 			.synchronizedMap(new HashMap<String, Map<String,WorkItemHandler>>());
@@ -134,6 +141,10 @@ public class BPMServerImpl implements IBPMService {
 		this.globalTransactionManager = globalTransactionManager;
 	}
 
+	public void setGlobalUserTransaction(UserTransaction globalUserTransaction) {
+		this.globalUserTransaction = globalUserTransaction;
+	}
+
 	public void setGlobalJPATransManager(
 			PlatformTransactionManager globalJPATransManager) {
 		this.globalJPATransManager = globalJPATransManager;
@@ -165,6 +176,13 @@ public class BPMServerImpl implements IBPMService {
 		return jndiTemplate;
 	}
 	
+	public UserTransaction acquireUserTransaction() throws NamingException
+	{
+		 Context ctx = jndiTemplate.getContext();
+		 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
+		 return ut;
+	}
+	
 	public ManagementFactory getManagementFactory() {
 		return managementFactory;
 	}
@@ -182,6 +200,7 @@ public class BPMServerImpl implements IBPMService {
 		this.taskManager = this.managementFactory.createTaskManagement();
 		this.processGraphManager = new ProcessGraphManagement(this);
 		this.humanTaskManager = new HumanTaskService(this);
+		this.jpaProcessInstanceDbLog = new CustomJPAProcessInstanceDbLog(this.jbpmEMF,this.globalUserTransaction);
 
 		// try to restore known session id for reuse
 		ksessionId = getPersistedSessionId(jbpmProperties.getProperty(
@@ -562,8 +581,11 @@ public class BPMServerImpl implements IBPMService {
 			String stacktrace = sw.toString();
 			logger.error(stacktrace);			
 		}			
-	}    	
-	
+	}    
+
+	public CustomJPAProcessInstanceDbLog getJpaProcessInstanceDbLog() {
+		return jpaProcessInstanceDbLog;
+	}
 
 	/**
 	 * Process Management methods

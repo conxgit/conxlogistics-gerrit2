@@ -34,4 +34,10 @@
 			</plugin>
 		</plugins>
 	</build>  
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.btm</groupId>
+			<artifactId>btm</artifactId>
+		</dependency>
+	</dependencies>
 </project>
