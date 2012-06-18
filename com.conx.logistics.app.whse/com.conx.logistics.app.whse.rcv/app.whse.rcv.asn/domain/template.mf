@@ -3,11 +3,11 @@ Bundle-Version: 1.0.0
 Bundle-Name: ConX WMS RCV ASN Sub-Module Domain Model
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
-Import-Package:   javax.persistence;version="0",
-  com.conx.logistics.mdm.domain;version="1.0.0",
-  com.conx.logistics.mdm.domain.commercialrecord;version="1.0.0",
-  com.conx.logistics.mdm.domain.geolocation;version="1.0.0",
-  com.conx.logistics.mdm.domain.organization;version="1.0.0",
-  com.conx.logistics.mdm.domain.product;version="1.0.0",
-  org.springframework.format.annotation;version="[3.0,3.1)"
+Excluded-Imports:   javax.persistence,
+  com.conx.logistics.mdm.domain,
+  com.conx.logistics.mdm.domain.commercialrecord,
+  com.conx.logistics.mdm.domain.geolocation,
+  com.conx.logistics.mdm.domain.organization,
+  com.conx.logistics.mdm.domain.product,
+  org.springframework.format.annotation
 

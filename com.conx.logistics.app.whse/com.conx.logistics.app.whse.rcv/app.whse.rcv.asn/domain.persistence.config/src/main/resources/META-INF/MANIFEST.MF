@@ -12,6 +12,4 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain.persis
  tence.config
-Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
- 0.0"
 
