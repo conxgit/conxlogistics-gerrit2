@@ -1,8 +1,13 @@
 Manifest-Version: 1.0
+Build-Jdk: 1.6.0_23
+Built-By: sandile
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM Core
 Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
+ r
 Import-Package: com.conx.logistics.kernel.bpm.impl.jbpm.shared.utils;v
  ersion="1.0.0",com.conx.logistics.kernel.bpm.services;version="1.0.0"
  ,javax.persistence;version="0",javax.xml.stream;version="0",org.drool
@@ -34,6 +39,4 @@ Import-Package: com.conx.logistics.kernel.bpm.impl.jbpm.shared.utils;v
  ework.orm.jpa;version="[3.0, 3.1)",org.springframework.orm.jpa.vendor
  ;version="[3.0, 3.1)",org.springframework.transaction;version="[3.0,3
  .1)",org.springframework.transaction.support;version="[3.0,3.1)"
-Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
- r
 

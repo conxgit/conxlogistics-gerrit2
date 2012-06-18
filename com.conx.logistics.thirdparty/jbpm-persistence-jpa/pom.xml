@@ -142,7 +142,7 @@
 						<goals>
 							<goal>bundlor</goal>
 						</goals>
-						<phase>none</phase>
+						<phase>package</phase>
 						<configuration>
 							<inputPath>${project.build.directory}/${project.build.finalName}.${project.packaging}</inputPath>
 							<outputPath>${basedir}/src/main/resources</outputPath>

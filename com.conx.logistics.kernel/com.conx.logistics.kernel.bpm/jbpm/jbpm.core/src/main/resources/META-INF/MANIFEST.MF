@@ -12,8 +12,8 @@ Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm;version="1.0.0
  .bpm.console.server.integration,org.jbpm.process.audit,org.jbpm.task,
  org.jbpm.task.query,org.jbpm.task.service,org.springframework.transac
  tion"
-Build-Jdk: 1.6.0_29
-Built-By: dev
+Build-Jdk: 1.6.0_23
+Built-By: sandile
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM Core

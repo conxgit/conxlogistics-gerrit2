@@ -6,22 +6,28 @@ Export-Package: org.jbpm.persistence;version="5.3.0.Final";uses:="java
  uses:="javax.persistence,org.drools.common,org.drools.runtime,org.dro
  ols.runtime.process,org.hibernate,org.hibernate.usertype,org.jbpm.pro
  cess.instance,org.jbpm.process.instance.event"
-Built-By: dev
+Built-By: sandile
 Tool: Bundlor 1.0.0.RELEASE
 Created-By: Apache Maven
 Bundle-Version: 5.3.0.Final
-Build-Jdk: 1.6.0_29
+Build-Jdk: 1.6.0_23
 Bundle-ManifestVersion: 2
 Bundle-Description: jBPM Persistence
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-SymbolicName: org.jbpm.persistence
 Bundle-DocURL: http://www.jboss.org/
-Import-Package: org.drools.common;version="5.4.0.Final",org.drools.per
- sistence;version="5.4.0.Final",org.drools.persistence.jpa;version="5.
- 4.0.Final",org.drools.persistence.map;version="5.4.0.Final",org.drool
- s.runtime;version="5.4.0.Final",org.drools.runtime.process;version="5
- .4.0.Final",org.hibernate;version="3.6.0.Final",org.hibernate.usertyp
- e;version="3.6.0.Final",org.jbpm.process.instance;version="5.3.0.Final",
- org.jbpm.process.instance.event;version="5.3.0.Final"
+Import-Package: com.google.protobuf;version="2.4.1",javax.persistence;
+ version="0",org.drools;version="5.4.0.Final",org.drools.common;versio
+ n="5.4.0.Final",org.drools.definition.process;version="5.4.0.Final",o
+ rg.drools.impl;version="5.4.0.Final",org.drools.marshalling;version="
+ 5.4.0.Final",org.drools.marshalling.impl;version="5.4.0.Final",org.dr
+ ools.persistence;version="5.4.0.Final",org.drools.persistence.jpa;ver
+ sion="5.4.0.Final",org.drools.persistence.map;version="5.4.0.Final",o
+ rg.drools.runtime;version="5.4.0.Final",org.drools.runtime.process;ve
+ rsion="5.4.0.Final",org.hibernate;version="3.6.0.Final",org.hibernate
+ .usertype;version="3.6.0.Final",org.jbpm.marshalling.impl;version="5.
+ 3.0.Final",org.jbpm.process.instance;version="5.3.0.Final",org.jbpm.p
+ rocess.instance.event;version="5.3.0.Final",org.jbpm.process.instance
+ .impl;version="5.3.0.Final"
 Archiver-Version: Plexus Archiver
 

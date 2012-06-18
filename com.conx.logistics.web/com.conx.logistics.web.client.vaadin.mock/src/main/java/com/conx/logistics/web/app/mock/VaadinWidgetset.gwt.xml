@@ -17,6 +17,8 @@
     <!-- <set-property name="user.agent" value="gecko1_8"/> -->
 
 
+    
+
     <inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
 
     <inherits name="com.conx.logistics.client.web.app.mock.VaadinWidgetset" />

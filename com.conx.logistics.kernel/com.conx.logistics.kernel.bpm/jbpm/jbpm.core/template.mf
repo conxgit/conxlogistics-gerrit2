@@ -21,6 +21,7 @@ Import-Package:
  org.drools.reteoo;version="[5.4.0,5.5.0)",
  org.drools.runtime;version="[5.4.0,5.5.0)",
  org.drools.runtime.process;version="[5.4.0,5.5.0)",
+ org.drools.marshalling.impl;version="[5.4.0,5.5.0)",
  org.drools.definition.process;version="[5.4.0,5.5.0)",
  org.drools.persistence.jpa;version="[5.4.0,5.5.0)",
  org.drools.audit;version="[5.4.0,5.5.0)",

@@ -19,5 +19,9 @@
 
     
 
+    
+
+    <inherits name="com.conx.logistics.web.app.mock.VaadinWidgetset" />
+
     <inherits name="org.vaadin.teemu.wizards.WizardsforvaadinWidgetset" />
 </module>

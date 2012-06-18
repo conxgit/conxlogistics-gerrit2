@@ -22,15 +22,8 @@ Import-Package:
   org.hibernate;version="3.6.0.Final",
   org.hibernate.usertype;version="3.6.0.Final",
   org.hibernate.cfg;version="3.6.0.Final",
-  org.hibernate.classic;version="3.6.0.Final"
-Excluded-Imports: com.google.protobuf,
-  javax.persistence,
-  org.jbpm.marshalling.impl,
-  org.jbpm.process.instance,
-  org.jbpm.process.instance.event,
-  org.jbpm.process.instance.impl,
-  org.slf4j.impl,
-  org.slf4j
+  org.hibernate.classic;version="3.6.0.Final",
+  org.slf4j;version="1.6.1"
 Excluded-Exports: gnu.trove,
   org.slf4j.*,
   org.slf4j.spi.*

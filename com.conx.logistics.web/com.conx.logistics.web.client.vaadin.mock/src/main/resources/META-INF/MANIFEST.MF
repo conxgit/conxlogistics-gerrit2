@@ -39,5 +39,5 @@ Import-Package: com.vaadin;version="[6.7.4,7.0.0)",com.vaadin.addon.jp
  adin.mvp.presenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.
  annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="
  0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNA
- PSHOT",org.vaadin.teemu.wizards;version="0.4.4"
+ PSHOT"
 

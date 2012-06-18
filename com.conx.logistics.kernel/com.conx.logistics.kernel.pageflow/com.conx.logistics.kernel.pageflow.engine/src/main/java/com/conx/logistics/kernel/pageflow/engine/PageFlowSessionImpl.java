@@ -27,17 +27,18 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 	private List<HumanTaskNode> tasks;
 	private HumanTaskNode currentTaskNode;
 	
-	public PageFlowSessionImpl(ProcessInstanceRef processInstance, String userId, List<IPageFlowPage> pageList, IBPMService bpmService) {
+	public PageFlowSessionImpl(ProcessInstanceRef processInstance, String userId, List<IPageFlowPage> pageList, IBPMService bpmService){
 		this.bpmService = bpmService;
 		this.bpmInstance = processInstance;
 		this.tasks = bpmService.getProcessHumanTaskNodes(processInstance.getDefinitionId());
 //		tasks.get(0).get
 		registerPages(pageList);
-		createWizard();
+		
 		try {
+			createWizard();
 			waitForNextTask();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 	
@@ -101,7 +102,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 		}
 	}
 	
-	private void createWizard() {
+	private void createWizard() throws Exception {
 		wizard = new Wizard();
 		wizard.setSizeFull();
 		if (pages != null) {
@@ -111,7 +112,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 				if (page != null) {
 					wizard.addStep(page);
 				} else {
-					throw new InvocationFailureException("Invalid page list");
+					throw new Exception("Invalid page list");
 				}
 			}
 		}

@@ -13,19 +13,19 @@ Import-Package:
   org.drools.common;version="5.4.0.Final",
   org.drools.runtime;version="5.4.0.Final",
   org.drools.runtime.process;version="5.4.0.Final",
-  org.jbpm.process.instance;version="5.3.0.SNAPSHOT",
-  org.jbpm.process.instance.event;version="5.3.0.SNAPSHOT",  
+  org.jbpm.process.instance;version="5.3.0.Final",
+  org.jbpm.process.instance.event;version="5.3.0.Final",  
   org.hibernate;version="3.6.0.Final",
-  org.hibernate.usertype;version="3.6.0.Final"
-Excluded-Imports: com.google.protobuf,
-  javax.persistence,
-  org.drools,
-  org.drools.definition.process,
-  org.drools.impl,
-  org.drools.marshalling,
-  org.drools.marshalling.impl,  
-  org.jbpm.marshalling.impl,
-  org.jbpm.process.instance.impl
+  org.hibernate.usertype;version="3.6.0.Final",
+  org.drools.marshalling.impl;version="5.4.0.Final",
+  org.drools;version="5.4.0.Final",
+  org.drools.definition.process;version="5.4.0.Final",
+  org.drools.impl;version="5.4.0.Final",
+  org.drools.marshalling;version="5.4.0.Final",
+  org.jbpm.marshalling.impl;version="5.3.0.Final",
+  org.jbpm.process.instance.impl;version="5.3.0.Final",
+  com.google.protobuf;version="2.4.1",
+  javax.persistence;version="0"
 Excluded-Exports: gnu.trove
 
 

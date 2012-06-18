@@ -11,7 +11,7 @@ http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistenc
 		<!--
 		<jta-data-source>jdbc/testDS1</jta-data-source>
 		-->
-		<mapping-file>META-INF/orm.xml</mapping-file>
+		<mapping-file>META-INF/JBPMorm-JPA2.xml</mapping-file>
 
 		<class>org.drools.persistence.info.SessionInfo</class>
 		<class>org.jbpm.persistence.processinstance.ProcessInstanceInfo</class>

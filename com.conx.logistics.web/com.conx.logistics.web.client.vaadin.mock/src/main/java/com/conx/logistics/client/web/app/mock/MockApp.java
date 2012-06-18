@@ -8,9 +8,8 @@ import com.vaadin.ui.Window;
 
 public class MockApp extends Application {
 	private static final long serialVersionUID = -5470222303880854277L;
-	
-	private IPageFlowManager defaultPageFlowEngine;
 	private IPageFlowSession pfs;
+	private IPageFlowManager defaultPageFlowEngine;
 	
 	public void start() {
 	}
@@ -39,8 +38,6 @@ public class MockApp extends Application {
 	}
 
 	public void setDefaultPageFlowEngine(IPageFlowManager defaultPageFlowEngine) {
-		if (this.defaultPageFlowEngine == null) {
-			this.defaultPageFlowEngine = defaultPageFlowEngine;
-		}
+		this.defaultPageFlowEngine = defaultPageFlowEngine;
 	}
 }

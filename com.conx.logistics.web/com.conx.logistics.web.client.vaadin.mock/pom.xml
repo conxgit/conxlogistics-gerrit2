@@ -50,7 +50,7 @@
 			<groupId>com.conx.logistics</groupId>
 			<artifactId>com.conx.logistics.kernel.pageflow.engine</artifactId>
 			<version>${project.version}</version>
-		</dependency>	
+		</dependency>
 		<!-- GWT/Vaadin -->
         <dependency>
             <groupId>com.google.gwt</groupId>

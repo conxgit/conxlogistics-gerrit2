@@ -12,16 +12,16 @@ Bundle-Description: jBPM BAM
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-SymbolicName: org.jbpm.bam
 Bundle-DocURL: http://www.jboss.org/
-Import-Package: javax.naming;version="0",javax.transaction;version="0"
- ,org.drools;version="5.4.0.Final",org.drools.audit;version="5.4.0.Fin
- al",org.drools.audit.event;version="5.4.0.Final",org.drools.common;ve
- rsion="5.4.0.Final",org.drools.event;version="5.4.0.Final",org.drools
- .impl;version="5.4.0.Final",org.drools.persistence;version="5.4.0.Fin
- al",org.drools.persistence.jpa;version="5.4.0.Final",org.drools.persi
- stence.map;version="5.4.0.Final",org.drools.runtime;version="5.4.0.Fi
- nal",org.drools.runtime.process;version="5.4.0.Final",org.hibernate;v
- ersion="3.6.0.Final",org.hibernate.cfg;version="3.6.0.Final",org.hibe
- rnate.classic;version="3.6.0.Final",org.hibernate.usertype;version="3
- .6.0.Final"
+Import-Package: javax.naming;version="0",javax.persistence;version="0"
+ ,javax.transaction;version="0",org.drools;version="5.4.0.Final",org.d
+ rools.audit;version="5.4.0.Final",org.drools.audit.event;version="5.4
+ .0.Final",org.drools.common;version="5.4.0.Final",org.drools.event;ve
+ rsion="5.4.0.Final",org.drools.impl;version="5.4.0.Final",org.drools.
+ persistence;version="5.4.0.Final",org.drools.persistence.jpa;version=
+ "5.4.0.Final",org.drools.persistence.map;version="5.4.0.Final",org.dr
+ ools.runtime;version="5.4.0.Final",org.drools.runtime.process;version
+ ="5.4.0.Final",org.hibernate;version="3.6.0.Final",org.hibernate.cfg;
+ version="3.6.0.Final",org.hibernate.classic;version="3.6.0.Final",org
+ .hibernate.usertype;version="3.6.0.Final",org.slf4j;version="1.6.1"
 Archiver-Version: Plexus Archiver
 
