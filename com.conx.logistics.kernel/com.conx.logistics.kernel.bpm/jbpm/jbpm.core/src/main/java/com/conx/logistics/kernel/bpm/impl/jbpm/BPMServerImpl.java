@@ -501,7 +501,7 @@ public class BPMServerImpl implements IBPMService {
 	public void registerWIH(
 			WorkItemHandler wih, Map properties) {
 		try {
-			String workItemId = (String)properties.get("WORKITEM_ID");
+			String workItemId = (String)properties.get("TASK_NAME");
 			
 			ksession.getWorkItemManager().registerWorkItemHandler(workItemId, wih);
 			
@@ -538,7 +538,7 @@ public class BPMServerImpl implements IBPMService {
 		try
 		{
 			String processId = (String)properties.get("PROCESS_ID");
-			String workItemId = (String)properties.get("WORKITEM_ID");
+			String workItemId = (String)properties.get("TASK_NAME");
 			
 			logger.debug("unregisterWIH("+processId+")");	
 			Map<String,WorkItemHandler> list = this.wihCache.get(processId);
