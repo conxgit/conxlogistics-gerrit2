@@ -1,20 +1,12 @@
 Manifest-Version: 1.0
-Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.per
- sistence;version="1.0.0";uses:="javax.transaction,org.hibernate,org.h
- ibernate.transaction"
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a
  pplication"
-Build-Jdk: 1.6.0_29
-Built-By: dev
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM TaskServer Persistence in Hibernate
 Bundle-ManifestVersion: 2
-Created-By: Maven Integration for Eclipse
-Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
- r.persistence
 Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.journa
  l;version="[2.1.0,2.2.0)",bitronix.tm.recovery;version="[2.1.0,2.2.0)
  ",bitronix.tm.resource;version="[2.1.0,2.2.0)",bitronix.tm.resource.j
@@ -42,4 +34,6 @@ Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.journa
  on="[3.0, 3.1)",org.springframework.transaction.annotation;version="[
  3.0, 3.1)",org.springframework.transaction.aspectj;version="[3.0, 3.1
  )",org.springframework.transaction.jta;version="[3.0, 3.1)"
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
+ r.persistence
 

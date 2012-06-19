@@ -1,9 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.client.web.app.servlet;version="1.0
- .0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.vaadin,com.vaa
- din.terminal.gwt.server,javax.servlet,javax.servlet.http,org.springfr
- amework.beans.factory.annotation,org.springframework.stereotype,org.s
- pringframework.transaction.annotation"
+ .0";uses:="com.vaadin,com.vaadin.terminal.gwt.server,javax.servlet,ja
+ vax.servlet.http,org.springframework.beans.factory.annotation,org.spr
+ ingframework.stereotype,org.springframework.transaction.annotation"
 Import-Bundle: com.springsource.org.apache.taglibs.standard;version="[
  1.1.2,1.3)"
 Bundle-ClassPath: .,WEB-INF/classes

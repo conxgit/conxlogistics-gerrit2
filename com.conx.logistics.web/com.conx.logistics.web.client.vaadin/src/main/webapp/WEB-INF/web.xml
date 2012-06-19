@@ -24,7 +24,7 @@
 		<servlet-class>com.conx.logistics.client.web.app.servlet.MainAppServlet</servlet-class>	
         <init-param>
             <param-name>widgetset</param-name>
-            <param-value>com.conx.logistics.client.web.app.VaadinWidgetset</param-value>
+            <param-value>com.conx.logistics.web.app.VaadinWidgetset</param-value>
         </init-param>	
 	</servlet>
 	<servlet-mapping>

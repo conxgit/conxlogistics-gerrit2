@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.system.dao.impl;version="1.0
  .0";uses:="com.conx.logistics.kernel.system.dao.services.application,
- javax.persistence,org.springframework.beans.factory.annotation,org.sp
- ringframework.stereotype,org.springframework.transaction.annotation"
+ com.conx.logistics.mdm.domain.application,javax.persistence,org.sprin
+ gframework.beans.factory.annotation,org.springframework.stereotype,or
+ g.springframework.transaction.annotation"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev

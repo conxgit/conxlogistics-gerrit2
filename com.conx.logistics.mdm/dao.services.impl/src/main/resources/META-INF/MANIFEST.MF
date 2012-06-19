@@ -10,17 +10,21 @@ Export-Package: com.conx.logistics.mdm.dao.services.impl;version="1.0.
  ogistics.mdm.domain.currency,com.conx.logistics.mdm.domain.geolocatio
  n,javax.persistence,org.springframework.beans.factory.annotation,org.
  springframework.stereotype,org.springframework.transaction.annotation
- ",com.conx.logistics.mdm.dao.services.impl.product;version="1.0.0";us
- es:="com.conx.logistics.mdm.dao.services.product,com.conx.logistics.m
- dm.domain.product,javax.persistence,org.springframework.beans.factory
- .annotation,org.springframework.stereotype,org.springframework.transa
- ction.annotation",com.conx.logistics.mdm.dao.services.impl.referencen
- umber;version="1.0.0";uses:="com.conx.logistics.mdm.dao.services.refe
- rencenumber,com.conx.logistics.mdm.domain.referencenumber,javax.persi
- stence,org.springframework.stereotype,org.springframework.transaction
- .annotation",org.springframework.dao.support.custom;version="1.0.0";u
- ses:="org.springframework.dao,org.springframework.dao.support,org.spr
- ingframework.orm.jpa"
+ ",com.conx.logistics.mdm.dao.services.impl.documentlibrary;version="1
+ .0.0";uses:="com.conx.logistics.mdm.dao.services.documentlibrary,com.
+ conx.logistics.mdm.domain.documentlibrary,javax.persistence,org.sprin
+ gframework.stereotype,org.springframework.transaction.annotation",com
+ .conx.logistics.mdm.dao.services.impl.product;version="1.0.0";uses:="
+ com.conx.logistics.mdm.dao.services.product,com.conx.logistics.mdm.do
+ main.product,javax.persistence,org.springframework.beans.factory.anno
+ tation,org.springframework.stereotype,org.springframework.transaction
+ .annotation",com.conx.logistics.mdm.dao.services.impl.referencenumber
+ ;version="1.0.0";uses:="com.conx.logistics.mdm.dao.services.reference
+ number,com.conx.logistics.mdm.domain.referencenumber,javax.persistenc
+ e,org.springframework.stereotype,org.springframework.transaction.anno
+ tation",org.springframework.dao.support.custom;version="1.0.0";uses:=
+ "org.springframework.dao,org.springframework.dao.support,org.springfr
+ amework.orm.jpa"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -33,25 +37,27 @@ Bundle-SymbolicName: com.conx.logistics.mdm.dao.services.impl
 Import-Package: com.conx.logistics.common.utils;version="1.0.0",com.co
  nx.logistics.mdm.dao.services;version="1.0.0",com.conx.logistics.mdm.
  dao.services.currency;version="1.0.0",com.conx.logistics.mdm.dao.serv
- ices.product;version="1.0.0",com.conx.logistics.mdm.dao.services.refe
- rencenumber;version="1.0.0",com.conx.logistics.mdm.domain.application
- ;version="1.0.0",com.conx.logistics.mdm.domain.commercialrecord;versi
- on="1.0.0",com.conx.logistics.mdm.domain.currency;version="1.0.0",com
- .conx.logistics.mdm.domain.geolocation;version="1.0.0",com.conx.logis
- tics.mdm.domain.metadata;version="1.0.0",com.conx.logistics.mdm.domai
- n.organization;version="1.0.0",com.conx.logistics.mdm.domain.product;
- version="1.0.0",com.conx.logistics.mdm.domain.referencenumber;version
- ="1.0.0",com.conx.logistics.mdm.domain.task;version="1.0.0",javax.per
- sistence;version="0",javax.persistence.criteria;version="0",javax.tra
- nsaction;version="0",org.hibernate.hql.ast;version="3.6.0.Final",org.
- slf4j;version="[1.6.1,1.7.0)",org.springframework.beans.factory.annot
- ation;version="[3.0,3.1)",org.springframework.dao;version="[3.0,3.1)"
- ,org.springframework.dao.annotation;version="[3.0,3.1)",org.springfra
- mework.dao.support;version="[3.0,3.1)",org.springframework.orm.jpa;ve
- rsion="[3.0,3.1)",org.springframework.orm.jpa.vendor;version="[3.0,3.
- 1)",org.springframework.stereotype;version="[3.0,3.1)",org.springfram
- ework.transaction;version="[3.0,3.1)",org.springframework.transaction
- .annotation;version="[3.0,3.1)",org.springframework.transaction.aspec
- tj;version="[3.0,3.1)",org.springframework.transaction.jta;version="[
- 3.0,3.1)"
+ ices.documentlibrary;version="1.0.0",com.conx.logistics.mdm.dao.servi
+ ces.product;version="1.0.0",com.conx.logistics.mdm.dao.services.refer
+ encenumber;version="1.0.0",com.conx.logistics.mdm.domain.application;
+ version="1.0.0",com.conx.logistics.mdm.domain.commercialrecord;versio
+ n="1.0.0",com.conx.logistics.mdm.domain.currency;version="1.0.0",com.
+ conx.logistics.mdm.domain.documentlibrary;version="1.0.0",com.conx.lo
+ gistics.mdm.domain.geolocation;version="1.0.0",com.conx.logistics.mdm
+ .domain.metadata;version="1.0.0",com.conx.logistics.mdm.domain.organi
+ zation;version="1.0.0",com.conx.logistics.mdm.domain.product;version=
+ "1.0.0",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0"
+ ,com.conx.logistics.mdm.domain.task;version="1.0.0",javax.persistence
+ ;version="0",javax.persistence.criteria;version="0",javax.transaction
+ ;version="0",org.hibernate.hql.ast;version="3.6.0.Final",org.slf4j;ve
+ rsion="[1.6.1,1.7.0)",org.springframework.beans.factory.annotation;ve
+ rsion="[3.0,3.1)",org.springframework.dao;version="[3.0,3.1)",org.spr
+ ingframework.dao.annotation;version="[3.0,3.1)",org.springframework.d
+ ao.support;version="[3.0,3.1)",org.springframework.orm.jpa;version="[
+ 3.0,3.1)",org.springframework.orm.jpa.vendor;version="[3.0,3.1)",org.
+ springframework.stereotype;version="[3.0,3.1)",org.springframework.tr
+ ansaction;version="[3.0,3.1)",org.springframework.transaction.annotat
+ ion;version="[3.0,3.1)",org.springframework.transaction.aspectj;versi
+ on="[3.0,3.1)",org.springframework.transaction.jta;version="[3.0,3.1)
+ "
 

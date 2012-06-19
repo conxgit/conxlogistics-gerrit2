@@ -1,6 +1,7 @@
 package com.conx.logistics.mdm.domain.application;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class Feature extends BaseEntity {
     protected Feature parentFeature;   
     
     @OneToMany(targetEntity = Feature.class, mappedBy="parentFeature", cascade=CascadeType.ALL)
-    private List<Feature> childFeatures;  
+    private Set<Feature> childFeatures= new java.util.HashSet<Feature>();  
     
     protected boolean featureSet = false;
     
@@ -86,11 +87,11 @@ public class Feature extends BaseEntity {
 		this.parentApplication = parentApplication;
 	} 
 	
-	public List<Feature> getChildFeatures() {
+	public Set<Feature> getChildFeatures() {
 		return childFeatures;
 	}
 
-	public void setChildFeatures(List<Feature> childFeatures) {
+	public void setChildFeatures(Set<Feature> childFeatures) {
 		this.childFeatures = childFeatures;
 	}
 

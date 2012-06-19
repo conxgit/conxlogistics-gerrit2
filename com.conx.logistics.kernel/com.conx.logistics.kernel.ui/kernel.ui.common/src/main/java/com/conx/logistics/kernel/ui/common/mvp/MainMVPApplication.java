@@ -46,12 +46,7 @@ public class MainMVPApplication extends Application {
 	/** Main presenter */
 	private IPresenter<?, ? extends EventBus> mainPresenter;
 	private IUIContributionManager uiContributionManager;
-	
-	/** EntityManagerFactories */
-	private final Map<String,EntityManagerFactory> entityManagerFactories = Collections
-			.synchronizedMap(new HashMap<String,EntityManagerFactory>());
 
-	
 	private IApplicationDAOService applicationDAOService;
 	
 	private boolean appServiceInititialized = false;
@@ -113,36 +108,7 @@ public class MainMVPApplication extends Application {
 		return this.presenterFactory;
 	}
 
-	public void bindEntitymanagerFactory(
-			EntityManagerFactory entityManagerFactory, Map properties) {
-		String code = (String)properties.get("module");
-		logger.info("bindEntitymanagerFactory("+code+")");		
-		if (Validator.isNotNull(code))
-		{
-			logger.info("bindEntitymanagerFactory("+code+") successful");
-			entityManagerFactories.put(code,entityManagerFactory);
-		}
-		else
-		{
-			logger.error("entityManagerFactories has no module factory associated with ("+code+"). Deregistration failed.");
-		}
-	}
 
-	public void unbindEntitymanagerFactory(
-			EntityManagerFactory entityManagerFactory, Map properties) {
-		String code = (String)properties.get("module");
-		logger.info("unbindEntitymanagerFactory("+code+")");	
-		if (Validator.isNotNull(code))
-		{
-			logger.info("unbindEntitymanagerFactory("+code+") successful");
-			entityManagerFactories.remove(code);
-		}
-		else
-		{
-			logger.warn("entityManagerFactories has no module factory associated with ("+code+"). Deregistration failed.");
-		}
-	}
-	
 	public void bindViewContribution(IViewContribution viewContribution,
 			Map properties) {
 		String code = (String)properties.get(IUIContributionManager.UISERVICE_PROPERTY_CODE);
@@ -312,12 +278,6 @@ public class MainMVPApplication extends Application {
 		return uiContributionManager;
 	}	
 	
-	public EntityManagerFactory getEntityManagerFactoryByModule(String module)
-	{
-		return entityManagerFactories.get(module);
-	}
-	
-
 	public EntityManagerFactory getKernelSystemEntityManagerFactory() {
 		return kernelSystemEntityManagerFactory;
 	}

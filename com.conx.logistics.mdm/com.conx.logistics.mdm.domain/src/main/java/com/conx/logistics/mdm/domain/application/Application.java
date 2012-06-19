@@ -1,5 +1,6 @@
 package com.conx.logistics.mdm.domain.application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ public class Application extends BaseEntity {
     
 
     @OneToMany(targetEntity = Feature.class, mappedBy="parentApplication", cascade=CascadeType.ALL)
-    private List<Feature> features;  
+    private List<Feature> features = new ArrayList<Feature>();  
 
     public Application()
     {

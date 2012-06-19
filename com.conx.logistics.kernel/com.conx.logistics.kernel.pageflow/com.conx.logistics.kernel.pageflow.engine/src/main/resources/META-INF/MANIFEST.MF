@@ -2,7 +2,8 @@ Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.pageflow.engine;version="1.0
  .0";uses:="com.conx.logistics.kernel.bpm.services,com.conx.logistics.
  kernel.pageflow.services,com.conx.logistics.mdm.domain.task,com.vaadi
- n.ui,org.jboss.bpm.console.client.model"
+ n.ui,javax.persistence,org.jboss.bpm.console.client.model,org.springf
+ ramework.transaction"
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel PageFlow Engine
@@ -10,10 +11,12 @@ Bundle-ManifestVersion: 2
 Import-Package: com.conx.logistics.kernel.bpm.impl.jbpm.core;version="
  1.0.0",com.conx.logistics.kernel.bpm.services;version="1.0.0",com.con
  x.logistics.kernel.pageflow.services;version="1.0.0",com.conx.logisti
- cs.mdm.domain.task;version="1.0.0",com.vaadin;version="[6.7.0,7.0.0)"
- ,com.vaadin.ui;version="[6.7.0,7.0.0)",org.jboss.bpm.console.client.m
- odel;version="2.3.2.SNAPSHOT",org.jbpm.task.query;version="[5.3.0,5.4
- .0)",org.jbpm.workflow.core.node;version="[5.3.0,5.4.0)",org.slf4j;ve
- rsion="[1.6.0,1.7.0)",org.vaadin.teemu.wizards;version="0.4.4"
+ cs.mdm.domain.geolocation;version="1.0.0",com.conx.logistics.mdm.doma
+ in.task;version="1.0.0",com.vaadin;version="[6.7.0,7.0.0)",com.vaadin
+ .ui;version="[6.7.0,7.0.0)",javax.persistence;version="0",org.jboss.b
+ pm.console.client.model;version="2.3.2.SNAPSHOT",org.jbpm.task.query;
+ version="[5.3.0,5.4.0)",org.jbpm.workflow.core.node;version="[5.3.0,5
+ .4.0)",org.slf4j;version="[1.6.0,1.7.0)",org.springframework.transact
+ ion;version="[3.0,3.1)",org.vaadin.teemu.wizards;version="0.4.4"
 Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.engine
 

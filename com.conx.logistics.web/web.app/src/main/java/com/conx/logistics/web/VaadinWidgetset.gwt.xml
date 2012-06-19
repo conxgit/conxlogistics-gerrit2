@@ -1,0 +1,17 @@
+<module>
+	<!-- Inherit the default widget set -->
+	<inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
+
+	<inherits name="org.vaadin.weelayout.WeelayoutWidgetset" />
+
+	<inherits name="org.vaadin.csstools.CssToolsWidgetset" />
+
+    <inherits name="org.vaadin.peter.contextmenu.ContextmenuWidgetset" />
+    
+	<!-- The default theme of this widget set -->
+	<stylesheet src="styles.css" />
+
+	<set-property name="user.agent" value="gecko1_8" />
+
+    <inherits name="com.vaadin.addon.toolbar.widgetset.ToolbarWidgetset" />
+</module>

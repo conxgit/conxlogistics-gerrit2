@@ -8,20 +8,22 @@ Export-Package: com.conx.logistics.mdm.domain;version="1.0.0";uses:="j
  cs.mdm.domain.constants;version="1.0.0",com.conx.logistics.mdm.domain
  .currency;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.co
  nx.logistics.mdm.domain.geolocation,javax.persistence",com.conx.logis
- tics.mdm.domain.geolocation;version="1.0.0";uses:="com.conx.logistics
- .mdm.domain,javax.persistence",com.conx.logistics.mdm.domain.metadata
- ;version="1.0.0";uses:="javax.persistence,org.springframework.format.
- annotation",com.conx.logistics.mdm.domain.organization;version="1.0.0
- ";uses:="com.conx.logistics.mdm.domain,com.conx.logistics.mdm.domain.
- geolocation,javax.persistence",com.conx.logistics.mdm.domain.product;
- version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.conx.logisti
- cs.mdm.domain.commercialrecord,com.conx.logistics.mdm.domain.organiza
- tion,javax.persistence",com.conx.logistics.mdm.domain.referencenumber
- ;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.conx.logist
- ics.mdm.domain.metadata,javax.persistence",com.conx.logistics.mdm.dom
- ain.task;version="1.0.0";uses:="com.conx.logistics.mdm.domain,com.con
- x.logistics.mdm.domain.application,javax.persistence,javax.validation
- .constraints"
+ tics.mdm.domain.documentlibrary;version="1.0.0";uses:="com.conx.logis
+ tics.mdm.domain,javax.persistence",com.conx.logistics.mdm.domain.geol
+ ocation;version="1.0.0";uses:="com.conx.logistics.mdm.domain,javax.pe
+ rsistence",com.conx.logistics.mdm.domain.metadata;version="1.0.0";use
+ s:="javax.persistence,org.springframework.format.annotation",com.conx
+ .logistics.mdm.domain.organization;version="1.0.0";uses:="com.conx.lo
+ gistics.mdm.domain,com.conx.logistics.mdm.domain.geolocation,com.conx
+ .logistics.mdm.domain.metadata,javax.persistence",com.conx.logistics.
+ mdm.domain.product;version="1.0.0";uses:="com.conx.logistics.mdm.doma
+ in,com.conx.logistics.mdm.domain.commercialrecord,com.conx.logistics.
+ mdm.domain.organization,javax.persistence",com.conx.logistics.mdm.dom
+ ain.referencenumber;version="1.0.0";uses:="com.conx.logistics.mdm.dom
+ ain,com.conx.logistics.mdm.domain.metadata,javax.persistence",com.con
+ x.logistics.mdm.domain.task;version="1.0.0";uses:="com.conx.logistics
+ .mdm.domain,com.conx.logistics.mdm.domain.application,javax.persisten
+ ce,javax.validation.constraints"
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Build-Jdk: 1.6.0_29
 Built-By: dev

@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.data.uat.sprint1.data;version="1.0.
  0";uses:="com.conx.logistics.mdm.dao.services,com.conx.logistics.mdm.
- dao.services.currency,com.conx.logistics.mdm.dao.services.product,com
- .conx.logistics.mdm.dao.services.referencenumber,javax.persistence,or
- g.springframework.transaction"
+ dao.services.currency,com.conx.logistics.mdm.dao.services.documentlib
+ rary,com.conx.logistics.mdm.dao.services.product,com.conx.logistics.m
+ dm.dao.services.referencenumber,javax.persistence,org.springframework
+ .transaction"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev
@@ -15,15 +16,16 @@ Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.data.uat.sprint1.data
 Import-Package: com.conx.logistics.mdm.dao.services;version="1.0.0",co
  m.conx.logistics.mdm.dao.services.currency;version="1.0.0",com.conx.l
- ogistics.mdm.dao.services.product;version="1.0.0",com.conx.logistics.
- mdm.dao.services.referencenumber;version="1.0.0",com.conx.logistics.m
- dm.domain.application;version="1.0.0",com.conx.logistics.mdm.domain.c
- ommercialrecord;version="1.0.0",com.conx.logistics.mdm.domain.constan
- ts;version="1.0.0",com.conx.logistics.mdm.domain.geolocation;version=
- "1.0.0",com.conx.logistics.mdm.domain.organization;version="1.0.0",co
- m.conx.logistics.mdm.domain.product;version="1.0.0",com.conx.logistic
- s.mdm.domain.task;version="1.0.0",javax.persistence;version="0",org.s
- lf4j;version="[1.6.1,1.7.0)",org.springframework.transaction;version=
- "[3.0,3.1)",org.springframework.transaction.support;version="[3.0,3.1
- )"
+ ogistics.mdm.dao.services.documentlibrary;version="1.0.0",com.conx.lo
+ gistics.mdm.dao.services.product;version="1.0.0",com.conx.logistics.m
+ dm.dao.services.referencenumber;version="1.0.0",com.conx.logistics.md
+ m.domain.application;version="1.0.0",com.conx.logistics.mdm.domain.co
+ mmercialrecord;version="1.0.0",com.conx.logistics.mdm.domain.constant
+ s;version="1.0.0",com.conx.logistics.mdm.domain.geolocation;version="
+ 1.0.0",com.conx.logistics.mdm.domain.metadata;version="1.0.0",com.con
+ x.logistics.mdm.domain.organization;version="1.0.0",com.conx.logistic
+ s.mdm.domain.product;version="1.0.0",com.conx.logistics.mdm.domain.ta
+ sk;version="1.0.0",javax.persistence;version="0",org.slf4j;version="[
+ 1.6.1,1.7.0)",org.springframework.transaction;version="[3.0,3.1)",org
+ .springframework.transaction.support;version="[3.0,3.1)"
 

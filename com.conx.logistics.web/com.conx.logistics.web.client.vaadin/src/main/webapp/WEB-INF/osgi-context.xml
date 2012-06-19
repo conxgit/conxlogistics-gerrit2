@@ -12,7 +12,7 @@
 	</osgi:reference>
 	<tx:annotation-driven transaction-manager="kernelSystemTransManager"/>
 	
-	<osgi:reference id="kernelSystemEntityManagerFactory" interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL.TM.JTA)">
+	<osgi:reference id="kernelSystemEntityManagerFactory" interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL)">
 		<osgi:listener ref="mainApp" bind-method="bindKernelSystemEntityManagerFactory" unbind-method="unbindKernelSystemEntityManagerFactory"/>
 	</osgi:reference>	
 	
