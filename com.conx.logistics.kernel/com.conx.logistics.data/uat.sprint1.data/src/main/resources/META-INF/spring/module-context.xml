@@ -16,10 +16,13 @@
 		<property name="globalTransactionManager" ref="globalTransManager"></property>
 				
 		<property name="addressDaoService" ref="addressDao"></property>
+		<property name="contactDAOService" ref="contactDao"></property>
 		<property name="countryDaoService" ref="countryDao"></property>
 		<property name="countryStateDaoService" ref="countryStateDao"></property>
 		<property name="currencyUnitDaoService" ref="currencyUnitDao"></property>
 		<property name="dimUnitDaoService" ref="dimUnitDao"></property>
+		<property name="docTypeDOAService" ref="docTypeDao"></property>
+		<property name="entityMetadataDAOService" ref="entityMetadataDao"></property>
 		<property name="orgDaoService" ref="orgDao"></property>
 		<property name="packUnitDaoService" ref="packUnitDao"></property>
 		<property name="productDaoService" ref="productDao"></property>
@@ -28,6 +31,4 @@
 		<property name="unlocoDaoService" ref="unlocoDao"></property>
 		<property name="weightUnitDaoService" ref="weightUnitDao"></property>
 	</bean>
-	
-	
 </beans>

@@ -15,5 +15,8 @@
   	<!-- <module>com.conx.logistics.kernel.system.dao.jpa.eclipselink</module>-->
   	<module>com.conx.logistics.kernel.system.dao.datasource</module>
   	<module>kernel.system.ui</module>
+  	<module>
+  		com.conx.logistics.kernel.system.dao.jpa.persistence
+  	</module>
   </modules>
 </project>

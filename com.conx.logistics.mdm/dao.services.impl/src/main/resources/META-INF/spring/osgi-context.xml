@@ -21,10 +21,12 @@
 	<osgi:service ref="addressDao" interface="com.conx.logistics.mdm.dao.services.IAddressDAOService"/>
 	<osgi:service ref="commercialRecordDao" interface="com.conx.logistics.mdm.dao.services.ICommercialRecordDAOService"/>
 	<osgi:service ref="commercialValueDao" interface="com.conx.logistics.mdm.dao.services.ICommercialValueDAOService"/>
+	<osgi:service ref="contactDao" interface="com.conx.logistics.mdm.dao.services.IContactDAOService"/>
 	<osgi:service ref="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>
 	<osgi:service ref="countryStateDao" interface="com.conx.logistics.mdm.dao.services.ICountryStateDAOService"/>
 	<osgi:service ref="currencyDao" interface="com.conx.logistics.mdm.dao.services.currency.ICurrencyUnitDAOService"/>
 	<osgi:service ref="dimUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IDimUnitDAOService"/>
+	<osgi:service ref="docTypeDao" interface="com.conx.logistics.mdm.dao.services.documentlibrary.IDocTypeDAOService"/>
 	<osgi:service ref="entityMetadataDao" interface="com.conx.logistics.mdm.dao.services.IEntityMetadataDAOService"/>
 	<osgi:service ref="orgDao" interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
 	<osgi:service ref="packUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService"/>

@@ -65,10 +65,12 @@
 	<bean id="addressDao" class="com.conx.logistics.mdm.dao.services.impl.AddressDAOImpl"/>
 	<bean id="commercialRecordDao" class="com.conx.logistics.mdm.dao.services.impl.CommercialRecordDAOImpl"/>
 	<bean id="commercialValueDao" class="com.conx.logistics.mdm.dao.services.impl.CommercialValueDAOImpl"/>
+	<bean id="contactDao" class="com.conx.logistics.mdm.dao.services.impl.ContactDAOImpl"/>
 	<bean id="countryDao" class="com.conx.logistics.mdm.dao.services.impl.CountryDAOImpl"/>
 	<bean id="countryStateDao" class="com.conx.logistics.mdm.dao.services.impl.CountryStateDAOImpl"/>
 	<bean id="currencyDao" class="com.conx.logistics.mdm.dao.services.impl.currency.CurrencyUnitDAOImpl"/>
 	<bean id="dimUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.DimUnitDAOImpl"/>	
+	<bean id="docTypeDao" class="com.conx.logistics.mdm.dao.services.impl.documentlibrary.DocTypeDAOImpl"/>	
 	<bean id="entityMetadataDao" class="com.conx.logistics.mdm.dao.services.impl.EntityMetadataDAOImpl"/>
 	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>
 	<bean id="referenceNumberTypeDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberTypeDAOImpl"/>

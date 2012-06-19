@@ -16,6 +16,8 @@ Import-Package:
   com.conx.logistics.mdm.dao.services.product;version="1.0.0",
   com.conx.logistics.mdm.dao.services.referencenumber;version="1.0.0",
   com.conx.logistics.mdm.dao.services.currency;version="1.0.0",
+  com.conx.logistics.mdm.dao.services.documentlibrary;version="1.0.0",
+  com.conx.logistics.mdm.domain.metadata;version="1.0.0",  
   javax.persistence;version="0",
   org.slf4j;version="[1.6.1,1.7.0)",
   org.springframework.transaction;version="[3.0,3.1)",

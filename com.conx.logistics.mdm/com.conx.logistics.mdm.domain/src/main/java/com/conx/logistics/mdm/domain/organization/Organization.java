@@ -27,6 +27,9 @@ public class Organization extends MultitenantBaseEntity {
     @ManyToOne(targetEntity = Address.class)
     private Address adHocAddress;
 
+    @ManyToOne(targetEntity = Contact.class)
+    private Contact mainContact;    
+
 	public Address getMainAddress() {
 		return mainAddress;
 	}
@@ -81,5 +84,13 @@ public class Organization extends MultitenantBaseEntity {
 
 	public void setAdHocAddress(Address adHocAddress) {
 		this.adHocAddress = adHocAddress;
+	}
+
+	public Contact getMainContact() {
+		return mainContact;
+	}
+
+	public void setMainContact(Contact mainContact) {
+		this.mainContact = mainContact;
 	}	
 }
