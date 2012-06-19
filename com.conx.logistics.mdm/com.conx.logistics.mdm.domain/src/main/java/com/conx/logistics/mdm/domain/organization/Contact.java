@@ -19,7 +19,7 @@ import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="refaddress")
+@Table(name="refcontact")
 public class Contact extends BaseEntity implements Serializable {
     private String firstName;
 

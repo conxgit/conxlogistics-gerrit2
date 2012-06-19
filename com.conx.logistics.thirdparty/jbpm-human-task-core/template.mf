@@ -29,6 +29,7 @@ Import-Package:
   org.hibernate.usertype;version="3.6.0.Final",
   org.hibernate.cfg;version="3.6.0.Final",
   org.hibernate.classic;version="3.6.0.Final",
+  javassist.util.proxy;version="3.12.0.GA",
   javax.activation;version="0",
   javax.jms;version="0",
   javax.mail;version="0",

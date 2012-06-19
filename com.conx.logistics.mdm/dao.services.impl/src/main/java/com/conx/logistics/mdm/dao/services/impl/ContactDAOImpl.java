@@ -151,9 +151,11 @@ public class ContactDAOImpl implements IContactDAOService {
 		Contact res = null;
 		res = getByMetadataAndId(entityMetadata,entityPK);
 		if (Validator.isNull(res)) {
-			res.setCode(record.getFirstName()+"."+record.getLastName());
-			res.setEntityMetadata(entityMetadata);
-			res = add(res);
+			record.setCode(record.getFirstName()+"."+record.getLastName());
+			record.setEntityMetadata(entityMetadata);
+			record.setEntityMetadata(entityMetadata);
+			record.setEntityPK(entityPK);
+			res = add(record);
 		}
 		
 		return res;

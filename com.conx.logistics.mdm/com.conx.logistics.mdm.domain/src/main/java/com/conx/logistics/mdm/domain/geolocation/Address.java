@@ -52,10 +52,6 @@ public class Address extends BaseEntity implements Serializable {
 
     private Long ownerEntityId;
 
-    private boolean isPrimary;
-
-    private boolean isMailing;
-
 	public Set<AddressCapability> getAddressCapabilities() {
 		return addressCapabilities;
 	}
@@ -158,21 +154,5 @@ public class Address extends BaseEntity implements Serializable {
 
 	public void setOwnerEntityId(Long ownerEntityId) {
 		this.ownerEntityId = ownerEntityId;
-	}
-
-	public boolean isPrimary() {
-		return isPrimary;
-	}
-
-	public void setPrimary(boolean isPrimary) {
-		this.isPrimary = isPrimary;
-	}
-
-	public boolean isMailing() {
-		return isMailing;
-	}
-
-	public void setMailing(boolean isMailing) {
-		this.isMailing = isMailing;
 	}
 }
