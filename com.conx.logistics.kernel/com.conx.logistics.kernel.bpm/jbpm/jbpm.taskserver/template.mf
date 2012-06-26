@@ -5,6 +5,17 @@ Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver
 Import-Package: 
  com.conx.logistics.kernel.bpm.impl.jbpm.shared.utils;version="1.0.0",
  com.conx.logistics.kernel.bpm.services;version="1.0.0",
+ org.jbpm.task.service.local;version="1.0.0",
+ bitronix.tm.journal;version="[2.1.0,2.2.0)",
+ bitronix.tm.utils;version="[2.1.0,2.2.0)",
+ bitronix.tm;version="[2.1.0,2.2.0)",
+ bitronix.tm.recovery;version="[2.1.0,2.2.0)",
+ bitronix.tm.resource;version="[2.1.0,2.2.0)",
+ bitronix.tm.resource.jdbc;version="[2.1.0,2.2.0)",
+ bitronix.tm.timer;version="[2.1.0,2.2.0)",
+ bitronix.tm.twopc.executor;version="[2.1.0,2.2.0)",
+ bitronix.tm.jndi;version="[2.1.0,2.2.0)",
+ org.apache.naming.java;version="0",
  org.drools;version="[5.4.0,5.5.0)",
  org.drools.agent;version="[5.4.0,5.5.0)",
  org.drools.builder ;version="[5.4.0,5.5.0)",
@@ -21,6 +32,8 @@ Import-Package:
  org.drools.runtime;version="[5.4.0,5.5.0)",
  org.drools.runtime.process;version="[5.4.0,5.5.0)",
  org.drools.definition.process;version="[5.4.0,5.5.0)",
+ org.drools.persistence;version="[5.4.0,5.5.0)",
+ org.drools.persistence.jta;version="[5.4.0,5.5.0)",
  org.jbpm.bpmn2;version="[5.3.0,5.4.0)",
  org.jbpm.marshalling.impl;version="[5.3.0,5.4.0)",
  org.jbpm.process.audit;version="[5.3.0,5.4.0)",
@@ -39,14 +52,26 @@ Import-Package:
  org.jbpm.workflow.instance.node;version="[5.3.0,5.4.0)",
  org.jbpm.process.workitem.email;version="[5.3.0,5.4.0)",
  org.jbpm.task.event;version="[5.3.0,5.4.0)",
+ org.jbpm.eventmessaging;version="[5.3.0,5.4.0)",
+ org.jbpm.task.admin;version="[5.3.0,5.4.0)",
+ org.jbpm.task.query;version="[5.3.0,5.4.0)",
+ org.jbpm.task.service.persistence;version="[5.3.0,5.4.0)",
  org.jboss.bpm.console.server.integration;version="2.3.2.SNAPSHOT",
  org.jboss.errai.bus.server.annotations;version="1.1",
  org.springframework.transaction;version="[3.0,3.1)",
  org.springframework.transaction.support;version="[3.0,3.1)",
  org.springframework.orm.jpa;version="[3.0, 3.1)",
- org.springframework.orm.jpa.vendor;version="[3.0, 3.1)", 
+ org.springframework.orm.jpa.vendor;version="[3.0, 3.1)",
+ org.springframework.jndi;version="[3.0, 3.1)",
  javax.persistence;version="0",
  javax.xml.stream;version="0",
- org.slf4j;version="[1.6.1,1.7.0)"
+ org.slf4j;version="[1.6.1,1.7.0)",
+ org.mvel2;version="2.1.0"
 Excluded-Exports: 
- com.conx.logistics.kernel.bpm.impl.jbpm.taskserver
+ com.conx.logistics.kernel.bpm.impl.jbpm.taskserver,
+ org.jbpm.task.service,
+ org.jbpm.task.service.persistence,
+ org.mvel2
+Private-Package: 
+ org.jbpm.task.service,
+ org.jbpm.task.service.persistence 

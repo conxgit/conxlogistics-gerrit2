@@ -11,5 +11,7 @@
   <modules>
   	<module>com.conx.logistics.kernel.pageflow.services</module>
   	<!-- <module>com.conx.logistics.kernel.pageflow.engine</module> -->
+  	<module>pageflow.ui</module>
+  	<module>pageflow.tests</module>
   </modules>
 </project>

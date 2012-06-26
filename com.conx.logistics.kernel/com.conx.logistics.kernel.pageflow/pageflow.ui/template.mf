@@ -1,0 +1,36 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX Kernel PageFlow UI
+Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.ui
+Import-Package: com.conx.logistics.kernel.pageflow.services;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.common;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.common.data.container;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.common.mvp;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.common.mvp.view.feature;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.common.ui.feature;version="[1.0.0,2.0.0)",
+  com.conx.logistics.kernel.ui.common.ui.form.field;version="[1.0.0,2.0.0)",  
+  com.conx.logistics.mdm.domain.application;version="[1.0.0,2.0.0)",
+  com.conx.logistics.mdm.domain.task;version="[1.0.0,2.0.0)",
+  com.vaadin;version="[6.7.0,7.0.0)",
+  com.vaadin.event;version="[6.7.0,7.0.0)",
+  com.vaadin.ui;version="[6.7.0,7.0.0)",
+  com.vaadin.data;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util.filter;version="[6.7.0,7.0.0)",
+  com.vaadin.addon.jpacontainer;version="2.0.0",
+  com.vaadin.addon.jpacontainer.provider;version="2.0.0",
+  org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.presenter.annotation;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT",
+  org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT",  
+  javax.persistence;version="[1.0.0, 3.0.0)",
+  javax.persistence.criteria;version="[1.0.0, 3.0.0)",  
+  org.slf4j;version="[1.6.1,1.6.1]"
+Export-Template: com.conx.logistics.kernel.system.ui.*,
+  com.conx.logistics.kernel.system.ui.navigation.*,
+  com.conx.logistics.kernel.system.ui.view.*
+

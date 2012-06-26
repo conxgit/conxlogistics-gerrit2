@@ -1,6 +1,7 @@
 package com.conx.logistics.kernel.ui.common.mvp.view.feature;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.presenter.IPresenter;
@@ -11,6 +12,8 @@ import com.conx.logistics.kernel.ui.common.ActiveLink;
 import com.conx.logistics.kernel.ui.common.mvp.LaunchableViewEventBus;
 import com.conx.logistics.kernel.ui.common.mvp.MainMVPApplication;
 import com.conx.logistics.kernel.ui.service.IUIContributionManager;
+import com.conx.logistics.kernel.ui.service.contribution.IActionContribution;
+import com.conx.logistics.kernel.ui.service.contribution.ITaskActionContribution;
 import com.conx.logistics.kernel.ui.service.contribution.IViewContribution;
 import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.Application;
@@ -103,8 +106,35 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 	}
 
 	private Component getComponentFor(Feature f) {
-		if (Validator.isNotNull(f.getCode())) {
-			Component ex = exampleCache.get(f);
+		Component ex = null;
+		if (f.isTaskFeature())
+		{
+			IUIContributionManager cm = this.app.getUiContributionManager();
+			String viewCode = f.getExternalCode();
+			String processId = f.getCode();
+
+			ITaskActionContribution ac = (ITaskActionContribution)app.getActionContributionByCode(viewCode);	
+			
+			if (   viewCode != null 
+				&& processId != null
+				&& ac != null)
+			{
+				Map<String,Object> props = new HashMap<String,Object>();
+				props.put("userId","john");
+				props.put("processId",processId);
+				
+				try
+				{
+					ex = ac.execute(this.app, props);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		else if (Validator.isNotNull(f.getCode())) {
+			ex = exampleCache.get(f);
 			if (ex == null) {
 				IUIContributionManager cm = this.app.getUiContributionManager();
 				String viewCode = f.getCode();
@@ -126,9 +156,9 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 					exampleCache.put(f,ex);
 				}
 			}
-			return ex;
+
 		}
-		return null;
+		return ex;
 	}
 
 }

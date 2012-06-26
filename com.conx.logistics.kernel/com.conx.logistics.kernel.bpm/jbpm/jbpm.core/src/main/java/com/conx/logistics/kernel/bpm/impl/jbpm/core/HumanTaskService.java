@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -28,9 +29,9 @@ import org.jbpm.task.Reassignment;
 import org.jbpm.task.Status;
 import org.jbpm.task.Task;
 import org.jbpm.task.TaskData;
+import org.jbpm.task.TaskService;
 import org.jbpm.task.User;
 import org.jbpm.task.query.TaskSummary;
-import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.TaskServiceSession;
 import org.mvel2.MVEL;
 import org.mvel2.ParserContext;
@@ -41,18 +42,32 @@ import com.conx.logistics.kernel.bpm.services.IBPMService;
 
 public class HumanTaskService {
 	
-	private static TaskService INSTANCE;
+	private static org.jbpm.task.TaskService INSTANCE;
+	private static org.jbpm.task.service.TaskService LOCALINSTANCE;
 	private BPMServerImpl bpmService;
 	
 	public HumanTaskService(BPMServerImpl bpmService) {
 		// TODO Auto-generated constructor stub
 		this.bpmService = bpmService;
 	}
+	
+	public org.jbpm.task.service.TaskService getLocalService() {
+		if (LOCALINSTANCE == null) {
+	        try {
+	        	LOCALINSTANCE = bpmService.getLocalHumanTaskServer().getTaskService();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return LOCALINSTANCE;
+	}
 
 	public TaskService getService() {
 		if (INSTANCE == null) {
-			INSTANCE = this.bpmService.getLocalHumanTaskServer().createHumanTaskService();
-			/*
+			INSTANCE = TaskClientFactory.newInstance(this.bpmService.getJbpmProperties(), null);
+	        /*
+			//INSTANCE = this.bpmService.getLocalHumanTaskServer().createHumanTaskService();
 	        EntityManagerFactory emf = bpmService.getJbpmTaskEMF();
 	        TaskService taskService = new TaskService(emf, SystemEventListenerFactory.getSystemEventListener());
 	        TaskServiceSession taskSession = taskService.createSession();

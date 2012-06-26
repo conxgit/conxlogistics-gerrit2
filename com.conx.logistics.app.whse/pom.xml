@@ -12,5 +12,7 @@
   <description>com.conx.logistics.app.whse</description>
   <modules>
   	<module>com.conx.logistics.app.whse.rcv</module>
+  	<module>whse.ui</module>
+  	<module>whse.dao.services</module>
   </modules>
 </project>

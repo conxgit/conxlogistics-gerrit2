@@ -22,4 +22,6 @@
 	<!-- Subscribe to BpmServerInstance -->
 	<osgi:reference id="bpmService" cardinality="1..1" interface="com.conx.logistics.kernel.bpm.services.IBPMService">
 	</osgi:reference>
+	<osgi:reference id="tmJndiTemplate" interface="org.springframework.jndi.JndiTemplate">
+	</osgi:reference>		
 </beans>

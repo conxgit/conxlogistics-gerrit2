@@ -34,11 +34,15 @@ import javax.security.jacc.PolicyContext;
 
 import org.jboss.bpm.console.client.model.TaskRef;
 import org.jbpm.task.AccessType;
+import org.jbpm.task.Content;
+import org.jbpm.task.OrganizationalEntity;
 import org.jbpm.task.Status;
 import org.jbpm.task.Task;
 import org.jbpm.task.TaskService;
+import org.jbpm.task.User;
 import org.jbpm.task.query.TaskSummary;
 import org.jbpm.task.service.ContentData;
+import org.jbpm.task.service.local.LocalTaskService;
 
 import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
 
@@ -46,7 +50,7 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	
 	private static int clientCounter = 0;
     
-	private TaskService service;
+	private LocalTaskService service;
 	private BPMServerImpl bpmService;
 	
 	public TaskManagement (BPMServerImpl bpmService) {
@@ -55,14 +59,18 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	}
 	
 	public void connect() {
-	    if (service == null) {
-	        
-    	    Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
-            service = TaskClientFactory.newInstance(jbpmConsoleProperties, "org.jbpm.integration.console.TaskManagement"+clientCounter);
-            clientCounter++;
-	    }
-		
+    	service = new LocalTaskService(bpmService.getLocalHumanTaskServer().getTaskService());
+	    //Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
+        //service = TaskClientFactory.newInstance(jbpmConsoleProperties, "org.jbpm.integration.console.TaskManagement"+clientCounter);
+        clientCounter++;
 	}
+	
+	public Content getTaskContent(long taskId) {
+		connect();
+		Content content = service.getContent(taskId);
+		
+        return content;
+	}	
 	
 	public TaskRef getTaskById(long taskId) {
 		connect();
@@ -94,6 +102,22 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 		connect();
 		service.claimNextAvailable(userId, "");
 	}
+	
+	public void nominateTask(long taskId, User nominnee) {
+		connect();
+		Task task = service.getTask(taskId);
+		List<OrganizationalEntity> potentialOwners = new ArrayList<OrganizationalEntity>();
+		potentialOwners.add(nominnee);
+		service.nominate(task.getId(),"Administrator",potentialOwners);
+	}	
+	
+	public void startTask(long taskId, String userId) {
+		connect();
+		Task task = service.getTask(taskId);
+		service.start(task.getId(), userId);
+	}		
+	
+	
 	
 	public void completeTask(long taskId, Map data, String userId) {
 		connect();

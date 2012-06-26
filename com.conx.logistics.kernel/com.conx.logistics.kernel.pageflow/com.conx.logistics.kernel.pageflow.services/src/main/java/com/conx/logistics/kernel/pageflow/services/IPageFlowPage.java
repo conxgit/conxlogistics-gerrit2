@@ -11,6 +11,7 @@ import com.vaadin.ui.Component;
 
 public abstract class IPageFlowPage implements WizardStep {
 	public static final String PROCESS_ID = "PROCESS_ID"; // Process Id in BPMN
+	public static final String TASK_NAME = "TASK_NAME"; // Task Name in BPMN
 	
 	private IPageFlowSession session;
 	protected EntityManagerFactory emf;

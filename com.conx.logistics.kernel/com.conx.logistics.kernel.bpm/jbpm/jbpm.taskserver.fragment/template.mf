@@ -1,0 +1,36 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX JBPM TaskServer Human-Task-Core Fragment
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.fragment
+Fragment-Host: org.jbpm.human-task-core
+Import-Package: 
+ org.jbpm.task.service.local;version="1.0.0",
+ bitronix.tm.journal;version="[2.1.0,2.2.0)",
+ bitronix.tm.utils;version="[2.1.0,2.2.0)",
+ bitronix.tm;version="[2.1.0,2.2.0)",
+ bitronix.tm.recovery;version="[2.1.0,2.2.0)",
+ bitronix.tm.resource;version="[2.1.0,2.2.0)",
+ bitronix.tm.resource.jdbc;version="[2.1.0,2.2.0)",
+ bitronix.tm.timer;version="[2.1.0,2.2.0)",
+ bitronix.tm.twopc.executor;version="[2.1.0,2.2.0)",
+ bitronix.tm.jndi;version="[2.1.0,2.2.0)",
+ org.apache.naming.java;version="0",
+ org.springframework.jndi;version="[3.0,3.1)"
+Excluded-Exports: 
+ org.jbpm.task.service,
+ org.jbpm.task.service.persistence,
+ org.mvel2
+Excluded-Imports: 
+  javax.persistence,
+  org.drools,
+  org.drools.persistence,
+  org.drools.persistence.jta,
+  org.jbpm.eventmessaging,
+  org.jbpm.task,
+  org.jbpm.task.admin,
+  org.jbpm.task.event,
+  org.jbpm.task.query,
+  org.jbpm.task.service,
+  org.jbpm.task.service.persistence,
+  org.mvel2,
+  org.slf4j

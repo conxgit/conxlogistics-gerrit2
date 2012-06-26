@@ -32,10 +32,12 @@ public class Feature extends BaseEntity {
     @JoinColumn
     protected Feature parentFeature;   
     
-    @OneToMany(targetEntity = Feature.class, mappedBy="parentFeature", cascade=CascadeType.ALL)
+    @OneToMany(targetEntity = Feature.class, mappedBy="parentFeature", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     private Set<Feature> childFeatures= new java.util.HashSet<Feature>();  
     
     protected boolean featureSet = false;
+    
+    protected boolean taskFeature;
     
     public Feature()
     {
@@ -101,5 +103,13 @@ public class Feature extends BaseEntity {
 
 	public void setFeatureSet(boolean featureSet) {
 		this.featureSet = featureSet;
+	}
+
+	public boolean isTaskFeature() {
+		return taskFeature;
+	}
+
+	public void setTaskFeature(boolean taskFeature) {
+		this.taskFeature = taskFeature;
 	}   	
 }

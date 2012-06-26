@@ -15,6 +15,7 @@
 	<!-- Bitronix Transaction Manager embedded configuration -->
 	<bean id="btmConfig" factory-method="getConfiguration"
 		class="bitronix.tm.TransactionManagerServices">
+		<property name="allowMultipleLrc" value="true" />
 		<!-- <property name="serverId" value="spring-btm" /> <property name="logPart1Filename" 
 			value="btm1.tlog"/> <property name="logPart2Filename" value="btm2.tlog"/> -->
 	</bean>

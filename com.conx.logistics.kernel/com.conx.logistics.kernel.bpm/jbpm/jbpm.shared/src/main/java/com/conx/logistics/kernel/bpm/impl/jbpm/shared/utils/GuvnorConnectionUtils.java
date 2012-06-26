@@ -325,8 +325,28 @@ public class GuvnorConnectionUtils {
                     readFile(GuvnorConnectionUtils.class.getResourceAsStream("/ChangeSet.st")));
             TemplateInfo info = new TemplateInfo(getGuvnorProtocol(), getGuvnorHost(), 
                     getGuvnorUsr(), getGuvnorPwd(), getGuvnorSubdomain(), packageNames);
-            changeSetTemplate.setAttribute("data",  info.getData());
-            return new StringReader(changeSetTemplate.toString());
+            
+            StringBuffer st = new StringBuffer();
+            st.append("<change-set xmlns='http://drools.org/drools-5.0/change-set' xmlns:xs='http://www.w3.org/2001/XMLSchema-instance' xs:schemaLocation='http://drools.org/drools-5.0/change-set http://anonsvn.jboss.org/repos/labs/labs/jbossrules/trunk/drools-api/src/main/resources/change-set-1.0.0.xsd'>");
+            st.append("\n\t");
+            st.append("<add>");
+            st.append("\n");
+            for (String elem : info.getData())
+            {
+            	st.append("\t\t");
+	            st.append(elem);
+	            st.append("\n");
+            }
+            st.append("\n\t");
+	        st.append("</add>");
+	        st.append("\n");
+	        st.append("</change-set>");            
+            
+            //changeSetTemplate.setAttribute("data",  info.getData());
+            //String changeSetStr = changeSetTemplate.toString();
+            //return new StringReader(changeSetTemplate.toString());
+	        String csres = st.toString();
+	        return new StringReader(csres);
         } catch (IOException e) {
             logger.error("Exception creating changeset: " + e.getMessage());
             return new StringReader("");

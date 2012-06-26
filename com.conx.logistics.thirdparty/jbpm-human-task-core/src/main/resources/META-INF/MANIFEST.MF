@@ -38,36 +38,59 @@ Import-Package: javassist.util.proxy;version="3.12.0.GA",javax.activat
  ion;version="0",javax.jms;version="0",javax.mail;version="0",javax.ma
  il.internet;version="0",javax.mail.util;version="0",javax.naming;vers
  ion="0",javax.naming.directory;version="0",javax.naming.ldap;version=
- "0",javax.persistence;version="0",javax.transaction;version="0",org.a
- pache.mina.core.filterchain;version="2.0.2",org.apache.mina.core.futu
- re;version="2.0.2",org.apache.mina.core.service;version="2.0.2",org.a
- pache.mina.core.session;version="2.0.2",org.apache.mina.filter.codec;
- version="2.0.2",org.apache.mina.filter.codec.serialization;version="2
- .0.2",org.apache.mina.filter.logging;version="2.0.2",org.apache.mina.
- transport.socket;version="2.0.2",org.apache.mina.transport.socket.nio
- ;version="2.0.2",org.drools;version="5.4.0.Final",org.drools.common;v
- ersion="5.4.0.Final",org.drools.core.util;version="5.4.0.Final",org.d
- rools.definition.process;version="5.4.0.Final",org.drools.event;versi
- on="5.4.0.Final",org.drools.event.process;version="5.4.0.Final",org.d
- rools.marshalling;version="5.4.0.Final",org.drools.marshalling.impl;v
- ersion="5.4.0.Final",org.drools.persistence;version="5.4.0.Final",org
- .drools.persistence.jpa;version="5.4.0.Final",org.drools.persistence.
- jta;version="5.4.0.Final",org.drools.persistence.map;version="5.4.0.F
- inal",org.drools.process.instance.impl;version="5.4.0.Final",org.droo
- ls.runtime;version="5.4.0.Final",org.drools.runtime.process;version="
- 5.4.0.Final",org.drools.task.service;version="5.4.0.Final",org.drools
- .time;version="5.4.0.Final",org.drools.util;version="5.4.0.Final",org
- .hibernate;version="3.6.0.Final",org.hibernate.cfg;version="3.6.0.Fin
- al",org.hibernate.classic;version="3.6.0.Final",org.hibernate.proxy;v
- ersion="3.6.0.Final",org.hibernate.usertype;version="3.6.0.Final",org
- .hornetq.api.core;version="0",org.hornetq.api.core.client;version="0"
- ,org.hornetq.core.config;version="0",org.hornetq.core.config.impl;ver
- sion="0",org.hornetq.core.remoting.impl.netty;version="0",org.hornetq
- .core.server;version="0",org.jaxen;version="1.1.1",org.jaxen.jdom;ver
- sion="1.1.1",org.jbpm.process.workitem.email;version="0";resolution:=
- "optional",org.mvel2;version="2.1",org.mvel2.compiler;version="2.1",o
- rg.mvel2.integration;version="2.1",org.mvel2.integration.impl;version
- ="2.1",org.mvel2.templates;version="2.1",org.osgi.framework;version="
- 0",org.slf4j;version="[1.6.1,1.7.0)"
+ "0",javax.persistence;version="0",javax.persistence.criteria;version=
+ "0",javax.persistence.spi;version="0",javax.transaction;version="0",j
+ avax.validation;version="1.0.0.GA",net.sf.cglib.core;version="2.2.0",
+ net.sf.cglib.proxy;version="2.2.0",net.sf.cglib.reflect;version="2.2.
+ 0",org.aopalliance.aop;version="1.0.0",org.apache.mina.core.filtercha
+ in;version="2.0.2",org.apache.mina.core.future;version="2.0.2",org.ap
+ ache.mina.core.service;version="2.0.2",org.apache.mina.core.session;v
+ ersion="2.0.2",org.apache.mina.filter.codec;version="2.0.2",org.apach
+ e.mina.filter.codec.serialization;version="2.0.2",org.apache.mina.fil
+ ter.logging;version="2.0.2",org.apache.mina.transport.socket;version=
+ "2.0.2",org.apache.mina.transport.socket.nio;version="2.0.2",org.droo
+ ls;version="5.4.0.Final",org.drools.common;version="5.4.0.Final",org.
+ drools.core.util;version="5.4.0.Final",org.drools.definition.process;
+ version="5.4.0.Final",org.drools.event;version="5.4.0.Final",org.droo
+ ls.event.process;version="5.4.0.Final",org.drools.marshalling;version
+ ="5.4.0.Final",org.drools.marshalling.impl;version="5.4.0.Final",org.
+ drools.persistence;version="5.4.0.Final",org.drools.persistence.jpa;v
+ ersion="5.4.0.Final",org.drools.persistence.jta;version="5.4.0.Final"
+ ,org.drools.persistence.map;version="5.4.0.Final",org.drools.process.
+ instance.impl;version="5.4.0.Final",org.drools.runtime;version="5.4.0
+ .Final",org.drools.runtime.process;version="5.4.0.Final",org.drools.t
+ ask.service;version="5.4.0.Final",org.drools.time;version="5.4.0.Fina
+ l",org.drools.util;version="5.4.0.Final",org.hibernate;version="3.6.0
+ .Final",org.hibernate.cfg;version="3.6.0.Final",org.hibernate.classic
+ ;version="3.6.0.Final",org.hibernate.ejb;version="3.6.0.Final",org.hi
+ bernate.hql.ast;version="3.6.0.Final",org.hibernate.proxy;version="3.
+ 6.0.Final",org.hibernate.transaction;version="3.6.0.Final",org.hibern
+ ate.usertype;version="3.6.0.Final",org.hibernate.validator;version="4
+ .2.0.Final",org.hornetq.api.core;version="0",org.hornetq.api.core.cli
+ ent;version="0",org.hornetq.core.config;version="0",org.hornetq.core.
+ config.impl;version="0",org.hornetq.core.remoting.impl.netty;version=
+ "0",org.hornetq.core.server;version="0",org.jaxen;version="1.1.1",org
+ .jaxen.jdom;version="1.1.1",org.jbpm.process.workitem.email;version="
+ 0";resolution:="optional",org.jsoup;version="1.5.2",org.mvel2;version
+ ="2.1",org.mvel2.compiler;version="2.1",org.mvel2.integration;version
+ ="2.1",org.mvel2.integration.impl;version="2.1",org.mvel2.templates;v
+ ersion="2.1",org.osgi.framework;version="0",org.slf4j;version="[1.6.1
+ ,1.7.0)",org.springframework.aop;version="[3.0, 3.1)",org.springframe
+ work.aop.framework;version="[3.0, 3.1)",org.springframework.aop.scope
+ ;version="[3.0, 3.1)",org.springframework.beans.factory;version="[3.0
+ , 3.1)",org.springframework.beans.factory.annotation;version="[3.0, 3
+ .1)",org.springframework.beans.factory.config;version="[3.0, 3.1)",or
+ g.springframework.context;version="[3.0, 3.1)",org.springframework.co
+ ntext.weaving;version="[3.0, 3.1)",org.springframework.core.io;versio
+ n="[3.0, 3.1)",org.springframework.dao;version="[3.0, 3.1)",org.sprin
+ gframework.dao.annotation;version="[3.0, 3.1)",org.springframework.jd
+ bc.core;version="[3.0, 3.1)",org.springframework.orm.jpa;version="[3.
+ 0, 3.1)",org.springframework.orm.jpa.persistenceunit;version="[3.0, 3
+ .1)",org.springframework.orm.jpa.support;version="[3.0, 3.1)",org.spr
+ ingframework.orm.jpa.vendor;version="[3.0, 3.1)",org.springframework.
+ stereotype;version="[3.0, 3.1)",org.springframework.transaction;versi
+ on="[3.0, 3.1)",org.springframework.transaction.annotation;version="[
+ 3.0, 3.1)",org.springframework.transaction.aspectj;version="[3.0, 3.1
+ )",org.springframework.transaction.jta;version="[3.0, 3.1)"
 Archiver-Version: Plexus Archiver
 

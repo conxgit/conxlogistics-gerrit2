@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Fragment-Host: org.jbpm.human-task-core
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
+Bundle-Version: 5.3.0.Final
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX JBPM TaskServer Human-Task-Core Fragment
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
+ r.fragment
+Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.jndi;v
+ ersion="[2.1.0,2.2.0)",bitronix.tm.journal;version="[2.1.0,2.2.0)",bi
+ tronix.tm.recovery;version="[2.1.0,2.2.0)",bitronix.tm.resource;versi
+ on="[2.1.0,2.2.0)",bitronix.tm.resource.jdbc;version="[2.1.0,2.2.0)",
+ bitronix.tm.timer;version="[2.1.0,2.2.0)",bitronix.tm.twopc.executor;
+ version="[2.1.0,2.2.0)",bitronix.tm.utils;version="[2.1.0,2.2.0)",jav
+ ax.naming;version="0",javax.transaction;version="0",org.apache.naming
+ .java;version="0",org.jbpm.task.service.local;version="1.0.0",org.spr
+ ingframework.jndi;version="[3.0,3.1)"
+

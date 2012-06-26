@@ -13,17 +13,25 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.transaction.SystemException;
+import javax.transaction.TransactionManager;
+import javax.transaction.UserTransaction;
 
 import org.drools.SystemEventListenerFactory;
 import org.jbpm.task.Group;
 import org.jbpm.task.User;
+import org.jbpm.task.service.JTACustomTaskService;
 import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.TaskServiceSession;
+import org.jbpm.task.service.local.LocalTaskService;
 import org.jbpm.task.service.mina.MinaTaskServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jndi.JndiTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -37,28 +45,46 @@ public class HumanTaskServer implements IBPMTaskService {
 
 	private MinaTaskServer minaServer;
 	private Thread minaServerThread;
-	
+
 	private EntityManagerFactory emfOrgJbpmTask;
 	private PlatformTransactionManager globalJTATransManager;
+	private TransactionManager globalTransactionManager;
+	private JndiTemplate jndiTemplate;
+
+	private LocalTaskService localTaskService;
+	private JTACustomTaskService taskService;
 
 	public void stop() {
 		minaServer.stop();
 	}
 
-	public void start() {
-		
-		//-- Submit to repository
-		//emfOrgJbpmTask = Persistence.createEntityManagerFactory("org.jbpm.task");
-		TaskService taskService = new TaskService(emfOrgJbpmTask,
-				SystemEventListenerFactory.getSystemEventListener());
-		TaskServiceSession taskSession = taskService.createSession();
+	public void start() throws NamingException, IllegalStateException,
+			SecurityException, SystemException {
 
-		// Add users
-		Map vars = new HashMap();
-		Reader reader;
+		// -- Submit to repository
+		// emfOrgJbpmTask =
+		// Persistence.createEntityManagerFactory("org.jbpm.task");
+		//Context ctx = jndiTemplate.getContext();
+		//UserTransaction ut = (UserTransaction) ctx
+		//		.lookup("java:comp/UserTransaction");
 
 		try {
-			URL usersURL = HumanTaskServer.class.getClassLoader().getResource("LoadUsers.mvel");
+
+			//ut.begin();
+
+			taskService = new JTACustomTaskService(globalTransactionManager,
+					jndiTemplate, emfOrgJbpmTask,
+					SystemEventListenerFactory.getSystemEventListener());
+			TaskServiceSession taskSession = taskService.createSession();
+
+			localTaskService = new LocalTaskService(taskService);
+
+			// Add users
+			Map vars = new HashMap();
+			Reader reader;
+
+			URL usersURL = HumanTaskServer.class.getClassLoader().getResource(
+					"LoadUsers.mvel");
 			reader = new FileReader(new File(usersURL.toURI()));
 
 			Map<String, User> users = (Map<String, User>) eval(reader, vars);
@@ -67,34 +93,33 @@ public class HumanTaskServer implements IBPMTaskService {
 
 			}
 
-			URL grpsURL = HumanTaskServer.class.getClassLoader().getResource("LoadGroups.mvel");
-			reader = new FileReader(new File(grpsURL.toURI()));			
-			
+			URL grpsURL = HumanTaskServer.class.getClassLoader().getResource(
+					"LoadGroups.mvel");
+			reader = new FileReader(new File(grpsURL.toURI()));
+
 			Map<String, Group> groups = (Map<String, Group>) eval(reader, vars);
 			for (Group group : groups.values()) {
 				taskSession.addGroup(group);
 			}
 			
-			//kernelSystemBPMTransManager.commit(status);
-		} catch (FileNotFoundException e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			String stacktrace = sw.toString();	
-			logger.error(stacktrace);
-			//kernelSystemBPMTransManager.rollback(status);
-		} catch (URISyntaxException e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			String stacktrace = sw.toString();		
-			logger.error(stacktrace);
-			//kernelSystemBPMTransManager.rollback(status);
-		}
 
-		// start server
-		minaServer = new MinaTaskServer(taskService);
-		minaServerThread = new Thread(minaServer);
-		minaServerThread.start();
-		taskSession.dispose();
+			//ut.commit();			
+			
+			// start server
+			minaServer = new MinaTaskServer(taskService);
+			minaServerThread = new Thread(minaServer);
+			minaServerThread.start();		
+			
+			taskSession.dispose();
+			// kernelSystemBPMTransManager.commit(status);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+			//ut.rollback();
+			// kernelSystemBPMTransManager.rollback(status);
+		}
 
 		logger.debug("Task service started correctly !");
 		logger.debug("Task service running ...");
@@ -124,10 +149,28 @@ public class HumanTaskServer implements IBPMTaskService {
 		this.globalJTATransManager = kernelSystemBPMTransManager;
 	}
 
-	@Override
+	public void setGlobalTransactionManager(
+			TransactionManager globalTransactionManager) {
+		this.globalTransactionManager = globalTransactionManager;
+	}
+
+	public void setJndiTemplate(JndiTemplate jndiTemplate) {
+		this.jndiTemplate = jndiTemplate;
+	}
+
 	public TaskService createHumanTaskService() {
-		TaskService taskService = new TaskService(emfOrgJbpmTask,SystemEventListenerFactory.getSystemEventListener());
+		TaskService taskService = new TaskService(emfOrgJbpmTask,
+				SystemEventListenerFactory.getSystemEventListener());
 		return taskService;
 	}
-	
+
+	@Override
+	public LocalTaskService getLocalTaskService() {
+		return localTaskService;
+	}
+
+	@Override
+	public TaskService getTaskService() {
+		return taskService;
+	}
 }

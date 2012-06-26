@@ -5,29 +5,34 @@
 		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
 	xmlns:osgi="http://www.springframework.org/schema/osgi">
 
-	<osgi:service ref="addAsnLinesPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
+	<osgi:service ref="confirmAsnOrgPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
 		<osgi:service-properties>
-			<entry key="PROCESS_ID" value="whse.rcv.asn"/>
-		  </osgi:service-properties>		
-	</osgi:service>	
-	<osgi:service ref="addAsnLocalTransPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
-		<osgi:service-properties>
-			<entry key="PROCESS_ID" value="whse.rcv.asn"/>
+			<entry key="PROCESS_ID" value="whse.rcv.asn.CreateNewASNByOrgV1.0"/>
+			<entry key="TASK_NAME" value="ConfirmASNOrg"/>
 		  </osgi:service-properties>		
 	</osgi:service>	
 	<osgi:service ref="addAsnRefNumsPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
 		<osgi:service-properties>
-			<entry key="PROCESS_ID" value="whse.rcv.asn"/>
+			<entry key="PROCESS_ID" value="whse.rcv.asn.CreateNewASNByOrgV1.0"/>
+			<entry key="TASK_NAME" value="AddASNRefNums"/>
+		  </osgi:service-properties>		
+	</osgi:service>		
+	<osgi:service ref="addAsnLinesPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.asn.CreateNewASNByOrgV1.0"/>
+			<entry key="TASK_NAME" value="AddASNLines"/>
 		  </osgi:service-properties>		
 	</osgi:service>	
-	<osgi:service ref="confirmAsnOrgPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
+	<osgi:service ref="addAsnLocalTransPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
 		<osgi:service-properties>
-			<entry key="PROCESS_ID" value="whse.rcv.asn"/>
+			<entry key="PROCESS_ID" value="whse.rcv.asn.CreateNewASNByOrgV1.0"/>
+			<entry key="TASK_NAME" value="AddASNLocalTrans"/>
 		  </osgi:service-properties>		
 	</osgi:service>	
 	<osgi:service ref="confirmAsnPage"  interface="com.conx.logistics.kernel.pageflow.services.IPageFlowPage">
 		<osgi:service-properties>
-			<entry key="PROCESS_ID" value="whse.rcv.asn"/>
+			<entry key="PROCESS_ID" value="whse.rcv.asn.CreateNewASNByOrgV1.0"/>
+			<entry key="TASK_NAME" value="ConfirmASN"/>
 		  </osgi:service-properties>		
 	</osgi:service>	
 </beans>

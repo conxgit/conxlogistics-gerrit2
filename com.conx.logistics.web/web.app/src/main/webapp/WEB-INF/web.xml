@@ -32,10 +32,10 @@
 		<servlet-name>webappServlet</servlet-name>
 		<url-pattern>/VAADIN/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<filter>
 	    <filter-name>openSessionInViewFilter</filter-name>
-	    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	    <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 		<init-param>
 			<param-name>entityManagerFactoryBeanName</param-name>
 			<param-value>kernelSystemEntityManagerFactory</param-value>
@@ -46,4 +46,9 @@
 	    <filter-name>openSessionInViewFilter</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>	
+
+	<filter-mapping>
+	    <filter-name>openSessionInViewFilter</filter-name>
+	    <url-pattern>/VAADIN/*</url-pattern>
+	</filter-mapping>		
 </web-app>

@@ -13,7 +13,7 @@
 		<property name="className"
 			value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
 		<property name="uniqueName" value="jdbc/conxbpmJPADS" />
-		<property name="minPoolSize" value="2" />
+		<property name="minPoolSize" value="10" />
 		<property name="maxPoolSize" value="32" />
 		<property name="acquisitionInterval" value="1" />
 		<property name="acquisitionTimeout" value="15" />
@@ -23,6 +23,7 @@
 		<property name="automaticEnlistingEnabled" value="true" />
 		<property name="allowLocalTransactions" value="true" />
 		<property name="testQuery" value="SELECT current_timestamp" />
+		<property name="preparedStatementCacheSize" value="0"/>
 		<property name="driverProperties">
 			<props>
 				<prop key="user">root</prop>

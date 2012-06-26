@@ -13,9 +13,13 @@ Import-Package: com.conx.logistics.mdm.domain.task;version="1.0.0",
   org.vaadin.teemu.wizards;version="0.4.4",
   org.jboss.bpm.console.client.model;version="2.3.2.SNAPSHOT",
   org.jbpm.workflow.core.node;version="[5.3.0,5.4.0)",
+  org.jbpm.task;version="[5.3.0,5.4.0)",
+  org.springframework.transaction.support;version="[3.0,3.1)",
   org.jbpm.task.query;version="[5.3.0,5.4.0)",
+  org.jbpm.marshalling.impl;version="[5.3.0,5.4.0)",
   javax.persistence;version="0",
-  org.springframework.transaction;version="[3.0,3.1)"
+  org.springframework.transaction;version="[3.0,3.1)",
+  org.springframework.jndi;version="[3.0,3.1)"
 Excluded-Imports: 
   com.conx.logistics.kernel.pageflow.engine
 

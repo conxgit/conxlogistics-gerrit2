@@ -14,9 +14,10 @@ public class InitNewASNWIH implements WorkItemHandler {
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
 		ASN newasn = new ASN();
-		Map<String, Object> output = new HashMap<String, Object>();
-		output.put("newasn",newasn);
-		manager.completeWorkItem(workItem.getId(), output);
+		Map<String, Object> results = new HashMap<String, Object>();
+		//workItem.getResults().put("asnOut", newasn);
+		results.put("asnIdOut","201");
+		manager.completeWorkItem(workItem.getId(), results);
 	}
 
 	@Override

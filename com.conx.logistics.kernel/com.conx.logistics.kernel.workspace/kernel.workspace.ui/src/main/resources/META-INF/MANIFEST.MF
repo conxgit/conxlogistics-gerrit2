@@ -1,10 +1,13 @@
 Manifest-Version: 1.0
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel User Workspace :: Basic Profile View
 Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.workspace.ui
 Import-Package: com.conx.logistics.kernel.ui.service.contribution;vers
  ion="[1.0.0,2.0.0)",com.conx.logistics.kernel.workspace.ui.contributi
  on
-Bundle-SymbolicName: com.conx.logistics.kernel.workspace.ui
 

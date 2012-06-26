@@ -28,6 +28,29 @@ public interface IApplicationDAOService {
 	public static final String SYSTEM_CONTROL_PANEL_APP_WFMNGMT_WTDFS_SEARCH_NAME = "Task Definitions";
 	public static final String SYSTEM_CONTROL_PANEL_APP_WFMNGMT_WTDFS_SEARCH_CODE = "WTDFS.SEARCH";		
 	
+	/**
+	 * Warehouse App
+	 */
+	//== App
+	public static final String WAREHOUSE_APP_NAME = "Warehouse";
+	public static final String WAREHOUSE_APP_CODE = "WHSE";
+	
+	//==== Receiving Featureset
+	public static final String WAREHOUSE_APP_RECEIVING_NAME = "Receiving";
+	public static final String WAREHOUSE_APP_RECEIVING_CODE = "RCVNG";	
+	
+	//==== Receiving ASN Featureset
+	public static final String WAREHOUSE_APP_RECEIVING_ASN_NAME = "ASN's";
+	public static final String WAREHOUSE_APP_RECEIVING_ASN_CODE = "ASN";		
+	
+	//========= Receiving ASN :: Search Feature
+	public static final String WAREHOUSE_APP_RECEIVING_ASN_SEARCH_NAME = "Search";
+	public static final String WAREHOUSE_APP_RECEIVING_ASN_SEARCH_CODE = "SEARCH";	
+	
+	//========= Receiving ASN :: New ASN Feature
+	public static final String WAREHOUSE_APP_RECEIVING_ASN_NEW_NAME = "New";
+	public static final String WAREHOUSE_APP_RECEIVING_ASN_NEW_CODE = "NEW";	
+	
 	public List<Application> getApplications();
 
 	public Application addApplication(Application app);

@@ -5,6 +5,7 @@ Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-SymbolicName: org.jbpm.bam
 Bundle-DocURL: http://www.jboss.org/
 Import-Package: 
+  javax.activation;version="0",
   javax.persistence;version="0",
   javax.transaction;version="0",
   org.drools;version="5.4.0.Final",
@@ -23,7 +24,22 @@ Import-Package:
   org.hibernate.usertype;version="3.6.0.Final",
   org.hibernate.cfg;version="3.6.0.Final",
   org.hibernate.classic;version="3.6.0.Final",
-  org.slf4j;version="1.6.1"
+  org.hibernate.proxy;version="3.6.0.Final",
+  org.hibernate.validator;version="4.2.0.Final",
+  org.hibernate.transaction;version="3.6.0.Final",
+  org.hibernate.ejb;version="3.6.0.Final",
+  org.hibernate.cfg;version="3.6.0.Final",
+  org.hibernate.hql.ast;version="3.6.0.Final",   
+  org.slf4j;version="1.6.1",
+  javax.persistence.criteria;version="0",
+  javax.persistence.spi;version="0",
+  javax.validation;version="1.0.0.GA",
+  net.sf.cglib.proxy;version="2.2.0",
+  net.sf.cglib.core;version="2.2.0",
+  net.sf.cglib.reflect;version="2.2.0",
+  org.aopalliance.aop;version="1.0.0",
+  org.jsoup;version="1.5.2",
+  javassist.util.proxy;version="3.12.0.GA"  
 Excluded-Exports: gnu.trove,
   org.slf4j.*,
   org.slf4j.spi.*

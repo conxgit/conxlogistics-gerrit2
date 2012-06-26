@@ -8,7 +8,7 @@ http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistenc
 	xmlns="http://java.sun.com/xml/ns/persistence">
 
 
-	<persistence-unit name="org.jbpm.task">
+	<persistence-unit name="org.jbpm.task" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
 		<mapping-file>META-INF/CustomTaskorm.xml</mapping-file>
@@ -16,8 +16,6 @@ http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistenc
 		<class>org.jbpm.task.Attachment</class>
 		<class>org.jbpm.task.Content</class>
 		<class>org.jbpm.task.BooleanExpression</class>
-		<class>org.jbpm.task.Comment</class>
-		<class>org.jbpm.task.Deadline</class>
 		<class>org.jbpm.task.Comment</class>
 		<class>org.jbpm.task.Deadline</class>
 		<class>org.jbpm.task.Delegation</class>
@@ -36,13 +34,10 @@ http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistenc
 		<class>org.jbpm.task.SubTasksStrategy</class>
 		<class>org.jbpm.task.OnParentAbortAllSubTasksEndStrategy</class>
 		<class>org.jbpm.task.OnAllSubTasksEndParentEndStrategy</class>
-
 		<class>org.jbpm.task.User</class>
 		<class>org.drools.persistence.info.SessionInfo</class>
 		<class>org.jbpm.persistence.processinstance.ProcessInstanceInfo</class>
-
 		<class>org.jbpm.persistence.processinstance.ProcessInstanceEventInfo</class>
-
 		<class>org.drools.persistence.info.WorkItemInfo</class>
 
 		<properties>
@@ -60,6 +55,8 @@ http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistenc
 			-->
             <property name="hibernate.transaction.manager_lookup_class" value="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.persistence.CustomBTMTransactionManagerLookup"/>
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+            <!-- <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/> -->
+            <property name="hibernate.jndi.class" value="bitronix.tm.jndi.BitronixInitialContextFactory"/>
             <property name="hibernate.current_session_context_class" value="jta"/>
             <property name="hibernate.connection.release_mode" value="after_statement"/>
             <property name="hibernate.hbm2ddl.auto" value="create" />	

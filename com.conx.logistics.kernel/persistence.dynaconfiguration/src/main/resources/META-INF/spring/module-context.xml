@@ -18,7 +18,6 @@
 		<property name="properties">
 			<props>
 	            <prop key="hibernate.transaction.manager_lookup_class">com.conx.logistics.kernel.persistence.dynaconfiguration.CustomBTMTransactionManagerLookup</prop>
-	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 	            <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
 	            <prop key="hibernate.current_session_context_class">jta</prop>
 	            <prop key="hibernate.connection.release_mode">after_statement</prop>

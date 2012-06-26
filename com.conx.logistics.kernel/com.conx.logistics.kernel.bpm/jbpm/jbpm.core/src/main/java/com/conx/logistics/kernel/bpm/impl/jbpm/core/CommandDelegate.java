@@ -34,6 +34,7 @@ import org.drools.runtime.process.NodeInstance;
 import org.drools.runtime.process.ProcessInstance;
 import org.jbpm.process.audit.JPAProcessInstanceDbLog;
 import org.jbpm.process.audit.ProcessInstanceLog;
+import org.jbpm.process.audit.VariableInstanceLog;
 import org.jbpm.process.core.context.variable.VariableScope;
 import org.jbpm.process.instance.context.variable.VariableScopeInstance;
 import org.jbpm.process.instance.impl.ProcessInstanceImpl;
@@ -80,7 +81,7 @@ public class CommandDelegate {
     public Process getProcess(String processId) {
         try {
 			KnowledgeBase kbase = getSession().getKnowledgeBase();
-			for (KnowledgePackage kpackage: kbase.getKnowledgePackages()) {
+			for (KnowledgePackage kpackage :kbase.getKnowledgePackages()) {
 			    for (Process process: kpackage.getProcesses()) {
 			        if (processId.equals(process.getId())) {
 			            return process;
@@ -129,6 +130,11 @@ public class CommandDelegate {
     public ProcessInstanceLog startProcess(String processId, Map<String, Object> parameters) {
         long processInstanceId = getSession().startProcess(processId, parameters).getId();
         return this.bpmService.getJpaProcessInstanceDbLog().findProcessInstance(processInstanceId);
+    }
+    
+    public List<VariableInstanceLog> findVariableInstances(Long processInstanceId)
+    {
+    	return this.bpmService.getJpaProcessInstanceDbLog().findVariableInstances(processInstanceId);
     }
     
     public void abortProcessInstance(String processInstanceIdString) {

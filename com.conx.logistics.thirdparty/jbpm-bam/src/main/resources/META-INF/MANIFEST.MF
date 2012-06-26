@@ -12,16 +12,25 @@ Bundle-Description: jBPM BAM
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-SymbolicName: org.jbpm.bam
 Bundle-DocURL: http://www.jboss.org/
-Import-Package: javax.naming;version="0",javax.persistence;version="0"
- ,javax.transaction;version="0",org.drools;version="5.4.0.Final",org.d
- rools.audit;version="5.4.0.Final",org.drools.audit.event;version="5.4
- .0.Final",org.drools.common;version="5.4.0.Final",org.drools.event;ve
- rsion="5.4.0.Final",org.drools.impl;version="5.4.0.Final",org.drools.
- persistence;version="5.4.0.Final",org.drools.persistence.jpa;version=
- "5.4.0.Final",org.drools.persistence.map;version="5.4.0.Final",org.dr
- ools.runtime;version="5.4.0.Final",org.drools.runtime.process;version
- ="5.4.0.Final",org.hibernate;version="3.6.0.Final",org.hibernate.cfg;
- version="3.6.0.Final",org.hibernate.classic;version="3.6.0.Final",org
- .hibernate.usertype;version="3.6.0.Final",org.slf4j;version="1.6.1"
+Import-Package: javassist.util.proxy;version="3.12.0.GA",javax.activat
+ ion;version="0",javax.naming;version="0",javax.persistence;version="0
+ ",javax.persistence.criteria;version="0",javax.persistence.spi;versio
+ n="0",javax.transaction;version="0",javax.validation;version="1.0.0.G
+ A",net.sf.cglib.core;version="2.2.0",net.sf.cglib.proxy;version="2.2.
+ 0",net.sf.cglib.reflect;version="2.2.0",org.aopalliance.aop;version="
+ 1.0.0",org.drools;version="5.4.0.Final",org.drools.audit;version="5.4
+ .0.Final",org.drools.audit.event;version="5.4.0.Final",org.drools.com
+ mon;version="5.4.0.Final",org.drools.event;version="5.4.0.Final",org.
+ drools.impl;version="5.4.0.Final",org.drools.persistence;version="5.4
+ .0.Final",org.drools.persistence.jpa;version="5.4.0.Final",org.drools
+ .persistence.map;version="5.4.0.Final",org.drools.runtime;version="5.
+ 4.0.Final",org.drools.runtime.process;version="5.4.0.Final",org.hiber
+ nate;version="3.6.0.Final",org.hibernate.cfg;version="3.6.0.Final",or
+ g.hibernate.classic;version="3.6.0.Final",org.hibernate.ejb;version="
+ 3.6.0.Final",org.hibernate.hql.ast;version="3.6.0.Final",org.hibernat
+ e.proxy;version="3.6.0.Final",org.hibernate.transaction;version="3.6.
+ 0.Final",org.hibernate.usertype;version="3.6.0.Final",org.hibernate.v
+ alidator;version="4.2.0.Final",org.jsoup;version="1.5.2",org.slf4j;ve
+ rsion="1.6.1"
 Archiver-Version: Plexus Archiver
 

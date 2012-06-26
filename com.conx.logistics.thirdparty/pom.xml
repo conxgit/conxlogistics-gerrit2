@@ -22,7 +22,7 @@
 		<module>vaadin-addon-toolbar</module>
 		<module>vaadin-addon-contextmenu</module>
 		<module>google</module>
-		<module>vaadin-addon-mvp</module>
+		<!-- <module>vaadin-addon-mvp</module> -->
 		<module>vaadin675</module>
 		<module>vaadin-addon-mvp-customized</module>
 		<module>bitronix212</module>

@@ -1,15 +1,23 @@
 package com.conx.logistics.kernel.bpm.impl.jbpm;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +29,11 @@ import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.TransactionManager;
 import javax.transaction.UserTransaction;
 
@@ -33,7 +46,9 @@ import org.drools.agent.KnowledgeAgentFactory;
 import org.drools.command.impl.CommandBasedStatefulKnowledgeSession;
 import org.drools.command.impl.KnowledgeCommandContext;
 import org.drools.core.util.StringUtils;
+import org.drools.definition.KnowledgePackage;
 import org.drools.definition.process.Node;
+import org.drools.definition.process.Process;
 import org.drools.event.ActivationCancelledEvent;
 import org.drools.event.ActivationCreatedEvent;
 import org.drools.event.AfterActivationFiredEvent;
@@ -42,10 +57,15 @@ import org.drools.event.AgendaGroupPushedEvent;
 import org.drools.event.BeforeActivationFiredEvent;
 import org.drools.event.RuleFlowGroupActivatedEvent;
 import org.drools.event.RuleFlowGroupDeactivatedEvent;
+import org.drools.impl.EnvironmentFactory;
 import org.drools.impl.StatefulKnowledgeSessionImpl;
 import org.drools.io.ResourceChangeScannerConfiguration;
 import org.drools.io.ResourceFactory;
+import org.drools.marshalling.ObjectMarshallingStrategy;
+import org.drools.marshalling.impl.ClassObjectMarshallingStrategyAcceptor;
+import org.drools.marshalling.impl.SerializablePlaceholderResolverStrategy;
 import org.drools.persistence.jpa.JPAKnowledgeService;
+import org.drools.persistence.jpa.marshaller.JPAPlaceholderResolverStrategy;
 import org.drools.process.instance.WorkItemHandler;
 import org.drools.runtime.Environment;
 import org.drools.runtime.EnvironmentName;
@@ -57,12 +77,20 @@ import org.jboss.bpm.console.client.model.ProcessInstanceRef.RESULT;
 import org.jboss.bpm.console.client.model.ProcessInstanceRef.STATE;
 import org.jboss.bpm.console.client.model.TaskRef;
 import org.jbpm.process.audit.JPAWorkingMemoryDbLogger;
+import org.jbpm.process.audit.VariableInstanceLog;
 import org.jbpm.process.workitem.wsht.CommandBasedWSHumanTaskHandler;
 import org.jbpm.process.workitem.wsht.SyncWSHumanTaskHandler;
+import org.jbpm.task.Content;
+import org.jbpm.task.Group;
+import org.jbpm.task.Task;
+import org.jbpm.task.User;
 import org.jbpm.task.query.TaskSummary;
 import org.jbpm.task.service.TaskClient;
 import org.jbpm.task.service.TaskService;
+import org.jbpm.task.service.TaskServiceSession;
 import org.jbpm.task.service.local.LocalTaskService;
+import org.jbpm.task.service.mina.MinaTaskServer;
+import org.jbpm.task.utils.ContentMarshallerHelper;
 import org.jbpm.workflow.core.node.HumanTaskNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,6 +122,7 @@ public class BPMServerImpl implements IBPMService {
 
 	private EntityManagerFactory jbpmEMF;
 	private EntityManagerFactory jbpmTaskEMF;
+	private EntityManagerFactory conxlogisticsEMF;
 	
 	private TransactionManager globalTransactionManager;
 	private UserTransaction globalUserTransaction;
@@ -115,6 +144,8 @@ public class BPMServerImpl implements IBPMService {
 	private HumanTaskService humanTaskManager;	
 	
 	private IBPMTaskService localHumanTaskServer;
+
+	private SyncWSHumanTaskHandler handler;
 	
 	public IBPMTaskService getLocalHumanTaskServer() {
 		return localHumanTaskServer;
@@ -134,6 +165,15 @@ public class BPMServerImpl implements IBPMService {
 	
 	public EntityManagerFactory getJbpmTaskEMF() {
 		return this.jbpmTaskEMF;
+	}
+	
+
+	public EntityManagerFactory getConxlogisticsEMF() {
+		return conxlogisticsEMF;
+	}
+
+	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
+		this.conxlogisticsEMF = conxlogisticsEMF;
 	}
 
 	public void setGlobalTransactionManager(
@@ -171,10 +211,6 @@ public class BPMServerImpl implements IBPMService {
 	public EntityManagerFactory getJbpmEMF() {
 		return jbpmEMF;
 	}
-
-	public JndiTemplate getJndiTemplate() {
-		return jndiTemplate;
-	}
 	
 	public UserTransaction acquireUserTransaction() throws NamingException
 	{
@@ -191,6 +227,7 @@ public class BPMServerImpl implements IBPMService {
 		return processManager;
 	}
 
+	
 	private void start() {
 		jbpmProperties = loadJbpmProperties();
 		KnowledgeBase localKBase = loadKnowledgeBase(jbpmProperties);
@@ -208,6 +245,12 @@ public class BPMServerImpl implements IBPMService {
 				System.getProperty("jboss.server.temp.dir")));
 		// Create knowledge session
 		ksession = createOrLoadStatefulKnowledgeSession(localKBase);
+		
+		KnowledgeBase kbase = ksession.getKnowledgeBase();
+		Collection<KnowledgePackage> pkgs = kbase.getKnowledgePackages();
+		
+
+		
 		persistSessionId(jbpmProperties.getProperty("jbpm.conxrepo.tmp.dir",
 				System.getProperty("jboss.server.temp.dir")));
 		// Additional necessary modifications to the knowledge session
@@ -215,6 +258,63 @@ public class BPMServerImpl implements IBPMService {
 		// Adds a work item handler for work items titled "Human Task"		
 		registerWorkItemHandler(ksession, jbpmProperties);
 		addAgendaEventListener(ksession);
+		
+		try {
+			addUsersAndGroups();
+		} catch (NamingException e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+		}
+	}
+	
+	private void addUsersAndGroups() throws NamingException
+	{
+		 Context ctx = jndiTemplate.getContext();
+		 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
+
+		 try
+		 {
+			ut.begin();
+			
+			TaskServiceSession ts = getHumanTaskManager().getLocalService().createSession();
+			
+			// Add users
+			Map vars = new HashMap();
+			Reader reader;
+
+			URL usersURL = BPMServerImpl.class.getClassLoader().getResource(
+					"LoadUsers.mvel");
+			reader = new FileReader(new File(usersURL.toURI()));
+
+			Map<String, User> users = (Map<String, User>) eval(reader, vars);
+			for (User user : users.values()) {
+				ts.addUser(user);
+			}
+
+			URL grpsURL = BPMServerImpl.class.getClassLoader().getResource(
+					"LoadGroups.mvel");
+			reader = new FileReader(new File(grpsURL.toURI()));
+
+			Map<String, Group> groups = (Map<String, Group>) eval(reader, vars);
+			for (Group group : groups.values()) {
+				ts.addGroup(group);
+			}
+			
+			
+			ut.commit();
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+		}				
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static Object eval(Reader reader, Map vars) {
+		return TaskService.eval(reader, vars);
 	}
 	
 	private void stop() {
@@ -226,6 +326,13 @@ public class BPMServerImpl implements IBPMService {
 		KnowledgeBase kbase = null;
 		try {
 			GuvnorConnectionUtils guvnorUtils = new GuvnorConnectionUtils(jbpmProperties);
+			List<String> pkgs = guvnorUtils.getPackageNames();
+			boolean canBuild = false;
+			for (String pkgName : pkgs)
+			{
+				canBuild = guvnorUtils.canBuildPackage(pkgName);
+			}
+			
 			if (guvnorUtils.guvnorExists()) {
 				try {
 					ResourceChangeScannerConfiguration sconf = ResourceFactory
@@ -241,10 +348,20 @@ public class BPMServerImpl implements IBPMService {
 					aconf.setProperty("drools.agent.newInstance", "false");
 					kagent = KnowledgeAgentFactory.newKnowledgeAgent(
 							"Guvnor default", aconf);
+					StringReader changeSet = guvnorUtils.createChangeSet();
+					
+					String changeSetStr = changeSet.toString();
+					
 					kagent.applyChangeSet(ResourceFactory
-							.newReaderResource(guvnorUtils.createChangeSet()));
+							.newReaderResource(changeSet));
 					kbase = kagent.getKnowledgeBase();
+
 					int processCount = kagent.getKnowledgeBase().getProcesses().size();
+					
+					if (processCount > 0)
+					{
+						boolean b = true;
+					}
 					//if (processCount == 0)
 					//	throw new IllegalStateException("0 processes were found in Guvnor");
 				}
@@ -403,6 +520,16 @@ public class BPMServerImpl implements IBPMService {
 			env.set(EnvironmentName.ENTITY_MANAGER_FACTORY, jbpmEMF);
 			env.set(EnvironmentName.TRANSACTION_MANAGER, this.globalTransactionManager);
 			
+			
+			//-- Configure for JPA Entity Persistence support when saving ProcessInstance's with JPA Entities as variables
+	        Environment domainEnv = EnvironmentFactory.newEnvironment();
+	        domainEnv.set(EnvironmentName.ENTITY_MANAGER_FACTORY, conxlogisticsEMF);
+	        domainEnv.set(EnvironmentName.TRANSACTION_MANAGER, this.globalTransactionManager);
+	        env.set(EnvironmentName.OBJECT_MARSHALLING_STRATEGIES, new ObjectMarshallingStrategy[]{
+	                    new JPAPlaceholderResolverStrategy(domainEnv),
+	                    new SerializablePlaceholderResolverStrategy(ClassObjectMarshallingStrategyAcceptor.DEFAULT)
+	                });		
+			
 			 try {
 				 Context ctx = jndiTemplate.getContext();
 				 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
@@ -452,18 +579,18 @@ public class BPMServerImpl implements IBPMService {
 	
 	private void registerWorkItemHandler( StatefulKnowledgeSession ksession, Properties consoleProperties ) { 
 //        if ("Local".equalsIgnoreCase(consoleProperties.getProperty("jbpm.conxrepo.task.service.strategy", TaskClientFactory.DEFAULT_TASK_SERVICE_STRATEGY))) {
-            TaskService taskService = humanTaskManager.getService();
+//            TaskService taskService = humanTaskManager.getService();
 //            TaskServiceSession s = taskService.createSession();
 //            taskService.createTaskAdmin().getCompletedTasks()
-            SyncWSHumanTaskHandler handler = new SyncWSHumanTaskHandler(new LocalTaskService(taskService), ksession);
-            ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
-//        } else  {
-//            CommandBasedWSHumanTaskHandler handler = new CommandBasedWSHumanTaskHandler(ksession);
-//            TaskClient client = TaskClientFactory.newAsyncInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler");
-//            
-//            handler.configureClient(client);
+//            handler = new SyncWSHumanTaskHandler(new LocalTaskService(taskService), ksession);
 //            ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
-//            handler.connect();
+//        } else  {
+            CommandBasedWSHumanTaskHandler handler = new CommandBasedWSHumanTaskHandler(ksession);
+            TaskClient client = TaskClientFactory.newAsyncInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler");
+            
+            handler.configureClient(client);
+            ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
+            handler.connect();
 //        }
         
     }
@@ -650,6 +777,25 @@ public class BPMServerImpl implements IBPMService {
 	public List<HumanTaskNode> getProcessHumanTaskNodes(String definitionId) {
 		return processGraphManager.getProcessHumanTaskNodes(definitionId);
 	}
+	
+	@Override
+    public Map<String, Object> getProcessInstanceVariables(String processInstanceId)
+    {
+    	return getProcessManager().getProcessInstanceVariables(processInstanceId);
+    }
+	
+	@Override
+	public Map<String, String> findVariableInstances(Long processInstanceId)
+	{
+		return getProcessManager().findVariableInstances(processInstanceId);
+	}
+    
+	@Override
+    public void setProcessInstanceVariables(final String processInstanceId, final Map<String, Object> variables)
+    {
+		getProcessManager().setProcessInstanceVariables(processInstanceId, variables);
+    }	
+	
 
 	@Override
 	public List<Node> getActiveNode(String instanceId) {
@@ -669,6 +815,17 @@ public class BPMServerImpl implements IBPMService {
 	public void assignTask(long taskId, String idRef, String userId) {
 		taskManager.assignTask(taskId, idRef, userId);
 		
+	}
+	
+	@Override
+	public void nominate(long taskId, String userId) {
+		User nominee = (User)getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().findEntity(User.class, userId);
+		taskManager.nominateTask(taskId,nominee);
+	}	
+	
+	@Override
+	public void startTask(long taskId, String userId) {
+		taskManager.startTask(taskId, userId);
 	}
 
 	@Override
@@ -719,36 +876,76 @@ public class BPMServerImpl implements IBPMService {
 	}
 
 	@Override
-	public List<TaskSummary> getReadyTasksByProcessId(Long processInstanceId) {
-		String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
-		Query emQuery = getHumanTaskManager().getService().createSession().getTaskPersistenceManager().createNewQuery(query);
+	public List<Task> getCreatedTasksByProcessId(Long processInstanceId) {
+		//String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
+		Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createQuery("TasksByStatusAndProcessId");
+		emQuery.setParameter("status", org.jbpm.task.Status.Created);
+		emQuery.setParameter("processId", processInstanceId);
+		//emQuery.setParameter("language", "en-UK");
+		List<Task> result = emQuery.getResultList();
+		return result;
+	}
+	
+	
+	@Override
+	public List<Task> getReadyTasksByProcessId(Long processInstanceId) {
+		//String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
+		Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createQuery("TasksByStatusAndProcessId");
 		emQuery.setParameter("status", org.jbpm.task.Status.Ready);
 		emQuery.setParameter("processId", processInstanceId);
-		List<TaskSummary> result = emQuery.getResultList();
+		//emQuery.setParameter("language", "en-UK");
+		List<Task> result = emQuery.getResultList();
 		return result;
 	}
 
 	@Override
-	public List<TaskSummary> getReservedTasksByProcessId(Long processInstanceId) {
-		String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
-		Query emQuery = getHumanTaskManager().getService().createSession().getTaskPersistenceManager().createNewQuery(query);
+	public List<Task> getReservedTasksByProcessId(Long processInstanceId) {
+		//String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
+		Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createQuery("TasksByStatusAndProcessId");
 		emQuery.setParameter("status", org.jbpm.task.Status.Reserved);
 		emQuery.setParameter("processId", processInstanceId);
-		List<TaskSummary> result = emQuery.getResultList();
+		//mQuery.setParameter("language", "en-UK");
+		List<Task> result = emQuery.getResultList();
 		return result;
 	}
 
 	@Override
-	public List<TaskSummary> getReadyAndReservedTasksByProcessId(
+	public List<Task> getReadyAndReservedTasksByProcessId(
 			Long processInstanceId) {
 		String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status in :statusList and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
-		Query emQuery = getHumanTaskManager().getService().createSession().getTaskPersistenceManager().createNewQuery(query);
+		Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createNewQuery(query);
 		ArrayList<org.jbpm.task.Status> statusList = new ArrayList<org.jbpm.task.Status>();
 		statusList.add(org.jbpm.task.Status.Ready);
 		statusList.add(org.jbpm.task.Status.Reserved);
 		emQuery.setParameter("statusList", statusList);
 		emQuery.setParameter("processId", processInstanceId);
-		List<TaskSummary> result = emQuery.getResultList();
+		//emQuery.setParameter("language", "en-UK");
+		List<Task> result = emQuery.getResultList();
 		return result;
 	}
+	
+	@Override
+	public Content getTaskContent(long taskId) {
+		return taskManager.getTaskContent(taskId);
+	}	
+	
+	@Override
+    public Object getTaskContentObject(Task task) throws IOException, ClassNotFoundException{
+        Content content = taskManager.getTaskContent(task.getTaskData().getDocumentContentId());
+        /*
+        Object readObject = 
+                ContentMarshallerHelper.unmarshall(task.getTaskData().getDocumentType(), 
+                                                            content.getContent(), 
+                                                            ((SyncWSHumanTaskHandler)handler).getMarshallerContext(),  
+                                                            ksession.getEnvironment());
+        //ois.readObject();
+         * *
+         */
+        ByteArrayInputStream bais = new ByteArrayInputStream(content.getContent());
+        
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        Object readObject = ois.readObject();         
+        logger.info(" >>> Object = "+readObject);
+        return readObject;
+    }		
 }

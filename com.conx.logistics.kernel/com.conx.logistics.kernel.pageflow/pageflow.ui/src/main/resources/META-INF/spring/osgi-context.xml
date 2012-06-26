@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<osgi:service ref="startTaskActionContribution"  interface="com.conx.logistics.kernel.ui.service.contribution.ITaskActionContribution">
+		<osgi:service-properties>
+		    <entry key="code" value="KERNEL.PAGEFLOW.STARTTASK"/>
+		  </osgi:service-properties>		
+	</osgi:service>	
+	
+	<osgi:reference id="defaultPageFlowEngine" cardinality="1..1" interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">		
+	</osgi:reference>	
+</beans>

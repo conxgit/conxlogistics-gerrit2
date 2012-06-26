@@ -28,4 +28,11 @@
 	<osgi:list id="viewContributions" cardinality="0..N" interface="com.conx.logistics.kernel.ui.service.contribution.IViewContribution" >
 		<osgi:listener ref="mainApp" bind-method="bindViewContribution" unbind-method="unbindViewContribution"/>
 	</osgi:list>	
+	
+	<osgi:list id="actionContributions" cardinality="0..N" interface="com.conx.logistics.kernel.ui.service.contribution.ITaskActionContribution" >
+		<osgi:listener ref="mainApp" bind-method="bindActionContribution" unbind-method="unbindActionContribution"/>
+	</osgi:list>	
+	
+	<osgi:reference id="defaultPageFlowEngine" cardinality="1..1" interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">		
+	</osgi:reference>		
 </beans>

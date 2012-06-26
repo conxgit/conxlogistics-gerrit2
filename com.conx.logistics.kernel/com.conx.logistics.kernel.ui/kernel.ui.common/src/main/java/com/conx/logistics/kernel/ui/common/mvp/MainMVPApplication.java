@@ -60,6 +60,8 @@ public class MainMVPApplication extends Application {
 			.synchronizedMap(new HashMap<String,IApplicationViewContribution>());
 	private final Map<String,IViewContribution> viewContributions = Collections
 			.synchronizedMap(new HashMap<String,IViewContribution>());	
+	private final Map<String,IActionContribution> actionContributions = Collections
+			.synchronizedMap(new HashMap<String,IActionContribution>());	
 	
 	private volatile boolean initialized = false;
 
@@ -107,6 +109,46 @@ public class MainMVPApplication extends Application {
 	public IPresenterFactory getPresenterFactory() {
 		return this.presenterFactory;
 	}
+	
+	public void bindActionContribution(IActionContribution actionContribution,
+			Map properties) {
+		String code = (String)properties.get(IUIContributionManager.UISERVICE_PROPERTY_CODE);
+		if (Validator.isNotNull(code))
+		{
+			logger.info("bindActionContribution("+code+")");
+			actionContributions.put(code,actionContribution);
+			if (initialized) {
+				/*
+				tabSheet.addTab(viewContribution.getView(this), viewContribution
+						.getName(), new ThemeResource(viewContribution.getIcon()));
+				*/
+			}
+		}
+		else
+		{
+			logger.error("bindViewContribution has no code associated with it. Registration failed.");
+		}
+	}
+
+	public void unbindActionContribution(IActionContribution actionContribution,
+			Map properties) {
+		String code = (String)properties.get(IUIContributionManager.UISERVICE_PROPERTY_CODE);
+		if (Validator.isNotNull(code))
+		{
+			logger.info("unbindActionContribution("+code+")");
+			actionContributions.remove(code);
+			if (initialized) {
+				/*
+				tabSheet.addTab(viewContribution.getView(this), viewContribution
+						.getName(), new ThemeResource(viewContribution.getIcon()));
+				*/
+			}
+		}
+		else
+		{
+			logger.error("unbindActionContribution has no code associated with it. Deregistration failed.");
+		}
+	}		
 
 
 	public void bindViewContribution(IViewContribution viewContribution,
@@ -299,5 +341,10 @@ public class MainMVPApplication extends Application {
 	public IViewContribution getViewContributionByCode(String code)
 	{
 		return viewContributions.get(code);
+	}
+	
+	public IActionContribution getActionContributionByCode(String code)
+	{
+		return actionContributions.get(code);
 	}
 }

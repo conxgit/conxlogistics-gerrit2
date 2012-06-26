@@ -32,6 +32,7 @@ import org.jboss.bpm.console.client.model.ProcessInstanceRef.STATE;
 import org.jbpm.process.audit.JPAProcessInstanceDbLog;
 import org.jbpm.process.audit.NodeInstanceLog;
 import org.jbpm.process.audit.ProcessInstanceLog;
+import org.jbpm.process.audit.VariableInstanceLog;
 
 import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
 
@@ -132,5 +133,26 @@ public class ProcessManagement implements org.jboss.bpm.console.server.integrati
     public void endInstance(String instanceId, RESULT result) {
         commandDelegate.abortProcessInstance(instanceId);
     }
-
+    
+    public Map<String, Object> getProcessInstanceVariables(String processInstanceId)
+    {
+    	return commandDelegate.getProcessInstanceVariables(processInstanceId);
+    }
+    
+    public Map<String, String> findVariableInstances(Long processInstanceId)
+    {
+    	Map<String,String> varMap = new HashMap<String, String>();
+    	List<VariableInstanceLog> vars = commandDelegate.findVariableInstances(processInstanceId);
+    	for (VariableInstanceLog var : vars)
+    	{
+    		varMap.put(var.getVariableId(), var.getValue());
+    	}
+    	
+    	return varMap;
+    }    
+    
+    public void setProcessInstanceVariables(final String processInstanceId, final Map<String, Object> variables)
+    {
+    	commandDelegate.setProcessInstanceVariables(processInstanceId, variables);
+    }
 }

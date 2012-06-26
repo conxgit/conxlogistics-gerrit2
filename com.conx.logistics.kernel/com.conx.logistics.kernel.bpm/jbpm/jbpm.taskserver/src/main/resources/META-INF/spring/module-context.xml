@@ -14,6 +14,8 @@
 	<bean id="humanTaskServer" class="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.HumanTaskServer" init-method="start" destroy-method="stop">
 		<property name="jbpmTaskEMF" ref="jbpmTaskEMF"></property>
 		<property name="globalJTATransManager" ref="globalTransManager"></property>
+		<property name="globalTransactionManager" ref="globalTransactionManager"/>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>		
 	</bean>
 	
 	

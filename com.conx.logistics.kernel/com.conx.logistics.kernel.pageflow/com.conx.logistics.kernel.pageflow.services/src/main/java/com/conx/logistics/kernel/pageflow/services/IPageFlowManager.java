@@ -1,5 +1,8 @@
 package com.conx.logistics.kernel.pageflow.services;
 
+
+import java.util.Map;
+
 import com.conx.logistics.mdm.domain.task.TaskDefinition;
 
 public interface IPageFlowManager {
@@ -7,15 +10,23 @@ public interface IPageFlowManager {
 	 * Services:
 	 */
 	/**
-	 * 1. Given a TaskDefinition and UserId, createPageFlowSession
+	 * Given a TaskDefinition and UserId, createPageFlowSession
 	 */
 	public IPageFlowSession startPageFlowSession(String userid, TaskDefinition td);
 	/**
-	 * 2. Given a TaskDefinition and UserId, pageFlowSessionId
+	 * Given a TaskDefinition and UserId, createPageFlowSession
+	 */
+	public ITaskWizard createTaskWizard(Map<String, Object> properties) throws Exception;
+	/**
+	 * Given a TaskDefinition and UserId, createPageFlowSession
+	 */
+	public ITaskWizard executeTaskWizard(ITaskWizard tw, Map<String, Object> properties) throws Exception;	
+	/**
+	 * Given a TaskDefinition and UserId, pageFlowSessionId
 	 */
 	public IPageFlowSession closePageFlowSession(String userid, Long pageFlowSessionId);	
 	/**
-	 * 3. Given a TaskDefinition and UserId, pageFlowSessionId
+	 * Given a TaskDefinition and UserId, pageFlowSessionId
 	 */
 	public IPageFlowSession resumePageFlowSession(String userid, Long pageFlowSessionId);
 }

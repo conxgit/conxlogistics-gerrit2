@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-Vendor: ConX
-Build-Jdk: 1.6.0_29
-Built-By: Developer
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConXLogistics BPM PoolingDataSource

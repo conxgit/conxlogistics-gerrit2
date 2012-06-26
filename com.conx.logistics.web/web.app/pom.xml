@@ -34,6 +34,11 @@
 			<groupId>com.conx.logistics</groupId>
 			<artifactId>com.conx.logistics.kernel.workspace.ui</artifactId>
 			<version>1.0.0</version>
+		</dependency>		
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.app.whse.ui</artifactId>
+			<version>1.0.0</version>
 		</dependency>				
 		<!-- GWT/Vaadin -->
         <dependency>
@@ -65,7 +70,12 @@
 			<artifactId>vaadin</artifactId>
 			<version>6.7.5</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>wizards-for-vaadin</artifactId>
+		   <version>0.4.4</version>
+		</dependency>						
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>jpacontainer-addon-agpl-3.0</artifactId>

@@ -15,31 +15,32 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.bpmserver
  .persistence
-Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.journa
- l;version="[2.1.0,2.2.0)",bitronix.tm.recovery;version="[2.1.0,2.2.0)
- ",bitronix.tm.resource;version="[2.1.0,2.2.0)",bitronix.tm.resource.j
- dbc;version="[2.1.0,2.2.0)",bitronix.tm.timer;version="[2.1.0,2.2.0)"
- ,bitronix.tm.twopc.executor;version="[2.1.0,2.2.0)",bitronix.tm.utils
- ;version="[2.1.0,2.2.0)",com.mysql.jdbc.jdbc2.optional;version="5.1.2
- 0",javassist.util.proxy;version="3.12.0.GA",javax.naming;version="0",
- javax.persistence;version="0",javax.persistence.criteria;version="0",
- javax.sql;version="0",javax.transaction;version="0",javax.validation;
- version="1.0.0.GA",org.drools.persistence.info;version="[5.4.0.Final,
- 5.4.0.Final]",org.hibernate;version="3.6.0.Final",org.hibernate.ejb;v
- ersion="3.6.0.Final",org.hibernate.transaction;version="3.6.0.Final",
- org.hibernate.validator;version="4.2.0.Final",org.jbpm.persistence.pr
- ocessinstance;version="[5.3.0.Final,5.3.0.Final]",org.jbpm.process.au
- dit;version="[5.3.0.Final,5.3.0.Final]",org.jbpm.task;version="[5.3.0
- .Final,5.3.0.Final]",org.jbpm.task.query;version="[5.3.0.Final,5.3.0.
- Final]",org.jsoup;version="1.5.2",org.springframework.beans.factory.a
- nnotation;version="[3.0, 3.1)",org.springframework.context.weaving;ve
- rsion="[3.0, 3.1)",org.springframework.core.io;version="[3.0, 3.1)",o
- rg.springframework.dao;version="[3.0, 3.1)",org.springframework.dao.a
- nnotation;version="[3.0, 3.1)",org.springframework.jdbc.core;version=
- "[3.0, 3.1)",org.springframework.orm.jpa;version="[3.0, 3.1)",org.spr
- ingframework.orm.jpa.vendor;version="[3.0, 3.1)",org.springframework.
- stereotype;version="[3.0, 3.1)",org.springframework.transaction;versi
- on="[3.0, 3.1)",org.springframework.transaction.annotation;version="[
- 3.0, 3.1)",org.springframework.transaction.aspectj;version="[3.0, 3.1
- )",org.springframework.transaction.jta;version="[3.0, 3.1)"
+Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.jndi;v
+ ersion="[2.1.0,2.2.0)",bitronix.tm.journal;version="[2.1.0,2.2.0)",bi
+ tronix.tm.recovery;version="[2.1.0,2.2.0)",bitronix.tm.resource;versi
+ on="[2.1.0,2.2.0)",bitronix.tm.resource.jdbc;version="[2.1.0,2.2.0)",
+ bitronix.tm.timer;version="[2.1.0,2.2.0)",bitronix.tm.twopc.executor;
+ version="[2.1.0,2.2.0)",bitronix.tm.utils;version="[2.1.0,2.2.0)",com
+ .mysql.jdbc.jdbc2.optional;version="5.1.20",javassist.util.proxy;vers
+ ion="3.12.0.GA",javax.naming;version="0",javax.persistence;version="0
+ ",javax.persistence.criteria;version="0",javax.sql;version="0",javax.
+ transaction;version="0",javax.validation;version="1.0.0.GA",org.apach
+ e.naming.java;version="0",org.drools.persistence.info;version="[5.4.0
+ .Final,5.4.0.Final]",org.hibernate;version="3.6.0.Final",org.hibernat
+ e.ejb;version="3.6.0.Final",org.hibernate.transaction;version="3.6.0.
+ Final",org.hibernate.validator;version="4.2.0.Final",org.jbpm.persist
+ ence.processinstance;version="[5.3.0.Final,5.3.0.Final]",org.jbpm.pro
+ cess.audit;version="[5.3.0.Final,5.3.0.Final]",org.jbpm.task;version=
+ "[5.3.0.Final,5.3.0.Final]",org.jbpm.task.query;version="[5.3.0.Final
+ ,5.3.0.Final]",org.jsoup;version="1.5.2",org.springframework.beans.fa
+ ctory.annotation;version="[3.0, 3.1)",org.springframework.context.wea
+ ving;version="[3.0, 3.1)",org.springframework.core.io;version="[3.0, 
+ 3.1)",org.springframework.dao;version="[3.0, 3.1)",org.springframewor
+ k.dao.annotation;version="[3.0, 3.1)",org.springframework.jdbc.core;v
+ ersion="[3.0, 3.1)",org.springframework.orm.jpa;version="[3.0, 3.1)",
+ org.springframework.orm.jpa.vendor;version="[3.0, 3.1)",org.springfra
+ mework.stereotype;version="[3.0, 3.1)",org.springframework.transactio
+ n;version="[3.0, 3.1)",org.springframework.transaction.annotation;ver
+ sion="[3.0, 3.1)",org.springframework.transaction.aspectj;version="[3
+ .0, 3.1)",org.springframework.transaction.jta;version="[3.0, 3.1)"
 

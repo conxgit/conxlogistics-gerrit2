@@ -20,6 +20,7 @@
 		-->
 		<module>jbpm.shared</module>
 		<module>jbpm.core</module>
+  		<module>jbpm.taskserver.fragment</module>		
 		<module>jbpm.taskserver</module>
 		<!-- <module>jbpm.taskserver.tests</module> -->
 		<module>jbpm.taskserver.persistence</module>
@@ -29,5 +30,6 @@
   		<!-- <module>jpbm-osgi-bundles</module> -->
   		<module>jbpm.bpmserver.tests.standalone</module>
   		<!-- <module>jbpm.core.mock</module> -->
+
 	</modules>
 </project>

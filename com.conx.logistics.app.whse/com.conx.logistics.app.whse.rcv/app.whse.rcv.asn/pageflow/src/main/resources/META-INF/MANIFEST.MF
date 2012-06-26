@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.pageflow.pages;ver
- sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.v
- aadin.data,com.vaadin.ui"
+ sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.c
+ onx.logistics.mdm.domain.geolocation,com.vaadin.addon.jpacontainer,co
+ m.vaadin.data,com.vaadin.ui"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
