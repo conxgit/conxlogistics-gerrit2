@@ -7,10 +7,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import com.conx.logistics.app.whse.rcv.asn.shared.type.ASNLINESTATUS;
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 import com.conx.logistics.mdm.domain.product.Product;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -23,6 +26,10 @@ public class ASNLine extends MultitenantBaseEntity {
     @ManyToOne(targetEntity = ASN.class)
     @JoinColumn
     private ASN parentASN;    
+    
+    @OneToOne(targetEntity = ReferenceNumber.class)
+    @JoinColumn
+    private ReferenceNumber refNumber;
 
     private Integer lineNumber;
 
@@ -129,5 +136,13 @@ public class ASNLine extends MultitenantBaseEntity {
 
 	public void setStatus(ASNLINESTATUS status) {
 		this.status = status;
+	}
+
+	public ReferenceNumber getRefNumber() {
+		return refNumber;
+	}
+
+	public void setRefNumber(ReferenceNumber refNumber) {
+		this.refNumber = refNumber;
 	}
 }

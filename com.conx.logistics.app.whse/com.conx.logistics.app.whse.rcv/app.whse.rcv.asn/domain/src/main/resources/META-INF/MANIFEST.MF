@@ -3,26 +3,17 @@ Export-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
  0.0";uses:="com.conx.logistics.app.whse.rcv.asn.shared.type,com.conx.
  logistics.mdm.domain,com.conx.logistics.mdm.domain.commercialrecord,c
  om.conx.logistics.mdm.domain.geolocation,com.conx.logistics.mdm.domai
- n.organization,com.conx.logistics.mdm.domain.product,javax.persistenc
- e,org.springframework.format.annotation",com.conx.logistics.app.whse.
- rcv.asn.shared.type;version="1.0.0"
-Exclude-Packages:   javax.persistence, com.conx.logistics.mdm.domain, 
- com.conx.logistics.mdm.domain.commercialrecord, com.conx.logistics.md
- m.domain.geolocation, com.conx.logistics.mdm.domain.organization, com
- .conx.logistics.mdm.domain.product, org.springframework.format.annota
- tion
-Built-By: dev
+ n.organization,com.conx.logistics.mdm.domain.product,com.conx.logisti
+ cs.mdm.domain.referencenumber,javax.persistence,org.springframework.f
+ ormat.annotation",com.conx.logistics.app.whse.rcv.asn.shared.type;ver
+ sion="1.0.0"
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Build-Jdk: 1.6.0_23
+Built-By: sandile
+Bundle-Version: 1.0.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: ConX WMS RCV ASN Sub-Module Domain Model
-Created-By: Maven Integration for Eclipse
-Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
-Bundle-Version: 1.0.0
-Build-Jdk: 1.6.0_29
 Bundle-ManifestVersion: 2
-Exclude-Imports:   javax.persistence, com.conx.logistics.mdm.domain, c
- om.conx.logistics.mdm.domain.commercialrecord, com.conx.logistics.mdm
- .domain.geolocation, com.conx.logistics.mdm.domain.organization, com.
- conx.logistics.mdm.domain.product, org.springframework.format.annotat
- ion
+Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.domain
 

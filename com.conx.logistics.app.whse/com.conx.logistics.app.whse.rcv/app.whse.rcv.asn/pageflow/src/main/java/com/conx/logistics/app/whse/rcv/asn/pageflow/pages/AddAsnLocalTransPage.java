@@ -1,23 +1,28 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
+import java.util.Date;
 import java.util.Map;
 
+import javax.persistence.EntityManagerFactory;
+
+import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
 import com.conx.logistics.mdm.domain.constants.AddressCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.geolocation.Address;
+import com.conx.logistics.mdm.domain.organization.Contact;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
-import com.vaadin.data.Container;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
-import com.vaadin.data.util.filter.Compare;
+import com.vaadin.ui.AbstractSelect.Filtering;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.InlineDateField;
@@ -27,9 +32,12 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 public class AddAsnLocalTransPage extends IPageFlowPage {
-private static final String VIEW_HEIGHT = "400px";
+	private static final String VIEW_HEIGHT = "450px";
+	private static final String ASN_VARIABLE_KEY = "asn";
 	
-	private VerticalLayout canvas;
+	private Map<String, Object> processState;
+	private ASN asn;
+	
 	private ComboBox pickupCarrierOrganization;
 	private TabSheet entityTabSheet;
 	private ComboBox pickupCarrierAddress;
@@ -46,7 +54,7 @@ private static final String VIEW_HEIGHT = "400px";
 	private TextField pickupCarrierBolNum;
 	private TextField pickupCarrierSealNum;
 	private HorizontalLayout pickupCarrierLayout;
-	private Label pickupAddressLabel;
+	private Label pickupCarrierAddressLabel;
 	private GridLayout pickupLocationContactLayout;
 	private GridLayout pickupLocationDockTypeLayout;
 	private GridLayout pickupCarrierContactLayout;
@@ -58,7 +66,6 @@ private static final String VIEW_HEIGHT = "400px";
 	private HorizontalLayout dateTimeLayout;
 	private ComboBox dropOffLocationOrganization;
 	private ComboBox dropOffLocationAddress;
-	private Label dropOffAddressLabel;
 	private GridLayout dropOffLocationOrganizationLayout;
 	private ComboBox dropOffLocationContact;
 	private GridLayout dropOffLocationContactLayout;
@@ -69,12 +76,26 @@ private static final String VIEW_HEIGHT = "400px";
 	private Button resetButton;
 	private HorizontalLayout toolstripLeftButtonPanel;
 	private HorizontalLayout toolStrip;
+	private Label pickupLocationContactAddressLabel;
 
 	private JPAContainer<Organization> pickupLocationOrganizationContainer;
+	private JPAContainer<Organization> pickupCarrierOrganizationContainer;
+	private JPAContainer<Organization> dropOffLocationOrganizationContainer;
+	
+	private Organization currentPickupLocationOrg = null;
+	private Label pickupCarrierContactAddressLabel;
+	private Organization currentPickupCarrierOrg;
+	private Label dropOffLocationContactAddressLabel;
+	private Label dropOffLocationAddressLabel;
+	private Organization currentDropOffLocationOrg;
+	private EntityManagerFactory emf;
+	private Label pickupLocationAddressLabel;
+	private Button cancelButton;
 	
 	private void initContainers() {
 		pickupLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
-//		pickupLocationContactContainer = JPAContainerFactory.make(Contact.class, this.emf.createEntityManager());
+		pickupCarrierOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
+		dropOffLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 	}
 	
 	public void initPickupLocation() {
@@ -82,56 +103,89 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupLocationOrganization.setInputPrompt("Organization");
 		pickupLocationOrganization.setContainerDataSource(pickupLocationOrganizationContainer);
 		pickupLocationOrganization.setItemCaptionPropertyId("code");
+		pickupLocationOrganization.setFilteringMode(Filtering.FILTERINGMODE_OFF);
+		pickupLocationOrganization.setImmediate(true);
 		pickupLocationOrganization.setWidth("100%");
+		pickupLocationOrganization.setValue(pickupLocationOrganizationContainer.getIdByIndex(0));
+		pickupLocationOrganization.setNullSelectionAllowed(false);
+		currentPickupLocationOrg = pickupLocationOrganizationContainer.getItem(pickupLocationOrganizationContainer.getIdByIndex(0)).getEntity();
 		pickupLocationOrganization.addListener(new ValueChangeListener() {
-			private static final long serialVersionUID = 7796995334178965L;
+			private static final long serialVersionUID = -7077062557675605070L;
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
-				if (!pickupLocationAddress.isEnabled()) {
-					pickupLocationAddress.setEnabled(true);
-				}
+				updatePickupLocationFields(pickupLocationOrganization.getValue());
 			}
 		});
 		
 		pickupLocationAddress = new ComboBox();
 		pickupLocationAddress.setInputPrompt("Address");
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
-		pickupLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+		pickupLocationAddress.setEnabled(false);
+		pickupLocationAddress.setNullSelectionAllowed(false);
 		pickupLocationAddress.setWidth("100%");
 		pickupLocationAddress.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 7796995334178965L;
 			
-			private Organization organization;
-			
 			@Override
 			public void valueChange(ValueChangeEvent event) {
-				organization = pickupLocationOrganizationContainer.getItem(pickupLocationOrganization.getValue()).getEntity();
 				if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getAdHocAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getAdHocAddress()));
 				} else if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getShippingAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getShippingAddress()));
 				} else if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getReceivingAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getReceivingAddress()));
 				} else if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getBillingAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getBillingAddress()));
 				} else if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getPickupAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getPickupAddress()));
 				} else if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getDeliveryAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getDeliveryAddress()));
 				} else {
-					pickupAddressLabel.setValue(addressToXhtml(organization.getMainAddress()));
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getMainAddress()));
 				}
 			}
 		});
 		
-		pickupAddressLabel = new Label();
-		pickupAddressLabel.setContentMode(Label.CONTENT_XHTML);
-		pickupAddressLabel.setValue("<i>No Address Selected</i>");
+		pickupLocationAddressLabel = new Label();
+		pickupLocationAddressLabel.setContentMode(Label.CONTENT_XHTML);
+		pickupLocationAddressLabel.setValue("<i>No Address Selected</i>");
+		
+		if (currentPickupLocationOrg.getAdHocAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getAdHocAddress()));
+		} else if (currentPickupLocationOrg.getShippingAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getShippingAddress()));
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+		} else if (currentPickupLocationOrg.getReceivingAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getReceivingAddress()));
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+		} else if (currentPickupLocationOrg.getBillingAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getBillingAddress()));
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+		} else if (currentPickupLocationOrg.getPickupAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getPickupAddress()));
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+		} else if (currentPickupLocationOrg.getDeliveryAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getDeliveryAddress()));
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+		} else if (currentPickupLocationOrg.getMainAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getMainAddress()));
+			pickupLocationAddress.setValue(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			pickupLocationAddress.setEnabled(true);
+		}
 		
 		Label pickupLocationOrganizationLayoutLabel = new Label();
 		pickupLocationOrganizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
@@ -140,8 +194,8 @@ private static final String VIEW_HEIGHT = "400px";
 		Label pickupLocationOrganizationLabel = new Label();
 		pickupLocationOrganizationLabel.setValue("Organization");
 		
-		Label pickupLocationAddressLabel = new Label();
-		pickupLocationAddressLabel.setValue("Address");
+		Label pickupLocationAddressFieldLabel = new Label();
+		pickupLocationAddressFieldLabel.setValue("Address");
 		
 		pickupLocationOrganizationLayout = new GridLayout(2, 4);
 		pickupLocationOrganizationLayout.setWidth("100%");
@@ -152,21 +206,33 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupLocationOrganizationLayout.addComponent(pickupLocationOrganizationLayoutLabel, 0, 0, 1, 0);
 		pickupLocationOrganizationLayout.addComponent(pickupLocationOrganizationLabel);
 		pickupLocationOrganizationLayout.addComponent(pickupLocationOrganization);
-		pickupLocationOrganizationLayout.addComponent(pickupLocationAddressLabel);
+		pickupLocationOrganizationLayout.addComponent(pickupLocationAddressFieldLabel);
 		pickupLocationOrganizationLayout.addComponent(pickupLocationAddress);
-		pickupLocationOrganizationLayout.addComponent(pickupAddressLabel, 1, 3, 1, 3);
+		pickupLocationOrganizationLayout.addComponent(pickupLocationAddressLabel, 1, 3, 1, 3);
 		pickupLocationOrganizationLayout.setComponentAlignment(pickupLocationOrganizationLabel, Alignment.MIDDLE_LEFT);
-		pickupLocationOrganizationLayout.setComponentAlignment(pickupLocationAddressLabel, Alignment.MIDDLE_LEFT);
+		pickupLocationOrganizationLayout.setComponentAlignment(pickupLocationAddressFieldLabel, Alignment.MIDDLE_LEFT);
 		
 		pickupLocationContact = new ComboBox();
+		pickupLocationContact.setEnabled(false);
 		pickupLocationContact.setInputPrompt("Contact");
-		pickupLocationContact.addItem("Red");
-		pickupLocationContact.addItem("Orange");
-		pickupLocationContact.addItem("Blue");
-		pickupLocationContact.addItem("Yellow");
-		pickupLocationContact.addItem("Grey");
 		pickupLocationContact.setWidth("100%");
-		//TODO
+		String name = currentPickupLocationOrg.getMainContact().getFirstName() + " " + currentPickupLocationOrg.getMainContact().getLastName();
+		pickupLocationContact.addItem(name);
+		pickupLocationContact.setNullSelectionAllowed(false);
+		pickupLocationContact.setEnabled(currentPickupLocationOrg != null);
+		pickupLocationContact.setValue(name);
+		pickupLocationContact.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 779001014178965L;
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				pickupLocationContactAddressLabel.setValue(contactToXhtml(currentPickupLocationOrg.getMainContact()));
+			}
+		});
+		
+		pickupLocationContactAddressLabel = new Label();
+		pickupLocationContactAddressLabel.setContentMode(Label.CONTENT_XHTML);
+		pickupLocationContactAddressLabel.setValue(contactToXhtml(currentPickupLocationOrg.getMainContact()));
 		
 		Label pickupLocationContactLabel = new Label();
 		pickupLocationContactLabel.setValue("Contact");
@@ -175,7 +241,7 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupLocationContactLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupLocationContactLayoutLabel.setValue("<h3>Contact</h3>");
 		
-		pickupLocationContactLayout = new GridLayout(2, 2);
+		pickupLocationContactLayout = new GridLayout(2, 3);
 		pickupLocationContactLayout.setMargin(false,  true, true, true);
 		pickupLocationContactLayout.setSpacing(true);
 		pickupLocationContactLayout.setWidth("100%");
@@ -184,17 +250,13 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupLocationContactLayout.addComponent(pickupLocationContactLayoutLabel, 0, 0, 1, 0);
 		pickupLocationContactLayout.addComponent(pickupLocationContactLabel);
 		pickupLocationContactLayout.addComponent(pickupLocationContact);
+		pickupLocationContactLayout.addComponent(pickupLocationContactAddressLabel, 1, 2, 1, 2);
 		pickupLocationContactLayout.setComponentAlignment(pickupLocationContactLabel, Alignment.MIDDLE_LEFT);
 		
 		pickupLocationDockType = new ComboBox();
 		pickupLocationDockType.setInputPrompt("Dock Type");
-		pickupLocationDockType.addItem("Red");
-		pickupLocationDockType.addItem("Orange");
-		pickupLocationDockType.addItem("Blue");
-		pickupLocationDockType.addItem("Yellow");
-		pickupLocationDockType.addItem("Grey");
+		pickupLocationDockType.setEnabled(false);
 		pickupLocationDockType.setWidth("100%");
-		//TODO
 		
 		Label pickupLocationDockTypeLabel = new Label();
 		pickupLocationDockTypeLabel.setValue("Dock Type");
@@ -229,27 +291,91 @@ private static final String VIEW_HEIGHT = "400px";
 	public void initPickupCarrier() {
 		pickupCarrierOrganization = new ComboBox();
 		pickupCarrierOrganization.setInputPrompt("Organization");
-		pickupCarrierOrganization.addItem("Red");
-		pickupCarrierOrganization.addItem("Orange");
-		pickupCarrierOrganization.addItem("Blue");
-		pickupCarrierOrganization.addItem("Yellow");
-		pickupCarrierOrganization.addItem("Grey");
+		pickupCarrierOrganization.setContainerDataSource(pickupCarrierOrganizationContainer);
+		pickupCarrierOrganization.setItemCaptionPropertyId("code");
 		pickupCarrierOrganization.setWidth("100%");
-		//TODO
+		pickupCarrierOrganization.setFilteringMode(Filtering.FILTERINGMODE_OFF);
+		pickupCarrierOrganization.setImmediate(true);
+		pickupCarrierOrganization.setValue(pickupCarrierOrganizationContainer.getIdByIndex(0));
+		pickupCarrierOrganization.setNullSelectionAllowed(false);
+		currentPickupCarrierOrg = pickupCarrierOrganizationContainer.getItem(pickupCarrierOrganizationContainer.getIdByIndex(0)).getEntity();
+		pickupCarrierOrganization.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 7796995334178965L;
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				updatePickupCarrierFields(pickupCarrierOrganization.getValue());
+			}
+		});
 		
 		pickupCarrierAddress = new ComboBox();
 		pickupCarrierAddress.setInputPrompt("Address");
-		pickupCarrierAddress.addItem("Red");
-		pickupCarrierAddress.addItem("Orange");
-		pickupCarrierAddress.addItem("Blue");
-		pickupCarrierAddress.addItem("Yellow");
-		pickupCarrierAddress.addItem("Grey");
+		pickupCarrierAddress.setEnabled(false);
+		pickupCarrierAddress.setNullSelectionAllowed(false);
 		pickupCarrierAddress.setWidth("100%");
-		//TODO
+		pickupCarrierAddress.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 7796995334178965L;
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getAdHocAddress()));
+				} else if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getShippingAddress()));
+				} else if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getReceivingAddress()));
+				} else if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getBillingAddress()));
+				} else if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getPickupAddress()));
+				} else if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getDeliveryAddress()));
+				} else {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getMainAddress()));
+				}
+			}
+		});
 		
-		pickupAddressLabel = new Label();
-		pickupAddressLabel.setContentMode(Label.CONTENT_XHTML);
-		pickupAddressLabel.setValue("</br><b>220 N Elm Ave</b></br>Newtown, PA</br>18940");
+		pickupCarrierAddressLabel = new Label();
+		pickupCarrierAddressLabel.setContentMode(Label.CONTENT_XHTML);
+		pickupCarrierAddressLabel.setValue("<i>No Address Selected</i>");
+		
+		if (currentPickupCarrierOrg.getAdHocAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getAdHocAddress()));
+		} else if (currentPickupCarrierOrg.getShippingAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getShippingAddress()));
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+		} else if (currentPickupCarrierOrg.getReceivingAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getReceivingAddress()));
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+		} else if (currentPickupCarrierOrg.getBillingAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getBillingAddress()));
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+		} else if (currentPickupCarrierOrg.getPickupAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getPickupAddress()));
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+		} else if (currentPickupCarrierOrg.getDeliveryAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getDeliveryAddress()));
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+		} else if (currentPickupCarrierOrg.getMainAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getMainAddress()));
+			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			pickupCarrierAddress.setEnabled(true);
+		}
 		
 		Label pickupCarrierOrganizationLayoutLabel = new Label();
 		pickupCarrierOrganizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
@@ -258,8 +384,8 @@ private static final String VIEW_HEIGHT = "400px";
 		Label pickupCarrierOrganizationLabel = new Label();
 		pickupCarrierOrganizationLabel.setValue("Organization");
 		
-		Label pickupCarrierAddressLabel = new Label();
-		pickupCarrierAddressLabel.setValue("Address");
+		Label pickupCarrierAddressFieldLabel = new Label();
+		pickupCarrierAddressFieldLabel.setValue("Address");
 		
 		pickupCarrierOrganizationLayout = new GridLayout(2, 4);
 		pickupCarrierOrganizationLayout.setWidth("100%");
@@ -270,21 +396,34 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupCarrierOrganizationLayout.addComponent(pickupCarrierOrganizationLayoutLabel, 0, 0, 1, 0);
 		pickupCarrierOrganizationLayout.addComponent(pickupCarrierOrganizationLabel);
 		pickupCarrierOrganizationLayout.addComponent(pickupCarrierOrganization);
-		pickupCarrierOrganizationLayout.addComponent(pickupCarrierAddressLabel);
+		pickupCarrierOrganizationLayout.addComponent(pickupCarrierAddressFieldLabel);
 		pickupCarrierOrganizationLayout.addComponent(pickupCarrierAddress);
-		pickupCarrierOrganizationLayout.addComponent(pickupAddressLabel, 1, 3, 1, 3);
+		pickupCarrierOrganizationLayout.addComponent(pickupCarrierAddressLabel, 1, 3, 1, 3);
 		pickupCarrierOrganizationLayout.setComponentAlignment(pickupCarrierOrganizationLabel, Alignment.MIDDLE_LEFT);
-		pickupCarrierOrganizationLayout.setComponentAlignment(pickupCarrierAddressLabel, Alignment.MIDDLE_LEFT);
+		pickupCarrierOrganizationLayout.setComponentAlignment(pickupCarrierAddressFieldLabel, Alignment.MIDDLE_LEFT);
 		
 		pickupCarrierContact = new ComboBox();
+		pickupCarrierContact.setEnabled(false);
 		pickupCarrierContact.setInputPrompt("Contact");
-		pickupCarrierContact.addItem("Red");
-		pickupCarrierContact.addItem("Orange");
-		pickupCarrierContact.addItem("Blue");
-		pickupCarrierContact.addItem("Yellow");
-		pickupCarrierContact.addItem("Grey");
 		pickupCarrierContact.setWidth("100%");
-		//TODO
+		String name = currentPickupCarrierOrg.getMainContact().getFirstName() + " " + currentPickupCarrierOrg.getMainContact().getLastName();
+		pickupCarrierContact.addItem(name);
+		pickupCarrierContact.setNullSelectionAllowed(false);
+		pickupCarrierContact.setEnabled(currentPickupCarrierOrg != null);
+		pickupCarrierContact.setValue(name);
+		pickupCarrierContact.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 779001014178965L;
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				pickupCarrierContactAddressLabel.setValue(contactToXhtml(currentPickupCarrierOrg.getMainContact()));
+			}
+		});
+		
+		pickupCarrierContactAddressLabel = new Label();
+		pickupCarrierContactAddressLabel.setContentMode(Label.CONTENT_XHTML);
+//		pickupCarrierContactAddressLabel.setValue("<i>No Contact Selected</i>");
+		pickupCarrierContactAddressLabel.setValue(contactToXhtml(currentPickupCarrierOrg.getMainContact()));
 		
 		Label pickupCarrierContactLabel = new Label();
 		pickupCarrierContactLabel.setValue("Contact");
@@ -293,7 +432,7 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupCarrierContactLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupCarrierContactLayoutLabel.setValue("<h3>Contact</h3>");
 		
-		pickupCarrierContactLayout = new GridLayout(2, 2);
+		pickupCarrierContactLayout = new GridLayout(2, 3);
 		pickupCarrierContactLayout.setMargin(false,  true, true, true);
 		pickupCarrierContactLayout.setSpacing(true);
 		pickupCarrierContactLayout.setWidth("100%");
@@ -302,6 +441,7 @@ private static final String VIEW_HEIGHT = "400px";
 		pickupCarrierContactLayout.addComponent(pickupCarrierContactLayoutLabel, 0, 0, 1, 0);
 		pickupCarrierContactLayout.addComponent(pickupCarrierContactLabel);
 		pickupCarrierContactLayout.addComponent(pickupCarrierContact);
+		pickupCarrierContactLayout.addComponent(pickupCarrierContactAddressLabel, 1, 2, 1, 2);
 		pickupCarrierContactLayout.setComponentAlignment(pickupCarrierContactLabel, Alignment.MIDDLE_LEFT);
 		
 		pickupCarrierDriverId = new TextField();
@@ -370,7 +510,6 @@ private static final String VIEW_HEIGHT = "400px";
 	
 	public void initDateTime() {
 		expectedPickupDate = new InlineDateField();
-//		expectedPickupDate.setInputPrompt("Expected Pickup Date & Time");
 		expectedPickupDate.setWidth("100%");
 		expectedPickupDate.setResolution(InlineDateField.RESOLUTION_MIN);
 		
@@ -400,7 +539,6 @@ private static final String VIEW_HEIGHT = "400px";
 		expectedWhArrivalDateLayoutLabel.setValue("<h3>W/H Arrival Date</h3>");
 		
 		expectedWhArrivalDate = new InlineDateField();
-//		expectedWhArrivalDate.setInputPrompt("Expected W/H Arrival Date & Time");
 		expectedWhArrivalDate.setWidth("100%");
 		expectedWhArrivalDate.setResolution(InlineDateField.RESOLUTION_MIN);
 		
@@ -429,27 +567,92 @@ private static final String VIEW_HEIGHT = "400px";
 	public void initDropOffLocation() {
 		dropOffLocationOrganization = new ComboBox();
 		dropOffLocationOrganization.setInputPrompt("Organization");
-		dropOffLocationOrganization.addItem("Red");
-		dropOffLocationOrganization.addItem("Orange");
-		dropOffLocationOrganization.addItem("Blue");
-		dropOffLocationOrganization.addItem("Yellow");
-		dropOffLocationOrganization.addItem("Grey");
+		dropOffLocationOrganization.setContainerDataSource(dropOffLocationOrganizationContainer);
+		dropOffLocationOrganization.setItemCaptionPropertyId("code");
 		dropOffLocationOrganization.setWidth("100%");
-		//TODO
+		dropOffLocationOrganization.setFilteringMode(Filtering.FILTERINGMODE_OFF);
+		dropOffLocationOrganization.setImmediate(true);
+		dropOffLocationOrganization.setValue(dropOffLocationOrganizationContainer.getIdByIndex(0));
+		dropOffLocationOrganization.setNullSelectionAllowed(false);
+		currentDropOffLocationOrg = dropOffLocationOrganizationContainer.getItem(dropOffLocationOrganizationContainer.getIdByIndex(0)).getEntity();
+		dropOffLocationOrganization.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 7796995334178965L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				updateDropOffLocationFields(dropOffLocationOrganization.getValue());
+				
+			}
+		});
 		
 		dropOffLocationAddress = new ComboBox();
 		dropOffLocationAddress.setInputPrompt("Address");
-		dropOffLocationAddress.addItem("Red");
-		dropOffLocationAddress.addItem("Orange");
-		dropOffLocationAddress.addItem("Blue");
-		dropOffLocationAddress.addItem("Yellow");
-		dropOffLocationAddress.addItem("Grey");
+		dropOffLocationAddress.setEnabled(false);
+		dropOffLocationAddress.setNullSelectionAllowed(false);
 		dropOffLocationAddress.setWidth("100%");
-		//TODO
+		dropOffLocationAddress.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 7796995334178965L;
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getAdHocAddress()));
+				} else if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getShippingAddress()));
+				} else if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getReceivingAddress()));
+				} else if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getBillingAddress()));
+				} else if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getPickupAddress()));
+				} else if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getDeliveryAddress()));
+				} else {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getMainAddress()));
+				}
+			}
+		});
 		
-		dropOffAddressLabel = new Label();
-		dropOffAddressLabel.setContentMode(Label.CONTENT_XHTML);
-		dropOffAddressLabel.setValue("</br><b>220 N Elm Ave</b></br>Newtown, PA</br>18940");
+		dropOffLocationAddressLabel = new Label();
+		dropOffLocationAddressLabel.setContentMode(Label.CONTENT_XHTML);
+		dropOffLocationAddressLabel.setValue("<i>No Address Selected</i>");
+		
+		if (currentDropOffLocationOrg.getAdHocAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getAdHocAddress()));
+		} else if (currentDropOffLocationOrg.getShippingAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getShippingAddress()));
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+		} else if (currentDropOffLocationOrg.getReceivingAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getReceivingAddress()));
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+		} else if (currentDropOffLocationOrg.getBillingAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getBillingAddress()));
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+		} else if (currentDropOffLocationOrg.getPickupAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getPickupAddress()));
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+		} else if (currentDropOffLocationOrg.getDeliveryAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getDeliveryAddress()));
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+		} else if (currentDropOffLocationOrg.getMainAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getMainAddress()));
+			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			dropOffLocationAddress.setEnabled(true);
+		}
 		
 		Label dropOffLocationOrganizationLayoutLabel = new Label();
 		dropOffLocationOrganizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
@@ -458,8 +661,8 @@ private static final String VIEW_HEIGHT = "400px";
 		Label dropOffLocationOrganizationLabel = new Label();
 		dropOffLocationOrganizationLabel.setValue("Organization");
 		
-		Label dropOffLocationAddressLabel = new Label();
-		dropOffLocationAddressLabel.setValue("Address");
+		Label dropOffLocationAddressFieldLabel = new Label();
+		dropOffLocationAddressFieldLabel.setValue("Address");
 		
 		dropOffLocationOrganizationLayout = new GridLayout(2, 4);
 		dropOffLocationOrganizationLayout.setWidth("100%");
@@ -470,21 +673,33 @@ private static final String VIEW_HEIGHT = "400px";
 		dropOffLocationOrganizationLayout.addComponent(dropOffLocationOrganizationLayoutLabel, 0, 0, 1, 0);
 		dropOffLocationOrganizationLayout.addComponent(dropOffLocationOrganizationLabel);
 		dropOffLocationOrganizationLayout.addComponent(dropOffLocationOrganization);
-		dropOffLocationOrganizationLayout.addComponent(dropOffLocationAddressLabel);
+		dropOffLocationOrganizationLayout.addComponent(dropOffLocationAddressFieldLabel);
 		dropOffLocationOrganizationLayout.addComponent(dropOffLocationAddress);
-		dropOffLocationOrganizationLayout.addComponent(dropOffAddressLabel, 1, 3, 1, 3);
+		dropOffLocationOrganizationLayout.addComponent(dropOffLocationAddressLabel, 1, 3, 1, 3);
 		dropOffLocationOrganizationLayout.setComponentAlignment(dropOffLocationOrganizationLabel, Alignment.MIDDLE_LEFT);
 		dropOffLocationOrganizationLayout.setComponentAlignment(dropOffLocationAddressLabel, Alignment.MIDDLE_LEFT);
 		
 		dropOffLocationContact = new ComboBox();
+		dropOffLocationContact.setEnabled(false);
 		dropOffLocationContact.setInputPrompt("Contact");
-		dropOffLocationContact.addItem("Red");
-		dropOffLocationContact.addItem("Orange");
-		dropOffLocationContact.addItem("Blue");
-		dropOffLocationContact.addItem("Yellow");
-		dropOffLocationContact.addItem("Grey");
 		dropOffLocationContact.setWidth("100%");
-		//TODO
+		String name = currentDropOffLocationOrg.getMainContact().getFirstName() + " " + currentDropOffLocationOrg.getMainContact().getLastName();
+		dropOffLocationContact.addItem(name);
+		dropOffLocationContact.setNullSelectionAllowed(false);
+		dropOffLocationContact.setEnabled(currentDropOffLocationOrg != null);
+		dropOffLocationContact.setValue(name);
+		dropOffLocationContact.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 779001014178965L;
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				dropOffLocationContactAddressLabel.setValue(contactToXhtml(currentDropOffLocationOrg.getMainContact()));
+			}
+		});
+		
+		dropOffLocationContactAddressLabel = new Label();
+		dropOffLocationContactAddressLabel.setContentMode(Label.CONTENT_XHTML);
+		dropOffLocationContactAddressLabel.setValue(contactToXhtml(currentDropOffLocationOrg.getMainContact()));
 		
 		Label dropOffLocationContactLabel = new Label();
 		dropOffLocationContactLabel.setValue("Contact");
@@ -493,7 +708,7 @@ private static final String VIEW_HEIGHT = "400px";
 		dropOffLocationContactLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		dropOffLocationContactLayoutLabel.setValue("<h3>Contact</h3>");
 		
-		dropOffLocationContactLayout = new GridLayout(2, 2);
+		dropOffLocationContactLayout = new GridLayout(2, 3);
 		dropOffLocationContactLayout.setMargin(false,  true, true, true);
 		dropOffLocationContactLayout.setSpacing(true);
 		dropOffLocationContactLayout.setWidth("100%");
@@ -502,17 +717,13 @@ private static final String VIEW_HEIGHT = "400px";
 		dropOffLocationContactLayout.addComponent(dropOffLocationContactLayoutLabel, 0, 0, 1, 0);
 		dropOffLocationContactLayout.addComponent(dropOffLocationContactLabel);
 		dropOffLocationContactLayout.addComponent(dropOffLocationContact);
+		dropOffLocationContactLayout.addComponent(dropOffLocationContactAddressLabel, 1, 2, 1, 2);
 		dropOffLocationContactLayout.setComponentAlignment(dropOffLocationContactLabel, Alignment.MIDDLE_LEFT);
 		
 		dropOffLocationDockType = new ComboBox();
 		dropOffLocationDockType.setInputPrompt("Dock Type");
-		dropOffLocationDockType.addItem("Red");
-		dropOffLocationDockType.addItem("Orange");
-		dropOffLocationDockType.addItem("Blue");
-		dropOffLocationDockType.addItem("Yellow");
-		dropOffLocationDockType.addItem("Grey");
+		dropOffLocationDockType.setEnabled(false);
 		dropOffLocationDockType.setWidth("100%");
-		//TODO
 		
 		Label dropOffLocationDockTypeLabel = new Label();
 		dropOffLocationDockTypeLabel.setValue("Dock Type");
@@ -582,13 +793,25 @@ private static final String VIEW_HEIGHT = "400px";
 			}
 		});
 		
+		cancelButton = new Button("Cancel");
+		cancelButton.setEnabled(false);
+		cancelButton.setWidth("100%");
+		cancelButton.addListener(new ClickListener() {
+			private static final long serialVersionUID = 500785840900978L;
+
+			public void buttonClick(ClickEvent event) {
+			}
+		});
+		
 		toolstripLeftButtonPanel = new HorizontalLayout();
-		toolstripLeftButtonPanel.setWidth("200px");
+		toolstripLeftButtonPanel.setWidth("300px");
 		toolstripLeftButtonPanel.setSpacing(true);
 		toolstripLeftButtonPanel.addComponent(saveButton);
 		toolstripLeftButtonPanel.addComponent(resetButton);
-		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.5f);
-		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.5f);
+		toolstripLeftButtonPanel.addComponent(cancelButton);
+		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.33f);
+		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.33f);
+		toolstripLeftButtonPanel.setExpandRatio(cancelButton, 0.33f);
 		
 		toolStrip = new HorizontalLayout();
 		toolStrip.setWidth("100%");
@@ -597,63 +820,378 @@ private static final String VIEW_HEIGHT = "400px";
 		toolStrip.setComponentAlignment(toolstripLeftButtonPanel, Alignment.MIDDLE_LEFT);
 	}
 	
-	public void init() {
-		initEntityTabSheet();
-		initTableToolStrip();
-		
-		canvas = new VerticalLayout();
-		canvas.setSizeFull();
-		canvas.addComponent(entityTabSheet);
-		canvas.addComponent(toolStrip);
-		canvas.setExpandRatio(entityTabSheet, 1.0f);
-	}
-	
 	private String addressToXhtml(Address address) {
 		StringBuffer xhtml = new StringBuffer();
 		xhtml.append("<b>");
 		xhtml.append(address.getStreet1());
 		xhtml.append("</b></br>");
-		xhtml.append(address.getUnloco().getPortCity());
-		xhtml.append(", ");
-		xhtml.append(address.getCountryState().getName());
-		xhtml.append("</br>");
-		xhtml.append(address.getZipCode());
+		if (address.getUnloco() != null && address.getCountryState() != null) {
+			xhtml.append(address.getUnloco().getPortCity());
+			xhtml.append(", ");
+			xhtml.append(address.getCountryState().getName());
+			xhtml.append("</br>");
+		} else if (address.getUnloco() == null && address.getCountryState() != null) {
+			xhtml.append(address.getCountryState().getName());
+			xhtml.append("</br>");
+		} else if (address.getCountryState() == null && address.getUnloco() != null) {
+			xhtml.append(address.getUnloco().getPortCity());
+			xhtml.append("</br>");
+		}
+		
+		if (address.getCountry() != null && address.getZipCode() != null) {
+			xhtml.append(address.getZipCode());
+			xhtml.append(" ");
+			xhtml.append(address.getCountry().getName());
+			xhtml.append("</br>");
+		} else if (address.getCountry() != null && address.getZipCode() == null) {
+			xhtml.append(address.getCountry().getName());
+			xhtml.append("</br>");
+		} else if (address.getCountry() == null && address.getZipCode() != null) {
+			xhtml.append(address.getZipCode());
+			xhtml.append("</br>");
+		}
+		
+		return xhtml.toString();
+	}
+	
+	private String contactToXhtml(Contact contact) {
+		StringBuffer xhtml = new StringBuffer();
+		xhtml.append("<b>");
+		xhtml.append(contact.getFirstName());
 		xhtml.append(" ");
-		xhtml.append(address.getCountry());
+		xhtml.append(contact.getLastName());
+		xhtml.append("</b></br>Office Phone: ");
+		xhtml.append(contact.getOfficePhoneNumber());
+		xhtml.append("</br>Cell Phone: ");
+		xhtml.append(contact.getCellPhoneNumber());
+		xhtml.append("</br>Email: ");
+		xhtml.append(contact.getEmail());
 		xhtml.append("</br>");
 		return xhtml.toString();
 	}
 	
+	private void updatePickupLocationFields(Object id) {
+		currentPickupLocationOrg = pickupLocationOrganizationContainer.getItem(id).getEntity();
+		String name = currentPickupLocationOrg.getMainContact().getFirstName() + " " + currentPickupLocationOrg.getMainContact().getLastName();
+		pickupLocationContact.removeAllItems();
+		pickupLocationContact.addItem(name);
+		pickupLocationContact.setValue(name);
+		pickupLocationContact.setEnabled(true);
+		pickupLocationContactAddressLabel.setValue(contactToXhtml(currentPickupLocationOrg.getMainContact()));
+		
+		try {
+			pickupLocationAddress.removeAllItems();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String selectedAddress = null;
+		int addressCount = 0;
+		if (currentPickupLocationOrg.getAdHocAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.ADHOC_ADDRESS;
+			addressCount++;
+		} else if (currentPickupLocationOrg.getShippingAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.SHIPPING_ADDRESS;
+			addressCount++;
+		} else if (currentPickupLocationOrg.getReceivingAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.RECEIVING_ADDRESS;
+			addressCount++;
+		} else if (currentPickupLocationOrg.getBillingAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.BILLING_ADDRESS;
+			addressCount++;
+		} else if (currentPickupLocationOrg.getPickupAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.PICKUP_ADDRESS;
+			addressCount++;
+		} else if (currentPickupLocationOrg.getDeliveryAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.DELIVERY_ADDRESS;
+			addressCount++;
+		} else if (currentPickupLocationOrg.getMainAddress() != null) {
+			pickupLocationAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.MAIN_ADDRESS;
+			addressCount++;
+		}
+		if (selectedAddress != null) {
+			if (addressCount > 1) {
+				pickupLocationAddress.setEnabled(true);
+			}
+			pickupLocationAddress.setValue(selectedAddress);
+			if (addressCount == 1) {
+				if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getAdHocAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getShippingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getReceivingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getBillingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getPickupAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getDeliveryAddress()));
+				} else {
+					pickupLocationAddressLabel.setValue(addressToXhtml(currentPickupLocationOrg.getMainAddress()));
+				}
+			}
+		}
+	}
+	
+	private void updatePickupCarrierFields(Object id) {
+		currentPickupCarrierOrg = pickupCarrierOrganizationContainer.getItem(id).getEntity();
+		String name = currentPickupCarrierOrg.getMainContact().getFirstName() + " " + currentPickupCarrierOrg.getMainContact().getLastName();
+		pickupCarrierContact.removeAllItems();
+		pickupCarrierContact.addItem(name);
+		pickupCarrierContact.setValue(name);
+		pickupCarrierContact.setEnabled(true);
+		pickupCarrierContactAddressLabel.setValue(contactToXhtml(currentPickupCarrierOrg.getMainContact()));
+		
+		try {
+			pickupCarrierAddress.removeAllItems();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String selectedAddress = null;
+		int addressCount = 0;
+		if (currentPickupCarrierOrg.getAdHocAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.ADHOC_ADDRESS;
+			addressCount++;
+		} else if (currentPickupCarrierOrg.getShippingAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.SHIPPING_ADDRESS;
+			addressCount++;
+		} else if (currentPickupCarrierOrg.getReceivingAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.RECEIVING_ADDRESS;
+			addressCount++;
+		} else if (currentPickupCarrierOrg.getBillingAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.BILLING_ADDRESS;
+			addressCount++;
+		} else if (currentPickupCarrierOrg.getPickupAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.PICKUP_ADDRESS;
+			addressCount++;
+		} else if (currentPickupCarrierOrg.getDeliveryAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.DELIVERY_ADDRESS;
+			addressCount++;
+		} else if (currentPickupCarrierOrg.getMainAddress() != null) {
+			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.MAIN_ADDRESS;
+			addressCount++;
+		}
+		if (selectedAddress != null) {
+			if (addressCount > 1) {
+				pickupCarrierAddress.setEnabled(true);
+			}
+			pickupCarrierAddress.setValue(selectedAddress);
+			if (addressCount == 1) {
+				if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getAdHocAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getShippingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getReceivingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getBillingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getPickupAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getDeliveryAddress()));
+				} else {
+					pickupCarrierAddressLabel.setValue(addressToXhtml(currentPickupCarrierOrg.getMainAddress()));
+				}
+			}
+		}
+	}
+	
+	private void updateDropOffLocationFields(Object id) {
+		currentDropOffLocationOrg = dropOffLocationOrganizationContainer.getItem(id).getEntity();
+		String name = currentDropOffLocationOrg.getMainContact().getFirstName() + " " + currentDropOffLocationOrg.getMainContact().getLastName();
+		dropOffLocationContact.removeAllItems();
+		dropOffLocationContact.addItem(name);
+		dropOffLocationContact.setValue(name);
+		dropOffLocationContact.setEnabled(true);
+		dropOffLocationContactAddressLabel.setValue(contactToXhtml(currentDropOffLocationOrg.getMainContact()));
+		
+		try {
+			dropOffLocationAddress.removeAllItems();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String selectedAddress = null;
+		int addressCount = 0;
+		if (currentDropOffLocationOrg.getAdHocAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.ADHOC_ADDRESS;
+			addressCount++;
+		} else if (currentDropOffLocationOrg.getShippingAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.SHIPPING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.SHIPPING_ADDRESS;
+			addressCount++;
+		} else if (currentDropOffLocationOrg.getReceivingAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.RECEIVING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.RECEIVING_ADDRESS;
+			addressCount++;
+		} else if (currentDropOffLocationOrg.getBillingAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.BILLING_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.BILLING_ADDRESS;
+			addressCount++;
+		} else if (currentDropOffLocationOrg.getPickupAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.PICKUP_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.PICKUP_ADDRESS;
+			addressCount++;
+		} else if (currentDropOffLocationOrg.getDeliveryAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.DELIVERY_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.DELIVERY_ADDRESS;
+			addressCount++;
+		} else if (currentDropOffLocationOrg.getMainAddress() != null) {
+			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.MAIN_ADDRESS);
+			selectedAddress = AddressCustomCONSTANTS.MAIN_ADDRESS;
+			addressCount++;
+		}
+		if (selectedAddress != null) {
+			if (addressCount > 1) {
+				dropOffLocationAddress.setEnabled(true);
+			}
+			dropOffLocationAddress.setValue(selectedAddress);
+			if (addressCount == 1) {
+				if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getAdHocAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getShippingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getReceivingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getBillingAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getPickupAddress()));
+				} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getDeliveryAddress()));
+				} else {
+					dropOffLocationAddressLabel.setValue(addressToXhtml(currentDropOffLocationOrg.getMainAddress()));
+				}
+			}
+		}
+	}
+	
 	@Override
 	public String getTaskName() {
-		// TODO Auto-generated method stub
 		return "AddAsnLocalTrans";
 	}
 
 	@Override
-	public Component getContent() {
-		if (canvas == null) {
-			init();
-		}
-		return canvas;
-	}
-
-	@Override
-	public void setDataContainerMap(Map<String, Container> containerMap) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Map<String, Container> getDataContainerMap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getCaption() {
-		// TODO Auto-generated method stub
 		return "Add Local Transportation";
+	}
+
+	@Override
+	public void initialize(EntityManagerFactory emf) {
+		this.emf = emf;
+		
+		initContainers();
+		initEntityTabSheet();
+		initTableToolStrip();
+		
+		VerticalLayout canvas = new VerticalLayout();
+		canvas.setSizeFull();
+		canvas.addComponent(entityTabSheet);
+		canvas.addComponent(toolStrip);
+		canvas.setExpandRatio(entityTabSheet, 1.0f);
+		
+		this.setCanvas(canvas);
+	}
+
+	@Override
+	public Map<String, Object> getProcessState() {
+		if (asn != null) {
+			ASNPickup pickup = new ASNPickup();
+			ASNDropOff dropOff = new ASNDropOff();
+			
+			Organization pickupLocOrg = this.pickupLocationOrganizationContainer.getItem(pickupLocationOrganization.getValue()).getEntity();
+			Organization pickupCarrierOrg = this.pickupCarrierOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
+			Organization dropOffLocOrg = this.dropOffLocationOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
+			
+			pickup.setPickUpFrom(pickupLocOrg);
+			String selectedAddress = (String) pickupLocationAddress.getValue();
+			if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+				pickup.setPickUpFromAddress(pickupLocOrg.getAdHocAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+				pickup.setPickUpFromAddress(pickupLocOrg.getShippingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+				pickup.setPickUpFromAddress(pickupLocOrg.getReceivingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+				pickup.setPickUpFromAddress(pickupLocOrg.getBillingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+				pickup.setPickUpFromAddress(pickupLocOrg.getPickupAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+				pickup.setPickUpFromAddress(pickupLocOrg.getDeliveryAddress());
+			} else {
+				pickup.setPickUpFromAddress(pickupLocOrg.getMainAddress());
+			}
+			
+			pickup.setLocalTrans(pickupCarrierOrg);
+			selectedAddress = (String) pickupCarrierAddress.getValue();
+			if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getAdHocAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getShippingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getReceivingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getBillingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getPickupAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getDeliveryAddress());
+			} else {
+				pickup.setLocalTransAddress(pickupCarrierOrg.getMainAddress());
+			}
+			pickup.setDriverId((String) pickupCarrierDriverId.getValue());
+			pickup.setVehicleId((String) pickupCarrierVehicleId.getValue());
+			pickup.setBolNumber((String) pickupCarrierBolNum.getValue());
+			pickup.setVehicleId((String) pickupCarrierSealNum.getValue());
+			pickup.setEstimatedPickup((Date) expectedPickupDate.getValue());
+			
+			dropOff.setDropOffAt(dropOffLocOrg);
+			selectedAddress = (String) dropOffLocationAddress.getValue();
+			if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getAdHocAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getShippingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getReceivingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getBillingAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getPickupAddress());
+			} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getDeliveryAddress());
+			} else {
+				dropOff.setDropOffAtAddress(pickupCarrierOrg.getMainAddress());
+			}
+			dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
+			
+			asn.setPickup(pickup);
+			asn.setDropOff(dropOff);
+		}
+		
+		if (processState != null) {
+			processState.put(ASN_VARIABLE_KEY, asn);
+		}
+		
+		return processState;
+	}
+
+	@Override
+	public void setProcessState(Map<String, Object> state) {
+		processState = state;
+		asn = (ASN) state.get(ASN_VARIABLE_KEY);
 	}
 
 }

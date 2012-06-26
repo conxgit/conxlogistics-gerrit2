@@ -37,24 +37,24 @@ public class MockApp extends Application {
 		
 		TaskDefinition td = new TaskDefinition();
 		td.setBpmn2ProcDefURL("");
-		td.setProcessId("whse.rcv.asn.CreateNewASNByOrg");
+		td.setProcessId("whse.rcv.asn");
 		
-		//DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-		//def.setName("web.app.mock");
-		//def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-		//TransactionStatus status = this.globalJtaTransactionManager.getTransaction(def);		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setName("web.app.mock");
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus status = this.globalJtaTransactionManager.getTransaction(def);	
+		
 		try
 		{
 			pfs = defaultPageFlowEngine.startPageFlowSession("skeswa", td);
-			//this.globalJtaTransactionManager.commit(status);
+			w.addComponent(pfs.getWizardComponent());
+			this.globalJtaTransactionManager.commit(status);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			//this.globalJtaTransactionManager.rollback(status);
+			this.globalJtaTransactionManager.rollback(status);
 		}
-		
-		w.addComponent(pfs.getWizardComponent());
 		
 		this.setMainWindow(w);
 	}

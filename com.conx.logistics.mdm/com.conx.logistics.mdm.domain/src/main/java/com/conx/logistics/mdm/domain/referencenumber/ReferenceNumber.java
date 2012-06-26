@@ -44,4 +44,68 @@ public class ReferenceNumber extends MultitenantBaseEntity implements Serializab
     private boolean rootNum;
 
     private String value;
+
+	public Set<ReferenceNumber> getChildReferenceNumbers() {
+		return childReferenceNumbers;
+	}
+
+	public void setChildReferenceNumbers(Set<ReferenceNumber> childReferenceNumbers) {
+		this.childReferenceNumbers = childReferenceNumbers;
+	}
+
+	public ReferenceNumber getParentReferenceNumber() {
+		return parentReferenceNumber;
+	}
+
+	public void setParentReferenceNumber(ReferenceNumber parentReferenceNumber) {
+		this.parentReferenceNumber = parentReferenceNumber;
+	}
+
+	public ReferenceNumberType getType() {
+		return type;
+	}
+
+	public void setType(ReferenceNumberType type) {
+		this.type = type;
+	}
+
+	public DefaultEntityMetadata getEntityMetadata() {
+		return entityMetadata;
+	}
+
+	public void setEntityMetadata(DefaultEntityMetadata entityMetadata) {
+		this.entityMetadata = entityMetadata;
+	}
+
+	public Long getEntityPK() {
+		return entityPK;
+	}
+
+	public void setEntityPK(Long entityPK) {
+		this.entityPK = entityPK;
+	}
+
+	public String getEntityClassName() {
+		return entityClassName;
+	}
+
+	public void setEntityClassName(String entityClassName) {
+		this.entityClassName = entityClassName;
+	}
+
+	public boolean isRootNum() {
+		return rootNum;
+	}
+
+	public void setRootNum(boolean rootNum) {
+		this.rootNum = rootNum;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

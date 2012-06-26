@@ -2,17 +2,18 @@ package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
 import java.util.Map;
 
+import javax.persistence.EntityManagerFactory;
+
+import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
-import com.vaadin.data.Container;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -20,9 +21,12 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
 public class ConfirmAsnOrgPage extends IPageFlowPage {
-	private static final String VIEW_HEIGHT = "400px";
+	private static final String VIEW_HEIGHT = "450px";
+	private static final String ASN_VARIABLE_KEY = "asn";
 	
-	private VerticalLayout canvas;
+	private Map<String, Object> processState;
+	private ASN asn;
+	
 	private TabSheet entityTabSheet;
 	private ComboBox organization;
 	private Label organizationLabel;
@@ -32,8 +36,9 @@ public class ConfirmAsnOrgPage extends IPageFlowPage {
 	private Button resetButton;
 	private HorizontalLayout toolstripLeftButtonPanel;
 	private HorizontalLayout toolStrip;
-	
 	private JPAContainer<Organization> organizationContainer;
+	private EntityManagerFactory emf;
+	private Button cancelButton;
 	
 	private void initContainers() {
 		organizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
@@ -43,9 +48,12 @@ public class ConfirmAsnOrgPage extends IPageFlowPage {
 		organization = new ComboBox();
 		organization.setInputPrompt("Default Organization");
 		organization.setContainerDataSource(organizationContainer);
-		organization.setItemCaptionPropertyId("code");
+		organization.setItemCaptionPropertyId("name");
+		organization.setNullSelectionAllowed(false);
 		organization.isReadOnly();
 		organization.setWidth("100%");
+		organization.setValue(organizationContainer.firstItemId());
+		organization.setEnabled(false);
 		
 		organizationLabel = new Label();
 		organizationLabel.setValue("Organization");
@@ -90,7 +98,6 @@ public class ConfirmAsnOrgPage extends IPageFlowPage {
 			private static final long serialVersionUID = 500312301678L;
 
 			public void buttonClick(ClickEvent event) {
-				
 			}
 		});
 		
@@ -101,35 +108,34 @@ public class ConfirmAsnOrgPage extends IPageFlowPage {
 			private static final long serialVersionUID = 5003289976900978L;
 
 			public void buttonClick(ClickEvent event) {
-				
+			}
+		});
+		
+		cancelButton = new Button("Cancel");
+		cancelButton.setEnabled(false);
+		cancelButton.setWidth("100%");
+		cancelButton.addListener(new ClickListener() {
+			private static final long serialVersionUID = 500785840900978L;
+
+			public void buttonClick(ClickEvent event) {
 			}
 		});
 		
 		toolstripLeftButtonPanel = new HorizontalLayout();
-		toolstripLeftButtonPanel.setWidth("200px");
+		toolstripLeftButtonPanel.setWidth("300px");
 		toolstripLeftButtonPanel.setSpacing(true);
 		toolstripLeftButtonPanel.addComponent(saveButton);
 		toolstripLeftButtonPanel.addComponent(resetButton);
-		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.5f);
-		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.5f);
+		toolstripLeftButtonPanel.addComponent(cancelButton);
+		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.33f);
+		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.33f);
+		toolstripLeftButtonPanel.setExpandRatio(cancelButton, 0.33f);
 		
 		toolStrip = new HorizontalLayout();
 		toolStrip.setWidth("100%");
 		toolStrip.setMargin(true, false, true, false);
 		toolStrip.addComponent(toolstripLeftButtonPanel);
 		toolStrip.setComponentAlignment(toolstripLeftButtonPanel, Alignment.MIDDLE_LEFT);
-	}
-	
-	public void init() {
-		initContainers();
-		initEntityTabSheet();
-		initTableToolStrip();
-		
-		canvas = new VerticalLayout();
-		canvas.setSizeFull();
-		canvas.addComponent(entityTabSheet);
-		canvas.addComponent(toolStrip);
-		canvas.setExpandRatio(entityTabSheet, 1.0f);
 	}
 
 	@Override
@@ -138,28 +144,44 @@ public class ConfirmAsnOrgPage extends IPageFlowPage {
 	}
 
 	@Override
-	public Component getContent() {
-		if (canvas == null) {
-			init();
-		}
-		return canvas;
-	}
-
-	@Override
-	public void setDataContainerMap(Map<String, Container> containerMap) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Map<String, Container> getDataContainerMap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getCaption() {
 		return "Confirm Asn Organization";
+	}
+
+	@Override
+	public void initialize(EntityManagerFactory emf) {
+		this.emf = emf;
+		
+		initContainers();
+		initEntityTabSheet();
+		initTableToolStrip();
+		
+		VerticalLayout canvas = new VerticalLayout();
+		canvas.setSizeFull();
+		canvas.addComponent(entityTabSheet);
+		canvas.addComponent(toolStrip);
+		canvas.setExpandRatio(entityTabSheet, 1.0f);
+		
+		this.setCanvas(canvas);
+	}
+
+	@Override
+	public Map<String, Object> getProcessState() {
+		if (processState != null) {
+			processState.put(ASN_VARIABLE_KEY, asn);
+		}
+		
+		return processState;
+	}
+
+	@Override
+	public void setProcessState(Map<String, Object> state) {
+		processState = state;
+		asn = (ASN) state.get(ASN_VARIABLE_KEY);
+		
+		if (asn == null) {
+			asn = new ASN();
+		}
 	}
 
 }

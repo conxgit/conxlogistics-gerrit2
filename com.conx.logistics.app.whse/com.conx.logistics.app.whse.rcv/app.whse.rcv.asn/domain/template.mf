@@ -9,5 +9,6 @@ Excluded-Imports:   javax.persistence,
   com.conx.logistics.mdm.domain.geolocation,
   com.conx.logistics.mdm.domain.organization,
   com.conx.logistics.mdm.domain.product,
+  com.conx.logistics.mdm.domain.referencenumber,
   org.springframework.format.annotation
 

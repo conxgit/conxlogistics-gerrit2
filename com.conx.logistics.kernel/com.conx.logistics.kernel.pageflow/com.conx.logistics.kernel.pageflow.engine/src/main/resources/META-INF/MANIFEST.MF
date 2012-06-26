@@ -1,13 +1,9 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.pageflow.engine;version="1.0
  .0";uses:="com.conx.logistics.kernel.bpm.services,com.conx.logistics.
- kernel.pageflow.engine.ui,com.conx.logistics.kernel.pageflow.services
- ,com.conx.logistics.mdm.domain.task,com.vaadin.ui,javax.persistence,o
- rg.jboss.bpm.console.client.model,org.jbpm.task,org.springframework.j
- ndi,org.springframework.transaction",com.conx.logistics.kernel.pagefl
- ow.engine.ui;version="1.0.0";uses:="com.conx.logistics.kernel.pageflo
- w.engine,com.conx.logistics.kernel.pageflow.services,com.vaadin.ui,or
- g.vaadin.teemu.wizards"
+ kernel.pageflow.services,com.conx.logistics.mdm.domain.task,com.vaadi
+ n.ui,javax.persistence,org.jboss.bpm.console.client.model,org.springf
+ ramework.transaction"
 Build-Jdk: 1.6.0_32
 Built-By: Mdu
 Bundle-Version: 1.0.0
@@ -21,13 +17,12 @@ Import-Package: com.conx.logistics.kernel.bpm.impl.jbpm.core;version="
  x.logistics.kernel.pageflow.services;version="1.0.0",com.conx.logisti
  cs.mdm.domain.geolocation;version="1.0.0",com.conx.logistics.mdm.doma
  in.task;version="1.0.0",com.vaadin;version="[6.7.0,7.0.0)",com.vaadin
- .ui;version="[6.7.0,7.0.0)",javax.naming,javax.persistence;version="0
- ",javax.transaction,org.jboss.bpm.console.client.model;version="2.3.2
- .SNAPSHOT",org.jbpm.marshalling.impl;version="[5.3.0,5.4.0)",org.jbpm
- .task;version="[5.3.0,5.4.0)",org.jbpm.task.query;version="[5.3.0,5.4
- .0)",org.jbpm.workflow.core.node;version="[5.3.0,5.4.0)",org.slf4j;ve
- rsion="[1.6.0,1.7.0)",org.springframework.jndi;version="[3.0,3.1)",or
- g.springframework.transaction;version="[3.0,3.1)",org.springframework
- .transaction.support;version="[3.0,3.1)",org.vaadin.teemu.wizards;ver
- sion="0.4.4"
+ .ui;version="[6.7.0,7.0.0)",javax.persistence;version="0",org.jboss.b
+ pm.console.client.model;version="2.3.2.SNAPSHOT",org.jbpm.marshalling
+ .impl;version="[5.3.0,5.4.0)",org.jbpm.task;version="[5.3.0,5.4.0)",o
+ rg.jbpm.task.query;version="[5.3.0,5.4.0)",org.jbpm.workflow.core.nod
+ e;version="[5.3.0,5.4.0)",org.slf4j;version="[1.6.0,1.7.0)",org.sprin
+ gframework.jndi;version="[3.0,3.1)",org.springframework.transaction;v
+ ersion="[3.0,3.1)",org.springframework.transaction.support;version="[
+ 3.0,3.1)",org.vaadin.teemu.wizards;version="0.4.4"
 

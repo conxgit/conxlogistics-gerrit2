@@ -10,14 +10,6 @@
 	<artifactId>com.conx.logistics.app.whse.rcv.asn.pageflow</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>com.conx.logistics</groupId>
-			<artifactId>
-  			com.conx.logistics.kernel.pageflow.services
-  		</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin</artifactId>
 			<version>6.7.5</version>
@@ -27,6 +19,25 @@
 			<artifactId>
 				com.conx.logistics.thirdparty.vaadin-addon-jpacontainer-agpl-3.0
 			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>
+				com.conx.logistics.app.whse.rcv.asn.domain
+			</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.mdm.domain</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>
+				com.conx.logistics.kernel.pageflow.services
+			</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 

@@ -39,11 +39,10 @@ Import-Package: com.conx.logistics.kernel.pageflow.services;version="1
  ctory.annotation;version="[3.0, 3.1)",org.springframework.core.io;ver
  sion="[3.0, 3.1)",org.springframework.stereotype;version="[3.0, 3.1)"
  ,org.springframework.transaction;version="[3.0, 3.1)",org.springframe
- work.transaction.annotation;version="[3.0, 3.1)",org.springframework.
- transaction.support;version="[3.0, 3.1)",org.vaadin.mvp.eventbus;vers
- ion="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.annotation;version="0.9.
- 2.SNAPSHOT",org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",org.vaa
- din.mvp.presenter.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.
- uibinder;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.annotation;
- version="0.9.2.SNAPSHOT"
+ work.transaction.annotation;version="[3.0, 3.1)",org.vaadin.mvp.event
+ bus;version="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.annotation;versi
+ on="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT"
+ ,org.vaadin.mvp.presenter.annotation;version="0.9.2.SNAPSHOT",org.vaa
+ din.mvp.uibinder;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.ann
+ otation;version="0.9.2.SNAPSHOT"
 

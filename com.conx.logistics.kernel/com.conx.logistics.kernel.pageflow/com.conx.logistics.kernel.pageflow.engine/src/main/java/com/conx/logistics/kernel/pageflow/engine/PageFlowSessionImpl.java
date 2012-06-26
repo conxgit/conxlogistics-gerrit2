@@ -1,31 +1,25 @@
 package com.conx.logistics.kernel.pageflow.engine;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
 import org.jboss.bpm.console.client.model.ProcessInstanceRef;
-import org.jbpm.marshalling.impl.JBPMMessages.ProcessInstance.NodeInstanceContent.HumanTaskNode;
-import org.jbpm.task.Content;
 import org.jbpm.task.Task;
-import org.jbpm.task.query.TaskSummary;
-import org.jbpm.task.utils.ContentMarshallerHelper;
-import org.vaadin.teemu.wizards.Wizard;
 
 import com.conx.logistics.kernel.bpm.services.IBPMProcessInstance;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
+import com.conx.logistics.kernel.pageflow.services.IPageFlowListener;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.vaadin.ui.Component;
 
-public class PageFlowSessionImpl implements IPageFlowSession {
+public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener {
 	private static final int WAIT_DELAY = 500;
 	
 	private Map<String, IPageFlowPage> pages;
@@ -106,9 +100,6 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 		}
 		return tasks.get(0);
 	}
-	
-	private void showPage() {
-	} 
 
 	@Override
 	public IBPMProcessInstance getBPMProcessInstance() {
@@ -142,8 +133,12 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 		wizard.setSizeFull();
 		if (orderedPageList != null) {
 			for (IPageFlowPage page : orderedPageList) {
-				page.setEntityManagerFactory(emf);
+				page.initialize(emf);
 				page.getContent();
+				page.addListener(this);
+				if (orderedPageList.get(0).equals(page)) {
+					page.setProcessState(new HashMap<String, Object>());
+				}
 				wizard.addStep(page);
 			}
 		}
@@ -165,6 +160,33 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 	public void executeNext() throws Exception {
 		bpmService.completeTask(currentTask.getId(), null, userId);
 		currentTask = waitForNextTask();
+	}
+
+	private IPageFlowPage getNextPage(IPageFlowPage currentPage) {
+		for (int i = 0; i < orderedPageList.size(); i++) {
+			if (orderedPageList.get(i).equals(currentPage)) {
+				if (i != orderedPageList.size() - 1) {
+					return orderedPageList.get(i + 1);
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void onNext(IPageFlowPage currentPage, Map<String, Object> state) {
+		IPageFlowPage next = getNextPage(currentPage);
+		if (next != null) {
+			next.setProcessState(state);
+		} else {
+			// Process is over
+		}
+	}
+
+
+	@Override
+	public void onPrevious(IPageFlowPage currentPage, Map<String, Object> state) {
+		// TODO Auto-generated method stub
 	}	
 
 }

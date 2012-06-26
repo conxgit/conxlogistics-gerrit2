@@ -4,14 +4,9 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -21,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,6 +28,7 @@ import com.conx.logistics.mdm.domain.organization.Organization;
 import com.conx.logistics.mdm.domain.product.DimUnit;
 import com.conx.logistics.mdm.domain.product.PackUnit;
 import com.conx.logistics.mdm.domain.product.WeightUnit;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -125,7 +120,9 @@ public class ASN extends MultitenantBaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date dateLastImportUpdated;
-
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<ReferenceNumber> refNumbers = new java.util.HashSet<ReferenceNumber>();
 
     /**
      * Pickup and Delivery
@@ -133,6 +130,10 @@ public class ASN extends MultitenantBaseEntity {
     @OneToOne(targetEntity = ASNPickup.class)
     @JoinColumn
     private ASNPickup pickup;
+    
+    @OneToOne(targetEntity = ASNDropOff.class)
+    @JoinColumn
+    private ASNDropOff dropOff;
 
 
 	public PackUnit getOuterPackUnit() {
@@ -398,5 +399,25 @@ public class ASN extends MultitenantBaseEntity {
 
 	public void setPickup(ASNPickup pickup) {
 		this.pickup = pickup;
+	}
+
+
+	public Set<ReferenceNumber> getRefNumbers() {
+		return refNumbers;
+	}
+
+
+	public void setRefNumbers(Set<ReferenceNumber> refNumbers) {
+		this.refNumbers = refNumbers;
+	}
+
+
+	public ASNDropOff getDropOff() {
+		return dropOff;
+	}
+
+	
+	public void setDropOff(ASNDropOff dropOff) {
+		this.dropOff = dropOff;
 	}
 }

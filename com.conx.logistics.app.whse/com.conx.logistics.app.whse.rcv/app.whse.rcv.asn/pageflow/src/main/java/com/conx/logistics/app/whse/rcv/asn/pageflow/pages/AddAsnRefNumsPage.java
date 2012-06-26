@@ -1,18 +1,25 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import javax.persistence.EntityManagerFactory;
+
+import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
-import com.vaadin.data.Container;
-import com.vaadin.data.Item;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
+import com.vaadin.addon.jpacontainer.JPAContainer;
+import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.util.IndexedContainer;
+import com.vaadin.data.util.BeanContainer;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.TextArea;
@@ -20,7 +27,15 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 public class AddAsnRefNumsPage extends IPageFlowPage {
-private static final String VIEW_HEIGHT = "400px";
+	private static final String VIEW_HEIGHT = "450px";
+	private static final String ASN_VARIABLE_KEY = "asn";
+	
+	private Map<String, Object> processState;
+	private ASN asn;
+	private int pageMode = LIST_PAGE_MODE;
+	
+	private static final int LIST_PAGE_MODE = 0;
+	private static final int EDIT_PAGE_MODE = 1;
 	
 	private Table referenceIdTable;
 	private VerticalLayout mainView;
@@ -30,7 +45,6 @@ private static final String VIEW_HEIGHT = "400px";
 	private TextField referenceIdField;
 	private Button addReferenceIdButton;
 	private HorizontalLayout addStrip;
-	private IndexedContainer referenceIdContainer;
 	private TextField referenceIdEditorField;
 	private ComboBox referenceIdEditorType;
 	private Button editButton;
@@ -39,11 +53,142 @@ private static final String VIEW_HEIGHT = "400px";
 	private HorizontalLayout toolStrip;
 	private HorizontalLayout referenceIdEditorStrip;
 	private TextArea referenceIdEditorNotes;
-	private VerticalLayout canvas;
 	private Button addReferenceIdType;
 	private HorizontalLayout toolstripLeftButtonPanel;
 	private Button saveButton;
 	private Button resetButton;
+
+	private JPAContainer<ReferenceNumberType> refNumTypeContainer;
+	
+	private BeanContainer<String, ReferenceNumber> refNumBeanContainer;
+	private EntityManagerFactory emf;
+	private Button cancelButton;
+	
+	private void setPageMode(int mode) {
+		switch (mode) {
+		case LIST_PAGE_MODE:
+			referenceIdField.setValue("");
+			referenceIdType.setValue(null);
+			
+			saveButton.setEnabled(false);
+			resetButton.setEnabled(false);
+			if (referenceIdTable.getValue() == null) {
+				editButton.setEnabled(false);
+				deleteButton.setEnabled(false);
+			} else {
+				editButton.setEnabled(true);
+				deleteButton.setEnabled(true);
+			}
+			
+			editView.setVisible(false);
+			listView.setVisible(true);
+			break;
+		case EDIT_PAGE_MODE:
+			ReferenceNumber refNum = refNumBeanContainer.getItem(referenceIdTable.getValue()).getBean();
+			referenceIdEditorType.setValue(refNum.getType().getId());
+			referenceIdEditorField.setValue(refNum.getValue());
+			if (refNum.getDescription() != null && !refNum.getDescription().isEmpty()) {
+				referenceIdEditorNotes.setValue(refNum.getDescription());
+			}
+			
+			saveButton.setEnabled(true);
+			resetButton.setEnabled(true);
+			editButton.setEnabled(false);
+			deleteButton.setEnabled(true);
+			
+			listView.setVisible(false);
+			editView.setVisible(true);
+			break;
+		}
+		this.pageMode = mode;
+	}
+	
+	private boolean validate() {
+		StringBuffer message = new StringBuffer();
+		switch (pageMode) {
+		case LIST_PAGE_MODE:
+			if ((referenceIdField.getValue() == null) || ((String) referenceIdField.getValue()).isEmpty()) {
+				message.append("</br>Reference Number was not provided");
+			} 
+			if (referenceIdType.getValue() == null) {
+				message.append("</br>Reference Number Type was not provided");
+			}
+			
+			if (message.length() != 0) {
+				showNotification("Could Not Add Reference Number", message.toString());
+				return false;
+			} else {
+				return true;
+			}
+		case EDIT_PAGE_MODE:
+			if ((referenceIdEditorField.getValue() == null) || ((String) referenceIdEditorField.getValue()).isEmpty()) {
+				message.append("</br>Reference Number was not provided");
+			} 
+			if (referenceIdEditorType.getValue() == null) {
+				message.append("</br>Reference Number Type was not provided");
+			}
+			
+			if (message.length() != 0) {
+				showNotification("Could Not Edit Reference Number", message.toString());
+				return false;
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void reset() {
+		switch (pageMode) {
+		case EDIT_PAGE_MODE:
+			ReferenceNumber refNum = refNumBeanContainer.getItem(referenceIdTable.getValue()).getBean();
+			referenceIdEditorType.setValue(refNum.getType().getId());
+			referenceIdEditorField.setValue(refNum.getValue());
+			if (refNum.getDescription() != null && !refNum.getDescription().isEmpty()) {
+				referenceIdEditorNotes.setValue(refNum.getDescription());
+			} else {
+				referenceIdEditorNotes.setValue("");
+			}
+			break;
+		}
+	}
+	
+	private void create() {
+		if (validate()) {
+			ReferenceNumber refNum = new ReferenceNumber();
+			refNum.setValue((String) referenceIdField.getValue());
+			refNum.setType(refNumTypeContainer.getItem(referenceIdType.getValue()).getEntity());
+			refNumBeanContainer.addBean(refNum);
+			referenceIdField.setValue("");
+			referenceIdType.setValue(null);
+			referenceIdField.focus();
+		}
+	}
+	
+	private void edit() {
+		if (validate()) {
+			BeanItem<ReferenceNumber> item = refNumBeanContainer.getItem(referenceIdTable.getValue());
+			ReferenceNumber refNum = item.getBean();
+			String refNumValue = (String) referenceIdEditorField.getValue();
+			ReferenceNumberType refNumType = refNumTypeContainer.getItem(referenceIdEditorType.getValue()).getEntity();
+			
+			refNum.setValue(refNumValue);
+			item.getItemProperty("value").setValue(refNumValue);
+			refNum.setType(refNumType);
+			item.getItemProperty("type.name").setValue(refNumType.getName());
+			refNum.setDescription((String) referenceIdEditorNotes.getValue());
+			
+			setPageMode(LIST_PAGE_MODE);
+		}
+	}
+	
+	private void initContainers() {
+		refNumTypeContainer = JPAContainerFactory.make(ReferenceNumberType.class, this.emf.createEntityManager());
+		refNumBeanContainer = new BeanContainer<String, ReferenceNumber>(ReferenceNumber.class);
+		
+		refNumBeanContainer.setBeanIdProperty("value");
+		refNumBeanContainer.addNestedContainerProperty("type.name");
+	}
 	
 	public void initRefIdToolStrip() {
 		referenceIdField = new TextField();
@@ -52,37 +197,24 @@ private static final String VIEW_HEIGHT = "400px";
 		
 		referenceIdType = new ComboBox();
 		referenceIdType.setInputPrompt("Reference Id Type");
-		referenceIdType.addItem("Red");
-		referenceIdType.addItem("Orange");
-		referenceIdType.addItem("Blue");
-		referenceIdType.addItem("Yellow");
-		referenceIdType.addItem("Grey");
+		referenceIdType.setContainerDataSource(refNumTypeContainer);
+		referenceIdType.setItemCaptionPropertyId("name");
+		referenceIdType.setNullSelectionAllowed(false);
 		referenceIdType.setWidth("100%");
 		
 		addReferenceIdButton = new Button("Add Reference Id");
-//		addReferenceIdButton.setWidth("100px");
 		addReferenceIdButton.addListener(new ClickListener() {
 			private static final long serialVersionUID = 328740392837363674L;
-			private Item item;
-			private int id = 0;
+			
 			public void buttonClick(ClickEvent event) {
-				item = referenceIdTable.addItem(++id);
-				item.getItemProperty("id").setValue(referenceIdField.getValue());
-				item.getItemProperty("type").setValue(referenceIdType.getValue());
-				referenceIdField.setValue("");
-				referenceIdType.setValue(null);
-				referenceIdField.focus();
+				create();
 			}
 		});
 		
 		addReferenceIdType = new Button("New Reference Id Type");
-//		addReferenceIdType.setWidth("100px");
 		addReferenceIdType.addListener(new ClickListener() {
-			private static final long serialVersionUID = 328740392837363674L;
-//			private Item item;
-//			private int id = 0;
+			private static final long serialVersionUID = 328750392837363674L;
 			public void buttonClick(ClickEvent event) {
-				//
 			}
 		});
 		
@@ -99,16 +231,15 @@ private static final String VIEW_HEIGHT = "400px";
 	}
 	
 	public void initRefIdTable() {
-		referenceIdContainer = new IndexedContainer();
-		referenceIdContainer.addContainerProperty("id", String.class, "");
-		referenceIdContainer.addContainerProperty("type", String.class, "");
-		
 		referenceIdTable = new Table(); 
 		referenceIdTable.setSizeFull();
 		referenceIdTable.setSelectable(true);
 		referenceIdTable.setImmediate(true);
 		referenceIdTable.setNullSelectionAllowed(false);
-		referenceIdTable.setContainerDataSource(referenceIdContainer);
+		referenceIdTable.setContainerDataSource(refNumBeanContainer);
+		referenceIdTable.setVisibleColumns(new String[] { "value",  "type.name" });
+		referenceIdTable.setColumnHeader("value", "Reference Number");
+		referenceIdTable.setColumnHeader("type.name", "Type");
 		referenceIdTable.addListener(new Table.ValueChangeListener() {
 			private static final long serialVersionUID = 4696828026010510338L;
 
@@ -138,11 +269,9 @@ private static final String VIEW_HEIGHT = "400px";
 		
 		referenceIdEditorType = new ComboBox();
 		referenceIdEditorType.setInputPrompt("Reference Id Type");
-		referenceIdEditorType.addItem("Red");
-		referenceIdEditorType.addItem("Orange");
-		referenceIdEditorType.addItem("Blue");
-		referenceIdEditorType.addItem("Yellow");
-		referenceIdEditorType.addItem("Grey");
+		referenceIdEditorType.setContainerDataSource(refNumTypeContainer);
+		referenceIdEditorType.setItemCaptionPropertyId("name");
+		referenceIdEditorType.setNullSelectionAllowed(false);
 		referenceIdEditorType.setWidth("100%");
 		
 		referenceIdEditorStrip = new HorizontalLayout();
@@ -155,9 +284,9 @@ private static final String VIEW_HEIGHT = "400px";
 		
 		referenceIdEditorNotes = new com.vaadin.ui.TextArea(null, "");
 		referenceIdEditorNotes.setRows(8);
-		referenceIdEditorNotes.setColumns(20);
+		referenceIdEditorNotes.setColumns(0);
 		referenceIdEditorNotes.setImmediate(true);
-		referenceIdEditorNotes.setWidth("100%");
+		referenceIdEditorNotes.setSizeFull();
 		referenceIdEditorNotes.setInputPrompt("Notes");
 		
 		editView = new VerticalLayout();
@@ -165,6 +294,7 @@ private static final String VIEW_HEIGHT = "400px";
 		editView.setHeight(VIEW_HEIGHT);
 		editView.addComponent(referenceIdEditorStrip);
 		editView.addComponent(referenceIdEditorNotes);
+		editView.setExpandRatio(referenceIdEditorNotes, 1.0f);
 		editView.setSpacing(true);
 		editView.setVisible(false);
 	}
@@ -177,7 +307,10 @@ private static final String VIEW_HEIGHT = "400px";
 			private static final long serialVersionUID = 500322301678L;
 
 			public void buttonClick(ClickEvent event) {
-				cycleMainView();
+				ReferenceNumber refNum = refNumBeanContainer.getItem(referenceIdTable.getValue()).getBean();
+				referenceIdField.setValue(refNum.getValue());
+				referenceIdType.setValue(refNum.getType().getId());
+				setPageMode(EDIT_PAGE_MODE);
 			}
 		});
 		
@@ -189,7 +322,10 @@ private static final String VIEW_HEIGHT = "400px";
 
 			public void buttonClick(ClickEvent event) {
 				referenceIdTable.removeItem(referenceIdTable.getValue());
-				cycleMainView();
+				if (pageMode == EDIT_PAGE_MODE) {
+					referenceIdTable.removeItem(referenceIdTable.getValue());
+					setPageMode(LIST_PAGE_MODE);
+				}
 			}
 		});
 		
@@ -208,7 +344,7 @@ private static final String VIEW_HEIGHT = "400px";
 			private static final long serialVersionUID = 500312301678L;
 
 			public void buttonClick(ClickEvent event) {
-				
+				edit();
 			}
 		});
 		
@@ -216,20 +352,32 @@ private static final String VIEW_HEIGHT = "400px";
 		resetButton.setEnabled(false);
 		resetButton.setWidth("100%");
 		resetButton.addListener(new ClickListener() {
-			private static final long serialVersionUID = 5003289976900978L;
+			private static final long serialVersionUID = 50030978L;
 
 			public void buttonClick(ClickEvent event) {
-				
+				reset();
+			}
+		});
+		
+		cancelButton = new Button("Cancel");
+		cancelButton.setEnabled(false);
+		cancelButton.setWidth("100%");
+		cancelButton.addListener(new ClickListener() {
+			private static final long serialVersionUID = 500785840900978L;
+
+			public void buttonClick(ClickEvent event) {
 			}
 		});
 		
 		toolstripLeftButtonPanel = new HorizontalLayout();
-		toolstripLeftButtonPanel.setWidth("200px");
+		toolstripLeftButtonPanel.setWidth("300px");
 		toolstripLeftButtonPanel.setSpacing(true);
 		toolstripLeftButtonPanel.addComponent(saveButton);
 		toolstripLeftButtonPanel.addComponent(resetButton);
-		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.5f);
-		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.5f);
+		toolstripLeftButtonPanel.addComponent(cancelButton);
+		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.33f);
+		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.33f);
+		toolstripLeftButtonPanel.setExpandRatio(cancelButton, 0.33f);
 		
 		toolStrip = new HorizontalLayout();
 		toolStrip.setWidth("100%");
@@ -240,7 +388,21 @@ private static final String VIEW_HEIGHT = "400px";
 		toolStrip.setComponentAlignment(toolstripRightButtonPanel, Alignment.MIDDLE_RIGHT);
 	}
 	
-	public void init() {
+	@Override
+	public String getTaskName() {
+		return "AddAsnRefNums";
+	}
+
+	@Override
+	public String getCaption() {
+		return "Add Reference Numbers";
+	}
+
+	@Override
+	public void initialize(EntityManagerFactory emf) {
+		this.emf = emf;
+		
+		initContainers();
 		initListView();
 		initEditView();
 		initTableToolStrip();
@@ -251,53 +413,40 @@ private static final String VIEW_HEIGHT = "400px";
 		mainView.addComponent(listView);
 		mainView.addComponent(editView);
 		
-		canvas = new VerticalLayout();
+		VerticalLayout canvas = new VerticalLayout();
 		canvas.setSizeFull();
 		canvas.addComponent(mainView);
 		canvas.addComponent(toolStrip);
 		canvas.setExpandRatio(mainView, 1.0f);
+		
+		this.setCanvas(canvas);
 	}
-	
-	private void cycleMainView() {
-		if (editButton.getCaption().equals("Edit")) {
-			editButton.setCaption("Apply");
-		} else {
-			editButton.setCaption("Edit");
+
+	@Override
+	public Map<String, Object> getProcessState() {
+		if (asn != null) {
+			Set<ReferenceNumber> refNums = new HashSet<ReferenceNumber>();
+			for (Object id : referenceIdTable.getItemIds()) {
+				refNums.add(refNumBeanContainer.getItem(id).getBean());
+			}
+			asn.setRefNumbers(refNums);
 		}
-		listView.setVisible(!listView.isVisible());
-		editView.setVisible(!editView.isVisible());
-	}
-	
-	@Override
-	public String getTaskName() {
-		// TODO Auto-generated method stub
-		return "AddAsnRefNums";
-	}
-
-	@Override
-	public Component getContent() {
-		if (canvas == null) {
-			init();
+		
+		if (processState != null) {
+			processState.put(ASN_VARIABLE_KEY, asn);
 		}
-		return canvas;
+		
+		return processState;
 	}
 
 	@Override
-	public void setDataContainerMap(Map<String, Container> containerMap) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Map<String, Container> getDataContainerMap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getCaption() {
-		// TODO Auto-generated method stub
-		return "Add Reference Numbers";
+	public void setProcessState(Map<String, Object> state) {
+		processState = state;
+		asn = (ASN) state.get(ASN_VARIABLE_KEY);
+		
+		if (asn != null && refNumBeanContainer != null) {
+			refNumBeanContainer.addAll(asn.getRefNumbers());
+		}
 	}
 
 }
