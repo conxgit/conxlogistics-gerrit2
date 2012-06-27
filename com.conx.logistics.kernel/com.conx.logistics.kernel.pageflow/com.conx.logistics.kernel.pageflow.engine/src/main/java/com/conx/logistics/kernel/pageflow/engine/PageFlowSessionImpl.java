@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
+import javax.transaction.UserTransaction;
 
 import org.jboss.bpm.console.client.model.ProcessInstanceRef;
 import org.jbpm.task.Task;
 
+import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.kernel.bpm.services.IBPMProcessInstance;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
@@ -123,6 +125,10 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	@Override
 	public void previousPage() {
 	}
+	
+	public void start() {
+		bpmService.startTask(currentTask.getId(), userId);	
+	}
 
 	@Override
 	public void abort() {
@@ -157,9 +163,46 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		return processVars;
 	}
 	
-	public void executeNext() throws Exception {
-		bpmService.completeTask(currentTask.getId(), null, userId);
-		currentTask = waitForNextTask();
+	public void executeNext(UserTransaction ut) throws Exception {
+		 try
+		 {
+			 ut.begin();
+			 bpmService.completeTask(currentTask.getId(), null, userId);
+			 ut.commit();
+		 }
+		 catch(Exception e)
+		 {
+			 ut.rollback();
+			 throw e;
+		 }			
+
+		 try
+		 {
+			 ut.begin();
+			 currentTask = waitForNextTask();
+			 ut.commit();
+		 }
+		 catch(Exception e)
+		 {
+			 ut.rollback();
+			 throw e;
+		 }	
+		 
+		 if (Validator.isNotNull(currentTask))
+		 {
+			 try
+			 {
+				 ut.begin();
+				 bpmService.startTask(currentTask.getId(), userId);
+				 ut.commit();
+			 }
+			 catch(Exception e)
+			 {
+				 ut.rollback();
+				 throw e;
+			 }		
+		 }
+		
 	}
 
 	private IPageFlowPage getNextPage(IPageFlowPage currentPage) {

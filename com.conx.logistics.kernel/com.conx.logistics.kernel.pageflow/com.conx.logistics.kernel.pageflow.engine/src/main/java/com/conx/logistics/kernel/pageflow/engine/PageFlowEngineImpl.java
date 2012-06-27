@@ -192,6 +192,20 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 			 ut.rollback();
 			 throw e;
 		 }		 
+		 
+		 try
+		 {
+			 ut.begin();
+			 
+			 session.start();
+			 
+			 ut.commit();
+		 }
+		 catch(Exception e)
+		 {
+			 ut.rollback();
+			 throw e;
+		 }			 
 		/*
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
@@ -223,7 +237,9 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	
 	@Override
 	public ITaskWizard executeTaskWizard(ITaskWizard tw, Map<String, Object> properties) throws Exception {
-		((TaskWizard)tw).getSession().executeNext();
+		 Context ctx = jndiTemplate.getContext();
+		 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
+		((TaskWizard)tw).getSession().executeNext(ut);
 		return tw;
 	}
 }

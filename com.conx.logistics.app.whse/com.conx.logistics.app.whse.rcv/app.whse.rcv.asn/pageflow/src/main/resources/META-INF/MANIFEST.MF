@@ -1,8 +1,7 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.pageflow.pages;ver
- sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.c
- onx.logistics.mdm.domain.geolocation,com.vaadin.addon.jpacontainer,co
- m.vaadin.data,com.vaadin.ui"
+ sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,javax
+ .persistence"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -11,12 +10,16 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module PageFlow artifacts
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
-Import-Package: com.conx.logistics.kernel.pageflow.services;version="1
- .0.0",com.conx.logistics.mdm.domain.geolocation;version="1.0.0",com.c
- onx.logistics.mdm.domain.organization;version="1.0.0",com.conx.logist
- ics.mdm.domain.product;version="1.0.0",com.vaadin.addon.jpacontainer;
- version="2.0.0",com.vaadin.data;version="[6.7.0,7.0.0)",com.vaadin.da
- ta.util;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)"
- ,javax.persistence;version="0",org.vaadin.teemu.wizards;version="0.4.
- 4"
+Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
+ 0.0",com.conx.logistics.kernel.pageflow.services;version="1.0.0",com.
+ conx.logistics.mdm.domain.commercialrecord;version="1.0.0",com.conx.l
+ ogistics.mdm.domain.currency;version="1.0.0",com.conx.logistics.mdm.d
+ omain.geolocation;version="1.0.0",com.conx.logistics.mdm.domain.organ
+ ization;version="1.0.0",com.conx.logistics.mdm.domain.product;version
+ ="1.0.0",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0
+ ",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.data;versi
+ on="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.v
+ aadin.event;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0
+ .0)",javax.persistence;version="0",org.vaadin.teemu.wizards;version="
+ 0.4.4"
 

@@ -26,6 +26,8 @@ public class PageflowEngineTests {
 			params.put("processId", "whse.rcv.asn.CreateNewASNByOrgV1.0");
 			params.put("userId", "john");
 			ITaskWizard wiz = defaultPageFlowEngine.createTaskWizard(params);
+			
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, null);
 			// ProcessInstanceRef pi =
 			//bpmService.newInstance("whse.rcv.asn.CreateNewASNByOrgV1.0");
 		} catch (Exception e) {
