@@ -164,6 +164,7 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	}
 	
 	public void executeNext(UserTransaction ut) throws Exception {
+		//1. Complete the current task first
 		 try
 		 {
 			 ut.begin();
@@ -174,8 +175,9 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		 {
 			 ut.rollback();
 			 throw e;
-		 }			
-
+		 }	
+		 
+		 //2. Get the next task after Proc resume
 		 try
 		 {
 			 ut.begin();
@@ -186,10 +188,25 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		 {
 			 ut.rollback();
 			 throw e;
-		 }	
-		 
+		 }			 
+
+		 //3. If the next task exists, nominate and start it
 		 if (Validator.isNotNull(currentTask))
 		 {
+			 //3.1 Nominate the current user for this task
+			 try
+			 {
+				 ut.begin();
+				 bpmService.nominate(currentTask.getId(), userId);
+				 ut.commit();
+			 }
+			 catch(Exception e)
+			 {
+				 ut.rollback();
+				 throw e;
+			 }	
+		 
+			//3.2 Start the task
 			 try
 			 {
 				 ut.begin();
