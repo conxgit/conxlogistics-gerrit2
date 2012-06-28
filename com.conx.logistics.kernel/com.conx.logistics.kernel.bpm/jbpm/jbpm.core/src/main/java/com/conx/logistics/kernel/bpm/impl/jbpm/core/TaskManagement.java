@@ -140,6 +140,11 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
   
 		service.complete(taskId, userId, contentData);
 	}
+	
+	public void completeTask(long taskId, ContentData contentData, String userId) {
+		connect();
+		service.complete(taskId, userId, contentData);
+	}	
 
 	@SuppressWarnings("unchecked")
 	public void completeTask(long taskId, String outcome, Map data, String userId) {

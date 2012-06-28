@@ -1,0 +1,21 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: JBPM ASN Package Decorator
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.human-task-core.package.decorator
+Fragment-Host: org.jbpm.human-task-core
+Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="[1.0.0,2.0.0)",
+  com.conx.logistics.mdm.domain.application;version="1.0.0",
+  com.conx.logistics.mdm.domain.commercialrecord;version="1.0.0",
+  com.conx.logistics.mdm.domain.organization;version="1.0.0",
+  com.conx.logistics.mdm.domain.product;version="1.0.0",
+  com.conx.logistics.mdm.domain.task;version="1.0.0",
+  com.conx.logistics.mdm.domain.geolocation;version="1.0.0",
+  com.conx.logistics.mdm.dao.services.currency;version="1.0.0",
+  com.conx.logistics.mdm.dao.services.product;version="1.0.0",
+  com.conx.logistics.mdm.domain.currency;version="1.0.0",
+  com.conx.logistics.mdm.domain.metadata;version="1.0.0",
+  com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",
+  com.conx.logistics.mdm.domain.documentlibrary;version="1.0.0",
+  com.conx.logistics.mdm.domain.documentlibrary;version="1.0.0",
+  org.hibernate.collection;version="3.6.0.Final"
+
