@@ -22,7 +22,7 @@ import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.vaadin.ui.Component;
 
 public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener {
-	private static final int WAIT_DELAY = 500;
+	private static final int WAIT_DELAY = 1000;
 	
 	private Map<String, IPageFlowPage> pages;
 	private List<IPageFlowPage> orderedPageList;
@@ -84,6 +84,7 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	private Task waitForNextTask() throws Exception {
 		List<Task> tasks = new ArrayList<Task>();
 		int count = 0;
+		Thread.sleep(WAIT_DELAY);
 		while (count < 10) {
 			tasks = bpmService.getCreatedTasksByProcessId(Long.parseLong(bpmInstance.getId()));
 			if (tasks.size() == 0) {
@@ -163,12 +164,12 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		return processVars;
 	}
 	
-	public void executeNext(UserTransaction ut) throws Exception {
-		//1. Complete the current task first
+	public void executeNext(UserTransaction ut, Map<String, Object> params) throws Exception {
+		 //1. Complete the current task first
 		 try
 		 {
 			 ut.begin();
-			 bpmService.completeTask(currentTask.getId(), null, userId);
+			 bpmService.completeTask(currentTask.getId(), params, userId);
 			 ut.commit();
 		 }
 		 catch(Exception e)

@@ -34,6 +34,7 @@ public class TaskWizard extends Wizard implements ITaskWizard{
 	public Map<String, Object> getProperties() {
 		Map<String,Object> props = new HashMap<String, Object>();
 		props.put("session",session);
+		props.putAll(session.getProcessVars());
 		return props;
 	}
 	
