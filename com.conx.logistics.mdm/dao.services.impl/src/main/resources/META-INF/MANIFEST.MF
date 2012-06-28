@@ -11,20 +11,18 @@ Export-Package: com.conx.logistics.mdm.dao.services.impl;version="1.0.
  n,javax.persistence,org.springframework.beans.factory.annotation,org.
  springframework.stereotype,org.springframework.transaction.annotation
  ",com.conx.logistics.mdm.dao.services.impl.documentlibrary;version="1
- .0.0";uses:="com.conx.logistics.mdm.dao.services.documentlibrary,com.
- conx.logistics.mdm.domain.documentlibrary,javax.persistence,org.sprin
- gframework.stereotype,org.springframework.transaction.annotation",com
- .conx.logistics.mdm.dao.services.impl.product;version="1.0.0";uses:="
- com.conx.logistics.mdm.dao.services.product,com.conx.logistics.mdm.do
- main.product,javax.persistence,org.springframework.beans.factory.anno
- tation,org.springframework.stereotype,org.springframework.transaction
- .annotation",com.conx.logistics.mdm.dao.services.impl.referencenumber
- ;version="1.0.0";uses:="com.conx.logistics.mdm.dao.services.reference
- number,com.conx.logistics.mdm.domain.referencenumber,javax.persistenc
- e,org.springframework.stereotype,org.springframework.transaction.anno
- tation",org.springframework.dao.support.custom;version="1.0.0";uses:=
- "org.springframework.dao,org.springframework.dao.support,org.springfr
- amework.orm.jpa"
+ .0.0";uses:="javax.persistence,org.springframework.stereotype,org.spr
+ ingframework.transaction.annotation",com.conx.logistics.mdm.dao.servi
+ ces.impl.product;version="1.0.0";uses:="com.conx.logistics.mdm.dao.se
+ rvices.product,com.conx.logistics.mdm.domain.product,javax.persistenc
+ e,org.springframework.beans.factory.annotation,org.springframework.st
+ ereotype,org.springframework.transaction.annotation",com.conx.logisti
+ cs.mdm.dao.services.impl.referencenumber;version="1.0.0";uses:="com.c
+ onx.logistics.mdm.dao.services.referencenumber,javax.persistence,org.
+ springframework.stereotype,org.springframework.transaction.annotation
+ ",org.springframework.dao.support.custom;version="1.0.0";uses:="org.s
+ pringframework.dao,org.springframework.dao.support,org.springframewor
+ k.orm.jpa"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev

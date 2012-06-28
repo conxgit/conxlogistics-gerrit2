@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.workitems;version=
- "1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.services,com.c
- onx.logistics.mdm.dao.services,javax.persistence,org.drools.process.i
- nstance,org.drools.runtime.process,org.springframework.jndi"
+ "1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.services,javax
+ .persistence,org.drools.process.instance,org.drools.runtime.process,o
+ rg.springframework.jndi"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0

@@ -8,10 +8,14 @@ Export-Package: com.conx.logistics.kernel.pageflow.engine;version="1.0
  tics.kernel.pageflow.engine.ui;version="1.0.0";uses:="com.conx.logist
  ics.kernel.pageflow.engine,com.conx.logistics.kernel.pageflow.service
  s,com.vaadin.ui,org.vaadin.teemu.wizards"
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel PageFlow Engine
 Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.engine
 Import-Package: com.conx.logistics.common.utils;version="1.0.0",com.co
  nx.logistics.kernel.bpm.impl.jbpm.core;version="1.0.0",com.conx.logis
  tics.kernel.bpm.services;version="1.0.0",com.conx.logistics.kernel.pa
@@ -21,10 +25,10 @@ Import-Package: com.conx.logistics.common.utils;version="1.0.0",com.co
  .0.0)",javax.naming,javax.persistence;version="0",javax.transaction,o
  rg.jboss.bpm.console.client.model;version="2.3.2.SNAPSHOT",org.jbpm.m
  arshalling.impl;version="[5.3.0,5.4.0)",org.jbpm.task;version="[5.3.0
- ,5.4.0)",org.jbpm.task.query;version="[5.3.0,5.4.0)",org.jbpm.workflo
- w.core.node;version="[5.3.0,5.4.0)",org.slf4j;version="[1.6.0,1.7.0)"
- ,org.springframework.jndi;version="[3.0,3.1)",org.springframework.tra
- nsaction;version="[3.0,3.1)",org.springframework.transaction.support;
- version="[3.0,3.1)",org.vaadin.teemu.wizards;version="0.4.4"
-Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.engine
+ ,5.4.0)",org.jbpm.task.query;version="[5.3.0,5.4.0)",org.jbpm.task.se
+ rvice;version="[5.3.0,5.4.0)",org.jbpm.workflow.core.node;version="[5
+ .3.0,5.4.0)",org.slf4j;version="[1.6.0,1.7.0)",org.springframework.jn
+ di;version="[3.0,3.1)",org.springframework.transaction;version="[3.0,
+ 3.1)",org.springframework.transaction.support;version="[3.0,3.1)",org
+ .vaadin.teemu.wizards;version="0.4.4"
 
