@@ -1,0 +1,41 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.rcv.asn.dao.services.impl;
+ version="1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.servic
+ es,com.conx.logistics.app.whse.rcv.asn.domain,javax.persistence,org.s
+ pringframework.stereotype,org.springframework.transaction.annotation"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WHSE RCV ASN DAO Persistence
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.dao.jpa.persi
+ stence
+Import-Package: com.conx.logistics.app.whse.rcv.asn.dao.services;versi
+ on="1.0.0",com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0"
+ ,com.conx.logistics.common.utils;version="1.0.0",com.conx.logistics.m
+ dm.dao.services.currency;version="1.0.0",com.conx.logistics.mdm.dao.s
+ ervices.product;version="1.0.0",com.conx.logistics.mdm.dao.services.r
+ eferencenumber;version="1.0.0",com.conx.logistics.mdm.domain.applicat
+ ion;version="1.0.0",com.conx.logistics.mdm.domain.commercialrecord;ve
+ rsion="1.0.0",com.conx.logistics.mdm.domain.currency;version="1.0.0",
+ com.conx.logistics.mdm.domain.geolocation;version="1.0.0",com.conx.lo
+ gistics.mdm.domain.metadata;version="1.0.0",com.conx.logistics.mdm.do
+ main.organization;version="1.0.0",com.conx.logistics.mdm.domain.produ
+ ct;version="1.0.0",com.conx.logistics.mdm.domain.referencenumber;vers
+ ion="1.0.0",com.conx.logistics.mdm.domain.task;version="1.0.0",javax.
+ persistence;version="0",javax.persistence.criteria;version="0",javax.
+ transaction;version="0",org.hibernate.hql.ast;version="3.6.0.Final",o
+ rg.slf4j;version="[1.6.1,1.7.0)",org.springframework.beans.factory.an
+ notation;version="[3.0,3.1)",org.springframework.dao;version="[3.0,3.
+ 1)",org.springframework.dao.annotation;version="[3.0,3.1)",org.spring
+ framework.dao.support;version="[3.0,3.1)",org.springframework.orm.jpa
+ ;version="[3.0,3.1)",org.springframework.orm.jpa.vendor;version="[3.0
+ ,3.1)",org.springframework.stereotype;version="[3.0,3.1)",org.springf
+ ramework.transaction;version="[3.0,3.1)",org.springframework.transact
+ ion.annotation;version="[3.0,3.1)",org.springframework.transaction.as
+ pectj;version="[3.0,3.1)",org.springframework.transaction.jta;version
+ ="[3.0,3.1)"
+

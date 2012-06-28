@@ -28,6 +28,8 @@ public class PageflowEngineTests {
 			ITaskWizard wiz = defaultPageFlowEngine.createTaskWizard(params);
 			
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, null);
+			Map<String, Object> res = wiz.getProperties();
+			res.get("a");
 			// ProcessInstanceRef pi =
 			//bpmService.newInstance("whse.rcv.asn.CreateNewASNByOrgV1.0");
 		} catch (Exception e) {

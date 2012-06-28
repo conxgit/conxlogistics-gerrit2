@@ -14,5 +14,6 @@
   	<module>workitems</module>
   	<module>domain.persistence.config</module>
   	<module>dao.services</module>
+  	<module>dao.jpa.persistence</module>
   </modules>
 </project>

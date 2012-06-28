@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>dao.services</name>
+	<name>dao.jpa.persistence</name>
 	<comment></comment>
 	<projects>
 	</projects>

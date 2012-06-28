@@ -9,7 +9,7 @@ Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
 Build-Jdk: 1.6.0_23
 Built-By: sandile
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.0.0.RELEASE
+Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM TaskServer Persistence in Hibernate
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse

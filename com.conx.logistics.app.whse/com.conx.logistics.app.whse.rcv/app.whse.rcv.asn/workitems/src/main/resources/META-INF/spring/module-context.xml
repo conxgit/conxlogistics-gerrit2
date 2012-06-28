@@ -10,10 +10,33 @@
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-	<bean id="newASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.InitNewASNWIH"/>	
-	<bean id="acceptASNOrgWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNOrgWIH"/>
-	<bean id="acceptASNRefNumsWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNRefNumsWIH"/>
-	<bean id="acceptASNLinesWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLinesWIH"/>
-	<bean id="acceptASNLocalTransWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLocalTransWIH"/>	
-	<bean id="acceptASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNWIH"/>
+	<bean id="newASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.InitNewASNWIH">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+		<property name="asnDao" ref="asnDao"/>
+		<property name="orgDao" ref="orgDao"/>	
+	</bean>	
+	
+	<bean id="acceptASNOrgWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNOrgWIH">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+		<property name="asnDao" ref="asnDao"/>
+		<property name="orgDao" ref="orgDao"/>
+	</bean>
+	<bean id="acceptASNRefNumsWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNRefNumsWIH">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+	</bean>
+	<bean id="acceptASNLinesWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLinesWIH">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+	</bean>
+	<bean id="acceptASNLocalTransWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLocalTransWIH">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+	</bean>	
+	<bean id="acceptASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNWIH">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>
+	</bean>
 </beans>

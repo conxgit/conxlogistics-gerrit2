@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.workitems;version=
- "1.0.0";uses:="org.drools.process.instance,org.drools.runtime.process
- "
+ "1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.services,com.c
+ onx.logistics.mdm.dao.services,javax.persistence,org.drools.process.i
+ nstance,org.drools.runtime.process,org.springframework.jndi"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -10,7 +11,12 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module WorkItemHandler artifacts
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.workitems
-Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
- 0.0",org.drools.process.instance;version="[5.4.0,5.5.0)",org.drools.r
- untime.process;version="[5.4.0,5.5.0)"
+Import-Package: com.conx.logistics.app.whse.rcv.asn.dao.services;versi
+ on="1.0.0",com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0"
+ ,com.conx.logistics.mdm.dao.services;version="1.0.0",com.conx.logisti
+ cs.mdm.domain.organization;version="1.0.0",javax.persistence;version=
+ "0",org.drools.process.instance;version="[5.4.0,5.5.0)",org.drools.ru
+ ntime.process;version="[5.4.0,5.5.0)",org.slf4j;version="[1.6.0,1.7.0
+ )",org.springframework.jndi;version="[3.0,3.1)",org.springframework.t
+ ransaction;version="[3.0,3.1)"
 

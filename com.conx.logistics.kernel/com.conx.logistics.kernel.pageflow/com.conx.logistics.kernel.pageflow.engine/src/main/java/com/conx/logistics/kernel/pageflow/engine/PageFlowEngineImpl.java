@@ -173,6 +173,10 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		 }
 		 catch(Exception e)
 		 {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);				 
 			 ut.rollback();
 			 throw e;
 		 }

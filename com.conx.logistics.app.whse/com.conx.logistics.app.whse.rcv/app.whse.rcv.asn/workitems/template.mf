@@ -4,6 +4,13 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module WorkItemHandler artifacts
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.workitems
 Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0",
   org.drools.process.instance;version="[5.4.0,5.5.0)",
-  org.drools.runtime.process;version="[5.4.0,5.5.0)"
+  org.drools.runtime.process;version="[5.4.0,5.5.0)",
+  com.conx.logistics.app.whse.rcv.asn.dao.services;version="1.0.0",
+  com.conx.logistics.mdm.dao.services;version="1.0.0",
+  com.conx.logistics.mdm.domain.organization;version="1.0.0",
+  javax.persistence;version="0",
+  org.springframework.jndi;version="[3.0,3.1)",
+  org.springframework.transaction;version="[3.0,3.1)",
+  org.slf4j;version="[1.6.0,1.7.0)"
   
 

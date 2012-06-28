@@ -12,5 +12,13 @@ import com.conx.logistics.mdm.domain.organization.Organization;
 public class MultitenantBaseEntity  extends  BaseEntity{
     @ManyToOne(targetEntity = Organization.class, fetch = FetchType.EAGER)
     @JoinColumn
-    private Organization tenant; 	
+    private Organization tenant;
+
+	public Organization getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Organization tenant) {
+		this.tenant = tenant;
+	} 	
 }
