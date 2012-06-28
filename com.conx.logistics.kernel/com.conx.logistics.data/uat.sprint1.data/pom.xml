@@ -99,8 +99,15 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.transaction</artifactId>
 			<version>${springframework.version}</version>
-		</dependency>				
-	</dependencies>
+		</dependency>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>
+				com.conx.logistics.app.whse.rcv.asn.dao.services
+			</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+  </dependencies>
 	<build>
 		<plugins>
 			<plugin>

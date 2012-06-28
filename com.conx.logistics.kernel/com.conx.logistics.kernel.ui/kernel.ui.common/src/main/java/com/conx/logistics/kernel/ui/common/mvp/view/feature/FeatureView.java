@@ -64,8 +64,8 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 		controls.setStyleName("feature-controls");
 
 		title.setStyleName("title");
-		controls.addComponent(title);
-		controls.setExpandRatio(title, 1);
+//		controls.addComponent(title);
+//		controls.setExpandRatio(title, 1);
 	}
 
 	public void setFeature(Feature feature) {
@@ -74,7 +74,7 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 				currentFeature = feature;
 				left.removeAllComponents();
 
-				left.addComponent(controls);
+//				left.addComponent(controls);
 				title.setValue("<span>" + feature.getName() + "</span>");
 				//if (feature.getSinceVersion().isNew()) {
 				//	title.addStyleName("new");

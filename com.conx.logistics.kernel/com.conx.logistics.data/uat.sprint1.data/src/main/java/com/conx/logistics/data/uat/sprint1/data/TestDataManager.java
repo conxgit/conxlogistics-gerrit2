@@ -2,6 +2,8 @@ package com.conx.logistics.data.uat.sprint1.data;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +15,13 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService;
+import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDropOffDAOService;
+import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNPickupDAOService;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.mdm.dao.services.IAddressDAOService;
 import com.conx.logistics.mdm.dao.services.IContactDAOService;
 import com.conx.logistics.mdm.dao.services.ICountryDAOService;
@@ -27,10 +36,13 @@ import com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService;
 import com.conx.logistics.mdm.dao.services.product.IProductDAOService;
 import com.conx.logistics.mdm.dao.services.product.IProductTypeDAOService;
 import com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService;
+import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService;
 import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService;
+import com.conx.logistics.mdm.domain.constants.AddressCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.constants.DimUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.constants.PackUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.constants.ProductTypeCustomCONSTANTS;
+import com.conx.logistics.mdm.domain.constants.ReferenceNumberTypeCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.constants.WeightUnitCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.geolocation.Country;
@@ -40,6 +52,8 @@ import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 import com.conx.logistics.mdm.domain.organization.Contact;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.conx.logistics.mdm.domain.product.Product;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 
 public class TestDataManager {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());	
@@ -60,12 +74,16 @@ public class TestDataManager {
 	private IProductTypeDAOService productTypeDaoService;
 	private IProductDAOService productDaoService;
 	private ICurrencyUnitDAOService currencyUnitDAOService;
+	private IASNDAOService asnDaoService;
+	private IASNPickupDAOService asnPickupDAOService;
+	private IASNDropOffDAOService asnDropOffDAOService;
 	
 	private IContactDAOService contactDAOService;
 	private IDocTypeDAOService docTypeDOAService;
 	private IEntityMetadataDAOService entityMetadataDAOService;
 	
 	private IReferenceNumberTypeDAOService referenceNumberTypeDaoService;
+	private IReferenceNumberDAOService referenceNumberDaoService;
 	
 	public void setOrgDaoService(IOrganizationDAOService orgDaoService) {
 		this.orgDaoService = orgDaoService;
@@ -91,7 +109,10 @@ public class TestDataManager {
 			IReferenceNumberTypeDAOService referenceNumberTypeDaoService) {
 		this.referenceNumberTypeDaoService = referenceNumberTypeDaoService;
 	}
-	
+	public void setReferenceNumberDaoService(
+			IReferenceNumberDAOService referenceNumberDaoService) {
+		this.referenceNumberDaoService = referenceNumberDaoService;
+	}	
 	public void setPackUnitDaoService(IPackUnitDAOService packUnitDaoService) {
 		this.packUnitDaoService = packUnitDaoService;
 	}
@@ -246,6 +267,100 @@ public class TestDataManager {
 				Product prd4 = productDaoService.provide("textil1", "Clothing",ProductTypeCustomCONSTANTS.TYPE_Textiles,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				
 				/**
+				 * 
+				 * Sample ASN
+				 * 
+				 */
+				DefaultEntityMetadata asnEMD = entityMetadataDAOService.getByClass(ASN.class);
+				//- Ref Numbers
+				ReferenceNumberType fedexRefType = referenceNumberTypeDaoService.getByCode(ReferenceNumberTypeCustomCONSTANTS.TYPE_FEDEX);
+				ReferenceNumber rn1 = new ReferenceNumber();
+				rn1.setCode("122345678899");
+				rn1.setValue("122345678899");
+				rn1.setType(fedexRefType);
+				rn1.setEntityMetadata(asnEMD);
+				rn1  = referenceNumberDaoService.add(rn1);
+				
+				ReferenceNumber rn2 = new ReferenceNumber();
+				rn2.setCode("998877665544332211");
+				rn2.setValue("122345678899");
+				rn2.setType(fedexRefType);
+				rn2.setEntityMetadata(asnEMD);
+				rn2  = referenceNumberDaoService.add(rn2);				
+				
+				ArrayList<ReferenceNumber> refNumList = new ArrayList<ReferenceNumber>();
+				refNumList.add(rn1);
+				refNumList.add(rn2);
+				
+				ASNLine al1 = new ASNLine();
+				al1.setCode("AL1");
+				al1.setProduct(prd2);
+				al1.setRefNumber(rn1);
+				al1.setLineNumber(0);
+				al1.setExpectedInnerPackCount(8);
+				al1.setExpectedOuterPackCount(12);
+				al1.setExpectedTotalWeight(28.0);
+				al1.setExpectedTotalVolume(12.54);
+				al1.setExpectedTotalLen(9.3);
+				al1.setExpectedTotalWidth(1.0);
+				al1.setExpectedTotalHeight(1.39);
+				al1.setDescription("A90234708-3292389 Laptop Package");
+				
+				ASNLine al2 = new ASNLine();
+				al2.setCode("AL2");
+				al2.setProduct(prd3);
+				al2.setRefNumber(rn2);
+				al2.setLineNumber(0);
+				al2.setExpectedInnerPackCount(18);
+				al2.setExpectedOuterPackCount(2);
+				al2.setExpectedTotalWeight(28.0);
+				al2.setExpectedTotalVolume(12.54);
+				al2.setExpectedTotalLen(9.3);
+				al2.setExpectedTotalWidth(1.0);
+				al2.setExpectedTotalHeight(1.39);
+				al2.setDescription("AODK-DLKDJ WKIWKWI");
+				
+				ArrayList<ASNLine> asnLineList = new ArrayList<ASNLine>();
+				asnLineList.add(al1);
+				asnLineList.add(al2);
+				
+				ASNPickup pickup1 = new ASNPickup();
+				ASNDropOff dropOff1 = new ASNDropOff();
+				
+				pickup1.setCode("PKUP1");
+				pickup1.setPickUpFrom(tescus1);
+				pickup1.setPickUpFromAddress(tescus1_addr);
+				pickup1.setLocalTrans(tescar1);
+				pickup1.setLocalTransAddress(tescar1_addr);
+				pickup1.setDriverId("DRV001");
+				pickup1.setVehicleId("DRV001");
+				pickup1.setBolNumber("DRV001");
+				pickup1.setVehicleId("DRV001");
+				pickup1.setEstimatedPickup(new Date());
+				
+				pickup1 = asnPickupDAOService.add(pickup1);
+				
+				
+				dropOff1.setDropOffAt(tescus1);
+				dropOff1.setCode("DRPOF1");
+				dropOff1.setDropOffAtAddress(tescus1_addr);
+				dropOff1.setEstimatedDropOff(new Date());
+				dropOff1 = asnDropOffDAOService.add(dropOff1);
+				
+				ASN asn1 = new ASN();
+				asn1.setCode("ASN1");
+				asn1 = asnDaoService.add(asn1);
+				
+				rn1.setEntityPK(asn1.getId());
+				rn2.setEntityPK(asn1.getId());
+				referenceNumberDaoService.update(rn1);
+				referenceNumberDaoService.update(rn2);
+				
+				asnDaoService.addRefNums(asn1.getId(), refNumList);
+				asnDaoService.addLines(asn1.getId(), asnLineList);
+				asnDaoService.addLocalTrans(asn1.getId(), pickup1, dropOff1);
+				
+				/**
 				 * Ref IDs: TD RIDTYP 2.0, 3.0, 4.0
 				 */
 				referenceNumberTypeDaoService.provideDefaults();
@@ -269,5 +384,23 @@ public class TestDataManager {
 	
 	public void stop() {
 		
+	}
+	public IASNDAOService getAsnDaoService() {
+		return asnDaoService;
+	}
+	public void setAsnDaoService(IASNDAOService asnDaoService) {
+		this.asnDaoService = asnDaoService;
+	}
+	public IASNPickupDAOService getAsnPickupDAOService() {
+		return asnPickupDAOService;
+	}
+	public void setAsnPickupDAOService(IASNPickupDAOService asnPickupDAOService) {
+		this.asnPickupDAOService = asnPickupDAOService;
+	}
+	public IASNDropOffDAOService getAsnDropOffDAOService() {
+		return asnDropOffDAOService;
+	}
+	public void setAsnDropOffDAOService(IASNDropOffDAOService asnDropOffDAOService) {
+		this.asnDropOffDAOService = asnDropOffDAOService;
 	}
 }

@@ -47,4 +47,6 @@
 		PersistenceExceptions will be auto-translated due to @Repository.
 	-->
 	<bean id="asnDao" class="com.conx.logistics.app.whse.rcv.asn.dao.services.impl.ASNDAOImpl"/>
+	<bean id="asnPickupDao" class="com.conx.logistics.app.whse.rcv.asn.dao.services.impl.ASNPickupDAOImpl"/>
+	<bean id="asnDropOffDao" class="com.conx.logistics.app.whse.rcv.asn.dao.services.impl.ASNDropOffDAOImpl"/>
 </beans>

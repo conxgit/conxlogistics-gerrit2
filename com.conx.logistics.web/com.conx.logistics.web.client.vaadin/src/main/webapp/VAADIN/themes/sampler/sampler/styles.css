@@ -256,7 +256,7 @@
 }
 
 .v-app-MainMVPApplication .v-splitpanel-first-container-main-split {
-	background: #eaebec url(tree-bg.png) repeat-x fixed;
+	/*background: #eaebec url(tree-bg.png) repeat-x fixed;*/
 	font-family: arial, helvetica, verdana, sans-serif;
 }
 

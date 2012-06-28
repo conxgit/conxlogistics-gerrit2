@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -78,7 +79,7 @@ public class ASN extends MultitenantBaseEntity {
     @JoinColumn
     private Address shipperAddress;
 
-    @OneToMany(mappedBy="parentASN",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="parentASN",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ASNLine> asnLines = new java.util.HashSet<ASNLine>();
 
     @OneToOne(targetEntity = CommercialRecord.class)
@@ -121,7 +122,7 @@ public class ASN extends MultitenantBaseEntity {
     @DateTimeFormat(style = "S-")
     private Date dateLastImportUpdated;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ReferenceNumber> refNumbers = new java.util.HashSet<ReferenceNumber>();
 
     /**

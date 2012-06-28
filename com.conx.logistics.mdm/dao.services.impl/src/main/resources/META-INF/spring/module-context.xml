@@ -73,10 +73,11 @@
 	<bean id="docTypeDao" class="com.conx.logistics.mdm.dao.services.impl.documentlibrary.DocTypeDAOImpl"/>	
 	<bean id="entityMetadataDao" class="com.conx.logistics.mdm.dao.services.impl.EntityMetadataDAOImpl"/>
 	<bean id="orgDao" class="com.conx.logistics.mdm.dao.services.impl.OrganizationDAOImpl"/>
-	<bean id="referenceNumberTypeDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberTypeDAOImpl"/>
 	<bean id="packUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.PackUnitDAOImpl"/>	
 	<bean id="productDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductDAOImpl"/>	
-	<bean id="productTypeDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductTypeDAOImpl"/>	
+	<bean id="productTypeDao" class="com.conx.logistics.mdm.dao.services.impl.product.ProductTypeDAOImpl"/>
+	<bean id="referenceNumberDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberDAOImpl"/>
+	<bean id="referenceNumberTypeDao" class="com.conx.logistics.mdm.dao.services.impl.referencenumber.ReferenceNumberTypeDAOImpl"/>
 	<bean id="unlocoDao" class="com.conx.logistics.mdm.dao.services.impl.UnlocoDAOImpl"/>
 	<bean id="weightUnitDao" class="com.conx.logistics.mdm.dao.services.impl.product.WeightUnitDAOImpl"/>
 </beans>

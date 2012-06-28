@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +22,7 @@ import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.documentlibrary.IDocTypeDAOService;
 import com.conx.logistics.mdm.domain.constants.DocTypeCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.documentlibrary.DocType;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 
 @Transactional
 @Repository
@@ -49,10 +54,21 @@ public class DocTypeDAOImpl implements IDocTypeDAOService {
 		
 		try
 		{
-			TypedQuery<DocType> q = em.createQuery("select o from com.conx.logistics.mdm.domain.documentlibrary.DocType o WHERE o.code = :code",DocType.class);
-			q.setParameter("code", code);
-						
-			org = q.getSingleResult();
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+			CriteriaQuery<DocType> query = builder.createQuery(DocType.class);
+			Root<DocType> rootEntity = query.from(DocType.class);
+			ParameterExpression<String> p = builder.parameter(String.class);
+			query.select(rootEntity).where(builder.equal(rootEntity.get("code"), p));
+
+			TypedQuery<DocType> typedQuery = em.createQuery(query);
+			typedQuery.setParameter(p, code);
+			
+			org = typedQuery.getSingleResult();			
+//			TODO
+//			TypedQuery<DocType> q = em.createQuery("select o from com.conx.logistics.mdm.domain.documentlibrary.DocType o WHERE o.code = :code",DocType.class);
+//			q.setParameter("code", code);
+//						
+//			org = q.getSingleResult();
 		}
 		catch(NoResultException e){}
 		catch(Exception e)

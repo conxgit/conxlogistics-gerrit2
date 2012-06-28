@@ -14,14 +14,10 @@ Export-Package: com.conx.logistics.kernel.workspace.ui;version="1.0.0"
  on",com.conx.logistics.kernel.workspace.ui.view;version="1.0.0";uses:
  ="com.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.uibinder.annot
  ation"
-Build-Jdk: 1.6.0_32
-Built-By: Mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: ConX kernel User Workspace :: Basic Profile View
 Bundle-ManifestVersion: 2
-Created-By: Maven Integration for Eclipse
-Bundle-SymbolicName: com.conx.logistics.kernel.workspace.ui
 Import-Package: com.conx.logistics.kernel.ui.common.mvp;version="[1.0.
  0,2.0.0)",com.conx.logistics.kernel.ui.common.mvp.view.feature;versio
  n="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.ui.feature;vers
@@ -35,4 +31,5 @@ Import-Package: com.conx.logistics.kernel.ui.common.mvp;version="[1.0.
  er;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.annotation;versi
  on="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT",
  org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT"
+Bundle-SymbolicName: com.conx.logistics.kernel.workspace.ui
 

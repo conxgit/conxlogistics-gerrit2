@@ -16,6 +16,9 @@
 	
 	<!-- BUSINESS SERVICES -->
 	<osgi:reference id="addressDao" interface="com.conx.logistics.mdm.dao.services.IAddressDAOService"/>
+	<osgi:reference id="asnDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService"/>
+	<osgi:reference id="asnPickupDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNPickupDAOService"/>
+	<osgi:reference id="asnDropOffDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDropOffDAOService"/>
 	<osgi:reference id="contactDao" interface="com.conx.logistics.mdm.dao.services.IContactDAOService"/>		
 	<osgi:reference id="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>
 	<osgi:reference id="currencyUnitDao" interface="com.conx.logistics.mdm.dao.services.currency.ICurrencyUnitDAOService"/>	
@@ -28,6 +31,7 @@
 	<osgi:reference id="packUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService"/>
 	<osgi:reference id="productTypeDao" interface="com.conx.logistics.mdm.dao.services.product.IProductTypeDAOService"/>
 	<osgi:reference id="referenceNumberTypeDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService"/>
+	<osgi:reference id="referenceNumberDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService"/>
 	<osgi:reference id="unlocoDao" interface="com.conx.logistics.mdm.dao.services.IUnlocoDAOService"/>
 	<osgi:reference id="weightUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService"/>
 </beans>

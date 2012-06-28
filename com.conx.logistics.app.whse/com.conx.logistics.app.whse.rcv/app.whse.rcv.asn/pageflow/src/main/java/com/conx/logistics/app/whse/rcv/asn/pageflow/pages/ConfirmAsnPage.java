@@ -485,16 +485,10 @@ public class ConfirmAsnPage extends IPageFlowPage {
 				whArrivalDateTime.setValue("N/A");
 			}
 			
-			dropOffLocationOrgLabel.setValue(("Organization"));
 			dropOffLocationOrg.setValue((asn.getDropOff().getDropOffAt().getName()));
-			dropOffLocationAddressLabel.setValue(("Address"));
 			dropOffLocationAddress.setValue((addressToXhtml(asn.getDropOff().getDropOffAtAddress())));
-			dropOffLocationContactNameLabel.setValue(("Contact Name"));
 			dropOffLocationContactName.setValue((asn.getDropOff().getDropOffAt().getMainContact().getFirstName() + " " + asn.getDropOff().getDropOffAt().getMainContact().getLastName()));
-			dropOffLocationContactPhoneLabel.setValue(("Contact Phone"));
 			dropOffLocationContactPhone.setValue((asn.getDropOff().getDropOffAt().getMainContact().getCellPhoneNumber()));
-			dropOffLocationDockTypeLabel.setValue(("Dock Type"));
-			dropOffLocationDockType.setValue(("Dock Type"));
 		}
 	}
 

@@ -29,7 +29,10 @@ Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="[1.0.0,2.0.0
   org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT",  
   javax.persistence;version="[1.0.0, 3.0.0)",
   javax.persistence.criteria;version="[1.0.0, 3.0.0)",  
-  org.slf4j;version="[1.6.1,1.6.1]"
+  org.slf4j;version="[1.6.1,1.6.1]",
+  com.conx.logistics.mdm.domain.geolocation;version="1.0.0",
+  com.conx.logistics.mdm.domain.organization;version="1.0.0",
+  com.conx.logistics.mdm.domain.referencenumber;version="1.0.0"
 Export-Template: com.conx.logistics.kernel.system.ui.*,
   com.conx.logistics.kernel.system.ui.navigation.*,
   com.conx.logistics.kernel.system.ui.view.*

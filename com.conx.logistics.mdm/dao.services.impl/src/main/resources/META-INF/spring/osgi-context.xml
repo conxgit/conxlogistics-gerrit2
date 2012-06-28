@@ -33,6 +33,7 @@
 	<osgi:service ref="productTypeDao" interface="com.conx.logistics.mdm.dao.services.product.IProductTypeDAOService"/>
 	<osgi:service ref="productDao" interface="com.conx.logistics.mdm.dao.services.product.IProductDAOService"/>
 	<osgi:service ref="referenceNumberTypeDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService"/>
+	<osgi:service ref="referenceNumberDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService"/>
 	<osgi:service ref="unlocoDao" interface="com.conx.logistics.mdm.dao.services.IUnlocoDAOService"/>
 	<osgi:service ref="weightUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService"/>
 </beans>

@@ -16,9 +16,11 @@
 		<osgi:listener ref="mainApp" bind-method="bindKernelSystemEntityManagerFactory" unbind-method="unbindKernelSystemEntityManagerFactory"/>
 	</osgi:reference>	
 	
+	<!-- 
 	<osgi:list id="entityManagerFactories" cardinality="0..N" interface="javax.persistence.EntityManagerFactory" >
 		<osgi:listener ref="mainApp" bind-method="bindEntitymanagerFactory" unbind-method="unbindEntitymanagerFactory"/>
 	</osgi:list>		
+	-->
 
 	<osgi:reference id="applicationDAOService" cardinality="0..1" interface="com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService">
 		<osgi:listener ref="mainApp" bind-method="bindApplicationDAOService" unbind-method="unbindApplicationDAOService"/>

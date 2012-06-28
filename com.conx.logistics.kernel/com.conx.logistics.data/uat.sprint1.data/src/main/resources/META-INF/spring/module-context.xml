@@ -16,6 +16,9 @@
 		<property name="globalTransactionManager" ref="globalTransManager"></property>
 				
 		<property name="addressDaoService" ref="addressDao"></property>
+		<property name="asnDaoService" ref="asnDao"></property>
+		<property name="asnPickupDAOService" ref="asnPickupDao"></property>
+		<property name="asnDropOffDAOService" ref="asnDropOffDao"></property>
 		<property name="contactDAOService" ref="contactDao"></property>
 		<property name="countryDaoService" ref="countryDao"></property>
 		<property name="countryStateDaoService" ref="countryStateDao"></property>
@@ -28,6 +31,7 @@
 		<property name="productDaoService" ref="productDao"></property>
 		<property name="productTypeDaoService" ref="productTypeDao"></property>
 		<property name="referenceNumberTypeDaoService" ref="referenceNumberTypeDao"></property>
+		<property name="referenceNumberDaoService" ref="referenceNumberDao"></property>
 		<property name="unlocoDaoService" ref="unlocoDao"></property>
 		<property name="weightUnitDaoService" ref="weightUnitDao"></property>
 	</bean>

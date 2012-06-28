@@ -6,20 +6,11 @@
 	<v:VerticalLayout sizeFull="" ui:field="mainLayout">
 		<v:VerticalSplitPanel sizeFull="" ui:field="splitLayout">
 			<v:VerticalLayout sizeFull="" ui:field="gridLayout">
-				  <v:Table sizeFull="" ui:field="grid" />
-				  <v:HorizontalLayout spacing="true" ui:field="buttonLayout" height="20px">
-				    <v:Button caption="Create" styleName="small" e:click="createASN" />
-				    <v:Button caption="Remove" styleName="small" e:click="removeASN" />
-				  </v:HorizontalLayout>				
-			</v:VerticalLayout>
-			<v:VerticalLayout sizeFull="" ui:field="detailLayout">
-				<v:Form ui:field="asnForm">
-				</v:Form>
-				<v:HorizontalLayout spacing="true">
-					<v:Button caption="Edit" styleName="small" e:click="editASN" enable="false"/>
-					<v:Button caption="Save" styleName="small" e:click="saveASN" enable="false"/>
-					<v:Button caption="Cancel" styleName="small" e:click="cancelEditASN" enable="false"/>
+				<v:HorizontalLayout spacing="true" ui:field="buttonLayout">
+					<v:Button caption="New ASN" e:click="createASN" />
+					<v:Button caption="Delete ASN" e:click="removeASN" />
 				</v:HorizontalLayout>
+				<v:Table sizeFull="" ui:field="grid" />
 			</v:VerticalLayout>
 		</v:VerticalSplitPanel>
 	</v:VerticalLayout>

@@ -19,4 +19,6 @@
 			
 	<!-- export internal interfaces -->
 	<osgi:service ref="asnDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService"/>
+	<osgi:service ref="asnPickupDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNPickupDAOService"/>
+	<osgi:service ref="asnDropOffDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDropOffDAOService"/>
 </beans>

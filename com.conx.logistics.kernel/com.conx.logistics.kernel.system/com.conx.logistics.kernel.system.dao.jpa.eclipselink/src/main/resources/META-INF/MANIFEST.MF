@@ -5,16 +5,17 @@ Export-Package: com.conx.logistics.kernel.system.dao.jpa.eclipselink.a
  x.persistence,org.junit,org.junit.runner,org.springframework.beans.fa
  ctory.annotation,org.springframework.stereotype,org.springframework.t
  est.context,org.springframework.transaction.annotation"
+Built-By: sandile
+Tool: Bundlor 1.1.0.BUILD-20101220120024
+Bundle-Name: ConX Kernel System DAO Services EclipseLink Impl
+Created-By: Maven Integration for Eclipse
 Import-Bundle: org.eclipse.persistence.core;version="[2.3.2.v20111125-
  r10461,2.3.2.v20111125-r10461]",org.eclipse.persistence.jpa;version="
  [2.3.2.v20111125-r10461,2.3.2.v20111125-r10461]"
 Bundle-Vendor: ConX
 Bundle-Version: 1.0.0
-Tool: Bundlor 1.1.0.BUILD-20101220120024
-Bundle-Name: ConX Kernel System DAO Services EclipseLink Impl
+Build-Jdk: 1.6.0_23
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: com.conx.logistics.kernel.system.dao.jpa.eclipsel
- ink
 Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
  ",com.conx.logistics.kernel.system.dao.services.application;version="
  [1.0.0,2.0.0)",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
@@ -34,4 +35,6 @@ Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
  ion;version="[3.0, 3.1)",org.springframework.transaction.annotation;v
  ersion="[3.0, 3.1)",org.springframework.transaction.aspectj;version="
  [3.0, 3.1)"
+Bundle-SymbolicName: com.conx.logistics.kernel.system.dao.jpa.eclipsel
+ ink
 
