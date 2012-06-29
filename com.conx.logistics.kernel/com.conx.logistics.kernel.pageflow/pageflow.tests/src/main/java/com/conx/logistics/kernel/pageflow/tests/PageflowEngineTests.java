@@ -42,14 +42,14 @@ public class PageflowEngineTests {
 			//-- 1. Start Proc
 			ITaskWizard wiz = defaultPageFlowEngine.createTaskWizard(params);			
 			Map<String, Object> res = wiz.getProperties();
-			ASN asn = (ASN)res.get("asnParams");
+//			ASN asn = (ASN)res.get("asnParams");
 			
 			//-- 2. Complete ConfirmASNOrg Task and get vars
 			Map<String,Object> outParams = new HashMap<String, Object>();
 			//outParams.put("asnParamsOut", asn);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-			asn = (ASN)res.get("asnParams");
+//			asn = (ASN)res.get("asnParams");
 			
 			
 			//-- 3. Complete AddRefNums Task and get vars
@@ -57,46 +57,46 @@ public class PageflowEngineTests {
 			ReferenceNumber rn = new ReferenceNumber();
 			rn.setCode("123456");
 			refNumbers.add(rn);
-			asn.setRefNumbers(refNumbers);
+//			asn.setRefNumbers(refNumbers);
 			
 			outParams = new HashMap<String, Object>();
 			outParams.put("refNumsCollectionOut", refNumbers);			
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-			asn = (ASN)res.get("asnParams");
+//			asn = (ASN)res.get("asnParams");
 			
 			//-- 4. Complete ASN Lines Human and get vars
 			HashSet<ASNLine> asnLines = new HashSet<ASNLine>();
 			ASNLine line = new ASNLine();
 			line.setLineNumber(1);
 			asnLines.add(line);
-			asn.setAsnLines(asnLines);
+//			asn.setAsnLines(asnLines);
 			
 			outParams = new HashMap<String, Object>();
 			outParams.put("asnLinesCollectionOut", asnLines);			
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-			asn = (ASN)res.get("asnParams");	
+//			asn = (ASN)res.get("asnParams");	
 			
 			//-- 4. Complete Local Trans Human and get vars
 			ASNPickup asnp = new ASNPickup();
 			ASNDropOff asnd = new ASNDropOff();
-			asn.setPickup(asnp);
-			asn.setDropOff(asnd);
+//			asn.setPickup(asnp);
+//			asn.setDropOff(asnd);
 			
 			outParams = new HashMap<String, Object>();
 			outParams.put("asnPickupOut", asnp);	
 			outParams.put("asnDropoffOut", asnd);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-			asn = (ASN)res.get("asnParams");		
+//			asn = (ASN)res.get("asnParams");		
 			
 			//-- 5. Complete Accept ASN and get vars
 			outParams = new HashMap<String, Object>();
 			//outParams.put("confirmASNAsnOut", asn);			
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-			asn = (ASN)res.get("asnParams");			
+//			asn = (ASN)res.get("asnParams");			
 			
 			
 			// ProcessInstanceRef pi =

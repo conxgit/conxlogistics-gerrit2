@@ -1,14 +1,14 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
 
-import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
+import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.constants.AddressCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.organization.Contact;
@@ -31,13 +31,9 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class AddAsnLocalTransPage extends IPageFlowPage {
+public class AddAsnLocalTransPage extends PageFlowPage {
 	private static final String VIEW_HEIGHT = "450px";
-	private static final String ASN_VARIABLE_KEY = "asn";
-	
-	private Map<String, Object> processState;
-	private ASN asn;
-	
+
 	private ComboBox pickupCarrierOrganization;
 	private TabSheet entityTabSheet;
 	private ComboBox pickupCarrierAddress;
@@ -81,7 +77,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 	private JPAContainer<Organization> pickupLocationOrganizationContainer;
 	private JPAContainer<Organization> pickupCarrierOrganizationContainer;
 	private JPAContainer<Organization> dropOffLocationOrganizationContainer;
-	
+
 	private Organization currentPickupLocationOrg = null;
 	private Label pickupCarrierContactAddressLabel;
 	private Organization currentPickupCarrierOrg;
@@ -91,13 +87,13 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 	private EntityManagerFactory emf;
 	private Label pickupLocationAddressLabel;
 	private Button cancelButton;
-	
+
 	private void initContainers() {
 		pickupLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 		pickupCarrierOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 		dropOffLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 	}
-	
+
 	public void initPickupLocation() {
 		pickupLocationOrganization = new ComboBox();
 		pickupLocationOrganization.setInputPrompt("Organization");
@@ -117,7 +113,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 				updatePickupLocationFields(pickupLocationOrganization.getValue());
 			}
 		});
-		
+
 		pickupLocationAddress = new ComboBox();
 		pickupLocationAddress.setInputPrompt("Address");
 		pickupLocationAddress.setEnabled(false);
@@ -125,7 +121,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationAddress.setWidth("100%");
 		pickupLocationAddress.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 7796995334178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				if (pickupLocationAddress.getValue().equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
@@ -145,11 +141,11 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 				}
 			}
 		});
-		
+
 		pickupLocationAddressLabel = new Label();
 		pickupLocationAddressLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupLocationAddressLabel.setValue("<i>No Address Selected</i>");
-		
+
 		if (currentPickupLocationOrg.getAdHocAddress() != null) {
 			pickupLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
 			pickupLocationAddress.setValue(AddressCustomCONSTANTS.ADHOC_ADDRESS);
@@ -186,17 +182,17 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			pickupLocationAddress.setValue(AddressCustomCONSTANTS.MAIN_ADDRESS);
 			pickupLocationAddress.setEnabled(true);
 		}
-		
+
 		Label pickupLocationOrganizationLayoutLabel = new Label();
 		pickupLocationOrganizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupLocationOrganizationLayoutLabel.setValue("<h3>Address Details</h3>");
-		
+
 		Label pickupLocationOrganizationLabel = new Label();
 		pickupLocationOrganizationLabel.setValue("Organization");
-		
+
 		Label pickupLocationAddressFieldLabel = new Label();
 		pickupLocationAddressFieldLabel.setValue("Address");
-		
+
 		pickupLocationOrganizationLayout = new GridLayout(2, 4);
 		pickupLocationOrganizationLayout.setWidth("100%");
 		pickupLocationOrganizationLayout.setSpacing(true);
@@ -211,7 +207,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationOrganizationLayout.addComponent(pickupLocationAddressLabel, 1, 3, 1, 3);
 		pickupLocationOrganizationLayout.setComponentAlignment(pickupLocationOrganizationLabel, Alignment.MIDDLE_LEFT);
 		pickupLocationOrganizationLayout.setComponentAlignment(pickupLocationAddressFieldLabel, Alignment.MIDDLE_LEFT);
-		
+
 		pickupLocationContact = new ComboBox();
 		pickupLocationContact.setEnabled(false);
 		pickupLocationContact.setInputPrompt("Contact");
@@ -223,24 +219,24 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationContact.setValue(name);
 		pickupLocationContact.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 779001014178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				pickupLocationContactAddressLabel.setValue(contactToXhtml(currentPickupLocationOrg.getMainContact()));
 			}
 		});
-		
+
 		pickupLocationContactAddressLabel = new Label();
 		pickupLocationContactAddressLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupLocationContactAddressLabel.setValue(contactToXhtml(currentPickupLocationOrg.getMainContact()));
-		
+
 		Label pickupLocationContactLabel = new Label();
 		pickupLocationContactLabel.setValue("Contact");
 
 		Label pickupLocationContactLayoutLabel = new Label();
 		pickupLocationContactLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupLocationContactLayoutLabel.setValue("<h3>Contact</h3>");
-		
+
 		pickupLocationContactLayout = new GridLayout(2, 3);
 		pickupLocationContactLayout.setMargin(false,  true, true, true);
 		pickupLocationContactLayout.setSpacing(true);
@@ -252,19 +248,19 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationContactLayout.addComponent(pickupLocationContact);
 		pickupLocationContactLayout.addComponent(pickupLocationContactAddressLabel, 1, 2, 1, 2);
 		pickupLocationContactLayout.setComponentAlignment(pickupLocationContactLabel, Alignment.MIDDLE_LEFT);
-		
+
 		pickupLocationDockType = new ComboBox();
 		pickupLocationDockType.setInputPrompt("Dock Type");
 		pickupLocationDockType.setEnabled(false);
 		pickupLocationDockType.setWidth("100%");
-		
+
 		Label pickupLocationDockTypeLabel = new Label();
 		pickupLocationDockTypeLabel.setValue("Dock Type");
 
 		Label pickupLocationDockTypeLayoutLabel = new Label();
 		pickupLocationDockTypeLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupLocationDockTypeLayoutLabel.setValue("<h3>Dock Info</h3>");
-		
+
 		pickupLocationDockTypeLayout = new GridLayout(2, 2);
 		pickupLocationDockTypeLayout.setMargin(false,  true, true, true);
 		pickupLocationDockTypeLayout.setSpacing(true);
@@ -275,7 +271,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationDockTypeLayout.addComponent(pickupLocationDockTypeLabel);
 		pickupLocationDockTypeLayout.addComponent(pickupLocationDockType);
 		pickupLocationDockTypeLayout.setComponentAlignment(pickupLocationDockTypeLabel, Alignment.MIDDLE_LEFT);
-		
+
 		pickupLocationLayout = new HorizontalLayout();
 		pickupLocationLayout.setMargin(true);
 		pickupLocationLayout.setSizeFull();
@@ -287,7 +283,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationLayout.setExpandRatio(pickupLocationContactLayout, 0.33f);
 		pickupLocationLayout.setExpandRatio(pickupLocationDockTypeLayout, 0.33f);
 	}
-	
+
 	public void initPickupCarrier() {
 		pickupCarrierOrganization = new ComboBox();
 		pickupCarrierOrganization.setInputPrompt("Organization");
@@ -301,13 +297,13 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		currentPickupCarrierOrg = pickupCarrierOrganizationContainer.getItem(pickupCarrierOrganizationContainer.getIdByIndex(0)).getEntity();
 		pickupCarrierOrganization.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 7796995334178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				updatePickupCarrierFields(pickupCarrierOrganization.getValue());
 			}
 		});
-		
+
 		pickupCarrierAddress = new ComboBox();
 		pickupCarrierAddress.setInputPrompt("Address");
 		pickupCarrierAddress.setEnabled(false);
@@ -315,7 +311,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierAddress.setWidth("100%");
 		pickupCarrierAddress.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 7796995334178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				if (pickupCarrierAddress.getValue().equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
@@ -335,11 +331,11 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 				}
 			}
 		});
-		
+
 		pickupCarrierAddressLabel = new Label();
 		pickupCarrierAddressLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupCarrierAddressLabel.setValue("<i>No Address Selected</i>");
-		
+
 		if (currentPickupCarrierOrg.getAdHocAddress() != null) {
 			pickupCarrierAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
 			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.ADHOC_ADDRESS);
@@ -376,17 +372,17 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			pickupCarrierAddress.setValue(AddressCustomCONSTANTS.MAIN_ADDRESS);
 			pickupCarrierAddress.setEnabled(true);
 		}
-		
+
 		Label pickupCarrierOrganizationLayoutLabel = new Label();
 		pickupCarrierOrganizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupCarrierOrganizationLayoutLabel.setValue("<h3>Address Details</h3>");
-		
+
 		Label pickupCarrierOrganizationLabel = new Label();
 		pickupCarrierOrganizationLabel.setValue("Organization");
-		
+
 		Label pickupCarrierAddressFieldLabel = new Label();
 		pickupCarrierAddressFieldLabel.setValue("Address");
-		
+
 		pickupCarrierOrganizationLayout = new GridLayout(2, 4);
 		pickupCarrierOrganizationLayout.setWidth("100%");
 		pickupCarrierOrganizationLayout.setSpacing(true);
@@ -401,7 +397,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierOrganizationLayout.addComponent(pickupCarrierAddressLabel, 1, 3, 1, 3);
 		pickupCarrierOrganizationLayout.setComponentAlignment(pickupCarrierOrganizationLabel, Alignment.MIDDLE_LEFT);
 		pickupCarrierOrganizationLayout.setComponentAlignment(pickupCarrierAddressFieldLabel, Alignment.MIDDLE_LEFT);
-		
+
 		pickupCarrierContact = new ComboBox();
 		pickupCarrierContact.setEnabled(false);
 		pickupCarrierContact.setInputPrompt("Contact");
@@ -413,25 +409,25 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierContact.setValue(name);
 		pickupCarrierContact.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 779001014178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				pickupCarrierContactAddressLabel.setValue(contactToXhtml(currentPickupCarrierOrg.getMainContact()));
 			}
 		});
-		
+
 		pickupCarrierContactAddressLabel = new Label();
 		pickupCarrierContactAddressLabel.setContentMode(Label.CONTENT_XHTML);
-//		pickupCarrierContactAddressLabel.setValue("<i>No Contact Selected</i>");
+		//		pickupCarrierContactAddressLabel.setValue("<i>No Contact Selected</i>");
 		pickupCarrierContactAddressLabel.setValue(contactToXhtml(currentPickupCarrierOrg.getMainContact()));
-		
+
 		Label pickupCarrierContactLabel = new Label();
 		pickupCarrierContactLabel.setValue("Contact");
 
 		Label pickupCarrierContactLayoutLabel = new Label();
 		pickupCarrierContactLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupCarrierContactLayoutLabel.setValue("<h3>Contact</h3>");
-		
+
 		pickupCarrierContactLayout = new GridLayout(2, 3);
 		pickupCarrierContactLayout.setMargin(false,  true, true, true);
 		pickupCarrierContactLayout.setSpacing(true);
@@ -443,39 +439,39 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierContactLayout.addComponent(pickupCarrierContact);
 		pickupCarrierContactLayout.addComponent(pickupCarrierContactAddressLabel, 1, 2, 1, 2);
 		pickupCarrierContactLayout.setComponentAlignment(pickupCarrierContactLabel, Alignment.MIDDLE_LEFT);
-		
+
 		pickupCarrierDriverId = new TextField();
 		pickupCarrierDriverId.setWidth("100%");
 		pickupCarrierDriverId.setInputPrompt("Driver Id");
-		
+
 		pickupCarrierVehicleId = new TextField();
 		pickupCarrierVehicleId.setWidth("100%");
 		pickupCarrierVehicleId.setInputPrompt("Vehicle Id");
-		
+
 		pickupCarrierBolNum = new TextField();
 		pickupCarrierBolNum.setWidth("100%");
 		pickupCarrierBolNum.setInputPrompt("BOL #");
-		
+
 		pickupCarrierSealNum = new TextField();
 		pickupCarrierSealNum.setWidth("100%");
 		pickupCarrierSealNum.setInputPrompt("Seal #");
-		
+
 		Label pickupCarrierDriverIdLabel = new Label();
 		pickupCarrierDriverIdLabel.setValue("Driver Id");
-		
+
 		Label pickupCarrierVehicleIdLabel = new Label();
 		pickupCarrierVehicleIdLabel.setValue("Vehicle Id");
-		
+
 		Label pickupCarrierBolNumLabel = new Label();
 		pickupCarrierBolNumLabel.setValue("BOL #");
-		
+
 		Label pickupCarrierSealNumLabel = new Label();
 		pickupCarrierSealNumLabel.setValue("Seal #");
 
 		Label pickupCarrierDriverDetailLayoutLabel = new Label();
 		pickupCarrierDriverDetailLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		pickupCarrierDriverDetailLayoutLabel.setValue("<h3>Driver Details</h3>");
-		
+
 		pickupCarrierDriverDetailLayout = new GridLayout(2, 5);
 		pickupCarrierDriverDetailLayout.setMargin(false,  true, true, true);
 		pickupCarrierDriverDetailLayout.setSpacing(true);
@@ -495,7 +491,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierDriverDetailLayout.setComponentAlignment(pickupCarrierVehicleIdLabel, Alignment.MIDDLE_LEFT);
 		pickupCarrierDriverDetailLayout.setComponentAlignment(pickupCarrierBolNumLabel, Alignment.MIDDLE_LEFT);
 		pickupCarrierDriverDetailLayout.setComponentAlignment(pickupCarrierSealNumLabel, Alignment.MIDDLE_LEFT);
-		
+
 		pickupCarrierLayout = new HorizontalLayout();
 		pickupCarrierLayout.setMargin(true);
 		pickupCarrierLayout.setSizeFull();
@@ -507,19 +503,19 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierLayout.setExpandRatio(pickupCarrierContactLayout, 0.33f);
 		pickupCarrierLayout.setExpandRatio(pickupCarrierDriverDetailLayout, 0.33f);
 	}
-	
+
 	public void initDateTime() {
 		expectedPickupDate = new InlineDateField();
 		expectedPickupDate.setWidth("100%");
 		expectedPickupDate.setResolution(InlineDateField.RESOLUTION_MIN);
-		
+
 		Label expectedPickupDateLabel = new Label();
 		expectedPickupDateLabel.setValue("Expected Pickup Date");
-		
+
 		Label expectedPickupDateLayoutLabel = new Label();
 		expectedPickupDateLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		expectedPickupDateLayoutLabel.setValue("<h3>Pickup Date</h3>");
-		
+
 		expectedPickupDateLayout = new GridLayout(2, 2);
 		expectedPickupDateLayout.setMargin(false,  true, true, true);
 		expectedPickupDateLayout.setSpacing(true);
@@ -530,18 +526,18 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		expectedPickupDateLayout.addComponent(expectedPickupDateLabel);
 		expectedPickupDateLayout.addComponent(expectedPickupDate);
 		expectedPickupDateLayout.setComponentAlignment(expectedPickupDateLabel, Alignment.TOP_LEFT);
-		
+
 		Label expectedWhArrivalDateLabel = new Label();
 		expectedWhArrivalDateLabel.setValue("Expected W/H Arrival Date & Time");
-		
+
 		Label expectedWhArrivalDateLayoutLabel = new Label();
 		expectedWhArrivalDateLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		expectedWhArrivalDateLayoutLabel.setValue("<h3>W/H Arrival Date</h3>");
-		
+
 		expectedWhArrivalDate = new InlineDateField();
 		expectedWhArrivalDate.setWidth("100%");
 		expectedWhArrivalDate.setResolution(InlineDateField.RESOLUTION_MIN);
-		
+
 		expectedWhArrivalDateLayout = new GridLayout(2, 2);
 		expectedWhArrivalDateLayout.setMargin(false,  true, true, true);
 		expectedWhArrivalDateLayout.setSpacing(true);
@@ -552,7 +548,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		expectedWhArrivalDateLayout.addComponent(expectedWhArrivalDateLabel);
 		expectedWhArrivalDateLayout.addComponent(expectedWhArrivalDate);
 		expectedWhArrivalDateLayout.setComponentAlignment(expectedWhArrivalDateLabel, Alignment.TOP_LEFT);
-		
+
 		dateTimeLayout = new HorizontalLayout();
 		dateTimeLayout.setMargin(true);
 		dateTimeLayout.setWidth("75%");
@@ -563,7 +559,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dateTimeLayout.setExpandRatio(expectedPickupDateLayout, 0.5f);
 		dateTimeLayout.setExpandRatio(expectedWhArrivalDateLayout, 0.5f);
 	}
-	
+
 	public void initDropOffLocation() {
 		dropOffLocationOrganization = new ComboBox();
 		dropOffLocationOrganization.setInputPrompt("Organization");
@@ -581,10 +577,10 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				updateDropOffLocationFields(dropOffLocationOrganization.getValue());
-				
+
 			}
 		});
-		
+
 		dropOffLocationAddress = new ComboBox();
 		dropOffLocationAddress.setInputPrompt("Address");
 		dropOffLocationAddress.setEnabled(false);
@@ -592,7 +588,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationAddress.setWidth("100%");
 		dropOffLocationAddress.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 7796995334178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				if (dropOffLocationAddress.getValue().equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
@@ -612,11 +608,11 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 				}
 			}
 		});
-		
+
 		dropOffLocationAddressLabel = new Label();
 		dropOffLocationAddressLabel.setContentMode(Label.CONTENT_XHTML);
 		dropOffLocationAddressLabel.setValue("<i>No Address Selected</i>");
-		
+
 		if (currentDropOffLocationOrg.getAdHocAddress() != null) {
 			dropOffLocationAddress.addItem(AddressCustomCONSTANTS.ADHOC_ADDRESS);
 			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.ADHOC_ADDRESS);
@@ -653,17 +649,17 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			dropOffLocationAddress.setValue(AddressCustomCONSTANTS.MAIN_ADDRESS);
 			dropOffLocationAddress.setEnabled(true);
 		}
-		
+
 		Label dropOffLocationOrganizationLayoutLabel = new Label();
 		dropOffLocationOrganizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		dropOffLocationOrganizationLayoutLabel.setValue("<h3>Address Details</h3>");
-		
+
 		Label dropOffLocationOrganizationLabel = new Label();
 		dropOffLocationOrganizationLabel.setValue("Organization");
-		
+
 		Label dropOffLocationAddressFieldLabel = new Label();
 		dropOffLocationAddressFieldLabel.setValue("Address");
-		
+
 		dropOffLocationOrganizationLayout = new GridLayout(2, 4);
 		dropOffLocationOrganizationLayout.setWidth("100%");
 		dropOffLocationOrganizationLayout.setSpacing(true);
@@ -678,7 +674,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationOrganizationLayout.addComponent(dropOffLocationAddressLabel, 1, 3, 1, 3);
 		dropOffLocationOrganizationLayout.setComponentAlignment(dropOffLocationOrganizationLabel, Alignment.MIDDLE_LEFT);
 		dropOffLocationOrganizationLayout.setComponentAlignment(dropOffLocationAddressLabel, Alignment.MIDDLE_LEFT);
-		
+
 		dropOffLocationContact = new ComboBox();
 		dropOffLocationContact.setEnabled(false);
 		dropOffLocationContact.setInputPrompt("Contact");
@@ -690,24 +686,24 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationContact.setValue(name);
 		dropOffLocationContact.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = 779001014178965L;
-			
+
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				dropOffLocationContactAddressLabel.setValue(contactToXhtml(currentDropOffLocationOrg.getMainContact()));
 			}
 		});
-		
+
 		dropOffLocationContactAddressLabel = new Label();
 		dropOffLocationContactAddressLabel.setContentMode(Label.CONTENT_XHTML);
 		dropOffLocationContactAddressLabel.setValue(contactToXhtml(currentDropOffLocationOrg.getMainContact()));
-		
+
 		Label dropOffLocationContactLabel = new Label();
 		dropOffLocationContactLabel.setValue("Contact");
 
 		Label dropOffLocationContactLayoutLabel = new Label();
 		dropOffLocationContactLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		dropOffLocationContactLayoutLabel.setValue("<h3>Contact</h3>");
-		
+
 		dropOffLocationContactLayout = new GridLayout(2, 3);
 		dropOffLocationContactLayout.setMargin(false,  true, true, true);
 		dropOffLocationContactLayout.setSpacing(true);
@@ -719,19 +715,19 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationContactLayout.addComponent(dropOffLocationContact);
 		dropOffLocationContactLayout.addComponent(dropOffLocationContactAddressLabel, 1, 2, 1, 2);
 		dropOffLocationContactLayout.setComponentAlignment(dropOffLocationContactLabel, Alignment.MIDDLE_LEFT);
-		
+
 		dropOffLocationDockType = new ComboBox();
 		dropOffLocationDockType.setInputPrompt("Dock Type");
 		dropOffLocationDockType.setEnabled(false);
 		dropOffLocationDockType.setWidth("100%");
-		
+
 		Label dropOffLocationDockTypeLabel = new Label();
 		dropOffLocationDockTypeLabel.setValue("Dock Type");
 
 		Label dropOffLocationDockTypeLayoutLabel = new Label();
 		dropOffLocationDockTypeLayoutLabel.setContentMode(Label.CONTENT_XHTML);
 		dropOffLocationDockTypeLayoutLabel.setValue("<h3>Dock Info</h3>");
-		
+
 		dropOffLocationDockTypeLayout = new GridLayout(2, 2);
 		dropOffLocationDockTypeLayout.setMargin(false,  true, true, true);
 		dropOffLocationDockTypeLayout.setSpacing(true);
@@ -742,7 +738,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationDockTypeLayout.addComponent(dropOffLocationDockTypeLabel);
 		dropOffLocationDockTypeLayout.addComponent(dropOffLocationDockType);
 		dropOffLocationDockTypeLayout.setComponentAlignment(dropOffLocationDockTypeLabel, Alignment.MIDDLE_LEFT);
-		
+
 		dropOffLocationLayout = new HorizontalLayout();
 		dropOffLocationLayout.setMargin(true);
 		dropOffLocationLayout.setSizeFull();
@@ -754,13 +750,13 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationLayout.setExpandRatio(dropOffLocationContactLayout, 0.33f);
 		dropOffLocationLayout.setExpandRatio(dropOffLocationDockTypeLayout, 0.33f);
 	}
-	
+
 	public void initEntityTabSheet() {
 		initPickupLocation();
 		initPickupCarrier();
 		initDateTime();
 		initDropOffLocation();
-		
+
 		entityTabSheet = new TabSheet();
 		entityTabSheet.setWidth("100%");
 		entityTabSheet.setHeight(VIEW_HEIGHT);
@@ -769,7 +765,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		entityTabSheet.addTab(dateTimeLayout, "Dates/Times");
 		entityTabSheet.addTab(dropOffLocationLayout, "Drop-Off Location");
 	}
-	
+
 	public void initTableToolStrip() {
 		saveButton = new Button("Save");
 		saveButton.setEnabled(false);
@@ -778,10 +774,10 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			private static final long serialVersionUID = 500312301678L;
 
 			public void buttonClick(ClickEvent event) {
-				
+
 			}
 		});
-		
+
 		resetButton = new Button("Reset");
 		resetButton.setEnabled(false);
 		resetButton.setWidth("100%");
@@ -789,10 +785,10 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			private static final long serialVersionUID = 5003289976900978L;
 
 			public void buttonClick(ClickEvent event) {
-				
+
 			}
 		});
-		
+
 		cancelButton = new Button("Cancel");
 		cancelButton.setEnabled(false);
 		cancelButton.setWidth("100%");
@@ -802,7 +798,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			public void buttonClick(ClickEvent event) {
 			}
 		});
-		
+
 		toolstripLeftButtonPanel = new HorizontalLayout();
 		toolstripLeftButtonPanel.setWidth("300px");
 		toolstripLeftButtonPanel.setSpacing(true);
@@ -812,14 +808,14 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.33f);
 		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.33f);
 		toolstripLeftButtonPanel.setExpandRatio(cancelButton, 0.33f);
-		
+
 		toolStrip = new HorizontalLayout();
 		toolStrip.setWidth("100%");
 		toolStrip.setMargin(true, false, true, false);
 		toolStrip.addComponent(toolstripLeftButtonPanel);
 		toolStrip.setComponentAlignment(toolstripLeftButtonPanel, Alignment.MIDDLE_LEFT);
 	}
-	
+
 	private String addressToXhtml(Address address) {
 		StringBuffer xhtml = new StringBuffer();
 		xhtml.append("<b>");
@@ -837,7 +833,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			xhtml.append(address.getUnloco().getPortCity());
 			xhtml.append("</br>");
 		}
-		
+
 		if (address.getCountry() != null && address.getZipCode() != null) {
 			xhtml.append(address.getZipCode());
 			xhtml.append(" ");
@@ -850,10 +846,10 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			xhtml.append(address.getZipCode());
 			xhtml.append("</br>");
 		}
-		
+
 		return xhtml.toString();
 	}
-	
+
 	private String contactToXhtml(Contact contact) {
 		StringBuffer xhtml = new StringBuffer();
 		xhtml.append("<b>");
@@ -869,7 +865,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		xhtml.append("</br>");
 		return xhtml.toString();
 	}
-	
+
 	private void updatePickupLocationFields(Object id) {
 		currentPickupLocationOrg = pickupLocationOrganizationContainer.getItem(id).getEntity();
 		String name = currentPickupLocationOrg.getMainContact().getFirstName() + " " + currentPickupLocationOrg.getMainContact().getLastName();
@@ -878,7 +874,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupLocationContact.setValue(name);
 		pickupLocationContact.setEnabled(true);
 		pickupLocationContactAddressLabel.setValue(contactToXhtml(currentPickupLocationOrg.getMainContact()));
-		
+
 		try {
 			pickupLocationAddress.removeAllItems();
 		} catch (Exception e) {
@@ -939,7 +935,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			}
 		}
 	}
-	
+
 	private void updatePickupCarrierFields(Object id) {
 		currentPickupCarrierOrg = pickupCarrierOrganizationContainer.getItem(id).getEntity();
 		String name = currentPickupCarrierOrg.getMainContact().getFirstName() + " " + currentPickupCarrierOrg.getMainContact().getLastName();
@@ -948,7 +944,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		pickupCarrierContact.setValue(name);
 		pickupCarrierContact.setEnabled(true);
 		pickupCarrierContactAddressLabel.setValue(contactToXhtml(currentPickupCarrierOrg.getMainContact()));
-		
+
 		try {
 			pickupCarrierAddress.removeAllItems();
 		} catch (Exception e) {
@@ -1009,7 +1005,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			}
 		}
 	}
-	
+
 	private void updateDropOffLocationFields(Object id) {
 		currentDropOffLocationOrg = dropOffLocationOrganizationContainer.getItem(id).getEntity();
 		String name = currentDropOffLocationOrg.getMainContact().getFirstName() + " " + currentDropOffLocationOrg.getMainContact().getLastName();
@@ -1018,7 +1014,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 		dropOffLocationContact.setValue(name);
 		dropOffLocationContact.setEnabled(true);
 		dropOffLocationContactAddressLabel.setValue(contactToXhtml(currentDropOffLocationOrg.getMainContact()));
-		
+
 		try {
 			dropOffLocationAddress.removeAllItems();
 		} catch (Exception e) {
@@ -1079,7 +1075,7 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 			}
 		}
 	}
-	
+
 	@Override
 	public String getTaskName() {
 		return "AddAsnLocalTrans";
@@ -1093,105 +1089,98 @@ public class AddAsnLocalTransPage extends IPageFlowPage {
 	@Override
 	public void initialize(EntityManagerFactory emf) {
 		this.emf = emf;
-		
+
 		initContainers();
 		initEntityTabSheet();
 		initTableToolStrip();
-		
+
 		VerticalLayout canvas = new VerticalLayout();
 		canvas.setSizeFull();
 		canvas.addComponent(entityTabSheet);
 		canvas.addComponent(toolStrip);
 		canvas.setExpandRatio(entityTabSheet, 1.0f);
-		
+
 		this.setCanvas(canvas);
 	}
 
 	@Override
-	public Map<String, Object> getProcessState() {
-		if (asn != null) {
-			ASNPickup pickup = new ASNPickup();
-			ASNDropOff dropOff = new ASNDropOff();
-			
-			Organization pickupLocOrg = this.pickupLocationOrganizationContainer.getItem(pickupLocationOrganization.getValue()).getEntity();
-			Organization pickupCarrierOrg = this.pickupCarrierOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
-			Organization dropOffLocOrg = this.dropOffLocationOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
-			
-			pickup.setPickUpFrom(pickupLocOrg);
-			String selectedAddress = (String) pickupLocationAddress.getValue();
-			if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
-				pickup.setPickUpFromAddress(pickupLocOrg.getAdHocAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
-				pickup.setPickUpFromAddress(pickupLocOrg.getShippingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
-				pickup.setPickUpFromAddress(pickupLocOrg.getReceivingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
-				pickup.setPickUpFromAddress(pickupLocOrg.getBillingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
-				pickup.setPickUpFromAddress(pickupLocOrg.getPickupAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
-				pickup.setPickUpFromAddress(pickupLocOrg.getDeliveryAddress());
-			} else {
-				pickup.setPickUpFromAddress(pickupLocOrg.getMainAddress());
-			}
-			
-			pickup.setLocalTrans(pickupCarrierOrg);
-			selectedAddress = (String) pickupCarrierAddress.getValue();
-			if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getAdHocAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getShippingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getReceivingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getBillingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getPickupAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getDeliveryAddress());
-			} else {
-				pickup.setLocalTransAddress(pickupCarrierOrg.getMainAddress());
-			}
-			pickup.setDriverId((String) pickupCarrierDriverId.getValue());
-			pickup.setVehicleId((String) pickupCarrierVehicleId.getValue());
-			pickup.setBolNumber((String) pickupCarrierBolNum.getValue());
-			pickup.setVehicleId((String) pickupCarrierSealNum.getValue());
-			pickup.setEstimatedPickup((Date) expectedPickupDate.getValue());
-			
-			dropOff.setDropOffAt(dropOffLocOrg);
-			selectedAddress = (String) dropOffLocationAddress.getValue();
-			if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getAdHocAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getShippingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getReceivingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getBillingAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getPickupAddress());
-			} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getDeliveryAddress());
-			} else {
-				dropOff.setDropOffAtAddress(pickupCarrierOrg.getMainAddress());
-			}
-			dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
-			
-			asn.setPickup(pickup);
-			asn.setDropOff(dropOff);
+	public Map<String, Object> getOnCompleteState() {
+		ASNPickup pickup = new ASNPickup();
+		ASNDropOff dropOff = new ASNDropOff();
+
+		Organization pickupLocOrg = this.pickupLocationOrganizationContainer.getItem(pickupLocationOrganization.getValue()).getEntity();
+		Organization pickupCarrierOrg = this.pickupCarrierOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
+		Organization dropOffLocOrg = this.dropOffLocationOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
+
+		pickup.setPickUpFrom(pickupLocOrg);
+		String selectedAddress = (String) pickupLocationAddress.getValue();
+		if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+			pickup.setPickUpFromAddress(pickupLocOrg.getAdHocAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+			pickup.setPickUpFromAddress(pickupLocOrg.getShippingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+			pickup.setPickUpFromAddress(pickupLocOrg.getReceivingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+			pickup.setPickUpFromAddress(pickupLocOrg.getBillingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+			pickup.setPickUpFromAddress(pickupLocOrg.getPickupAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+			pickup.setPickUpFromAddress(pickupLocOrg.getDeliveryAddress());
+		} else {
+			pickup.setPickUpFromAddress(pickupLocOrg.getMainAddress());
 		}
-		
-		if (processState != null) {
-			processState.put(ASN_VARIABLE_KEY, asn);
+
+		pickup.setLocalTrans(pickupCarrierOrg);
+		selectedAddress = (String) pickupCarrierAddress.getValue();
+		if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getAdHocAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getShippingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getReceivingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getBillingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getPickupAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getDeliveryAddress());
+		} else {
+			pickup.setLocalTransAddress(pickupCarrierOrg.getMainAddress());
 		}
-		
-		return processState;
+		pickup.setDriverId((String) pickupCarrierDriverId.getValue());
+		pickup.setVehicleId((String) pickupCarrierVehicleId.getValue());
+		pickup.setBolNumber((String) pickupCarrierBolNum.getValue());
+		pickup.setVehicleId((String) pickupCarrierSealNum.getValue());
+		pickup.setEstimatedPickup((Date) expectedPickupDate.getValue());
+
+		dropOff.setDropOffAt(dropOffLocOrg);
+		selectedAddress = (String) dropOffLocationAddress.getValue();
+		if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getAdHocAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getShippingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getReceivingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getBillingAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getPickupAddress());
+		} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getDeliveryAddress());
+		} else {
+			dropOff.setDropOffAtAddress(pickupCarrierOrg.getMainAddress());
+		}
+		dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
+
+		Map<String,Object> outParams = new HashMap<String, Object>();
+		outParams.put("asnPickupOut", pickup);	
+		outParams.put("asnDropoffOut", dropOff);
+
+		return outParams;
 	}
 
 	@Override
-	public void setProcessState(Map<String, Object> state) {
-		processState = state;
-		asn = (ASN) state.get(ASN_VARIABLE_KEY);
+	public void setOnStartState(Map<String, Object> state) {
 	}
 
 }

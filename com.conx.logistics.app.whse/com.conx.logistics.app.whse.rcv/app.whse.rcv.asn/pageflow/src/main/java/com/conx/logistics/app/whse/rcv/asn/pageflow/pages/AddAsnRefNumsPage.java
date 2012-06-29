@@ -1,13 +1,13 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
-import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
+import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 import com.vaadin.addon.jpacontainer.JPAContainer;
@@ -26,17 +26,14 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class AddAsnRefNumsPage extends IPageFlowPage {
+public class AddAsnRefNumsPage extends PageFlowPage {
 	private static final String VIEW_HEIGHT = "450px";
-	private static final String ASN_VARIABLE_KEY = "asn";
-	
-	private Map<String, Object> processState;
-	private ASN asn;
+
 	private int pageMode = LIST_PAGE_MODE;
-	
+
 	private static final int LIST_PAGE_MODE = 0;
 	private static final int EDIT_PAGE_MODE = 1;
-	
+
 	private Table referenceIdTable;
 	private VerticalLayout mainView;
 	private VerticalLayout editView;
@@ -59,17 +56,17 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 	private Button resetButton;
 
 	private JPAContainer<ReferenceNumberType> refNumTypeContainer;
-	
+
 	private BeanContainer<String, ReferenceNumber> refNumBeanContainer;
 	private EntityManagerFactory emf;
 	private Button cancelButton;
-	
+
 	private void setPageMode(int mode) {
 		switch (mode) {
 		case LIST_PAGE_MODE:
 			referenceIdField.setValue("");
 			referenceIdType.setValue(null);
-			
+
 			saveButton.setEnabled(false);
 			resetButton.setEnabled(false);
 			if (referenceIdTable.getValue() == null) {
@@ -79,7 +76,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 				editButton.setEnabled(true);
 				deleteButton.setEnabled(true);
 			}
-			
+
 			editView.setVisible(false);
 			listView.setVisible(true);
 			break;
@@ -90,19 +87,19 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			if (refNum.getDescription() != null && !refNum.getDescription().isEmpty()) {
 				referenceIdEditorNotes.setValue(refNum.getDescription());
 			}
-			
+
 			saveButton.setEnabled(true);
 			resetButton.setEnabled(true);
 			editButton.setEnabled(false);
 			deleteButton.setEnabled(true);
-			
+
 			listView.setVisible(false);
 			editView.setVisible(true);
 			break;
 		}
 		this.pageMode = mode;
 	}
-	
+
 	private boolean validate() {
 		StringBuffer message = new StringBuffer();
 		switch (pageMode) {
@@ -113,7 +110,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			if (referenceIdType.getValue() == null) {
 				message.append("</br>Reference Number Type was not provided");
 			}
-			
+
 			if (message.length() != 0) {
 				showNotification("Could Not Add Reference Number", message.toString());
 				return false;
@@ -127,7 +124,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			if (referenceIdEditorType.getValue() == null) {
 				message.append("</br>Reference Number Type was not provided");
 			}
-			
+
 			if (message.length() != 0) {
 				showNotification("Could Not Edit Reference Number", message.toString());
 				return false;
@@ -137,7 +134,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		}
 		return false;
 	}
-	
+
 	private void reset() {
 		switch (pageMode) {
 		case EDIT_PAGE_MODE:
@@ -152,7 +149,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			break;
 		}
 	}
-	
+
 	private void create() {
 		if (validate()) {
 			ReferenceNumber refNum = new ReferenceNumber();
@@ -164,60 +161,60 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			referenceIdField.focus();
 		}
 	}
-	
+
 	private void edit() {
 		if (validate()) {
 			BeanItem<ReferenceNumber> item = refNumBeanContainer.getItem(referenceIdTable.getValue());
 			ReferenceNumber refNum = item.getBean();
 			String refNumValue = (String) referenceIdEditorField.getValue();
 			ReferenceNumberType refNumType = refNumTypeContainer.getItem(referenceIdEditorType.getValue()).getEntity();
-			
+
 			refNum.setValue(refNumValue);
 			item.getItemProperty("value").setValue(refNumValue);
 			refNum.setType(refNumType);
 			item.getItemProperty("type.name").setValue(refNumType.getName());
 			refNum.setDescription((String) referenceIdEditorNotes.getValue());
-			
+
 			setPageMode(LIST_PAGE_MODE);
 		}
 	}
-	
+
 	private void initContainers() {
 		refNumTypeContainer = JPAContainerFactory.make(ReferenceNumberType.class, this.emf.createEntityManager());
 		refNumBeanContainer = new BeanContainer<String, ReferenceNumber>(ReferenceNumber.class);
-		
+
 		refNumBeanContainer.setBeanIdProperty("value");
 		refNumBeanContainer.addNestedContainerProperty("type.name");
 	}
-	
+
 	public void initRefIdToolStrip() {
 		referenceIdField = new TextField();
 		referenceIdField.setInputPrompt("Reference Id");
 		referenceIdField.setWidth("100%");
-		
+
 		referenceIdType = new ComboBox();
 		referenceIdType.setInputPrompt("Reference Id Type");
 		referenceIdType.setContainerDataSource(refNumTypeContainer);
 		referenceIdType.setItemCaptionPropertyId("name");
 		referenceIdType.setNullSelectionAllowed(false);
 		referenceIdType.setWidth("100%");
-		
+
 		addReferenceIdButton = new Button("Add Reference Id");
 		addReferenceIdButton.addListener(new ClickListener() {
 			private static final long serialVersionUID = 328740392837363674L;
-			
+
 			public void buttonClick(ClickEvent event) {
 				create();
 			}
 		});
-		
+
 		addReferenceIdType = new Button("New Reference Id Type");
 		addReferenceIdType.addListener(new ClickListener() {
 			private static final long serialVersionUID = 328750392837363674L;
 			public void buttonClick(ClickEvent event) {
 			}
 		});
-		
+
 		addStrip = new HorizontalLayout();
 		addStrip.setHeight("50px");
 		addStrip.setWidth("100%");
@@ -229,7 +226,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		addStrip.setExpandRatio(referenceIdField, 0.5f);
 		addStrip.setExpandRatio(referenceIdType, 0.5f);
 	}
-	
+
 	public void initRefIdTable() {
 		referenceIdTable = new Table(); 
 		referenceIdTable.setSizeFull();
@@ -244,16 +241,16 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			private static final long serialVersionUID = 4696828026010510338L;
 
 			public void valueChange(ValueChangeEvent event) {
-                editButton.setEnabled(true);
-                deleteButton.setEnabled(true);
-            }
-        });
+				editButton.setEnabled(true);
+				deleteButton.setEnabled(true);
+			}
+		});
 	}
-	
+
 	public void initListView() {
 		initRefIdToolStrip();
 		initRefIdTable();
-		
+
 		listView = new VerticalLayout();
 		listView.setWidth("100%");
 		listView.setHeight(VIEW_HEIGHT);
@@ -261,19 +258,19 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		listView.addComponent(referenceIdTable);
 		listView.setExpandRatio(referenceIdTable, 1.0f);
 	}
-	
+
 	public void initEditView() {
 		referenceIdEditorField = new TextField();
 		referenceIdEditorField.setInputPrompt("Reference Id");
 		referenceIdEditorField.setWidth("100%");
-		
+
 		referenceIdEditorType = new ComboBox();
 		referenceIdEditorType.setInputPrompt("Reference Id Type");
 		referenceIdEditorType.setContainerDataSource(refNumTypeContainer);
 		referenceIdEditorType.setItemCaptionPropertyId("name");
 		referenceIdEditorType.setNullSelectionAllowed(false);
 		referenceIdEditorType.setWidth("100%");
-		
+
 		referenceIdEditorStrip = new HorizontalLayout();
 		referenceIdEditorStrip.addComponent(referenceIdEditorField);
 		referenceIdEditorStrip.addComponent(referenceIdEditorType);
@@ -281,14 +278,14 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		referenceIdEditorStrip.setExpandRatio(referenceIdEditorType, 0.5f);
 		referenceIdEditorStrip.setWidth("100%");
 		referenceIdEditorStrip.setSpacing(true);
-		
+
 		referenceIdEditorNotes = new com.vaadin.ui.TextArea(null, "");
 		referenceIdEditorNotes.setRows(8);
 		referenceIdEditorNotes.setColumns(0);
 		referenceIdEditorNotes.setImmediate(true);
 		referenceIdEditorNotes.setSizeFull();
 		referenceIdEditorNotes.setInputPrompt("Notes");
-		
+
 		editView = new VerticalLayout();
 		editView.setWidth("100%");
 		editView.setHeight(VIEW_HEIGHT);
@@ -298,7 +295,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		editView.setSpacing(true);
 		editView.setVisible(false);
 	}
-	
+
 	public void initTableToolStrip() {
 		editButton = new Button("Edit");
 		editButton.setEnabled(false);
@@ -313,7 +310,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 				setPageMode(EDIT_PAGE_MODE);
 			}
 		});
-		
+
 		deleteButton = new Button("Delete");
 		deleteButton.setEnabled(false);
 		deleteButton.setWidth("100%");
@@ -328,7 +325,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 				}
 			}
 		});
-		
+
 		toolstripRightButtonPanel = new HorizontalLayout();
 		toolstripRightButtonPanel.setWidth("200px");
 		toolstripRightButtonPanel.setSpacing(true);
@@ -336,7 +333,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		toolstripRightButtonPanel.addComponent(deleteButton);
 		toolstripRightButtonPanel.setExpandRatio(editButton, 0.5f);
 		toolstripRightButtonPanel.setExpandRatio(deleteButton, 0.5f);
-		
+
 		saveButton = new Button("Save");
 		saveButton.setEnabled(false);
 		saveButton.setWidth("100%");
@@ -347,7 +344,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 				edit();
 			}
 		});
-		
+
 		resetButton = new Button("Reset");
 		resetButton.setEnabled(false);
 		resetButton.setWidth("100%");
@@ -358,7 +355,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 				reset();
 			}
 		});
-		
+
 		cancelButton = new Button("Cancel");
 		cancelButton.setEnabled(false);
 		cancelButton.setWidth("100%");
@@ -368,7 +365,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 			public void buttonClick(ClickEvent event) {
 			}
 		});
-		
+
 		toolstripLeftButtonPanel = new HorizontalLayout();
 		toolstripLeftButtonPanel.setWidth("300px");
 		toolstripLeftButtonPanel.setSpacing(true);
@@ -378,7 +375,7 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		toolstripLeftButtonPanel.setExpandRatio(saveButton, 0.33f);
 		toolstripLeftButtonPanel.setExpandRatio(resetButton, 0.33f);
 		toolstripLeftButtonPanel.setExpandRatio(cancelButton, 0.33f);
-		
+
 		toolStrip = new HorizontalLayout();
 		toolStrip.setWidth("100%");
 		toolStrip.setMargin(true, false, true, false);
@@ -387,21 +384,11 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		toolStrip.setComponentAlignment(toolstripLeftButtonPanel, Alignment.MIDDLE_LEFT);
 		toolStrip.setComponentAlignment(toolstripRightButtonPanel, Alignment.MIDDLE_RIGHT);
 	}
-	
-	@Override
-	public String getTaskName() {
-		return "AddAsnRefNums";
-	}
-
-	@Override
-	public String getCaption() {
-		return "Add Reference Numbers";
-	}
 
 	@Override
 	public void initialize(EntityManagerFactory emf) {
 		this.emf = emf;
-		
+
 		initContainers();
 		initListView();
 		initEditView();
@@ -412,40 +399,48 @@ public class AddAsnRefNumsPage extends IPageFlowPage {
 		mainView.setHeight(VIEW_HEIGHT);
 		mainView.addComponent(listView);
 		mainView.addComponent(editView);
-		
+
 		VerticalLayout canvas = new VerticalLayout();
 		canvas.setSizeFull();
 		canvas.addComponent(mainView);
 		canvas.addComponent(toolStrip);
 		canvas.setExpandRatio(mainView, 1.0f);
-		
+
 		this.setCanvas(canvas);
 	}
 
 	@Override
-	public Map<String, Object> getProcessState() {
-		if (asn != null) {
-			Set<ReferenceNumber> refNums = new HashSet<ReferenceNumber>();
-			for (Object id : referenceIdTable.getItemIds()) {
-				refNums.add(refNumBeanContainer.getItem(id).getBean());
-			}
-			asn.setRefNumbers(refNums);
-		}
-		
-		if (processState != null) {
-			processState.put(ASN_VARIABLE_KEY, asn);
-		}
-		
-		return processState;
+	public String getTaskName() {
+		return "AddAsnRefNums";
 	}
 
 	@Override
-	public void setProcessState(Map<String, Object> state) {
-		processState = state;
-		asn = (ASN) state.get(ASN_VARIABLE_KEY);
-		
-		if (asn != null && refNumBeanContainer != null) {
-			refNumBeanContainer.addAll(asn.getRefNumbers());
+	public String getCaption() {
+		return "Add Reference Numbers";
+	}
+
+
+	@Override
+	public Map<String, Object> getOnCompleteState() {
+		Map<String,Object> outParams = new HashMap<String, Object>();
+		Set<ReferenceNumber> refNums = new HashSet<ReferenceNumber>();
+		for (Object id : referenceIdTable.getItemIds()) {
+			refNums.add(refNumBeanContainer.getItem(id).getBean());
+		}
+
+		outParams.put("refNumsCollectionOut", refNums);
+		return outParams;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void setOnStartState(Map<String, Object> state) {
+		if (state != null) {
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionOut");
+
+			if (refNums != null && refNumBeanContainer != null) {
+				refNumBeanContainer.addAll(refNums);
+			}
 		}
 	}
 

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,17 +20,16 @@ import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.kernel.bpm.services.IBPMProcessInstance;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowListener;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
+import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.ui.Component;
 
-public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener {
+public class PageFlowSessionImpl implements IPageFlowSession {
 	private static final int WAIT_DELAY = 1000;
 
-	private Map<String, IPageFlowPage> pages;
-	private List<IPageFlowPage> orderedPageList;
+	private Map<String, PageFlowPage> pages;
+	private List<PageFlowPage> orderedPageList;
 	private ProcessInstanceRef processInstance;
 	private TaskWizard wizard;
 	private IBPMService bpmService;
@@ -43,13 +41,13 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 
 	private String userId;
 
-	private Feature setOnCompletionFeature;
+	private Feature onCompletionFeature;
 
 	public PageFlowSessionImpl(ProcessInstanceRef processInstance,
-			String userId, Map<String, IPageFlowPage> pageList,
+			String userId, Map<String, PageFlowPage> pageList,
 			IBPMService bpmService, EntityManagerFactory emf,
-			Feature setOnCompletionFeature) {
-		this.setOnCompletionFeature = setOnCompletionFeature;
+			Feature onCompletionFeature) {
+		this.onCompletionFeature = onCompletionFeature;
 		this.bpmService = bpmService;
 		this.processInstance = processInstance;
 		this.userId = userId;
@@ -61,7 +59,6 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		orderedPageList = orderPagesPerOrderedHumanTasks(this.tasks);
 		this.emf = emf;
 		try {
-			createWizard();
 			currentTask = waitForNextTask();
 			// Map<String, Object> vars =
 			// bpmService.getProcessInstanceVariables(processInstance.getId());
@@ -82,11 +79,11 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		}
 	}
 
-	private List<IPageFlowPage> orderPagesPerOrderedHumanTasks(
+	private List<PageFlowPage> orderPagesPerOrderedHumanTasks(
 			List<org.jbpm.workflow.core.node.HumanTaskNode> htNodes) {
 
-		List<IPageFlowPage> pageList = new ArrayList<IPageFlowPage>();
-		IPageFlowPage pg;
+		List<PageFlowPage> pageList = new ArrayList<PageFlowPage>();
+		PageFlowPage pg;
 		for (org.jbpm.workflow.core.node.HumanTaskNode htNode : htNodes) {
 			pg = this.pages.get(htNode.getName());
 			pageList.add(pg);
@@ -125,7 +122,7 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	}
 
 	@Override
-	public Collection<IPageFlowPage> getPages() {
+	public Collection<PageFlowPage> getPages() {
 		return orderedPageList;
 	}
 
@@ -150,22 +147,6 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	public void abort() {
 	}
 
-	private void createWizard() throws Exception {
-		wizard = new TaskWizard(this);
-		wizard.setSizeFull();
-		if (orderedPageList != null) {
-			for (IPageFlowPage page : orderedPageList) {
-				page.initialize(emf);
-				page.getContent();
-				page.addListener(this);
-				if (orderedPageList.get(0).equals(page)) {
-					page.setProcessState(new HashMap<String, Object>());
-				}
-				wizard.addStep(page);
-			}
-		}
-	}
-
 	public TaskWizard getWizard() {
 		return wizard;
 	}
@@ -176,7 +157,7 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	
 
 	public Feature getSetOnCompletionFeature() {
-		return setOnCompletionFeature;
+		return onCompletionFeature;
 	}
 
 	public Map<String, Object> getProcessVars() {
@@ -255,7 +236,7 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 
 	}
 
-	private IPageFlowPage getNextPage(IPageFlowPage currentPage) {
+	private PageFlowPage getNextPage(PageFlowPage currentPage) {
 		for (int i = 0; i < orderedPageList.size(); i++) {
 			if (orderedPageList.get(i).equals(currentPage)) {
 				if (i != orderedPageList.size() - 1) {
@@ -265,10 +246,10 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 		}
 		return null;
 	}
-
+/*
 	@Override
-	public void onNext(IPageFlowPage currentPage, Map<String, Object> state) {
-		IPageFlowPage next = getNextPage(currentPage);
+	public void onNext(PageFlowPage currentPage, Map<String, Object> state) {
+		PageFlowPage next = getNextPage(currentPage);
 		if (next != null) {
 			next.setProcessState(state);
 		} else {
@@ -277,8 +258,32 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 	}
 
 	@Override
-	public void onPrevious(IPageFlowPage currentPage, Map<String, Object> state) {
-		// TODO Auto-generated method stub
+	public void onPrevious(PageFlowPage currentPage, Map<String, Object> state) {
+	}
+	*/
+
+	public List<PageFlowPage> getOrderedPageList() {
+		return orderedPageList;
+	}
+
+	public void setOrderedPageList(List<PageFlowPage> orderedPageList) {
+		this.orderedPageList = orderedPageList;
+	}
+
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
+
+	public Feature getOnCompletionFeature() {
+		return onCompletionFeature;
+	}
+
+	public void setOnCompletionFeature(Feature onCompletionFeature) {
+		this.onCompletionFeature = onCompletionFeature;
 	}
 
 }

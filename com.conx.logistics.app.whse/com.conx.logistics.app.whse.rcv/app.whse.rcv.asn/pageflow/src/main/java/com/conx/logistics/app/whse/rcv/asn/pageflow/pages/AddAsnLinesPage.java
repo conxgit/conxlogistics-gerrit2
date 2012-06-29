@@ -1,14 +1,14 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
-import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
+import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.currency.CurrencyUnit;
 import com.conx.logistics.mdm.domain.product.DimUnit;
 import com.conx.logistics.mdm.domain.product.PackUnit;
@@ -37,12 +37,9 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class AddAsnLinesPage extends IPageFlowPage {
+public class AddAsnLinesPage extends PageFlowPage {
 	private static final String VIEW_HEIGHT = "450px";
-	private static final String ASN_VARIABLE_KEY = "asn";
 	
-	private Map<String, Object> processState;
-	private ASN asn;
 	private int pageMode = LIST_PAGE_MODE;
 	
 	private static final int LIST_PAGE_MODE = 0;
@@ -1345,30 +1342,33 @@ public class AddAsnLinesPage extends IPageFlowPage {
 	}
 
 	@Override
-	public Map<String, Object> getProcessState() {
-		if (asn != null) {
-			Set<ASNLine> asnLines = new HashSet<ASNLine>();
-			for (Object id : asnLineTable.getItemIds()) {
-				asnLines.add(asnLineContainer.getItem(id).getBean());
-			}
-			asn.setAsnLines(asnLines);
+	public Map<String, Object> getOnCompleteState() {
+		Map<String,Object> outParams = new HashMap<String, Object>();
+		Set<ASNLine> asnLines = new HashSet<ASNLine>();
+		for (Object id : asnLineTable.getItemIds()) {
+			asnLines.add(asnLineContainer.getItem(id).getBean());
 		}
+		outParams.put("asnLinesCollectionOut", asnLines);
 		
-		if (processState != null) {
-			processState.put(ASN_VARIABLE_KEY, asn);
-		}
-		
-		return processState;
+		return outParams;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void setProcessState(Map<String, Object> state) {
-		processState = state;
-		asn = (ASN) state.get(ASN_VARIABLE_KEY);
-		
-		if (asn != null && refNumBeanContainer != null && asn.getRefNumbers() != null) {
+	public void setOnStartState(Map<String, Object> state) {
+		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionOut");
+		Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionOut");
+		if (refNums != null && refNumBeanContainer != null) {
 			try {
-				refNumBeanContainer.addAll(asn.getRefNumbers());
+				refNumBeanContainer.addAll(refNums);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (asnLines != null && asnLineContainer != null) {
+			try {
+				asnLineContainer.addAll(asnLines);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

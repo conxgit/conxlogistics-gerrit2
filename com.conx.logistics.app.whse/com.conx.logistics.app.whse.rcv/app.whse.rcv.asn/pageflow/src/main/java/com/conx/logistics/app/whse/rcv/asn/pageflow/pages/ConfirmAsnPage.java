@@ -1,12 +1,15 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
-import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
+import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
+import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 import com.vaadin.data.util.BeanContainer;
@@ -21,12 +24,8 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
-public class ConfirmAsnPage extends IPageFlowPage {
+public class ConfirmAsnPage extends PageFlowPage {
 	private static final String VIEW_HEIGHT = "450px";
-	private static final String ASN_VARIABLE_KEY = "asn";
-
-	private Map<String, Object> processState;
-	private ASN asn;
 
 	private TabSheet entityTabSheet;
 	private Button saveButton;
@@ -87,10 +86,10 @@ public class ConfirmAsnPage extends IPageFlowPage {
 	private void initContainers() {
 		asnLineContainer = new BeanContainer<String, ASNLine>(ASNLine.class);
 		refNumContainer = new BeanContainer<String, ReferenceNumber>(ReferenceNumber.class);
-		
+
 		refNumContainer.setBeanIdProperty("value");
 		refNumContainer.addNestedContainerProperty("type.name");
-		
+
 		asnLineContainer.setBeanIdProperty("lineNumber");
 		asnLineContainer.addNestedContainerProperty("product.name");
 		asnLineContainer.addNestedContainerProperty("refNumber.value");
@@ -102,7 +101,7 @@ public class ConfirmAsnPage extends IPageFlowPage {
 		Label asnLineLabel = new Label();
 		asnLineLabel.setContentMode(Label.CONTENT_XHTML);
 		asnLineLabel.setValue("<h3>Confirm Asn Lines</h3>");
-		
+
 		asnLineTable = new Table(); 
 		asnLineTable.setSizeFull();
 		asnLineTable.setSelectable(true);
@@ -115,7 +114,7 @@ public class ConfirmAsnPage extends IPageFlowPage {
 		asnLineTable.setColumnHeader("expectedTotalVolume", "Total Volume");
 		asnLineTable.setColumnHeader("product.volUnit.name", "Volume Unit");
 		asnLineTable.setColumnHeader("expectedOuterPackCount", "Expected Quantity");
-		
+
 
 		asnLineLayout = new VerticalLayout();
 		asnLineLayout.setSizeFull();
@@ -130,7 +129,7 @@ public class ConfirmAsnPage extends IPageFlowPage {
 		Label refNumLabel = new Label();
 		refNumLabel.setContentMode(Label.CONTENT_XHTML);
 		refNumLabel.setValue("<h3>Confirm Reference Numbers</h3>");
-		
+
 		refNumTable = new Table(); 
 		refNumTable.setSizeFull();
 		refNumTable.setSelectable(true);
@@ -140,7 +139,7 @@ public class ConfirmAsnPage extends IPageFlowPage {
 		refNumTable.setVisibleColumns(new String[] { "value",  "type.name" });
 		refNumTable.setColumnHeader("value", "Reference Number");
 		refNumTable.setColumnHeader("type.name", "Type");
-		
+
 		refNumLayout = new VerticalLayout();
 		refNumLayout.setSizeFull();
 		refNumLayout.setMargin(true);
@@ -277,7 +276,7 @@ public class ConfirmAsnPage extends IPageFlowPage {
 		inboundCarrierLayout.addComponent(inboundCarrierBolNum);
 		inboundCarrierLayout.addComponent(inboundCarrierSealNumLabel);
 		inboundCarrierLayout.addComponent(inboundCarrierSealNum);
-		
+
 		GridLayout dropOffLocationLayout = new GridLayout(2, 6);
 		dropOffLocationLayout.setWidth("100%");
 		dropOffLocationLayout.setSpacing(true);
@@ -429,66 +428,72 @@ public class ConfirmAsnPage extends IPageFlowPage {
 
 		this.setCanvas(canvas);
 	}
-
+	
 	@Override
-	public Map<String, Object> getProcessState() {
-		if (processState != null) {
-			processState.put(ASN_VARIABLE_KEY, asn);
-		}
-
-		return processState;
+	public Map<String, Object> getOnCompleteState() {
+		return new HashMap<String, Object>();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void setProcessState(Map<String, Object> state) {
-		processState = state;
-		asn = (ASN) state.get(ASN_VARIABLE_KEY);
-		
-		if (asn != null) {
-			if (refNumContainer != null) {
+	public void setOnStartState(Map<String, Object> state) {
+		if (state != null) {
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionOut");
+			Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionOut");
+			ASNPickup pickup = (ASNPickup) state.get("asnPickupOut");
+			ASNDropOff dropOff = (ASNDropOff) state.get("asnDropoffOut");
+
+			if (refNumContainer != null && refNums != null) {
 				try {
-					refNumContainer.addAll(asn.getRefNumbers());
+					refNumContainer.addAll(refNums);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			
-			if (asnLineContainer != null) {
+
+			if (asnLineContainer != null && asnLines != null) {
 				try {
-					asnLineContainer.addAll(asn.getAsnLines());
+					asnLineContainer.addAll(asnLines);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+
+			if (pickup != null) {
+				pickupLocationOrg.setValue(new Label(pickup.getPickUpFrom().getName()));
+				pickupLocationAddress.setValue((addressToXhtml(pickup.getPickUpFromAddress())));
+				pickupLocationContactName.setValue((pickup.getPickUpFrom().getMainContact().getFirstName() + " " + pickup.getPickUpFrom().getMainContact().getLastName()));
+				pickupLocationContactPhone.setValue((pickup.getPickUpFrom().getMainContact().getCellPhoneNumber()));
+				
+				inboundCarrierOrg.setValue((pickup.getLocalTrans().getName()));
+				inboundCarrierAddress.setValue((addressToXhtml(pickup.getLocalTransAddress())));
+				inboundCarrierContactName.setValue((pickup.getLocalTrans().getMainContact().getFirstName() + " " + pickup.getLocalTrans().getMainContact().getLastName()));
+				inboundCarrierContactPhone.setValue((pickup.getLocalTrans().getMainContact().getCellPhoneNumber()));
+				inboundCarrierDriverId.setValue((pickup.getDriverId()));
+				inboundCarrierVehicleId.setValue((pickup.getVehicleId()));
+				inboundCarrierBolNum.setValue((pickup.getBolNumber()));
+				inboundCarrierSealNum.setValue((pickup.getSealNumber()));
 			
-			pickupLocationOrg.setValue(new Label(asn.getPickup().getPickUpFrom().getName()));
-			pickupLocationAddress.setValue((addressToXhtml(asn.getPickup().getPickUpFromAddress())));
-			pickupLocationContactName.setValue((asn.getPickup().getPickUpFrom().getMainContact().getFirstName() + " " + asn.getPickup().getPickUpFrom().getMainContact().getLastName()));
-			pickupLocationContactPhone.setValue((asn.getPickup().getPickUpFrom().getMainContact().getCellPhoneNumber()));
-
-			inboundCarrierOrg.setValue((asn.getPickup().getLocalTrans().getName()));
-			inboundCarrierAddress.setValue((addressToXhtml(asn.getPickup().getLocalTransAddress())));
-			inboundCarrierContactName.setValue((asn.getPickup().getLocalTrans().getMainContact().getFirstName() + " " + asn.getPickup().getLocalTrans().getMainContact().getLastName()));
-			inboundCarrierContactPhone.setValue((asn.getPickup().getLocalTrans().getMainContact().getCellPhoneNumber()));
-			inboundCarrierDriverId.setValue((asn.getPickup().getDriverId()));
-			inboundCarrierVehicleId.setValue((asn.getPickup().getVehicleId()));
-			inboundCarrierBolNum.setValue((asn.getPickup().getBolNumber()));
-			inboundCarrierSealNum.setValue((asn.getPickup().getSealNumber()));
-
-			try {
-				pickupDateTime.setValue((asn.getPickup().getEstimatedPickup()
-						.toString()));
-				whArrivalDateTime.setValue((asn.getDropOff()
-						.getEstimatedDropOff().toString()));
-			} catch (Exception e) {
-				pickupDateTime.setValue("N/A");
-				whArrivalDateTime.setValue("N/A");
+				try {
+					pickupDateTime.setValue((pickup.getEstimatedPickup()
+							.toString()));
+				} catch (Exception e) {
+					pickupDateTime.setValue("N/A");
+				}
 			}
-			
-			dropOffLocationOrg.setValue((asn.getDropOff().getDropOffAt().getName()));
-			dropOffLocationAddress.setValue((addressToXhtml(asn.getDropOff().getDropOffAtAddress())));
-			dropOffLocationContactName.setValue((asn.getDropOff().getDropOffAt().getMainContact().getFirstName() + " " + asn.getDropOff().getDropOffAt().getMainContact().getLastName()));
-			dropOffLocationContactPhone.setValue((asn.getDropOff().getDropOffAt().getMainContact().getCellPhoneNumber()));
+			if (dropOff != null) {
+				try {
+					whArrivalDateTime.setValue((dropOff
+							.getEstimatedDropOff().toString()));
+				} catch (Exception e) {
+					whArrivalDateTime.setValue("N/A");
+				}
+				
+				dropOffLocationOrg.setValue((dropOff.getDropOffAt().getName()));
+				dropOffLocationAddress.setValue((addressToXhtml(dropOff.getDropOffAtAddress())));
+				dropOffLocationContactName.setValue((dropOff.getDropOffAt().getMainContact().getFirstName() + " " + dropOff.getDropOffAt().getMainContact().getLastName()));
+				dropOffLocationContactPhone.setValue((dropOff.getDropOffAt().getMainContact().getCellPhoneNumber()));
+			}
 		}
 	}
 

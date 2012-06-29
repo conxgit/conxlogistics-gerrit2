@@ -1,11 +1,11 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
 
-import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
-import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
+import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
@@ -20,12 +20,11 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
-public class ConfirmAsnOrgPage extends IPageFlowPage {
+public class ConfirmAsnOrgPage extends PageFlowPage {
 	private static final String VIEW_HEIGHT = "450px";
-	private static final String ASN_VARIABLE_KEY = "asn";
 	
-	private Map<String, Object> processState;
-	private ASN asn;
+	private String userId;
+	private String orgId;
 	
 	private TabSheet entityTabSheet;
 	private ComboBox organization;
@@ -166,21 +165,15 @@ public class ConfirmAsnOrgPage extends IPageFlowPage {
 	}
 
 	@Override
-	public Map<String, Object> getProcessState() {
-		if (processState != null) {
-			processState.put(ASN_VARIABLE_KEY, asn);
-		}
-		
-		return processState;
+	public Map<String, Object> getOnCompleteState() {
+		return new HashMap<String, Object>();
 	}
 
 	@Override
-	public void setProcessState(Map<String, Object> state) {
-		processState = state;
-		asn = (ASN) state.get(ASN_VARIABLE_KEY);
-		
-		if (asn == null) {
-			asn = new ASN();
+	public void setOnStartState(Map<String, Object> state) {
+		if (state != null) {
+			this.orgId = (String) state.get("orgId");
+			this.userId = (String) state.get("userId");
 		}
 	}
 

@@ -1,8 +1,6 @@
 package com.conx.logistics.kernel.pageflow.services;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -12,17 +10,17 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
 
-public abstract class IPageFlowPage implements WizardStep {
+public abstract class PageFlowPage implements WizardStep {
 	public static final String PROCESS_ID = "PROCESS_ID"; // Process Id in BPMN
 	public static final String TASK_NAME = "TASK_NAME"; // Task Name in BPMN
 	
 	private VerticalLayout canvas;
-	private Set<IPageFlowListener> listeners = new HashSet<IPageFlowListener>();
 	
 	public abstract String getTaskName();
 	public abstract void initialize(EntityManagerFactory emf);
-	public abstract Map<String, Object> getProcessState();
-	public abstract void setProcessState(Map<String, Object> state);
+	public abstract void setOnStartState(Map<String, Object> params);
+	public abstract Map<String, Object> getOnCompleteState();
+	
 	@Override
 	public abstract String getCaption();
 	
@@ -74,32 +72,18 @@ public abstract class IPageFlowPage implements WizardStep {
 
 	@Override
 	public boolean onBack() {
-		for (IPageFlowListener listener : listeners) {
-			listener.onPrevious(this, getProcessState());
-		}
 		return true;
 	}
 	
 	@Override
 	public boolean onAdvance() {
-		for (IPageFlowListener listener : listeners) {
-			listener.onNext(this, getProcessState());
-		}
 		return true;
-	}
-	
-	public void addListener(IPageFlowListener listener) {
-		listeners.add(listener);
-	}
-	
-	public void removeListener(IPageFlowListener listener) {
-		listeners.remove(listener);
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof IPageFlowPage) {
-			return getTaskName().equals(((IPageFlowPage)o).getTaskName()); 
+		if (o instanceof PageFlowPage) {
+			return getTaskName().equals(((PageFlowPage)o).getTaskName()); 
 		}
 		return false;
 	}
