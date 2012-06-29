@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Fragment-Host: org.jbpm.human-task-core
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: JBPM ASN Package Decorator
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.human-task-co
+ re.package.decorator
+Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="[1
+ .0.0,2.0.0)",com.conx.logistics.mdm.dao.services.currency;version="1.
+ 0.0",com.conx.logistics.mdm.dao.services.product;version="1.0.0",com.
+ conx.logistics.mdm.domain.application;version="1.0.0",com.conx.logist
+ ics.mdm.domain.commercialrecord;version="1.0.0",com.conx.logistics.md
+ m.domain.currency;version="1.0.0",com.conx.logistics.mdm.domain.docum
+ entlibrary;version="1.0.0",com.conx.logistics.mdm.domain.geolocation;
+ version="1.0.0",com.conx.logistics.mdm.domain.metadata;version="1.0.0
+ ",com.conx.logistics.mdm.domain.organization;version="1.0.0",com.conx
+ .logistics.mdm.domain.product;version="1.0.0",com.conx.logistics.mdm.
+ domain.referencenumber;version="1.0.0",com.conx.logistics.mdm.domain.
+ task;version="1.0.0",org.hibernate.collection;version="3.6.0.Final"
+

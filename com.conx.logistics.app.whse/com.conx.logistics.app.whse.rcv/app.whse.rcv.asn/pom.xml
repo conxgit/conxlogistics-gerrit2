@@ -15,5 +15,6 @@
   	<module>domain.persistence.config</module>
   	<module>dao.services</module>
   	<module>dao.jpa.persistence</module>
+  	<module>human-task-core.package.decorator</module>
   </modules>
 </project>

@@ -20,7 +20,7 @@ public interface IPageFlowManager {
 	/**
 	 * Given a TaskDefinition and UserId, createPageFlowSession
 	 */
-	public ITaskWizard executeTaskWizard(ITaskWizard tw, Map<String, Object> properties) throws Exception;	
+	public ITaskWizard executeTaskWizard(ITaskWizard tw, Object data) throws Exception;	
 	/**
 	 * Given a TaskDefinition and UserId, pageFlowSessionId
 	 */
