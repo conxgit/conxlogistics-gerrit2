@@ -4,6 +4,7 @@ Bundle-Name: ConX JBPM TaskServer Human-Task-Core Fragment
 Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.fragment
 Fragment-Host: org.jbpm.human-task-core
 Import-Package: 
+ org.springframework.jndi;version="[3.0,3.1)"
 Excluded-Exports: 
  org.jbpm.task.service,
  org.jbpm.task.service.persistence,
@@ -21,5 +22,4 @@ Excluded-Imports:
   org.jbpm.task.service,
   org.jbpm.task.service.persistence,
   org.mvel2,
-  org.slf4j,
-  org.springframework.jndi
+  org.slf4j

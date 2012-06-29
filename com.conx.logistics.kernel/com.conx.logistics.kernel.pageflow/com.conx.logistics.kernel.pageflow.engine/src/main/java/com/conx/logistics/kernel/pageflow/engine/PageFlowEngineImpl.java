@@ -160,7 +160,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		
 		 String processId = (String)properties.get("processId");
 		 String userId = (String)properties.get("userId");
-		 Feature   onCompletionCompletionFeature = (Feature)properties.get("userId");
+		 Feature   onCompletionCompletionFeature = (Feature)properties.get("onCompletionFeature");
 		
 		 Context ctx = jndiTemplate.getContext();
 		 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );

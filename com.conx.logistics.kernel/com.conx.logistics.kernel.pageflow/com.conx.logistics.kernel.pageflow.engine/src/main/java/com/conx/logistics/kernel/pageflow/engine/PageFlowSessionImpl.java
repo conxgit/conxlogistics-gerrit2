@@ -24,6 +24,7 @@ import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowListener;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
+import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.ui.Component;
 
 public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener {
@@ -42,9 +43,13 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 
 	private String userId;
 
+	private Feature setOnCompletionFeature;
+
 	public PageFlowSessionImpl(ProcessInstanceRef processInstance,
 			String userId, Map<String, IPageFlowPage> pageList,
-			IBPMService bpmService, EntityManagerFactory emf) {
+			IBPMService bpmService, EntityManagerFactory emf,
+			Feature setOnCompletionFeature) {
+		this.setOnCompletionFeature = setOnCompletionFeature;
 		this.bpmService = bpmService;
 		this.processInstance = processInstance;
 		this.userId = userId;
@@ -167,6 +172,11 @@ public class PageFlowSessionImpl implements IPageFlowSession, IPageFlowListener 
 
 	public Task getCurrentTask() {
 		return currentTask;
+	}
+	
+
+	public Feature getSetOnCompletionFeature() {
+		return setOnCompletionFeature;
 	}
 
 	public Map<String, Object> getProcessVars() {

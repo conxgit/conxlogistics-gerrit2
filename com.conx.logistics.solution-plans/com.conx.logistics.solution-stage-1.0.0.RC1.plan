@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="com.conx.logistics.solution-stage.plan" version="1.0.0" scoped="false" atomic="true"
+        xmlns="http://www.eclipse.org/virgo/schema/plan"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+		        http://www.eclipse.org/virgo/schema/plan 
+		        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+
+	<!-- Bootstraping Bundles : stage 1 -->
+	<artifact type="bundle" name="com.conx.logistics.common.utils" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.datasource" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.tm.jta" version="1.0.0"/>	
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.services" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.dynaconfiguration" version="1.0.0"/>
+	
+	<!-- Bootstraping Bundles : stage 2 (fragments)-->
+	<!-- Host: com.conx.logistics.kernel.persistence.dynaconfiguration -->
+	<artifact type="bundle" name="com.conx.logistics.mdm.domain" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.domain" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.mdm.domain.persistence.config" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.domain.persistence.config" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.mdm.dao.services" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.mdm.dao.services.impl" version="1.0.0"/>
+	
+	<!-- Host: human-task-core -->
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.human-task-core.package.decorator" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.fragment" version="1.0.0"/>
+	
+	
+	<!-- App Components -->
+	<artifact type="bundle" name="com.conx.logistics.kernel.system.dao.services" version="1.0.0"/>
+	
+	<!-- 
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.shared" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.persistence.jpa.hibernate" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver" version="1.0.0"/>
+	-->
+</plan>

@@ -20,6 +20,7 @@ Import-Package:
   com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",
   com.conx.logistics.mdm.dao.services.documentlibrary;version="1.0.0",
   com.conx.logistics.mdm.domain.documentlibrary;version="1.0.0",
+  com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",
   com.conx.logistics.mdm.dao.services.documentlibrary;version="1.0.0",
   com.conx.logistics.mdm.domain.documentlibrary;version="1.0.0",
   com.conx.logistics.common.utils;version="1.0.0",
