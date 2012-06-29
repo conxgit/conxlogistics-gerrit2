@@ -85,6 +85,7 @@ import org.jbpm.task.Group;
 import org.jbpm.task.Task;
 import org.jbpm.task.User;
 import org.jbpm.task.query.TaskSummary;
+import org.jbpm.task.service.ContentData;
 import org.jbpm.task.service.TaskClient;
 import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.TaskServiceSession;
@@ -838,6 +839,11 @@ public class BPMServerImpl implements IBPMService {
 			String userId) {
 		taskManager.completeTask(taskId, data, userId);
 	}
+	
+	@Override
+	public void completeTask(long taskId, ContentData contentData, String userId) {
+		taskManager.completeTask(taskId, contentData, userId);
+	}		
 
 	@Override
 	public void releaseTask(long taskId, String userId) {

@@ -1,5 +1,7 @@
 package com.conx.logistics.kernel.pageflow.tests;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,6 +9,8 @@ import java.util.Map;
 
 import javax.transaction.TransactionManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,7 @@ import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 
 @Transactional
 public class PageflowEngineTests {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private IPageFlowManager defaultPageFlowEngine;
@@ -40,9 +45,9 @@ public class PageflowEngineTests {
 			ASN asn = (ASN)res.get("asnParams");
 			
 			//-- 2. Complete ConfirmASNOrg Task and get vars
-			Map<String,Object> inParams = new HashMap<String, Object>();
-			inParams.put("asnParams", asn);
-			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, inParams);
+			Map<String,Object> outParams = new HashMap<String, Object>();
+			//outParams.put("asnParamsOut", asn);
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			asn = (ASN)res.get("asnParams");
 			
@@ -54,9 +59,9 @@ public class PageflowEngineTests {
 			refNumbers.add(rn);
 			asn.setRefNumbers(refNumbers);
 			
-			inParams = new HashMap<String, Object>();
-			inParams.put("asnParams", asn);			
-			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, inParams);
+			outParams = new HashMap<String, Object>();
+			outParams.put("refNumsCollectionOut", refNumbers);			
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			asn = (ASN)res.get("asnParams");
 			
@@ -67,9 +72,9 @@ public class PageflowEngineTests {
 			asnLines.add(line);
 			asn.setAsnLines(asnLines);
 			
-			inParams = new HashMap<String, Object>();
-			inParams.put("asnParams", asn);			
-			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, inParams);
+			outParams = new HashMap<String, Object>();
+			outParams.put("asnLinesCollectionOut", asnLines);			
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			asn = (ASN)res.get("asnParams");	
 			
@@ -79,16 +84,17 @@ public class PageflowEngineTests {
 			asn.setPickup(asnp);
 			asn.setDropOff(asnd);
 			
-			inParams = new HashMap<String, Object>();
-			inParams.put("asnParams", asn);			
-			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, inParams);
+			outParams = new HashMap<String, Object>();
+			outParams.put("asnPickupOut", asnp);	
+			outParams.put("asnDropoffOut", asnd);
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			asn = (ASN)res.get("asnParams");		
 			
 			//-- 5. Complete Accept ASN and get vars
-			inParams = new HashMap<String, Object>();
-			inParams.put("asnParams", asn);			
-			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, inParams);
+			outParams = new HashMap<String, Object>();
+			//outParams.put("confirmASNAsnOut", asn);			
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			asn = (ASN)res.get("asnParams");			
 			
@@ -96,6 +102,10 @@ public class PageflowEngineTests {
 			// ProcessInstanceRef pi =
 			//bpmService.newInstance("whse.rcv.asn.CreateNewASNByOrgV1.0");
 		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
 			e.printStackTrace();
 		}
 

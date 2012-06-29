@@ -15,6 +15,7 @@ import org.jboss.bpm.console.client.model.TaskRef;
 import org.jbpm.task.Content;
 import org.jbpm.task.Task;
 import org.jbpm.task.query.TaskSummary;
+import org.jbpm.task.service.ContentData;
 import org.jbpm.workflow.core.node.HumanTaskNode;
 
 public interface IBPMService {
@@ -71,6 +72,7 @@ public interface IBPMService {
 	public void startTask(long taskId, String userId);
 	public void completeTask(long taskId, Map<String, Object> data, String userId);
 	public void completeTask(long taskId, String outcome, Map<String, Object> data, String userId);
+	public void completeTask(long taskId, ContentData contentData, String userId);
 	public void releaseTask(long taskId, String userId);
 	public List<TaskRef> getAssignedTasks(String idRef);
 	public List<TaskRef> getUnassignedTasks(String idRef, String participationType);
@@ -87,4 +89,6 @@ public interface IBPMService {
 	public Content getTaskContent(long taskId);
 	public Object getTaskContentObject(Task task) throws IOException,
 			ClassNotFoundException;
+
+	
 }

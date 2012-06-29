@@ -240,10 +240,10 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	}	
 	
 	@Override
-	public ITaskWizard executeTaskWizard(ITaskWizard tw, Map<String, Object> properties) throws Exception {
+	public ITaskWizard executeTaskWizard(ITaskWizard tw, Object data) throws Exception {
 		 Context ctx = jndiTemplate.getContext();
 		 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
-		((TaskWizard)tw).getSession().executeNext(ut);
+		((TaskWizard)tw).getSession().executeNext(ut,data);
 		return tw;
 	}
 }
