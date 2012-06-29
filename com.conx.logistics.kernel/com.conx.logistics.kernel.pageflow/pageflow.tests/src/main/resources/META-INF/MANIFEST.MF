@@ -11,31 +11,33 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.tests
 Import-Package: bitronix.tm.jndi;version="[2.1.0,2.2.0)",com.conx.logi
- stics.kernel.pageflow.services;version="[1.0.0,2.0.0)",com.conx.logis
- tics.kernel.ui.common;version="[1.0.0,2.0.0)",com.conx.logistics.kern
- el.ui.common.data.container;version="[1.0.0,2.0.0)",com.conx.logistic
- s.kernel.ui.common.mvp;version="[1.0.0,2.0.0)",com.conx.logistics.ker
- nel.ui.common.mvp.view.feature;version="[1.0.0,2.0.0)",com.conx.logis
- tics.kernel.ui.common.ui.feature;version="[1.0.0,2.0.0)",com.conx.log
- istics.kernel.ui.common.ui.form.field;version="[1.0.0,2.0.0)",com.con
- x.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",com.conx.logist
- ics.kernel.ui.service.contribution;version="[1.0.0,2.0.0)",com.conx.l
- ogistics.mdm.domain.application;version="[1.0.0,2.0.0)",com.conx.logi
- stics.mdm.domain.task;version="[1.0.0,2.0.0)",com.vaadin;version="[6.
- 7.0,7.0.0)",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.
- addon.jpacontainer.provider;version="2.0.0",com.vaadin.data;version="
- [6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.vaadi
- n.data.util.filter;version="[6.7.0,7.0.0)",com.vaadin.event;version="
- [6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)",javax.persistenc
- e;version="[1.0.0, 3.0.0)",javax.persistence.criteria;version="[1.0.0
- , 3.0.0)",javax.transaction;version="0",org.slf4j;version="[1.6.1,1.6
- .1]",org.springframework.beans.factory.annotation;version="[3.0,3.1)"
- ,org.springframework.orm.jpa;version="[3.0,3.1)",org.springframework.
- transaction;version="[3.0,3.1)",org.springframework.transaction.annot
- ation;version="[3.0,3.1)",org.springframework.transaction.aspectj;ver
- sion="[3.0,3.1)",org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",org
- .vaadin.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",org.vaadin.m
- vp.presenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.annota
- tion;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.
- SNAPSHOT",org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT"
+ stics.app.whse.rcv.asn.domain;version="[1.0.0,2.0.0)",com.conx.logist
+ ics.kernel.pageflow.services;version="[1.0.0,2.0.0)",com.conx.logisti
+ cs.kernel.ui.common;version="[1.0.0,2.0.0)",com.conx.logistics.kernel
+ .ui.common.data.container;version="[1.0.0,2.0.0)",com.conx.logistics.
+ kernel.ui.common.mvp;version="[1.0.0,2.0.0)",com.conx.logistics.kerne
+ l.ui.common.mvp.view.feature;version="[1.0.0,2.0.0)",com.conx.logisti
+ cs.kernel.ui.common.ui.feature;version="[1.0.0,2.0.0)",com.conx.logis
+ tics.kernel.ui.common.ui.form.field;version="[1.0.0,2.0.0)",com.conx.
+ logistics.kernel.ui.service;version="[1.0.0,2.0.0)",com.conx.logistic
+ s.kernel.ui.service.contribution;version="[1.0.0,2.0.0)",com.conx.log
+ istics.mdm.domain.application;version="[1.0.0,2.0.0)",com.conx.logist
+ ics.mdm.domain.referencenumber;version="[1.0.0,2.0.0)",com.conx.logis
+ tics.mdm.domain.task;version="[1.0.0,2.0.0)",com.vaadin;version="[6.7
+ .0,7.0.0)",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.a
+ ddon.jpacontainer.provider;version="2.0.0",com.vaadin.data;version="[
+ 6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.vaadin
+ .data.util.filter;version="[6.7.0,7.0.0)",com.vaadin.event;version="[
+ 6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)",javax.persistence
+ ;version="[1.0.0, 3.0.0)",javax.persistence.criteria;version="[1.0.0,
+  3.0.0)",javax.transaction;version="0",org.slf4j;version="[1.6.1,1.6.
+ 1]",org.springframework.beans.factory.annotation;version="[3.0,3.1)",
+ org.springframework.orm.jpa;version="[3.0,3.1)",org.springframework.t
+ ransaction;version="[3.0,3.1)",org.springframework.transaction.annota
+ tion;version="[3.0,3.1)",org.springframework.transaction.aspectj;vers
+ ion="[3.0,3.1)",org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",org.
+ vaadin.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mv
+ p.presenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.annotat
+ ion;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.S
+ NAPSHOT",org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT"
 

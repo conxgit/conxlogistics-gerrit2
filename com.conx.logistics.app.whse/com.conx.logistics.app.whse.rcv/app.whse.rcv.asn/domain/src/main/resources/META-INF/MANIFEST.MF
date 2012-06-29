@@ -1,12 +1,10 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
  0.0";uses:="com.conx.logistics.app.whse.rcv.asn.shared.type,com.conx.
- logistics.mdm.domain,com.conx.logistics.mdm.domain.commercialrecord,c
- om.conx.logistics.mdm.domain.geolocation,com.conx.logistics.mdm.domai
- n.organization,com.conx.logistics.mdm.domain.product,com.conx.logisti
- cs.mdm.domain.referencenumber,javax.persistence,org.springframework.f
- ormat.annotation",com.conx.logistics.app.whse.rcv.asn.shared.type;ver
- sion="1.0.0"
+ logistics.mdm.domain,com.conx.logistics.mdm.domain.geolocation,com.co
+ nx.logistics.mdm.domain.organization,javax.persistence,org.springfram
+ ework.format.annotation",com.conx.logistics.app.whse.rcv.asn.shared.t
+ ype;version="1.0.0"
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Build-Jdk: 1.6.0_23
 Built-By: sandile
