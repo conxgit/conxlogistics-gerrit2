@@ -122,6 +122,7 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 				Map<String,Object> props = new HashMap<String,Object>();
 				props.put("userId","john");
 				props.put("processId",processId);
+				props.put("onCompletionFeature",f.getOnCompletionFeature());
 				
 				try
 				{

@@ -15,6 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.conx.logistics.common.utils.Validator;
@@ -31,6 +32,10 @@ public class Feature extends BaseEntity {
     @ManyToOne(targetEntity = Feature.class)
     @JoinColumn
     protected Feature parentFeature;   
+    
+    @OneToOne(targetEntity = Feature.class)
+    @JoinColumn
+    protected Feature onCompletionFeature;     
     
     @OneToMany(targetEntity = Feature.class, mappedBy="parentFeature", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     private Set<Feature> childFeatures= new java.util.HashSet<Feature>();  
@@ -111,5 +116,13 @@ public class Feature extends BaseEntity {
 
 	public void setTaskFeature(boolean taskFeature) {
 		this.taskFeature = taskFeature;
-	}   	
+	}
+
+	public Feature getOnCompletionFeature() {
+		return onCompletionFeature;
+	}
+
+	public void setOnCompletionFeature(Feature onCompletionFeature) {
+		this.onCompletionFeature = onCompletionFeature;
+	}   
 }

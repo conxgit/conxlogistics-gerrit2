@@ -27,6 +27,7 @@ import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowPage;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
+import com.conx.logistics.mdm.domain.application.Feature;
 import com.conx.logistics.mdm.domain.task.TaskDefinition;
 
 public class PageFlowEngineImpl implements IPageFlowManager {
@@ -130,9 +131,9 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	@Override
 	public IPageFlowSession startPageFlowSession(String userId, TaskDefinition td) {
 //		ProcessInstanceRef pi = bpmService.newInstance(td.getProcessId());
-		IPageFlowSession session = new PageFlowSessionImpl(null, userId, getPages(td.getProcessId()), this.bpmService, conxlogisticsEMF);
-		sessions.add(session);
-		return session;
+		//IPageFlowSession session = new PageFlowSessionImpl(null, userId, getPages(td.getProcessId()), this.bpmService, conxlogisticsEMF);
+		//sessions.add(session);
+		return null;
 	}
 
 	public EntityManagerFactory getConxlogisticsEMF() {
@@ -158,7 +159,8 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		PageFlowSessionImpl session = null;
 		
 		 String processId = (String)properties.get("processId");
-		 String userId = (String)properties.get("userId");		
+		 String userId = (String)properties.get("userId");
+		 Feature   onCompletionCompletionFeature = (Feature)properties.get("userId");
 		
 		 Context ctx = jndiTemplate.getContext();
 		 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
@@ -186,7 +188,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 			 ut.begin();
 			 
 			 Map<String,IPageFlowPage> pageList = pageCache.get(processId);
-			 session = new PageFlowSessionImpl(pi, userId, pageList, this.bpmService, conxlogisticsEMF);
+			 session = new PageFlowSessionImpl(pi, userId, pageList, this.bpmService, conxlogisticsEMF, onCompletionCompletionFeature);
 			 sessions.add(session);	
 			 
 			 ut.commit();

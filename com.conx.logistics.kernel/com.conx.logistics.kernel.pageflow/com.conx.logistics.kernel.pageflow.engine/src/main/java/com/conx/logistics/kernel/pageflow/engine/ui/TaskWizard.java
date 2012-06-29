@@ -8,6 +8,7 @@ import org.vaadin.teemu.wizards.Wizard;
 
 import com.conx.logistics.kernel.pageflow.engine.PageFlowSessionImpl;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
+import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.ui.Component;
 
 public class TaskWizard extends Wizard implements ITaskWizard{
@@ -36,6 +37,12 @@ public class TaskWizard extends Wizard implements ITaskWizard{
 		props.put("session",session);
 		props.putAll(session.getProcessVars());
 		return props;
+	}
+
+	@Override
+	public Feature getOnCompletionFeature() {
+		// TODO Auto-generated method stub
+		return session.getSetOnCompletionFeature();
 	}
 	
 	
