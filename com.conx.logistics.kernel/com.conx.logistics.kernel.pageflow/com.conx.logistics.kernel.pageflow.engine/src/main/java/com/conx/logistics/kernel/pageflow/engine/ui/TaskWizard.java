@@ -81,8 +81,8 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 		}
 		// Start the next task (if it exists) with input variables from previous task
 		int index = steps.indexOf(currentStep);
-		if (index < steps.size() - 1) {
-			nextPage = (PageFlowPage) steps.get(steps.indexOf(index + 1));
+		if ((index + 1) < steps.size()) {
+			nextPage = (PageFlowPage) steps.get(index + 1));
 			nextPage.setOnStartState(params);
 		}
 		super.next();
