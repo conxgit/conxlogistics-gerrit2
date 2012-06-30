@@ -21,15 +21,17 @@ public class JTATaskSessionFactoryImpl implements TaskSessionFactory {
 	private final boolean useJTA;
 	private JndiTemplate jndiTemplate;
 	private TransactionManager tm;
+	private UserTransaction userTransaction;
 
 	public JTATaskSessionFactoryImpl(
 			TransactionManager tm,
 			JndiTemplate jndiTemplate,
-			JTACustomTaskService taskService,
+			UserTransaction userTransaction, JTACustomTaskService taskService,
 			EntityManagerFactory emf) {
 		this.emf = emf;
 		this.taskService = taskService;
 		this.jndiTemplate = jndiTemplate;
+		this.userTransaction = userTransaction;
 		this.tm = tm;
 		useJTA = useJTATransactions(emf);
 	}
@@ -63,7 +65,8 @@ public class JTATaskSessionFactoryImpl implements TaskSessionFactory {
 	public TaskServiceSession createTaskServiceSession() {
 		TaskPersistenceManager tpm;
 		if (useJTA) {
-			UserTransaction ut = null;
+			UserTransaction ut = userTransaction;
+			/*
 			try {
 				Context ctx = jndiTemplate.getContext();
 				 ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
@@ -71,6 +74,7 @@ public class JTATaskSessionFactoryImpl implements TaskSessionFactory {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 			
 			tpm = new TaskPersistenceManager(emf.createEntityManager(),
 					new TaskJTACustomTransactionManager(this.tm,ut));
@@ -83,14 +87,16 @@ public class JTATaskSessionFactoryImpl implements TaskSessionFactory {
 	public TasksAdmin createTaskAdmin() {
 		TaskPersistenceManager tpm;
 		if (useJTA) {
-			UserTransaction ut = null;
+			UserTransaction ut = userTransaction;
+			/*
 			try {
 				Context ctx = jndiTemplate.getContext();
 				 ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}			
+			}		
+			*/	
 			tpm = new TaskPersistenceManager(emf.createEntityManager(),
 					new TaskJTACustomTransactionManager(this.tm,ut));
 		} else {

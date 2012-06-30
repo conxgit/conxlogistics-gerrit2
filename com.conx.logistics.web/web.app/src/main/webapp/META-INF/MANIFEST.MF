@@ -15,42 +15,50 @@ Import-Library: org.springframework.spring;version="[3.0, 3.1)"
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: com.conx.logistics.web.app
 Web-ContextPath: logistics2.0.0
-Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="[1
- .0.0,2.0.0)",com.conx.logistics.common.utils;version="[1.0.0,2.0.0)",
- com.conx.logistics.kernel.pageflow.services;version="[1.0.0,2.0.0)",c
- om.conx.logistics.kernel.system.dao.services.application;version="[1.
- 0.0,2.0.0)",com.conx.logistics.kernel.ui.common.mvp;version="[1.0.0,2
- .0.0)",com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",c
- om.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.0.
- 0)",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",com.conx.lo
- gistics.mdm.domain.application;version="[1.0.0,2.0.0)",com.vaadin;ver
- sion="[6.7.4,7.0.0)",com.vaadin.addon.jpacontainer;version="2.0.0",co
- m.vaadin.addon.jpacontainer.fieldfactory;version="2.0.0",com.vaadin.a
- ddon.jpacontainer.filter;version="2.0.0",com.vaadin.addon.jpacontaine
- r.filter.util;version="2.0.0",com.vaadin.addon.jpacontainer.metadata;
- version="2.0.0",com.vaadin.addon.jpacontainer.provider;version="2.0.0
- ",com.vaadin.addon.jpacontainer.util;version="2.0.0",com.vaadin.data;
- version="[6.7.4,7.0.0)",com.vaadin.data.util;version="[6.7.4,7.0.0)",
- com.vaadin.event;version="[6.7.4,7.0.0)",com.vaadin.terminal;version=
- "[6.7.4,7.0.0)",com.vaadin.terminal.gwt.client;version="[6.7.4,7.0.0)
- ",com.vaadin.terminal.gwt.client.ui;version="[6.7.4,7.0.0)",com.vaadi
- n.terminal.gwt.server;version="[6.7.4,7.0.0)",com.vaadin.ui;version="
- [6.7.4,7.0.0)",javax.persistence;version="[1.0.0, 3.0.0)",javax.persi
- stence.criteria;version="[1.0.0, 3.0.0)",javax.servlet;version="[3.0.
- 0, 3.1.0)",javax.servlet.http;version="[3.0.0,3.1.0)",javax.servlet.j
- sp.jstl.core;version="[1.2.0,2.0.0)",org.eclipse.virgo.web.dm;version
- ="[3.0.0, 4.0.0)",org.slf4j;version="[1.6.1,1.6.1]",org.springframewo
- rk.beans.factory.annotation;version="[3.0, 3.1)",org.springframework.
- core.io;version="[3.0, 3.1)",org.springframework.orm.jpa.support;vers
- ion="[3.0, 3.1)",org.springframework.stereotype;version="[3.0, 3.1)",
- org.springframework.transaction.annotation;version="[3.0, 3.1)",org.s
- pringframework.web.bind.annotation;version="[3.0, 3.1)",org.springfra
- mework.web.context;version="[3.0, 3.1)",org.springframework.web.servl
- et;version="[3.0, 3.1)",org.springframework.web.servlet.mvc.annotatio
- n;version="[3.0, 3.1)",org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHO
- T",org.vaadin.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",org.va
- adin.mvp.presenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.
- annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="
- 0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNA
- PSHOT"
+Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.jndi;v
+ ersion="[2.1.0,2.2.0)",bitronix.tm.journal;version="[2.1.0,2.2.0)",bi
+ tronix.tm.recovery;version="[2.1.0,2.2.0)",bitronix.tm.resource;versi
+ on="[2.1.0,2.2.0)",bitronix.tm.resource.jdbc;version="[2.1.0,2.2.0)",
+ bitronix.tm.timer;version="[2.1.0,2.2.0)",bitronix.tm.twopc.executor;
+ version="[2.1.0,2.2.0)",bitronix.tm.utils;version="[2.1.0,2.2.0)",com
+ .conx.logistics.app.whse.rcv.asn.domain;version="[1.0.0,2.0.0)",com.c
+ onx.logistics.common.utils;version="[1.0.0,2.0.0)",com.conx.logistics
+ .kernel.pageflow.services;version="[1.0.0,2.0.0)",com.conx.logistics.
+ kernel.system.dao.services.application;version="[1.0.0,2.0.0)",com.co
+ nx.logistics.kernel.ui.common.mvp;version="[1.0.0,2.0.0)",com.conx.lo
+ gistics.kernel.ui.service;version="[1.0.0,2.0.0)",com.conx.logistics.
+ kernel.ui.service.contribution;version="[1.0.0,2.0.0)",com.conx.logis
+ tics.mdm.domain;version="[1.0.0,2.0.0)",com.conx.logistics.mdm.domain
+ .application;version="[1.0.0,2.0.0)",com.vaadin;version="[6.7.4,7.0.0
+ )",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.addon.jpa
+ container.fieldfactory;version="2.0.0",com.vaadin.addon.jpacontainer.
+ filter;version="2.0.0",com.vaadin.addon.jpacontainer.filter.util;vers
+ ion="2.0.0",com.vaadin.addon.jpacontainer.metadata;version="2.0.0",co
+ m.vaadin.addon.jpacontainer.provider;version="2.0.0",com.vaadin.addon
+ .jpacontainer.util;version="2.0.0",com.vaadin.data;version="[6.7.4,7.
+ 0.0)",com.vaadin.data.util;version="[6.7.4,7.0.0)",com.vaadin.event;v
+ ersion="[6.7.4,7.0.0)",com.vaadin.terminal;version="[6.7.4,7.0.0)",co
+ m.vaadin.terminal.gwt.client;version="[6.7.4,7.0.0)",com.vaadin.termi
+ nal.gwt.client.ui;version="[6.7.4,7.0.0)",com.vaadin.terminal.gwt.ser
+ ver;version="[6.7.4,7.0.0)",com.vaadin.ui;version="[6.7.4,7.0.0)",jav
+ ax.naming;version="0",javax.persistence;version="[1.0.0, 3.0.0)",java
+ x.persistence.criteria;version="[1.0.0, 3.0.0)",javax.servlet;version
+ ="[3.0.0, 3.1.0)",javax.servlet.http;version="[3.0.0,3.1.0)",javax.se
+ rvlet.jsp.jstl.core;version="[1.2.0,2.0.0)",javax.transaction;version
+ ="0",org.eclipse.virgo.web.dm;version="[3.0.0, 4.0.0)",org.slf4j;vers
+ ion="[1.6.1,1.6.1]",org.springframework.beans.factory.annotation;vers
+ ion="[3.0, 3.1)",org.springframework.core.io;version="[3.0, 3.1)",org
+ .springframework.orm.jpa;version="[3.0,3.1)",org.springframework.orm.
+ jpa.support;version="[3.0, 3.1)",org.springframework.stereotype;versi
+ on="[3.0, 3.1)",org.springframework.transaction;version="[3.0, 3.1)",
+ org.springframework.transaction.annotation;version="[3.0,3.1)",org.sp
+ ringframework.transaction.aspectj;version="[3.0,3.1)",org.springframe
+ work.web.bind.annotation;version="[3.0, 3.1)",org.springframework.web
+ .context;version="[3.0, 3.1)",org.springframework.web.servlet;version
+ ="[3.0, 3.1)",org.springframework.web.servlet.mvc.annotation;version=
+ "[3.0, 3.1)",org.vaadin.mvp.eventbus;version="0.9.2.SNAPSHOT",org.vaa
+ din.mvp.eventbus.annotation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.p
+ resenter;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter.annotation
+ ;version="0.9.2.SNAPSHOT",org.vaadin.mvp.uibinder;version="0.9.2.SNAP
+ SHOT",org.vaadin.mvp.uibinder.annotation;version="0.9.2.SNAPSHOT"
 

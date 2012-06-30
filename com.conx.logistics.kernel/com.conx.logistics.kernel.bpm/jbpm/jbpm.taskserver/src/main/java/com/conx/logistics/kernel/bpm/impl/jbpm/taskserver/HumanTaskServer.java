@@ -50,6 +50,7 @@ public class HumanTaskServer implements IBPMTaskService {
 	private PlatformTransactionManager globalJTATransManager;
 	private TransactionManager globalTransactionManager;
 	private JndiTemplate jndiTemplate;
+	private UserTransaction userTransaction;
 
 	private LocalTaskService localTaskService;
 	private JTACustomTaskService taskService;
@@ -73,7 +74,7 @@ public class HumanTaskServer implements IBPMTaskService {
 			//ut.begin();
 
 			taskService = new JTACustomTaskService(globalTransactionManager,
-					jndiTemplate, emfOrgJbpmTask,
+					jndiTemplate, userTransaction,emfOrgJbpmTask,
 					SystemEventListenerFactory.getSystemEventListener());
 			TaskServiceSession taskSession = taskService.createSession();
 
@@ -158,6 +159,10 @@ public class HumanTaskServer implements IBPMTaskService {
 		this.jndiTemplate = jndiTemplate;
 	}
 
+	public void setUserTransaction(UserTransaction userTransaction) {
+		this.userTransaction = userTransaction;
+	}
+	
 	public TaskService createHumanTaskService() {
 		TaskService taskService = new TaskService(emfOrgJbpmTask,
 				SystemEventListenerFactory.getSystemEventListener());

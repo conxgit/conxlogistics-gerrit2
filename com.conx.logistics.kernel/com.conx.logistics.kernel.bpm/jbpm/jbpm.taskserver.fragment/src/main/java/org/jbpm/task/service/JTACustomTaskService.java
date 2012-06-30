@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.TransactionManager;
+import javax.transaction.UserTransaction;
 
 import org.drools.SystemEventListener;
 import org.jbpm.eventmessaging.EventKeys;
@@ -91,6 +92,7 @@ public class JTACustomTaskService extends TaskService {
 
     /**
      * Constructor in which no EscalatedDeadlineHandler is given. 
+     * @param userTransaction 
      * 
      * @param emf the EntityManagerFactory
      * @param systemEventListener the Drools SystemEventListener
@@ -98,8 +100,8 @@ public class JTACustomTaskService extends TaskService {
     public JTACustomTaskService(
     		TransactionManager tm,
     		JndiTemplate jndiTemplate,
-    		EntityManagerFactory emf, SystemEventListener systemEventListener) {
-        initialize(jndiTemplate,tm,emf, systemEventListener, null);
+    		UserTransaction userTransaction, EntityManagerFactory emf, SystemEventListener systemEventListener) {
+        initialize(jndiTemplate,userTransaction,tm,emf, systemEventListener, null);
     }
 
     /**
@@ -111,8 +113,8 @@ public class JTACustomTaskService extends TaskService {
     public JTACustomTaskService(EntityManagerFactory emf, SystemEventListener systemEventListener, EscalatedDeadlineHandler escalationHandler) {
     }
     
-    private void initialize(JndiTemplate jndiTemplate,TransactionManager tm, EntityManagerFactory emf, SystemEventListener systemEventListener, EscalatedDeadlineHandler escalationHandler) {
-        this.sessionFactory = new JTATaskSessionFactoryImpl(tm,jndiTemplate,this,emf);
+    private void initialize(JndiTemplate jndiTemplate,UserTransaction userTransaction, TransactionManager tm, EntityManagerFactory emf, SystemEventListener systemEventListener, EscalatedDeadlineHandler escalationHandler) {
+        this.sessionFactory = new JTATaskSessionFactoryImpl(tm,jndiTemplate,userTransaction,this,emf);
         this.systemEventListener = systemEventListener;
         if (escalationHandler != null) {
             this.escalatedDeadlineHandler = escalationHandler;

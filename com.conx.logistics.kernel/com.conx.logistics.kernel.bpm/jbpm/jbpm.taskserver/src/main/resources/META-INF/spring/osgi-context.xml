@@ -21,5 +21,8 @@
 	</osgi:reference>			
 	
 	<osgi:service ref="humanTaskServer" interface="com.conx.logistics.kernel.bpm.services.IBPMTaskService">
-	</osgi:service>		
+	</osgi:service>
+	
+	<osgi:reference id="userTransaction" interface="javax.transaction.UserTransaction">
+	</osgi:reference>			
 </beans>

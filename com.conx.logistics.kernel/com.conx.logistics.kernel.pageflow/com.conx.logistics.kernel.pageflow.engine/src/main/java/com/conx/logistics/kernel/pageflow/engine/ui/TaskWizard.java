@@ -19,6 +19,7 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 	private PageFlowEngineImpl engine;
 	
 	public TaskWizard(PageFlowSessionImpl session, PageFlowEngineImpl engine) {
+		this.engine = engine;
 		this.session = session;
 	}
 

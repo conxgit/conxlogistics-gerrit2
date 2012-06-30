@@ -36,6 +36,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	private List<IPageFlowSession> sessions;
 
 	private JndiTemplate jndiTemplate;
+	private UserTransaction userTransaction;
 
 	public PageFlowEngineImpl() {
 		this.sessions = new ArrayList<IPageFlowSession>();
@@ -43,6 +44,11 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 
 	public void setJndiTemplate(JndiTemplate jndiTemplate) {
 		this.jndiTemplate = jndiTemplate;
+	}
+	
+
+	public void setUserTransaction(UserTransaction userTransaction) {
+		this.userTransaction = userTransaction;
 	}
 
 	@SuppressWarnings("unused")
@@ -160,7 +166,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		Feature   onCompletionCompletionFeature = (Feature)properties.get("onCompletionFeature");
 
 		Context ctx = jndiTemplate.getContext();
-		UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
+		UserTransaction ut = this.userTransaction;//(UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
 
 		// 1. Create process instance		
 		try
@@ -253,9 +259,9 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 
 	@Override
 	public ITaskWizard executeTaskWizard(ITaskWizard tw, Object data) throws Exception {
-		Context ctx = jndiTemplate.getContext();
-		UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
-		((TaskWizard)tw).getSession().executeNext(ut,data);
+		//Context ctx = jndiTemplate.getContext();
+		//UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
+		((TaskWizard)tw).getSession().executeNext(this.userTransaction,data);
 		return tw;
 	}
 }

@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>com.conx.logistics.kernel.pageflow</artifactId>
-    <groupId>com.conx.logistics</groupId>
-    <version>1.0.0</version>
-    <relativePath>..</relativePath>
-  </parent>
-  <artifactId>com.conx.logistics.kernel.pageflow.engine</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>com.conx.logistics.kernel.pageflow</artifactId>
+		<groupId>com.conx.logistics</groupId>
+		<version>1.0.0</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>com.conx.logistics.kernel.pageflow.engine</artifactId>
 	<dependencies>
 		<!-- Vaadin -->
 		<dependency>
@@ -15,11 +16,11 @@
 			<version>6.7.5</version>
 		</dependency>
 		<dependency>
-		   <groupId>org.vaadin.addons</groupId>
-		   <artifactId>wizards-for-vaadin</artifactId>
-		   <version>0.4.4</version>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>wizards-for-vaadin</artifactId>
+			<version>0.4.4</version>
 		</dependency>
-		
+
 		<!-- ConX -->
 		<dependency>
 			<groupId>com.conx.logistics</groupId>
@@ -46,6 +47,12 @@
 				com.conx.logistics.kernel.bpm.impl.jbpm.core
 			</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.catalina</groupId>
+			<artifactId>com.springsource.org.apache.catalina</artifactId>
+			<version>7.0.26</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -74,5 +81,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>  
+	</build>
 </project>

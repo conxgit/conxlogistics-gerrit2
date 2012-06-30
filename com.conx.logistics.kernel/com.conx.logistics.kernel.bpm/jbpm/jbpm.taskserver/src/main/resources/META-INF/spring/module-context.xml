@@ -15,7 +15,8 @@
 		<property name="jbpmTaskEMF" ref="jbpmTaskEMF"></property>
 		<property name="globalJTATransManager" ref="globalTransManager"></property>
 		<property name="globalTransactionManager" ref="globalTransactionManager"/>
-		<property name="jndiTemplate" ref="tmJndiTemplate"/>		
+		<property name="jndiTemplate" ref="tmJndiTemplate"/>	
+		<property name="userTransaction" ref="userTransaction"/>	
 	</bean>
 	
 	
