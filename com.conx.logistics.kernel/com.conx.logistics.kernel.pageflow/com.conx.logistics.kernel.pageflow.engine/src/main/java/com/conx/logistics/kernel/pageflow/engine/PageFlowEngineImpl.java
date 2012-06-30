@@ -218,7 +218,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		wizard.setSizeFull();
 		if (session.getOrderedPageList() != null) {
 			for (PageFlowPage page : session.getOrderedPageList()) {
-				page.initialize(session.getEmf(), wizard);
+				page.initialize(session.getEmf());
 				wizard.addStep(page);
 			}
 		}
