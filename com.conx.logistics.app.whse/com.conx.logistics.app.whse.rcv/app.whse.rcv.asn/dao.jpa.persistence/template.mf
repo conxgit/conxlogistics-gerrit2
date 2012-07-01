@@ -15,6 +15,7 @@ Import-Package:
   com.conx.logistics.mdm.domain.geolocation;version="1.0.0",
   com.conx.logistics.mdm.dao.services.currency;version="1.0.0",
   com.conx.logistics.mdm.dao.services.product;version="1.0.0",
+  com.conx.logistics.mdm.dao.services;version="1.0.0",
   com.conx.logistics.mdm.domain.currency;version="1.0.0",
   com.conx.logistics.mdm.domain.metadata;version="1.0.0",
   com.conx.logistics.mdm.dao.services.referencenumber;version="1.0.0",

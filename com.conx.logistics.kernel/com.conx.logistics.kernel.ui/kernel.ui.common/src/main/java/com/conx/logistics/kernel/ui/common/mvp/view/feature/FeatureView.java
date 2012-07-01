@@ -44,8 +44,11 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 
 	private MainMVPApplication app;
 
-	public FeatureView(MainMVPApplication app) {
+	private IPresenter<?, ? extends EventBus> viewPresenter;
+
+	public FeatureView(MainMVPApplication app,IPresenter<?, ? extends EventBus> viewPresenter) {
 		this.app = app;
+		this.viewPresenter = viewPresenter;
 
 		setWidth("100%");
 		setMargin(true);
@@ -123,6 +126,7 @@ public class FeatureView extends HorizontalLayout implements IFeatureView {
 				props.put("userId","john");
 				props.put("processId",processId);
 				props.put("onCompletionFeature",f.getOnCompletionFeature());
+				props.put("onCompletionViewPresenter",this.viewPresenter);
 				
 				try
 				{

@@ -159,15 +159,15 @@ public class ApplicationDAOImpl implements IApplicationDAOService {
 			mfs.getChildFeatures().add(smfs);
 			mfs = featureDaoService.updateFeature(mfs);		
 			
-			ft = new Feature(whseApp,smfs, IApplicationDAOService.WAREHOUSE_APP_RECEIVING_ASN_SEARCH_CODE);
-			ft.setName(WAREHOUSE_APP_RECEIVING_ASN_SEARCH_NAME);
-			ft = featureDaoService.addFeature(ft);
-			smfs.getChildFeatures().add(ft);
+			Feature searchFt = new Feature(whseApp,smfs, IApplicationDAOService.WAREHOUSE_APP_RECEIVING_ASN_SEARCH_CODE);
+			searchFt.setName(WAREHOUSE_APP_RECEIVING_ASN_SEARCH_NAME);
+			searchFt = featureDaoService.addFeature(searchFt);
+			smfs.getChildFeatures().add(searchFt);
 			
 			ft = new Feature(whseApp,smfs, IApplicationDAOService.WAREHOUSE_APP_RECEIVING_ASN_NEW_CODE);
 			ft.setName(WAREHOUSE_APP_RECEIVING_ASN_NEW_NAME);
 			ft.setTaskFeature(true);
-			ft.setOnCompletionFeature(ft);
+			ft.setOnCompletionFeature(searchFt);
 			ft.setCode("whse.rcv.asn.CreateNewASNByOrgV1.0");
 			ft.setExternalCode("KERNEL.PAGEFLOW.STARTTASK");
 			ft.setName("New");

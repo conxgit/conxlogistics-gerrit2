@@ -436,7 +436,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
 		if (state != null) {
-			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionOut");
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionIn");
 
 			if (refNums != null && refNumBeanContainer != null) {
 				refNumBeanContainer.addAll(refNums);

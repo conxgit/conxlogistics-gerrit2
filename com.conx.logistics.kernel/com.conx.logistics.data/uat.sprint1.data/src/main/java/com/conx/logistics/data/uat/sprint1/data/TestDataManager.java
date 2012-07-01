@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -288,7 +290,7 @@ public class TestDataManager {
 				rn2.setEntityMetadata(asnEMD);
 				rn2  = referenceNumberDaoService.add(rn2);				
 				
-				ArrayList<ReferenceNumber> refNumList = new ArrayList<ReferenceNumber>();
+				Set<ReferenceNumber> refNumList = new HashSet<ReferenceNumber>();
 				refNumList.add(rn1);
 				refNumList.add(rn2);
 				
@@ -320,7 +322,7 @@ public class TestDataManager {
 				al2.setExpectedTotalHeight(1.39);
 				al2.setDescription("AODK-DLKDJ WKIWKWI");
 				
-				ArrayList<ASNLine> asnLineList = new ArrayList<ASNLine>();
+				Set<ASNLine> asnLineList = new HashSet<ASNLine>();
 				asnLineList.add(al1);
 				asnLineList.add(al2);
 				

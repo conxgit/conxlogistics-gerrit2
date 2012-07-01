@@ -438,10 +438,10 @@ public class ConfirmAsnPage extends PageFlowPage {
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
 		if (state != null) {
-			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionOut");
-			Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionOut");
-			ASNPickup pickup = (ASNPickup) state.get("asnPickupOut");
-			ASNDropOff dropOff = (ASNDropOff) state.get("asnDropoffOut");
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionIn");
+			Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionIn");
+			ASNPickup pickup = (ASNPickup) state.get("asnPickupIn");
+			ASNDropOff dropOff = (ASNDropOff) state.get("asnDropoffIn");
 
 			if (refNumContainer != null && refNums != null) {
 				try {

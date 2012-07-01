@@ -25,16 +25,18 @@ import org.vaadin.mvp.presenter.PresenterFactory;
 import org.vaadin.mvp.uibinder.UiBinderException;
 
 import com.conx.logistics.common.utils.Validator;
+import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService;
 import com.conx.logistics.kernel.ui.common.data.container.EntityTypeContainerFactory;
 import com.conx.logistics.kernel.ui.common.ui.menu.app.AppMenuEntry;
 import com.conx.logistics.kernel.ui.service.IUIContributionManager;
 import com.conx.logistics.kernel.ui.service.contribution.IActionContribution;
 import com.conx.logistics.kernel.ui.service.contribution.IApplicationViewContribution;
+import com.conx.logistics.kernel.ui.service.contribution.IMainApplication;
 import com.conx.logistics.kernel.ui.service.contribution.IViewContribution;
 import com.vaadin.Application;
 
-public class MainMVPApplication extends Application {
+public class MainMVPApplication extends Application implements IMainApplication {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/** Per application (session) event bus manager */
@@ -53,7 +55,9 @@ public class MainMVPApplication extends Application {
 
 	private PlatformTransactionManager kernelSystemTransManager;
 
-	private EntityManagerFactory kernelSystemEntityManagerFactory;		
+	private EntityManagerFactory kernelSystemEntityManagerFactory;	
+	
+	private IPageFlowManager pageFlowEngine;
 	
 	/** UI contributions management*/
 	private final Map<String,IApplicationViewContribution> appContributions = Collections
@@ -293,6 +297,20 @@ public class MainMVPApplication extends Application {
 		if (!appServiceInititialized)
 			initAppService();		
 	}
+	
+	
+	public void unbindPageFlowEngine(
+			IPageFlowManager pageflowEngine, Map properties) {
+		logger.debug("unbindPageFlowEngine()");
+		this.pageFlowEngine  = null;
+	}
+	
+	public void bindPageFlowEngine(
+			IPageFlowManager pageflowEngine, Map properties) {
+		logger.debug("bindPageFlowEngine()");
+		this.pageFlowEngine  = pageflowEngine;
+		this.pageFlowEngine.setMainApplication(this);
+	}
 
 	public void unbindKernelSystemTransManager(
 			PlatformTransactionManager kernelSystemTransManager, Map properties) {
@@ -347,4 +365,9 @@ public class MainMVPApplication extends Application {
 	{
 		return actionContributions.get(code);
 	}
+	
+	public IApplicationViewContribution getApplicationContributionByCode(String code)
+	{
+		return appContributions.get(code);
+	}	
 }

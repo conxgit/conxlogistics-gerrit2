@@ -26,7 +26,7 @@ import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.ui.Component;
 
 public class PageFlowSessionImpl implements IPageFlowSession {
-	private static final int WAIT_DELAY = 1000;
+	private static final int WAIT_DELAY = 2000;
 
 	private Map<String, PageFlowPage> pages;
 	private List<PageFlowPage> orderedPageList;

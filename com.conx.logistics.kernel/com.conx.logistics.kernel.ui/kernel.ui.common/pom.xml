@@ -25,9 +25,14 @@
 			<groupId>com.conx.logistics</groupId>
 			<artifactId>com.conx.logistics.kernel.system.dao.services</artifactId>
 			<version>${project.version}</version>
-		</dependency>		
-		
-
+		</dependency>	
+		<dependency>	
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>
+				com.conx.logistics.kernel.pageflow.services
+			</artifactId>
+			<version>${project.version}</version>
+		</dependency>			
 		<!-- GWT/Vaadin -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>

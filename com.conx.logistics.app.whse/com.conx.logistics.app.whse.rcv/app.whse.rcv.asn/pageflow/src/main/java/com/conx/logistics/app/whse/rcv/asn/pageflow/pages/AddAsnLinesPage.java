@@ -1356,8 +1356,8 @@ public class AddAsnLinesPage extends PageFlowPage {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
-		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionOut");
-		Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionOut");
+		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionIn");
+		Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionIn");
 		if (refNums != null && refNumBeanContainer != null) {
 			try {
 				refNumBeanContainer.addAll(refNums);

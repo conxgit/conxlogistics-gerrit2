@@ -53,11 +53,10 @@
 	<osgi:reference id="conxlogisticsEMF"  interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL)">
 	</osgi:reference>
 
-	<osgi:reference id="tmJndiTemplate"  interface="org.springframework.jndi.JndiTemplate">
+	<osgi:reference id="userTransaction" interface="javax.transaction.UserTransaction">
 	</osgi:reference>	
 	
-	<osgi:reference id="asnDao"  interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService">
-	</osgi:reference>
+	<osgi:reference id="asnDao"  interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService"/>
 	<osgi:reference id="orgDao"  interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
-	
+	<osgi:reference id="referenceNumberDao"  interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService"/>
 </beans>

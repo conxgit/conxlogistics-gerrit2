@@ -49,7 +49,7 @@ public class ControlPanelPresenter extends BasePresenter<IControlPanelView, Cont
 	this.view.setNavigation(navView);
     
     //load fv
-	fv = new FeatureView(this.application);
+	fv = new FeatureView(this.application,this);
     this.view.setContent(this.fv);
   }
   

@@ -16,6 +16,9 @@
 	<osgi:reference id="globalTransactionManager" interface="javax.transaction.TransactionManager" filter="(module=KERNEL.TM)">
 	</osgi:reference>	
 	
+	<!-- import external interfaces -->
+	<osgi:reference id="entityMetadataDao" interface="com.conx.logistics.mdm.dao.services.IEntityMetadataDAOService"/>
+	<osgi:reference id="referenceNumberDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService"/>
 			
 	<!-- export internal interfaces -->
 	<osgi:service ref="asnDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService"/>

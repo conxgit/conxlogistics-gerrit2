@@ -3,6 +3,7 @@ package com.conx.logistics.kernel.pageflow.services;
 
 import java.util.Map;
 
+import com.conx.logistics.kernel.ui.service.contribution.IMainApplication;
 import com.conx.logistics.mdm.domain.task.TaskDefinition;
 
 public interface IPageFlowManager {
@@ -29,4 +30,9 @@ public interface IPageFlowManager {
 	 * Given a TaskDefinition and UserId, pageFlowSessionId
 	 */
 	public IPageFlowSession resumePageFlowSession(String userid, Long pageFlowSessionId);
+	
+	/**
+	 * Main App
+	 */
+	public void setMainApplication(IMainApplication mainApp);
 }

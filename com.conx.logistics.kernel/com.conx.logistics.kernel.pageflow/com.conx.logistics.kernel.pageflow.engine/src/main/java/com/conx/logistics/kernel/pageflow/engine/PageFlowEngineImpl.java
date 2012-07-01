@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.vaadin.mvp.eventbus.EventBus;
+import org.vaadin.mvp.presenter.IPresenter;
 
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
@@ -24,6 +26,7 @@ import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
+import com.conx.logistics.kernel.ui.service.contribution.IMainApplication;
 import com.conx.logistics.mdm.domain.application.Feature;
 import com.conx.logistics.mdm.domain.task.TaskDefinition;
 
@@ -87,7 +90,13 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 
 	/** EntityManagerFactories */
 	private final Map<String, Map<String,PageFlowPage>> pageCache = Collections
-			.synchronizedMap(new HashMap<String, Map<String,PageFlowPage>>());	
+			.synchronizedMap(new HashMap<String, Map<String,PageFlowPage>>());
+	private IMainApplication mainApp;	
+	
+
+	public IMainApplication getMainApp() {
+		return mainApp;
+	}
 
 	private Map<String,PageFlowPage> getPages(String processId) {
 		return pageCache.get(processId);
@@ -164,6 +173,8 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		String processId = (String)properties.get("processId");
 		String userId = (String)properties.get("userId");
 		Feature   onCompletionCompletionFeature = (Feature)properties.get("onCompletionFeature");
+		IPresenter<?, ? extends EventBus>   onCompletionCompletionViewPresenter = (IPresenter<?, ? extends EventBus>)properties.get("onCompletionViewPresenter");
+		
 
 		Context ctx = jndiTemplate.getContext();
 		UserTransaction ut = this.userTransaction;//(UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
@@ -220,7 +231,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		}			
 		
 		// 4. Create wizard
-		TaskWizard wizard = new TaskWizard(session, this);
+		TaskWizard wizard = new TaskWizard(session, this,onCompletionCompletionFeature,onCompletionCompletionViewPresenter);
 		wizard.setSizeFull();
 		if (session.getOrderedPageList() != null) {
 			for (PageFlowPage page : session.getOrderedPageList()) {
@@ -263,5 +274,10 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		//UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
 		((TaskWizard)tw).getSession().executeNext(this.userTransaction,data);
 		return tw;
+	}
+
+	@Override
+	public void setMainApplication(IMainApplication mainApp) {
+		this.mainApp = mainApp;
 	}
 }

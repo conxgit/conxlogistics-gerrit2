@@ -51,7 +51,7 @@ public class WarehousePresenter extends BasePresenter<IWarehouseView, WarehouseE
 	this.view.setNavigation(navView);
     
     //load fv
-	fv = new FeatureView(this.application);
+	fv = new FeatureView(this.application,this);
     this.view.setContent(this.fv);
   }
   

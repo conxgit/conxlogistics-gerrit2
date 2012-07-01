@@ -1,6 +1,7 @@
 package com.conx.logistics.app.whse.rcv.asn.dao.services;
 
 import java.util.List;
+import java.util.Set;
 
 import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
@@ -13,9 +14,9 @@ public interface IASNDAOService {
 
 	public ASN add(ASN record);
 	
-	public ASN addLines(Long asnId, List<ASNLine> line);	
+	public ASN addLines(Long asnId, Set<ASNLine> lines);	
 	
-	public ASN addRefNums(Long asnId, List<ReferenceNumber> numbers);	
+	public ASN addRefNums(Long asnId, Set<ReferenceNumber> numbers);	
 	
 	public ASN addLocalTrans(Long asnId, ASNPickup pickUp, ASNDropOff dropOff);
 
