@@ -161,5 +161,8 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 		}
 	}
 	
-	
+	public boolean currentStepIsLastStep()
+	{
+		return isLastStep(currentStep);
+	}
 }

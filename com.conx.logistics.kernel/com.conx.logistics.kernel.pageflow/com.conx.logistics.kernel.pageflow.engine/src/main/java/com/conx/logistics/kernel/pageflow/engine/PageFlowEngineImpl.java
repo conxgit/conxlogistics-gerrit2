@@ -272,7 +272,14 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	public ITaskWizard executeTaskWizard(ITaskWizard tw, Object data) throws Exception {
 		//Context ctx = jndiTemplate.getContext();
 		//UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
-		((TaskWizard)tw).getSession().executeNext(this.userTransaction,data);
+		if (((TaskWizard)tw).currentStepIsLastStep())
+		{
+			((TaskWizard)tw).getSession().completeProcess(this.userTransaction,data);
+		}
+		else
+		{
+			((TaskWizard)tw).getSession().executeNext(this.userTransaction,data);
+		}
 		return tw;
 	}
 

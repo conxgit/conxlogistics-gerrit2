@@ -213,10 +213,6 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			try {
 				ut.begin();
 				bpmService.nominate(currentTask.getId(), userId);
-				processVars = bpmService
-						.getProcessInstanceVariables(processInstance.getId());
-				Object res = this.bpmService.getTaskContentObject(currentTask);
-				processVars.put("Content", res);
 				ut.commit();
 			} catch (Exception e) {
 				ut.rollback();
@@ -227,6 +223,11 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			try {
 				ut.begin();
 				bpmService.startTask(currentTask.getId(), userId);
+				Thread.sleep(500);
+				processVars = bpmService
+						.getProcessInstanceVariables(processInstance.getId());
+				Object res = this.bpmService.getTaskContentObject(currentTask);
+				processVars.put("Content", res);				
 				ut.commit();
 			} catch (Exception e) {
 				ut.rollback();
@@ -284,6 +285,53 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 
 	public void setOnCompletionFeature(Feature onCompletionFeature) {
 		this.onCompletionFeature = onCompletionFeature;
+	}
+
+	public void completeProcess(UserTransaction ut, Object param) throws Exception {
+		// 1. Complete the current task first
+		try {
+			ut.begin();
+			if (param instanceof Map) {
+				bpmService.completeTask(currentTask.getId(), (Map) param,
+						userId);
+			} else {
+				ContentData contentData = null;
+				if (param != null) {
+					ByteArrayOutputStream bos = new ByteArrayOutputStream();
+					ObjectOutputStream out;
+					try {
+						out = new ObjectOutputStream(bos);
+						out.writeObject(param);
+						out.close();
+						contentData = new ContentData();
+						contentData.setContent(bos.toByteArray());
+						contentData.setAccessType(AccessType.Inline);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				bpmService.completeTask(currentTask.getId(), contentData,
+						userId);
+			}
+
+			ut.commit();
+		} catch (Exception e) {
+			ut.rollback();
+			throw e;
+		}
+		
+		try
+		{
+			ut.begin();
+			Thread.sleep(WAIT_DELAY);
+			List<Task> tasks = bpmService.getCreatedTasksByProcessId(Long
+						.parseLong(processInstance.getId()));
+			ut.commit();
+		} catch (Exception e) {
+			ut.rollback();
+			throw e;
+		}
+		
 	}
 
 }

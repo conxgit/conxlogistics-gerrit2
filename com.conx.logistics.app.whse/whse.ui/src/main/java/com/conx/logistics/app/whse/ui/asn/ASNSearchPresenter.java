@@ -2,19 +2,29 @@ package com.conx.logistics.app.whse.ui.asn;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.presenter.BasePresenter;
 import org.vaadin.mvp.presenter.IPresenter;
+import org.vaadin.mvp.presenter.IPresenterFactory;
 import org.vaadin.mvp.presenter.ViewFactoryException;
 import org.vaadin.mvp.presenter.annotation.Presenter;
 
 import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
+import com.conx.logistics.app.whse.ui.WarehouseEventBus;
+import com.conx.logistics.app.whse.ui.WarehousePresenter;
+import com.conx.logistics.app.whse.ui.navigation.WarehouseNavigationEventBus;
+import com.conx.logistics.app.whse.ui.navigation.WarehouseNavigationPresenter;
 import com.conx.logistics.app.whse.ui.view.asn.ASNSearchView;
 import com.conx.logistics.app.whse.ui.view.asn.IASNSearchView;
+import com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService;
 import com.conx.logistics.kernel.ui.common.mvp.MainMVPApplication;
 import com.conx.logistics.kernel.ui.common.mvp.view.feature.FeatureView;
+import com.conx.logistics.mdm.domain.application.Application;
+import com.conx.logistics.mdm.domain.application.Feature;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 import com.vaadin.addon.jpacontainer.EntityItem;
@@ -106,6 +116,7 @@ public class ASNSearchPresenter extends
 	private VerticalLayout refNumLayout;
 	private VerticalLayout asnLineLayout;
 	private BeanContainer<String, ReferenceNumber> asnRefNumContainer;
+	private EntityManagerFactory kernelSystemEntityManagerFactory;
 	
 	public void initAsnLines() {		
 		asnLineTable = new Table(); 
@@ -526,6 +537,28 @@ public class ASNSearchPresenter extends
 	 * 
 	 */
 	public void onCreateASN() throws ViewFactoryException {
+		this.kernelSystemEntityManagerFactory = application.getKernelSystemEntityManagerFactory();
+		this.kernelSystemEntityManager = this.kernelSystemEntityManagerFactory.createEntityManager();
+		
+		//Find ASN Search feature
+		Feature searchFeature = null;
+		TypedQuery<Feature> q = this.kernelSystemEntityManager.createQuery("select o from Feature o WHERE o.code = :code",Feature.class);
+		q.setParameter("code", IApplicationDAOService.WAREHOUSE_APP_RECEIVING_ASN_SEARCH_CODE);
+		try 
+		{
+			searchFeature = q.getSingleResult();
+		} 
+		catch (NoResultException e) 
+		{
+			e.printStackTrace();
+		}	
+		
+	    IPresenterFactory pf = application.getPresenterFactory();
+	    WarehousePresenter whsePresenter = (WarehousePresenter) pf.createPresenter(WarehousePresenter.class);		
+		
+	    WarehouseEventBus whseeb = (WarehouseEventBus)application.createEventBuss(WarehouseEventBus.class,whsePresenter);
+	    whseeb.openFeatureView(searchFeature);
+		/*
 		ASN td = new ASN();
 		td.setName("New ASN");
 		// BeanItem<ASN> beanItem = new BeanItem<ASN>(td);
@@ -533,6 +566,7 @@ public class ASNSearchPresenter extends
 				this.asns.createEntityItem(td));
 		this.view.getASNForm().setEnabled(true);
 		resetButtons(true, false, true);
+		*/
 	}
 
 	public void onRemoveASN() {
