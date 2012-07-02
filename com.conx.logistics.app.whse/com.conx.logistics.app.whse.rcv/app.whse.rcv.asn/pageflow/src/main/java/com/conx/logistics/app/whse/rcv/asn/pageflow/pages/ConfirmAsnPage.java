@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.transaction.PlatformTransactionManager;
+
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
@@ -415,7 +417,7 @@ public class ConfirmAsnPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
 		initContainers();
 		initEntityTabSheet();
 		initTableToolStrip();

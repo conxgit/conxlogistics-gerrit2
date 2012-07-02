@@ -18,6 +18,9 @@
 	<osgi:list id="actionContributions" cardinality="0..N" interface="com.conx.logistics.kernel.ui.service.contribution.IActionContribution" >
 		<osgi:listener ref="uiContributionManager" bind-method="bindActionContribution" unbind-method="unbindActionContribution"/>
 	</osgi:list>
+	<osgi:list id="taskActionContributions" cardinality="0..N" interface="com.conx.logistics.kernel.ui.service.contribution.ITaskActionContribution" >
+		<osgi:listener ref="uiContributionManager" bind-method="bindActionContribution" unbind-method="unbindActionContribution"/>
+	</osgi:list>
 	<osgi:reference id="applicationDAOService" cardinality="0..1" interface="com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService">
 		<osgi:listener ref="uiContributionManager" bind-method="bindApplicationDAOService" unbind-method="unbindApplicationDAOService"/>
 	</osgi:reference>			

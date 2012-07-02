@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 
 import org.vaadin.teemu.wizards.WizardStep;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
@@ -17,7 +18,7 @@ public abstract class PageFlowPage implements WizardStep {
 	private VerticalLayout canvas;
 	
 	public abstract String getTaskName();
-	public abstract void initialize(EntityManagerFactory emf);
+	public abstract void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm);
 	public abstract void setOnStartState(Map<String, Object> params);
 	public abstract Map<String, Object> getOnCompleteState();
 	

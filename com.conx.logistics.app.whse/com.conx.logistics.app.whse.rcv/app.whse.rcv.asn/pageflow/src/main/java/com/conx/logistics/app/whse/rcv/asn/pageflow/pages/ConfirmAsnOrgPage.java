@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.transaction.PlatformTransactionManager;
+
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.vaadin.addon.jpacontainer.JPAContainer;
@@ -23,7 +25,9 @@ import com.vaadin.ui.VerticalLayout;
 public class ConfirmAsnOrgPage extends PageFlowPage {
 	private static final String VIEW_HEIGHT = "450px";
 	
+	@SuppressWarnings("unused")
 	private String userId;
+	@SuppressWarnings("unused")
 	private String orgId;
 	
 	private TabSheet entityTabSheet;
@@ -148,7 +152,7 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
 		this.emf = emf;
 		
 		initContainers();

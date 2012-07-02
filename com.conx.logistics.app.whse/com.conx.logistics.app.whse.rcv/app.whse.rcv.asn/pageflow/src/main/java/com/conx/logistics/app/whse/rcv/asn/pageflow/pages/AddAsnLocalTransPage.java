@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.transaction.PlatformTransactionManager;
+
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
@@ -1087,7 +1089,7 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
 		this.emf = emf;
 
 		initContainers();

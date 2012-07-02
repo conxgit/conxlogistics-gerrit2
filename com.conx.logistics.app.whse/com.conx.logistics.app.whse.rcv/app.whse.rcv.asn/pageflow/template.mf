@@ -16,5 +16,7 @@ Import-Package: com.conx.logistics.kernel.pageflow.services;version="1.0.0",
   com.vaadin.addon.jpacontainer;version="2.0.0",
   javax.persistence;version="0",
   com.conx.logistics.mdm.domain.product;version="1.0.0",
-  com.conx.logistics.mdm.domain.referencenumber;version="1.0.0"
+  com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",
+  org.springframework.transaction;version="[3.0,3.1)",
+  org.springframework.transaction.support;version="[3.0,3.1)"
 

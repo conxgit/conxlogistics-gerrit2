@@ -7,9 +7,12 @@ import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.transaction.PlatformTransactionManager;
+
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
+import com.vaadin.addon.jpacontainer.EntityItem;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -54,8 +57,9 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	private HorizontalLayout toolstripLeftButtonPanel;
 	private Button saveButton;
 	private Button resetButton;
+	private Set<ReferenceNumberType> newTypes;
 
-	private JPAContainer<ReferenceNumberType> refNumTypeContainer;
+	private BeanContainer<String, ReferenceNumberType> refNumTypeContainer;
 
 	private BeanContainer<String, ReferenceNumber> refNumBeanContainer;
 	private EntityManagerFactory emf;
@@ -154,7 +158,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 		if (validate()) {
 			ReferenceNumber refNum = new ReferenceNumber();
 			refNum.setValue((String) referenceIdField.getValue());
-			refNum.setType(refNumTypeContainer.getItem(referenceIdType.getValue()).getEntity());
+			refNum.setType(refNumTypeContainer.getItem(referenceIdType.getValue()).getBean());
 			refNumBeanContainer.addBean(refNum);
 			referenceIdField.setValue("");
 			referenceIdType.setValue(null);
@@ -167,7 +171,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			BeanItem<ReferenceNumber> item = refNumBeanContainer.getItem(referenceIdTable.getValue());
 			ReferenceNumber refNum = item.getBean();
 			String refNumValue = (String) referenceIdEditorField.getValue();
-			ReferenceNumberType refNumType = refNumTypeContainer.getItem(referenceIdEditorType.getValue()).getEntity();
+			ReferenceNumberType refNumType = refNumTypeContainer.getItem(referenceIdEditorType.getValue()).getBean();
 
 			refNum.setValue(refNumValue);
 			item.getItemProperty("value").setValue(refNumValue);
@@ -178,13 +182,34 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			setPageMode(LIST_PAGE_MODE);
 		}
 	}
+	
+	private void initFields() {
+		newTypes = new HashSet<ReferenceNumberType>();
+	}
 
 	private void initContainers() {
-		refNumTypeContainer = JPAContainerFactory.make(ReferenceNumberType.class, this.emf.createEntityManager());
+		refNumTypeContainer = new BeanContainer<String, ReferenceNumberType>(ReferenceNumberType.class);
 		refNumBeanContainer = new BeanContainer<String, ReferenceNumber>(ReferenceNumber.class);
 
 		refNumBeanContainer.setBeanIdProperty("value");
 		refNumBeanContainer.addNestedContainerProperty("type.name");
+		refNumTypeContainer.setBeanIdProperty("name");
+		
+		try {
+			JPAContainer<ReferenceNumberType> temporaryRefNumTypeJpaContainer = JPAContainerFactory
+					.make(ReferenceNumberType.class, emf.createEntityManager());
+			for (Object id : temporaryRefNumTypeJpaContainer.getItemIds()) {
+				EntityItem<ReferenceNumberType> item = temporaryRefNumTypeJpaContainer
+						.getItem(id);
+				if (item != null) {
+					if (item.getEntity() != null) {
+						refNumTypeContainer.addBean(item.getEntity());
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void initRefIdToolStrip() {
@@ -204,7 +229,17 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			private static final long serialVersionUID = 328740392837363674L;
 
 			public void buttonClick(ClickEvent event) {
-				create();
+				if (referenceIdType.isVisible()) {
+					create();
+				} else {
+					addReferenceIdButton.setCaption("Add Reference Id");
+					referenceIdType.setVisible(true);
+					referenceIdField.setValue("");
+					referenceIdField.setInputPrompt("Reference Id");
+					addReferenceIdType.setCaption("New Reference Id Type");
+					addStrip.setExpandRatio(referenceIdField, 0.5f);
+					addStrip.setExpandRatio(referenceIdType, 0.5f);
+				}
 			}
 		});
 
@@ -212,6 +247,30 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 		addReferenceIdType.addListener(new ClickListener() {
 			private static final long serialVersionUID = 328750392837363674L;
 			public void buttonClick(ClickEvent event) {
+				if (referenceIdType.isVisible()) {
+					addReferenceIdButton.setCaption("Cancel");
+					referenceIdType.setVisible(false);
+					referenceIdField.setValue("");
+					referenceIdField.setInputPrompt("Enter a New Reference Number Type");
+					addReferenceIdType.setCaption("Save Reference Number Type");
+					addStrip.setExpandRatio(referenceIdField, 1.0f);
+					addStrip.setExpandRatio(referenceIdType, 0.0f);
+				} else {
+					ReferenceNumberType type = new ReferenceNumberType();
+					type.setName((String) referenceIdField.getValue());
+					type.setCode((String) referenceIdField.getValue());
+					
+					refNumTypeContainer.addBean(type);
+					newTypes.add(type);
+					
+					addReferenceIdButton.setCaption("Add Reference Id");
+					referenceIdType.setVisible(true);
+					referenceIdField.setValue("");
+					referenceIdField.setInputPrompt("Reference Id");
+					addReferenceIdType.setCaption("New Reference Id Type");
+					addStrip.setExpandRatio(referenceIdField, 0.5f);
+					addStrip.setExpandRatio(referenceIdType, 0.5f);
+				}
 			}
 		});
 
@@ -386,9 +445,10 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
 		this.emf = emf;
 
+		initFields();
 		initContainers();
 		initListView();
 		initEditView();
@@ -429,6 +489,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 		}
 
 		outParams.put("refNumsCollectionOut", refNums);
+		outParams.put("refNumTypesCollectionOut", newTypes);
 		return outParams;
 	}
 
