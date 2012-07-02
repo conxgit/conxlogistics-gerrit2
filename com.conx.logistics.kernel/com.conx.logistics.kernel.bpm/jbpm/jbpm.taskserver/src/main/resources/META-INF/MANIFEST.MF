@@ -1,15 +1,10 @@
 Manifest-Version: 1.0
 Private-Package: org.jbpm.task.service,org.jbpm.task.service.persisten
  ce 
-Build-Jdk: 1.6.0_32
-Built-By: Mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM Core
 Bundle-ManifestVersion: 2
-Created-By: Maven Integration for Eclipse
-Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
- r
 Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.jndi;v
  ersion="[2.1.0,2.2.0)",bitronix.tm.journal;version="[2.1.0,2.2.0)",bi
  tronix.tm.recovery;version="[2.1.0,2.2.0)",bitronix.tm.resource;versi
@@ -54,4 +49,6 @@ Import-Package: bitronix.tm;version="[2.1.0,2.2.0)",bitronix.tm.jndi;v
  , 3.1)",org.springframework.orm.jpa.vendor;version="[3.0, 3.1)",org.s
  pringframework.transaction;version="[3.0,3.1)",org.springframework.tr
  ansaction.support;version="[3.0,3.1)"
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
+ r
 

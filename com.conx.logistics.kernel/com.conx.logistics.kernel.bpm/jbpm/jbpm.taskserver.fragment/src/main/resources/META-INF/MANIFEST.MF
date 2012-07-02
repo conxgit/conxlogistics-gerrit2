@@ -9,5 +9,6 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
  r.fragment
-Import-Package: javax.naming;version="0",javax.transaction;version="0"
+Import-Package: javax.transaction;version="0",org.springframework.jndi
+ ;version="[3.0,3.1)"
 

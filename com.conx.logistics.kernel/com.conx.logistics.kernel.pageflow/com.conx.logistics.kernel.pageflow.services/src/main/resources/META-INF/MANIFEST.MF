@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.pageflow.services;version="1
  .0.0";uses:="com.conx.logistics.kernel.bpm.services,com.conx.logistic
- s.mdm.domain.task,com.vaadin.ui,javax.persistence,org.vaadin.teemu.wi
- zards"
+ s.kernel.ui.service.contribution,com.conx.logistics.mdm.domain.applic
+ ation,com.conx.logistics.mdm.domain.task,com.vaadin.ui,javax.persiste
+ nce,org.vaadin.teemu.wizards"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -12,7 +13,9 @@ Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.pageflow.services
 Import-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
- ,com.conx.logistics.mdm.domain.task;version="1.0.0",com.vaadin.ui;ver
- sion="[6.7.0,7.0.0)",javax.persistence;version="0",org.vaadin.teemu.w
- izards;version="0.4.4"
+ ,com.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.
+ 0.0)",com.conx.logistics.mdm.domain.application;version="1.0.0",com.c
+ onx.logistics.mdm.domain.task;version="1.0.0",com.vaadin.ui;version="
+ [6.7.0,7.0.0)",javax.persistence;version="0",org.vaadin.teemu.wizards
+ ;version="0.4.4"
 
