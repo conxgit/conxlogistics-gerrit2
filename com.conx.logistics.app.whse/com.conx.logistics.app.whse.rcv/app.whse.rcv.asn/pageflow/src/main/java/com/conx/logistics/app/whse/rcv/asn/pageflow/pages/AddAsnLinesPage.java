@@ -138,6 +138,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		case LIST_PAGE_MODE:
 			newButton.setEnabled(true);
 			saveButton.setEnabled(false);
+			cancelButton.setEnabled(false);
 			if (asnLineTable.getValue() != null) {
 				deleteButton.setEnabled(true);
 			}
@@ -151,6 +152,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			saveButton.setEnabled(true);
 			deleteButton.setEnabled(false);
 			resetButton.setEnabled(true);
+			cancelButton.setEnabled(false);
 			
 			reset();
 			listView.setVisible(false);
@@ -161,6 +163,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			saveButton.setEnabled(true);
 			deleteButton.setEnabled(false);
 			resetButton.setEnabled(true);
+			cancelButton.setEnabled(false);
 			
 			reset();
 			listView.setVisible(false);
@@ -711,6 +714,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		
 		productDetail = new TabSheet();
 		productDetail.setSizeFull();
+		productDetail.setEnabled(false);
 		productDetail.addTab(productDetailsForm, "Product Details");
 		productDetail.addTab(productWeightDimensionQuantityLayout, "Weight, Dimensions & Quantity");
 		
@@ -728,6 +732,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			private static final long serialVersionUID = 463328026010510338L;
 
 			public void valueChange(ValueChangeEvent event) {
+				productDetail.setEnabled(true);
 				currentProduct = productContainer.getItem(productMaster.getValue()).getEntity();
 				bindProductButton.setEnabled(true);
 				productName.setValue(currentProduct.getName());
@@ -1284,6 +1289,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			private static final long serialVersionUID = 500785840900978L;
 
 			public void buttonClick(ClickEvent event) {
+				setPageMode(LIST_PAGE_MODE);
 			}
 		});
 		
