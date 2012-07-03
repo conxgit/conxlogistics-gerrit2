@@ -68,11 +68,12 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			// String asnId = (String)res;
 			// Set<String> varNames = vars.keySet();
 			bpmService.nominate(currentTask.getId(), userId);
+			bpmService.getTaskById(currentTask.getId());
 			// bpmService.az(currentTask.getId(), userId);
 			processVars = bpmService
 					.getProcessInstanceVariables(processInstance.getId());
-			Object res = this.bpmService.getTaskContentObject(currentTask);
-			processVars.put("Content", res);
+/*			Object res = this.bpmService.getTaskContentObject(currentTask);
+			processVars.put("Content", res);*/
 			// processVars.put(key, value)
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,6 +172,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			if (param instanceof Map) {
 				bpmService.completeTask(currentTask.getId(), (Map) param,
 						userId);
+				bpmService.getTaskById(currentTask.getId());
 			} else {
 				ContentData contentData = null;
 				if (param != null) {
@@ -223,11 +225,11 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			try {
 				ut.begin();
 				bpmService.startTask(currentTask.getId(), userId);
-				Thread.sleep(500);
+				bpmService.getTaskById(currentTask.getId());
 				processVars = bpmService
 						.getProcessInstanceVariables(processInstance.getId());
-				Object res = this.bpmService.getTaskContentObject(currentTask);
-				processVars.put("Content", res);				
+/*				Object res = this.bpmService.getTaskContentObject(currentTask);
+				processVars.put("Content", res);*/				
 				ut.commit();
 			} catch (Exception e) {
 				ut.rollback();

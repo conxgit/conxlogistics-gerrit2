@@ -42,6 +42,7 @@ import org.jbpm.task.TaskService;
 import org.jbpm.task.User;
 import org.jbpm.task.query.TaskSummary;
 import org.jbpm.task.service.ContentData;
+import org.jbpm.task.service.SyncTaskServiceWrapper;
 import org.jbpm.task.service.local.LocalTaskService;
 
 import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
@@ -50,7 +51,7 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	
 	private static int clientCounter = 0;
     
-	private LocalTaskService service;
+	private TaskService service;
 	private BPMServerImpl bpmService;
 	
 	public TaskManagement (BPMServerImpl bpmService) {
@@ -59,7 +60,12 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	}
 	
 	public void connect() {
-    	service = new LocalTaskService(bpmService.getLocalHumanTaskServer().getTaskService());
+		if (service == null)
+		{
+			service = new LocalTaskService(bpmService.getLocalHumanTaskServer().getTaskService());
+			//service = bpmService.getHumanTaskManager().getService();
+		}
+		
 	    //Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
         //service = TaskClientFactory.newInstance(jbpmConsoleProperties, "org.jbpm.integration.console.TaskManagement"+clientCounter);
         clientCounter++;

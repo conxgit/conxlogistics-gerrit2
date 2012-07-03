@@ -56,7 +56,6 @@ public class TaskClientFactory {
             TaskService service = null;
             String strategy = properties.getProperty("jbpm.console.task.service.strategy", DEFAULT_TASK_SERVICE_STRATEGY);
             if ("Local".equalsIgnoreCase(strategy)) {
-
                 //org.jbpm.task.service.TaskService taskService = HumanTaskService.getService();
                 //service = new LocalTaskService(taskService);
 

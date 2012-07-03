@@ -16,14 +16,11 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.ui.WarehouseEventBus;
 import com.conx.logistics.app.whse.ui.WarehousePresenter;
-import com.conx.logistics.app.whse.ui.navigation.WarehouseNavigationEventBus;
-import com.conx.logistics.app.whse.ui.navigation.WarehouseNavigationPresenter;
 import com.conx.logistics.app.whse.ui.view.asn.ASNSearchView;
 import com.conx.logistics.app.whse.ui.view.asn.IASNSearchView;
 import com.conx.logistics.kernel.system.dao.services.application.IApplicationDAOService;
 import com.conx.logistics.kernel.ui.common.mvp.MainMVPApplication;
 import com.conx.logistics.kernel.ui.common.mvp.view.feature.FeatureView;
-import com.conx.logistics.mdm.domain.application.Application;
 import com.conx.logistics.mdm.domain.application.Feature;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
@@ -34,11 +31,11 @@ import com.vaadin.addon.jpacontainer.JPAContainerItem;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanContainer;
-import com.vaadin.event.ItemClickEvent;
-import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.terminal.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -543,7 +540,7 @@ public class ASNSearchPresenter extends
 		//Find ASN Search feature
 		Feature searchFeature = null;
 		TypedQuery<Feature> q = this.kernelSystemEntityManager.createQuery("select o from Feature o WHERE o.code = :code",Feature.class);
-		q.setParameter("code", IApplicationDAOService.WAREHOUSE_APP_RECEIVING_ASN_SEARCH_CODE);
+		q.setParameter("code", "whse.rcv.asn.CreateNewASNByOrgV1.0");
 		try 
 		{
 			searchFeature = q.getSingleResult();
@@ -553,10 +550,10 @@ public class ASNSearchPresenter extends
 			e.printStackTrace();
 		}	
 		
-	    IPresenterFactory pf = application.getPresenterFactory();
-	    WarehousePresenter whsePresenter = (WarehousePresenter) pf.createPresenter(WarehousePresenter.class);		
+	    //IPresenterFactory pf = application.getPresenterFactory();
+	    //WarehousePresenter whsePresenter = (WarehousePresenter) pf.createPresenter(WarehousePresenter.class);		
 		
-	    WarehouseEventBus whseeb = (WarehouseEventBus)application.createEventBuss(WarehouseEventBus.class,whsePresenter);
+	    WarehouseEventBus whseeb = (WarehouseEventBus)application.getEeventBusManager().getEventBus(WarehouseEventBus.class);
 	    whseeb.openFeatureView(searchFeature);
 		/*
 		ASN td = new ASN();

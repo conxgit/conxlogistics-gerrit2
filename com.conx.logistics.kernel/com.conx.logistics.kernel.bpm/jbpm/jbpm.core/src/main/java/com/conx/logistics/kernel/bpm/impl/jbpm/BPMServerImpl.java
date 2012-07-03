@@ -579,20 +579,21 @@ public class BPMServerImpl implements IBPMService {
 	}
 	
 	private void registerWorkItemHandler( StatefulKnowledgeSession ksession, Properties consoleProperties ) { 
-//        if ("Local".equalsIgnoreCase(consoleProperties.getProperty("jbpm.conxrepo.task.service.strategy", TaskClientFactory.DEFAULT_TASK_SERVICE_STRATEGY))) {
-//            TaskService taskService = humanTaskManager.getService();
-//            TaskServiceSession s = taskService.createSession();
-//            taskService.createTaskAdmin().getCompletedTasks()
-//            handler = new SyncWSHumanTaskHandler(new LocalTaskService(taskService), ksession);
-//            ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
-//        } else  {
+        //if ("Local".equalsIgnoreCase(consoleProperties.getProperty("jbpm.conxrepo.task.service.strategy", TaskClientFactory.DEFAULT_TASK_SERVICE_STRATEGY))) {
+            //TaskService taskService = humanTaskManager.getLocalService();
+            //handler = new SyncWSHumanTaskHandler(TaskClientFactory.newInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler"), ksession);
+            //handler.setLocal(true);
+            //ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
+            //handler.connect();
+            //TaskClientFactory.newInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler")
+        //} else  {
             CommandBasedWSHumanTaskHandler handler = new CommandBasedWSHumanTaskHandler(ksession);
             TaskClient client = TaskClientFactory.newAsyncInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler");
             
             handler.configureClient(client);
             ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
             handler.connect();
-//        }
+       // }*/
         
     }
 	
@@ -938,19 +939,17 @@ public class BPMServerImpl implements IBPMService {
 	@Override
     public Object getTaskContentObject(Task task) throws IOException, ClassNotFoundException{
         Content content = taskManager.getTaskContent(task.getTaskData().getDocumentContentId());
-        /*
         Object readObject = 
                 ContentMarshallerHelper.unmarshall(task.getTaskData().getDocumentType(), 
                                                             content.getContent(), 
                                                             ((SyncWSHumanTaskHandler)handler).getMarshallerContext(),  
                                                             ksession.getEnvironment());
-        //ois.readObject();
-         * *
-         */
-        ByteArrayInputStream bais = new ByteArrayInputStream(content.getContent());
+     /*
+        ois.readObject();
+       ByteArrayInputStream bais = new ByteArrayInputStream(content.getContent());
         
         ObjectInputStream ois = new ObjectInputStream(bais);
-        Object readObject = ois.readObject();         
+        Object readObject = ois.readObject();  */       
         logger.info(" >>> Object = "+readObject);
         return readObject;
     }		

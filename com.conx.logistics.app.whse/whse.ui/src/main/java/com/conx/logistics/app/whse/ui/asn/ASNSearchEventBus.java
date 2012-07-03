@@ -29,4 +29,7 @@ public interface ASNSearchEventBus extends LaunchableViewEventBus {
 	
 	@Event(handlers = { ASNSearchPresenter.class })
 	public void editTaskDef();	
+	
+	@Event(handlers = { ASNSearchPresenter.class })
+	public void createASN();		
 }

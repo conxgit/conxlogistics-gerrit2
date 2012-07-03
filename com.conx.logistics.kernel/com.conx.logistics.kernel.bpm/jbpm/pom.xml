@@ -31,5 +31,6 @@
   		<module>jbpm.bpmserver.tests.standalone</module>
   		<!-- <module>jbpm.core.mock</module> -->
 
+  		<module>jbpm.taskserver.mina.fragment</module>
 	</modules>
 </project>

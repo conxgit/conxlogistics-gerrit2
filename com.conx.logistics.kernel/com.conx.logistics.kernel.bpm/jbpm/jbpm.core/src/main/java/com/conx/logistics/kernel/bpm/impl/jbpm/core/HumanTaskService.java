@@ -65,7 +65,7 @@ public class HumanTaskService {
 
 	public TaskService getService() {
 		if (INSTANCE == null) {
-			INSTANCE = TaskClientFactory.newInstance(this.bpmService.getJbpmProperties(), null);
+			INSTANCE = TaskClientFactory.newInstance(this.bpmService.getJbpmProperties(), "MinaConnector");
 	        /*
 			//INSTANCE = this.bpmService.getLocalHumanTaskServer().createHumanTaskService();
 	        EntityManagerFactory emf = bpmService.getJbpmTaskEMF();
