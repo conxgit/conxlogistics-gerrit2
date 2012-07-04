@@ -40,10 +40,17 @@ import org.jbpm.task.Status;
 import org.jbpm.task.Task;
 import org.jbpm.task.TaskService;
 import org.jbpm.task.User;
+import org.jbpm.task.event.TaskFailedEvent;
 import org.jbpm.task.query.TaskSummary;
+import org.jbpm.task.service.Command;
+import org.jbpm.task.service.CommandName;
 import org.jbpm.task.service.ContentData;
 import org.jbpm.task.service.SyncTaskServiceWrapper;
+import org.jbpm.task.service.TaskClient;
+import org.jbpm.task.service.TaskClientHandler.QueryGenericResponseHandler;
 import org.jbpm.task.service.local.LocalTaskService;
+import org.jbpm.task.service.responsehandlers.BlockingQueryGenericResponseHandler;
+import org.jbpm.task.service.responsehandlers.BlockingTaskOperationResponseHandler;
 
 import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
 
@@ -62,7 +69,7 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	public void connect() {
 		if (service == null)
 		{
-			service = new LocalTaskService(bpmService.getLocalHumanTaskServer().getTaskService());
+			service = bpmService.getLocalHumanTaskServer().getLocalTaskService();
 			//service = bpmService.getHumanTaskManager().getService();
 		}
 		
@@ -71,7 +78,7 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
         clientCounter++;
 	}
 	
-	public Content getTaskContent(long taskId) {
+	public Content getTaskContent(long taskId) {      
 		connect();
 		Content content = service.getContent(taskId);
 		
@@ -81,9 +88,16 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	public TaskRef getTaskById(long taskId) {
 		connect();
 		Task task = service.getTask(taskId);
-		
+
         return Transform.task(task);
 	}
+	
+	public Task getTaskObjectById(long taskId) {
+		connect();
+		Task task = service.getTask(taskId);
+
+        return task;
+	}	
 
 	public void assignTask(long taskId, String idRef, String userId) {
 		connect(); 
@@ -109,15 +123,41 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 		service.claimNextAvailable(userId, "");
 	}
 	
+    public List<Task> getCreatedTasksByProcessId(Long processInstanceId) {
+    	String query = "select t from org.jbpm.task.Task t  where t.archived = 0 and t.taskData.status = '"+org.jbpm.task.Status.Ready+"' and t.taskData.processInstanceId = "+processInstanceId+" and t.taskData.expirationTime is null";
+    	List<Object> args = new ArrayList<Object>( 3 );
+
+    	Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
+    	TaskClient tc = TaskClientFactory.newAsyncInstance(jbpmConsoleProperties, "Mina Client");
+    	BlockingQueryGenericResponseHandler qh = new BlockingQueryGenericResponseHandler();
+    	tc.query(query, 1, 0, qh);
+    	List<Task> res = (List<Task>)qh.getResults();
+    	return res;
+	}	
+	
 	public void nominateTask(long taskId, User nominnee) {
-		connect();
-		Task task = service.getTask(taskId);
 		List<OrganizationalEntity> potentialOwners = new ArrayList<OrganizationalEntity>();
 		potentialOwners.add(nominnee);
+		connect();
+		Task task = service.getTask(taskId);
 		service.nominate(task.getId(),"Administrator",potentialOwners);
+		/*
+    	Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
+    	TaskClient tc = TaskClientFactory.newAsyncInstance(jbpmConsoleProperties, "Mina Client");
+        BlockingTaskOperationResponseHandler operationResponseHandler = new BlockingTaskOperationResponseHandler();
+        tc.nominate(taskId,"Administrator",potentialOwners,operationResponseHandler);
+        operationResponseHandler.waitTillDone(15000);		
+        */	
 	}	
 	
 	public void startTask(long taskId, String userId) {
+		/*
+    	Properties jbpmConsoleProperties = bpmService.getJbpmProperties();
+    	TaskClient tc = TaskClientFactory.newAsyncInstance(jbpmConsoleProperties, "Mina Client");
+        BlockingTaskOperationResponseHandler operationResponseHandler = new BlockingTaskOperationResponseHandler();
+        tc.start(taskId,userId,operationResponseHandler);
+        operationResponseHandler.waitTillDone(15000);		
+		*/
 		connect();
 		Task task = service.getTask(taskId);
 		service.start(task.getId(), userId);
@@ -148,6 +188,12 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 	}
 	
 	public void completeTask(long taskId, ContentData contentData, String userId) {
+		/*
+		TaskClient tc = TaskClientFactory.newAsyncInstance(null, "Mina Client");
+        BlockingTaskOperationResponseHandler operationResponseHandler = new BlockingTaskOperationResponseHandler();
+        tc.complete(taskId,userId,contentData, operationResponseHandler);
+        operationResponseHandler.waitTillDone(15000);
+		*/
 		connect();
 		service.complete(taskId, userId, contentData);
 	}	

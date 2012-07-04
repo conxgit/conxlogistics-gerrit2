@@ -79,6 +79,7 @@ import org.jboss.bpm.console.client.model.TaskRef;
 import org.jbpm.process.audit.JPAWorkingMemoryDbLogger;
 import org.jbpm.process.audit.VariableInstanceLog;
 import org.jbpm.process.workitem.wsht.CommandBasedWSHumanTaskHandler;
+import org.jbpm.process.workitem.wsht.GenericHTWorkItemHandler;
 import org.jbpm.process.workitem.wsht.SyncWSHumanTaskHandler;
 import org.jbpm.task.Content;
 import org.jbpm.task.Group;
@@ -91,6 +92,7 @@ import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.TaskServiceSession;
 import org.jbpm.task.service.local.LocalTaskService;
 import org.jbpm.task.service.mina.MinaTaskServer;
+import org.jbpm.task.utils.ContentMarshallerContext;
 import org.jbpm.task.utils.ContentMarshallerHelper;
 import org.jbpm.workflow.core.node.HumanTaskNode;
 import org.slf4j.Logger;
@@ -146,7 +148,9 @@ public class BPMServerImpl implements IBPMService {
 	
 	private IBPMTaskService localHumanTaskServer;
 
-	private SyncWSHumanTaskHandler handler;
+	//private SyncWSHumanTaskHandler handler;
+
+	private GenericHTWorkItemHandler hthandler;
 	
 	public IBPMTaskService getLocalHumanTaskServer() {
 		return localHumanTaskServer;
@@ -526,11 +530,10 @@ public class BPMServerImpl implements IBPMService {
 	        Environment domainEnv = EnvironmentFactory.newEnvironment();
 	        domainEnv.set(EnvironmentName.ENTITY_MANAGER_FACTORY, conxlogisticsEMF);
 	        domainEnv.set(EnvironmentName.TRANSACTION_MANAGER, this.globalTransactionManager);
-	        env.set(EnvironmentName.OBJECT_MARSHALLING_STRATEGIES, new ObjectMarshallingStrategy[]{
+/*	        env.set(EnvironmentName.OBJECT_MARSHALLING_STRATEGIES, new ObjectMarshallingStrategy[]{
 	                    new JPAPlaceholderResolverStrategy(domainEnv),
 	                    new SerializablePlaceholderResolverStrategy(ClassObjectMarshallingStrategyAcceptor.DEFAULT)
-	                });		
-			
+	                });	*/	
 			 try {
 				 Context ctx = jndiTemplate.getContext();
 				 UserTransaction ut = (UserTransaction)ctx.lookup( "java:comp/UserTransaction" );
@@ -580,13 +583,22 @@ public class BPMServerImpl implements IBPMService {
 	
 	private void registerWorkItemHandler( StatefulKnowledgeSession ksession, Properties consoleProperties ) { 
         //if ("Local".equalsIgnoreCase(consoleProperties.getProperty("jbpm.conxrepo.task.service.strategy", TaskClientFactory.DEFAULT_TASK_SERVICE_STRATEGY))) {
-            //TaskService taskService = humanTaskManager.getLocalService();
-            //handler = new SyncWSHumanTaskHandler(TaskClientFactory.newInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler"), ksession);
-            //handler.setLocal(true);
-            //ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);
-            //handler.connect();
-            //TaskClientFactory.newInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler")
-        //} else  {
+           
+		    LocalTaskService taskService = localHumanTaskServer.getLocalTaskService();
+		    /*
+            this.handler = new SyncWSHumanTaskHandler(taskService, ksession);
+            this.handler.setLocal(true);
+            ksession.getWorkItemManager().registerWorkItemHandler("Human Task", handler);     
+            this.handler.connect();*/
+            hthandler = new GenericHTWorkItemHandler(ksession);
+            hthandler.setClient(taskService);
+            hthandler.setLocal(true);
+            hthandler.setIpAddress("127.0.0.1");
+            hthandler.setPort(9123);            
+            hthandler.connect();
+            ksession.getWorkItemManager().registerWorkItemHandler("Human Task", hthandler); 
+            /*
+            //} else  {
             CommandBasedWSHumanTaskHandler handler = new CommandBasedWSHumanTaskHandler(ksession);
             TaskClient client = TaskClientFactory.newAsyncInstance(consoleProperties, "org.drools.process.workitem.wsht.CommandBasedWSHumanTaskHandler");
             
@@ -812,6 +824,11 @@ public class BPMServerImpl implements IBPMService {
 	public TaskRef getTaskById(long taskId) {
 		return taskManager.getTaskById(taskId);
 	}
+	
+	@Override
+	public Task getTaskObjectById(long taskId) {
+		return taskManager.getTaskObjectById(taskId);
+	}	
 
 	@Override
 	public void assignTask(long taskId, String idRef, String userId) {
@@ -832,6 +849,7 @@ public class BPMServerImpl implements IBPMService {
 
 	@Override
 	public void completeTask(long taskId, Map<String, Object> data, String userId) {
+		ContentData objectRes = ContentMarshallerHelper.marshal(data,((GenericHTWorkItemHandler)hthandler).getMarshallerContext(),ksession.getEnvironment());	
 		taskManager.completeTask(taskId, data, userId);
 	}
 
@@ -884,6 +902,7 @@ public class BPMServerImpl implements IBPMService {
 
 	@Override
 	public List<Task> getCreatedTasksByProcessId(Long processInstanceId) {
+		//return taskManager.getCreatedTasksByProcessId(processInstanceId);
 		//String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
 		Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createQuery("TasksByStatusAndProcessId");
 		emQuery.setParameter("status", org.jbpm.task.Status.Created);
@@ -942,14 +961,16 @@ public class BPMServerImpl implements IBPMService {
         Object readObject = 
                 ContentMarshallerHelper.unmarshall(task.getTaskData().getDocumentType(), 
                                                             content.getContent(), 
-                                                            ((SyncWSHumanTaskHandler)handler).getMarshallerContext(),  
+                                                            ((GenericHTWorkItemHandler)hthandler).getMarshallerContext(),  
                                                             ksession.getEnvironment());
-     /*
-        ois.readObject();
-       ByteArrayInputStream bais = new ByteArrayInputStream(content.getContent());
+        /*
+        ByteArrayInputStream bais = new ByteArrayInputStream(content.getContent());
         
         ObjectInputStream ois = new ObjectInputStream(bais);
-        Object readObject = ois.readObject();  */       
+        Object readObject = ois.readObject();    
+        ois.close();
+		*/
+ 
         logger.info(" >>> Object = "+readObject);
         return readObject;
     }		

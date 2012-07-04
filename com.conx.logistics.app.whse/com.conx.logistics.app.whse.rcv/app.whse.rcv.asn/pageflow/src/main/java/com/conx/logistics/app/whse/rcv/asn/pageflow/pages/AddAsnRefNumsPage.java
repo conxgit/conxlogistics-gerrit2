@@ -65,6 +65,8 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	private EntityManagerFactory emf;
 	private Button cancelButton;
 
+	private Map<String, Object> state;
+
 	private void setPageMode(int mode) {
 		switch (mode) {
 		case LIST_PAGE_MODE:
@@ -488,16 +490,20 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			refNums.add(refNumBeanContainer.getItem(id).getBean());
 		}
 
-		outParams.put("refNumsCollectionOut", refNums);
-		outParams.put("refNumTypesCollectionOut", newTypes);
-		return outParams;
+		this.state.put("refNumsCollection", refNums);
+		this.state.put("refNumTypesCollection", newTypes);
+		
+		outParams.put("Result", this.state);
+
+		return this.state;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
+		this.state = (Map<String, Object>)state.get("Content");
 		if (state != null) {
-			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionIn");
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollection");
 
 			if (refNums != null && refNumBeanContainer != null) {
 				refNumBeanContainer.addAll(refNums);

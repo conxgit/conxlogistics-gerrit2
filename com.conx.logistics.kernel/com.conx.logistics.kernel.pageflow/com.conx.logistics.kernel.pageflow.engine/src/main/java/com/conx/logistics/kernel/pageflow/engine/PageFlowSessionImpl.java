@@ -12,7 +12,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 
 import org.jboss.bpm.console.client.model.ProcessInstanceRef;
+import org.jboss.bpm.console.client.model.TaskRef;
+import org.jboss.bpm.console.client.model.TaskRef.STATE;
 import org.jbpm.task.AccessType;
+import org.jbpm.task.Status;
 import org.jbpm.task.Task;
 import org.jbpm.task.service.ContentData;
 
@@ -26,7 +29,7 @@ import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.ui.Component;
 
 public class PageFlowSessionImpl implements IPageFlowSession {
-	private static final int WAIT_DELAY = 2000;
+	private static final int WAIT_DELAY = 1000;
 
 	private Map<String, PageFlowPage> pages;
 	private List<PageFlowPage> orderedPageList;
@@ -68,12 +71,12 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			// String asnId = (String)res;
 			// Set<String> varNames = vars.keySet();
 			bpmService.nominate(currentTask.getId(), userId);
-			bpmService.getTaskById(currentTask.getId());
+			//bpmService.getTaskById(currentTask.getId());
 			// bpmService.az(currentTask.getId(), userId);
 			processVars = bpmService
 					.getProcessInstanceVariables(processInstance.getId());
-/*			Object res = this.bpmService.getTaskContentObject(currentTask);
-			processVars.put("Content", res);*/
+			Object res = this.bpmService.getTaskContentObject(currentTask);
+			processVars.put("Content", res);
 			// processVars.put(key, value)
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,17 +95,17 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 
 		return pageList;
 	}
-
+	
 	private Task waitForNextTask() throws Exception {
 		List<Task> tasks = new ArrayList<Task>();
 		int count = 0;
-		Thread.sleep(WAIT_DELAY);
+		Thread.sleep(1000L);
 		while (count < 10) {
 			tasks = bpmService.getCreatedTasksByProcessId(Long
 					.parseLong(processInstance.getId()));
 			if (tasks.size() == 0) {
 				try {
-					Thread.sleep(WAIT_DELAY);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -112,9 +115,62 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			count++;
 		}
 		if (count == 10) {
-			throw new Exception("Timed out");
+			throw new Exception("waitForNextTask Timed out");
 		}
 		return tasks.get(0);
+	}
+	
+	private void waitForTaskCompleteness(UserTransaction ut) throws Exception {
+		Task res = null;
+		int count = 0;
+		while (count < 10) {
+			ut.begin();
+			res = this.bpmService.getTaskObjectById(currentTask.getId());
+			ut.commit();
+			if (res.getTaskData().getStatus() != Status.Completed)
+			{
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			else
+				break;
+			count++;
+		}
+		if (count == 10) {
+			throw new Exception("waitForTaskCompleteness on Task("+currentTask.getId()+" Timed out");
+		}
+	}	
+	
+
+	private Object waitForContentResult() throws Exception {
+		Object res = null;
+		int count = 0;
+		Thread.sleep(2000);
+		while (count < 10) {
+			res = this.bpmService.getTaskContentObject(currentTask);
+			if (res instanceof Map)
+			{
+				if (   (((Map<String,Object>)res).size() == 1 && ((Map<String,Object>)res).containsKey("TaskName")))
+				{
+					try {
+						Thread.sleep(WAIT_DELAY);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				else
+					break;
+			}
+			count++;
+		}
+		if (count == 10) {
+			throw new Exception("Content Wait on Task("+currentTask.getId()+" Timed out");
+		}
+
+		return res;
 	}
 
 	@Override
@@ -172,7 +228,6 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			if (param instanceof Map) {
 				bpmService.completeTask(currentTask.getId(), (Map) param,
 						userId);
-				bpmService.getTaskById(currentTask.getId());
 			} else {
 				ContentData contentData = null;
 				if (param != null) {
@@ -190,31 +245,50 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 					}
 				}
 				bpmService.completeTask(currentTask.getId(), contentData,
-						userId);
+						userId);				
 			}
-
 			ut.commit();
 		} catch (Exception e) {
 			ut.rollback();
 			throw e;
 		}
+		
+		waitForTaskCompleteness(ut);		
+		
 
 		// 2. Get the next task after Proc resume
 		try {
 			ut.begin();
+			currentTask = null;
 			currentTask = waitForNextTask();
+			processVars = bpmService
+					.getProcessInstanceVariables(processInstance.getId());
+			Object res = this.bpmService.getTaskContentObject(currentTask);
+			processVars.put("Content", res);			
 			ut.commit();
 		} catch (Exception e) {
 			ut.rollback();
 			throw e;
 		}
-
+		
 		// 3. If the next task exists, nominate and start it
 		if (Validator.isNotNull(currentTask)) {
+/*			try {
+				ut.begin();
+				processVars = bpmService
+						.getProcessInstanceVariables(processInstance.getId());
+				Object res = waitForContentResult();
+				processVars.put("Content", res);
+				ut.commit();
+			} catch (Exception e) {
+				ut.rollback();
+				throw e;
+			}	
+			*/
 			// 3.1 Nominate the current user for this task
 			try {
 				ut.begin();
-				bpmService.nominate(currentTask.getId(), userId);
+				bpmService.nominate(currentTask.getId(), userId);				
 				ut.commit();
 			} catch (Exception e) {
 				ut.rollback();
@@ -224,12 +298,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			// 3.2 Start the task
 			try {
 				ut.begin();
-				bpmService.startTask(currentTask.getId(), userId);
-				bpmService.getTaskById(currentTask.getId());
-				processVars = bpmService
-						.getProcessInstanceVariables(processInstance.getId());
-/*				Object res = this.bpmService.getTaskContentObject(currentTask);
-				processVars.put("Content", res);*/				
+				bpmService.startTask(currentTask.getId(), userId);	
 				ut.commit();
 			} catch (Exception e) {
 				ut.rollback();
@@ -321,6 +390,7 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			ut.rollback();
 			throw e;
 		}
+
 		
 		try
 		{

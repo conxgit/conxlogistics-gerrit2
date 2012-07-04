@@ -90,6 +90,8 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 	private Label pickupLocationAddressLabel;
 	private Button cancelButton;
 
+	private Map<String, Object> state;
+
 	private void initContainers() {
 		pickupLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 		pickupCarrierOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
@@ -1174,15 +1176,16 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		}
 		dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
 
-		Map<String,Object> outParams = new HashMap<String, Object>();
-		outParams.put("asnPickupOut", pickup);	
-		outParams.put("asnDropoffOut", dropOff);
+		//Map<String,Object> outParams = new HashMap<String, Object>();
+		this.state.put("asnPickupOut", pickup);	
+		this.state.put("asnDropoffOut", dropOff);
 
-		return outParams;
+		return this.state;
 	}
 
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
+		this.state = (Map<String, Object>)state.get("Content");
 	}
 
 }

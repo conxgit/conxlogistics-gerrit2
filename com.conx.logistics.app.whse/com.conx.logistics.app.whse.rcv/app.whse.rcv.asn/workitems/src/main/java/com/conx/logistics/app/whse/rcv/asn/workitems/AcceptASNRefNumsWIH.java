@@ -41,13 +41,14 @@ public class AcceptASNRefNumsWIH implements WorkItemHandler {
 
 		try {
 			Map<String, Object> params = workItem.getParameters();
-			ASN asnParamsIn = (ASN)workItem.getParameter("asnParamsIn");
+			HashMap varsIn = (HashMap)workItem.getParameter("asnVarMapIn");
 
 			//asn = this.asnDao.update(asn);
 			
-			Map<String, Object> output = new HashMap<String, Object>();
-			output.put("asnParamsOut",asnParamsIn);
-			manager.completeWorkItem(workItem.getId(), output);
+			//Map<String, Object> output = new HashMap<String, Object>();
+			//output.put("asnParamsOut",asnParamsIn);
+			manager.completeWorkItem(workItem.getId(), null);
+			//WIUtils.waitTillCompleted(workItem,1000L);
 		}
 		catch (Exception e)
 		{

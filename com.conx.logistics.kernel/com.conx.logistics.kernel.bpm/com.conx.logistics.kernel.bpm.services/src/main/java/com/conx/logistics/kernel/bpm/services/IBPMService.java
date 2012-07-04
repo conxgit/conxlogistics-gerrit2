@@ -67,6 +67,7 @@ public interface IBPMService {
 	 * Task Management methods
 	 */
 	public TaskRef getTaskById(long taskId);
+	public Task getTaskObjectById(long taskId);
 	public void assignTask(long taskId, String idRef, String userId);
 	public void nominate(long taskId, String userId);
 	public void startTask(long taskId, String userId);
@@ -89,6 +90,8 @@ public interface IBPMService {
 	public Content getTaskContent(long taskId);
 	public Object getTaskContentObject(Task task) throws IOException,
 			ClassNotFoundException;
+
+
 
 	
 }

@@ -24,6 +24,7 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService;
+import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 
 public class AcceptASNWIH implements WorkItemHandler {
@@ -57,35 +58,47 @@ public class AcceptASNWIH implements WorkItemHandler {
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
 		try {
-			ASN asnParamsIn = (ASN)workItem.getParameter("asnParamsIn");
+/*			ASN asnParamsIn = (ASN)workItem.getParameter("asnParamsIn");
 			Set<ReferenceNumber> refNumsCollectionIn = (Set<ReferenceNumber>)workItem.getParameter("refNumsCollectionIn");
 			Set<ASNLine> asnLinesCollectionIn = (Set<ASNLine>)workItem.getParameter("asnLinesCollectionIn");
 			ASNPickup asnPickupIn = (ASNPickup)workItem.getParameter("asnPickupIn");
 			ASNDropOff asnDropoffIn = (ASNDropOff)workItem.getParameter("asnDropoffIn");
-
+			Set<Product> productsCollectionIn = (Set<Product>)workItem.getParameter("productsCollectionIn");*/
+			
+			
+			HashMap varsIn = (HashMap)workItem.getParameter("asnVarMapIn");	
+			
+			ASN asnParamsIn = (ASN)varsIn.get("asn");
+			Set<ReferenceNumber> refNumsCollectionIn = (Set<ReferenceNumber>)varsIn.get("refNumsCollection");
+			Set<ASNLine> asnLinesCollectionIn = (Set<ASNLine>)varsIn.get("asnLinesCollection");
+			ASNPickup asnPickupIn = (ASNPickup)varsIn.get("asnPickup");
+			ASNDropOff asnDropoffIn = (ASNDropOff)varsIn.get("asnDropoff");
+			Set<Product> productsCollectionIn = (Set<Product>)varsIn.get("productsCollection");
 
 			/**
 			 * 
 			 * Save ASN
 			 * 
 			 */
+			Map<String, Object> varsOut = new HashMap<String, Object>();
 			
 			ASN asn = asnDao.add(asnParamsIn);
+			varsOut.put("asn", asn);
 			Map<String, Object> output = new HashMap<String, Object>();
-			output.put("asnParamsOut",asn);
+			output.put("asnVarMapOut",varsOut);
 			
 			if (Validator.isNotNull(refNumsCollectionIn))
 			{
 				asn = asnDao.addRefNums(asn.getId(), refNumsCollectionIn);
 				Set<ReferenceNumber> refNumsCollectionOut = asn.getRefNumbers();
-				output.put("refNumsCollectionOut",refNumsCollectionOut);
+				varsOut.put("refNumsCollectionOut",refNumsCollectionOut);
 			}
 			
 			if (Validator.isNotNull(asnLinesCollectionIn))
 			{
 				asn = asnDao.addLines(asn.getId(), asnLinesCollectionIn);
 				Set<ASNLine> asnLinesCollectionOut = asn.getAsnLines();
-				output.put("asnLinesCollectionOut",asnLinesCollectionOut);
+				varsOut.put("asnLinesCollectionOut",asnLinesCollectionOut);
 			}
 
 			if (Validator.isNotNull(asnPickupIn) && Validator.isNotNull(asnDropoffIn))
@@ -93,10 +106,11 @@ public class AcceptASNWIH implements WorkItemHandler {
 				asn = asnDao.addLocalTrans(asn.getId(), asnPickupIn,asnDropoffIn);
 				ASNPickup asnPickupOut = asn.getPickup();
 				ASNDropOff asnDropoffOut = asn.getDropOff();
-				output.put("asnPickupOut",asnPickupOut);
-				output.put("asnDropoffOut",asnDropoffOut);
+				varsOut.put("asnPickupOut",asnPickupOut);
+				varsOut.put("asnDropoffOut",asnDropoffOut);
 			}
 			manager.completeWorkItem(workItem.getId(), output);
+			//WIUtils.waitTillCompleted(workItem,1000L);
 		}
 		catch (Exception e)
 		{

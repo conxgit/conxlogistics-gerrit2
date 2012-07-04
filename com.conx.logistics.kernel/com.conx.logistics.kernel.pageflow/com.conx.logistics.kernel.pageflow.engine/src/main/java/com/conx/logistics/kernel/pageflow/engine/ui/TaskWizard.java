@@ -10,6 +10,7 @@ import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.presenter.IPresenter;
 import org.vaadin.mvp.presenter.IPresenterFactory;
 import org.vaadin.teemu.wizards.Wizard;
+import org.vaadin.teemu.wizards.WizardStep;
 
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.kernel.pageflow.engine.PageFlowEngineImpl;
@@ -55,13 +56,20 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 	public Component getComponent() {
 		return this;
 	}
+	
+	@Override
+    public void addStep(WizardStep step) {
+		if (getSteps().size() == 0)//First page
+			((PageFlowPage)step).setOnStartState(getProperties());
+        super.addStep(step);
+    }
 
 	@Override
 	public Map<String, Object> getProperties() {
-		Map<String,Object> props = new HashMap<String, Object>();
-		props.put("session",session);
-		props.putAll(session.getProcessVars());
-		return props;
+		//Map<String,Object> props = new HashMap<String, Object>();
+		//props.put("session",session);
+		//props.putAll(session.getProcessVars());
+		return session.getProcessVars();
 	}
 
 	@Override

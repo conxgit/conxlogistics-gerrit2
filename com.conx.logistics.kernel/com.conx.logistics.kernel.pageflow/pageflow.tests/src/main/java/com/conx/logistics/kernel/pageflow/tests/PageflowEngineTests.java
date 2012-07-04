@@ -42,62 +42,60 @@ public class PageflowEngineTests {
 			//-- 1. Start Proc
 			ITaskWizard wiz = defaultPageFlowEngine.createTaskWizard(params);			
 			Map<String, Object> res = wiz.getProperties();
-//			ASN asn = (ASN)res.get("asnParams");
+			ASN asn = (ASN)res.get("Content");
 			
 			//-- 2. Complete ConfirmASNOrg Task and get vars
-			Map<String,Object> outParams = new HashMap<String, Object>();
-			//outParams.put("asnParamsOut", asn);
-			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
+			HashMap<String,Object> outParams = new HashMap<String, Object>();
+			outParams.putAll(res);
+			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, null);
 			res = wiz.getProperties();
-//			asn = (ASN)res.get("asnParams");
+			res = (HashMap<String,Object>)res.get("Content");
+
 			
 			
 			//-- 3. Complete AddRefNums Task and get vars
+			outParams = new HashMap<String, Object>();
+			//outParams.putAll(res);			
 			HashSet<ReferenceNumber> refNumbers = new HashSet<ReferenceNumber>();
 			ReferenceNumber rn = new ReferenceNumber();
 			rn.setCode("123456");
 			refNumbers.add(rn);
-//			asn.setRefNumbers(refNumbers);
-			
-			outParams = new HashMap<String, Object>();
-			outParams.put("refNumsCollectionOut", refNumbers);			
+			outParams.put("asnRefNumMapOut", refNumbers);	
+			//HashMap<String, Object> result = new HashMap<String, Object>();
+			//result.put("Content", outParams);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-//			asn = (ASN)res.get("asnParams");
+			res = (HashMap<String,Object>)res.get("Content");
 			
 			//-- 4. Complete ASN Lines Human and get vars
+			outParams = new HashMap<String, Object>();
+			outParams.putAll(res);			
 			HashSet<ASNLine> asnLines = new HashSet<ASNLine>();
 			ASNLine line = new ASNLine();
 			line.setLineNumber(1);
 			asnLines.add(line);
-//			asn.setAsnLines(asnLines);
-			
-			outParams = new HashMap<String, Object>();
 			outParams.put("asnLinesCollectionOut", asnLines);			
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-//			asn = (ASN)res.get("asnParams");	
+			res = (HashMap<String,Object>)res.get("Content");
 			
 			//-- 4. Complete Local Trans Human and get vars
+			outParams = new HashMap<String, Object>();
+			outParams.putAll(res);				
 			ASNPickup asnp = new ASNPickup();
 			ASNDropOff asnd = new ASNDropOff();
-//			asn.setPickup(asnp);
-//			asn.setDropOff(asnd);
-			
-			outParams = new HashMap<String, Object>();
 			outParams.put("asnPickupOut", asnp);	
 			outParams.put("asnDropoffOut", asnd);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-//			asn = (ASN)res.get("asnParams");		
+			res = (HashMap<String,Object>)res.get("Content");
 			
 			//-- 5. Complete Accept ASN and get vars
 			outParams = new HashMap<String, Object>();
-			//outParams.put("confirmASNAsnOut", asn);			
+			outParams.putAll(res);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
-//			asn = (ASN)res.get("asnParams");			
-			
+			res = (HashMap<String,Object>)res.get("Content");
 			
 			// ProcessInstanceRef pi =
 			//bpmService.newInstance("whse.rcv.asn.CreateNewASNByOrgV1.0");

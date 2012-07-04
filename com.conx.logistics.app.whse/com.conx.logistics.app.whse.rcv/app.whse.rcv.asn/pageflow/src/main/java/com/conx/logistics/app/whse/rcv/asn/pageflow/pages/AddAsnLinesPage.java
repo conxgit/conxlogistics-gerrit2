@@ -141,6 +141,8 @@ public class AddAsnLinesPage extends PageFlowPage {
 
 	private TextArea productDescription;
 
+	private Map<String, Object> state;
+
 	private void setPageMode(int mode) {
 		this.pageMode = mode;
 		reset();
@@ -1520,17 +1522,20 @@ public class AddAsnLinesPage extends PageFlowPage {
 		for (Object id : asnLineTable.getItemIds()) {
 			asnLines.add(asnLineContainer.getItem(id).getBean());
 		}
-		outParams.put("asnLinesCollectionOut", asnLines);
-		outParams.put("productsCollectionOut", newProducts);
+		this.state.put("asnLinesCollection", asnLines);
+		this.state.put("productsCollection", newProducts);
 
+		outParams.put("asnVarMapOut", this.state);
+		
 		return outParams;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
-		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionIn");
-		Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionIn");
+		this.state = (Map<String, Object>)state.get("Content");
+		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) this.state.get("refNumsCollection");
+		Set<ASNLine> asnLines = (Set<ASNLine>) this.state.get("asnLinesCollection");
 		if (refNums != null && refNumBeanContainer != null) {
 			try {
 				refNumBeanContainer.addAll(refNums);

@@ -59,13 +59,15 @@ public class AcceptASNOrgWIH implements WorkItemHandler {
 		*/
 
 		try {
-			ASN asnParamsIn = (ASN)workItem.getParameter("asnParamsIn");
+			Map<String, Object> params = workItem.getParameters();
+			HashMap varsIn = (HashMap)workItem.getParameter("asnVarMapIn");
 
 			//asn = this.asnDao.update(asn);
 			
-			Map<String, Object> output = new HashMap<String, Object>();
-			output.put("asnParamsOut",asnParamsIn);
-			manager.completeWorkItem(workItem.getId(), output);
+			//Map<String, Object> output = new HashMap<String, Object>();
+			//output.put("asnVarMapOut",asnParamsIn);
+			manager.completeWorkItem(workItem.getId(), null);
+			//WIUtils.waitTillCompleted(workItem,1000L);
 		}
 		catch (Exception e)
 		{
@@ -86,6 +88,7 @@ public class AcceptASNOrgWIH implements WorkItemHandler {
 			throw new IllegalStateException("AcceptASNOrgWIH:\r\n"+stacktrace, e);			
 		}			
 	}
+
 
 	@Override
 	public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {

@@ -85,6 +85,8 @@ public class ConfirmAsnPage extends PageFlowPage {
 	private VerticalLayout refNumLayout;
 	private VerticalLayout asnLineLayout;
 
+	private Map<String, Object> state;
+
 	private void initContainers() {
 		asnLineContainer = new BeanContainer<String, ASNLine>(ASNLine.class);
 		refNumContainer = new BeanContainer<String, ReferenceNumber>(ReferenceNumber.class);
@@ -433,17 +435,18 @@ public class ConfirmAsnPage extends PageFlowPage {
 	
 	@Override
 	public Map<String, Object> getOnCompleteState() {
-		return new HashMap<String, Object>();
+		return this.state;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
+		this.state = (Map<String, Object>)state.get("Content");
 		if (state != null) {
-			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) state.get("refNumsCollectionIn");
-			Set<ASNLine> asnLines = (Set<ASNLine>) state.get("asnLinesCollectionIn");
-			ASNPickup pickup = (ASNPickup) state.get("asnPickupIn");
-			ASNDropOff dropOff = (ASNDropOff) state.get("asnDropoffIn");
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) this.state.get("refNumsCollection");
+			Set<ASNLine> asnLines = (Set<ASNLine>) this.state.get("asnLinesCollection");
+			ASNPickup pickup = (ASNPickup) this.state.get("asnPickup");
+			ASNDropOff dropOff = (ASNDropOff) this.state.get("asnDropoff");
 
 			if (refNumContainer != null && refNums != null) {
 				try {

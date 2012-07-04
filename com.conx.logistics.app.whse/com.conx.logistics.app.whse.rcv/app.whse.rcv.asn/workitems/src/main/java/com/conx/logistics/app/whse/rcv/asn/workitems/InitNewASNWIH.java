@@ -80,8 +80,11 @@ public class InitNewASNWIH implements WorkItemHandler {
 			//asnParamsOut.put("asn", newasn);
 			
 			Map<String, Object> results = new HashMap<String, Object>();
-			results.put("asnParamsOut",newasn);
-			manager.completeWorkItem(workItem.getId(), results);
+			Map<String, Object> asnVarMapOut = new HashMap<String, Object>();
+			asnVarMapOut.put("asnOut",newasn);
+			//results.put("asnVarMapOut",asnVarMapOut);
+			manager.completeWorkItem(workItem.getId(), asnVarMapOut);
+			//WIUtils.waitTillCompleted(workItem,1000L);
 		}
 		catch (Exception e)
 		{

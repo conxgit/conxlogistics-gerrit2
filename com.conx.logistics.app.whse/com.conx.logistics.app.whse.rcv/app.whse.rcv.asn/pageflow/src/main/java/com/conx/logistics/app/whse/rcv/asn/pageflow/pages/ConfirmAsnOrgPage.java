@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.vaadin.addon.jpacontainer.JPAContainer;
@@ -42,6 +43,10 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 	private JPAContainer<Organization> organizationContainer;
 	private EntityManagerFactory emf;
 	private Button cancelButton;
+
+	private Map<String, Object> state;
+
+	private ASN asn;
 	
 	private void initContainers() {
 		organizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
@@ -170,11 +175,14 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 
 	@Override
 	public Map<String, Object> getOnCompleteState() {
-		return new HashMap<String, Object>();
+		//Map<String,Object> outParams = new HashMap<String, Object>();
+		//outParams.put("Result", this.state);
+		return null;
 	}
 
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
+		this.asn = (ASN)state.get("Content");
 		if (state != null) {
 			this.orgId = (String) state.get("orgId");
 			this.userId = (String) state.get("userId");
