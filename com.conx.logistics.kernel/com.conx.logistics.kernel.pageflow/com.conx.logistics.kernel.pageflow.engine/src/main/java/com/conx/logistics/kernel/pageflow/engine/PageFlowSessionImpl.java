@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,9 +74,10 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			bpmService.nominate(currentTask.getId(), userId);
 			//bpmService.getTaskById(currentTask.getId());
 			// bpmService.az(currentTask.getId(), userId);
-			processVars = bpmService
-					.getProcessInstanceVariables(processInstance.getId());
+/*			processVars = bpmService
+					.getProcessInstanceVariables(processInstance.getId());*/
 			Object res = this.bpmService.getTaskContentObject(currentTask);
+			processVars = new HashMap<String,Object>();
 			processVars.put("Content", res);
 			// processVars.put(key, value)
 		} catch (Exception e) {
@@ -261,9 +263,10 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 			ut.begin();
 			currentTask = null;
 			currentTask = waitForNextTask();
-			processVars = bpmService
-					.getProcessInstanceVariables(processInstance.getId());
+/*			processVars = bpmService
+					.getProcessInstanceVariables(processInstance.getId());*/
 			Object res = this.bpmService.getTaskContentObject(currentTask);
+			processVars = new HashMap<String,Object>();
 			processVars.put("Content", res);			
 			ut.commit();
 		} catch (Exception e) {

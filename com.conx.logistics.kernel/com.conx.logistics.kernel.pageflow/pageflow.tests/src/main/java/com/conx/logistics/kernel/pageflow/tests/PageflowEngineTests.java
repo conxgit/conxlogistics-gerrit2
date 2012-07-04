@@ -21,7 +21,9 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
+import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 
 @Transactional
 public class PageflowEngineTests {
@@ -54,38 +56,48 @@ public class PageflowEngineTests {
 			
 			
 			//-- 3. Complete AddRefNums Task and get vars
+			HashMap<String, Object> asnRefNumMap = new HashMap<String, Object>();
+			
 			outParams = new HashMap<String, Object>();
 			//outParams.putAll(res);			
 			HashSet<ReferenceNumber> refNumbers = new HashSet<ReferenceNumber>();
 			ReferenceNumber rn = new ReferenceNumber();
 			rn.setCode("123456");
 			refNumbers.add(rn);
-			outParams.put("asnRefNumMapOut", refNumbers);	
-			//HashMap<String, Object> result = new HashMap<String, Object>();
-			//result.put("Content", outParams);
+			asnRefNumMap.put("asnRefNumCollection", refNumbers);	
+			asnRefNumMap.put("asnRefNumTypeCollection", new HashSet<ReferenceNumberType>());	
+			outParams.put("asnRefNumMapOut", asnRefNumMap);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			res = (HashMap<String,Object>)res.get("Content");
 			
 			//-- 4. Complete ASN Lines Human and get vars
+			HashMap<String, Object> asnASNLineProductMap = new HashMap<String, Object>();
 			outParams = new HashMap<String, Object>();
 			outParams.putAll(res);			
 			HashSet<ASNLine> asnLines = new HashSet<ASNLine>();
 			ASNLine line = new ASNLine();
 			line.setLineNumber(1);
 			asnLines.add(line);
-			outParams.put("asnLinesCollectionOut", asnLines);			
+			asnASNLineProductMap.put("asnLinesCollection", asnLines);	
+			asnASNLineProductMap.put("productsCollection", new HashSet<Product>());
+			
+			outParams.put("asnASNLineProductMapOut", asnASNLineProductMap);
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			res = (HashMap<String,Object>)res.get("Content");
 			
 			//-- 4. Complete Local Trans Human and get vars
-			outParams = new HashMap<String, Object>();
-			outParams.putAll(res);				
+			HashMap<String, Object> asnLocalTransMap = new HashMap<String, Object>();
+			
+			outParams = new HashMap<String, Object>();				
 			ASNPickup asnp = new ASNPickup();
 			ASNDropOff asnd = new ASNDropOff();
-			outParams.put("asnPickupOut", asnp);	
-			outParams.put("asnDropoffOut", asnd);
+			asnLocalTransMap.put("asnPickup", asnp);	
+			asnLocalTransMap.put("asnDropoff", asnd);
+			
+			outParams.put("asnLocalTransMapOut", asnLocalTransMap);
+			
 			wiz = defaultPageFlowEngine.executeTaskWizard(wiz, outParams);
 			res = wiz.getProperties();
 			res = (HashMap<String,Object>)res.get("Content");
