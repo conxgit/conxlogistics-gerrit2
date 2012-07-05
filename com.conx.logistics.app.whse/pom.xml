@@ -14,5 +14,8 @@
   	<module>com.conx.logistics.app.whse.rcv</module>
   	<module>whse.ui</module>
   	<module>whse.dao.services</module>
+  	<module>whse.domain</module>
+  	<module>whse.domain.persistence.config</module>
+  	<module>whse.dao.jpa.persistence</module>
   </modules>
 </project>

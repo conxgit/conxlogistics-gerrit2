@@ -17,6 +17,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.conx.logistics.app.whse.dao.services.IDockTypeDAOService;
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService;
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDropOffDAOService;
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNPickupDAOService;
@@ -82,6 +83,7 @@ public class TestDataManager {
 	
 	private IContactDAOService contactDAOService;
 	private IDocTypeDAOService docTypeDOAService;
+	private IDockTypeDAOService dockTypeDOAService;
 	private IEntityMetadataDAOService entityMetadataDAOService;
 	
 	private IReferenceNumberTypeDAOService referenceNumberTypeDaoService;
@@ -139,6 +141,10 @@ public class TestDataManager {
 	
 	public void setDocTypeDOAService(IDocTypeDAOService docTypeDOAService) {
 		this.docTypeDOAService = docTypeDOAService;
+	}
+	
+	public void setDockTypeDOAService(IDockTypeDAOService dockTypeDOAService) {
+		this.dockTypeDOAService = dockTypeDOAService;
 	}
 	
 	public void setEntityMetadataDAOService(
@@ -264,6 +270,7 @@ public class TestDataManager {
 				referenceNumberTypeDaoService.provideDefaults();
 				currencyUnitDAOService.provideDefaults();
 				docTypeDOAService.provideDefaults();
+				dockTypeDOAService.provideDefaults();
 				Product prd2 = productDaoService.provide("fooite1", "banana's",ProductTypeCustomCONSTANTS.TYPE_Food_Item,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				Product prd3 = productDaoService.provide("hazmat1", "Jet Fuel",ProductTypeCustomCONSTANTS.TYPE_Hazardous_Material,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);
 				Product prd4 = productDaoService.provide("textil1", "Clothing",ProductTypeCustomCONSTANTS.TYPE_Textiles,PackUnitCustomCONSTANTS.TYPE_PCE,WeightUnitCustomCONSTANTS.TYPE_LB,DimUnitCustomCONSTANTS.TYPE_FT,DimUnitCustomCONSTANTS.TYPE_CF,"GEN",null);

@@ -1,0 +1,42 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.dao.services.impl;version=
+ "1.0.0";uses:="com.conx.logistics.app.whse.dao.services,com.conx.logi
+ stics.app.whse.domain.docktype,javax.persistence,org.springframework.
+ stereotype,org.springframework.transaction.annotation"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS DAO Persistence
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.dao.jpa.persistence
+Import-Package: com.conx.logistics.app.whse.dao.services;version="1.0.
+ 0",com.conx.logistics.app.whse.domain.docktype;version="1.0.0",com.co
+ nx.logistics.common.utils;version="1.0.0",com.conx.logistics.mdm.dao.
+ services;version="1.0.0",com.conx.logistics.mdm.dao.services.currency
+ ;version="1.0.0",com.conx.logistics.mdm.dao.services.product;version=
+ "1.0.0",com.conx.logistics.mdm.dao.services.referencenumber;version="
+ 1.0.0",com.conx.logistics.mdm.domain.application;version="1.0.0",com.
+ conx.logistics.mdm.domain.commercialrecord;version="1.0.0",com.conx.l
+ ogistics.mdm.domain.currency;version="1.0.0",com.conx.logistics.mdm.d
+ omain.geolocation;version="1.0.0",com.conx.logistics.mdm.domain.metad
+ ata;version="1.0.0",com.conx.logistics.mdm.domain.organization;versio
+ n="1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.c
+ onx.logistics.mdm.domain.referencenumber;version="1.0.0",com.conx.log
+ istics.mdm.domain.task;version="1.0.0",javax.persistence;version="0",
+ javax.persistence.criteria;version="0",javax.transaction;version="0",
+ org.aopalliance.aop;version="1.0.0",org.hibernate.hql.ast;version="3.
+ 6.0.Final",org.slf4j;version="[1.6.1,1.7.0)",org.springframework.aop;
+ version="[3.0,3.1)",org.springframework.aop.framework;version="[3.0,3
+ .1)",org.springframework.beans.factory.annotation;version="[3.0,3.1)"
+ ,org.springframework.dao;version="[3.0,3.1)",org.springframework.dao.
+ annotation;version="[3.0,3.1)",org.springframework.dao.support;versio
+ n="[3.0,3.1)",org.springframework.orm.jpa;version="[3.0,3.1)",org.spr
+ ingframework.orm.jpa.vendor;version="[3.0,3.1)",org.springframework.s
+ tereotype;version="[3.0,3.1)",org.springframework.transaction;version
+ ="[3.0,3.1)",org.springframework.transaction.annotation;version="[3.0
+ ,3.1)",org.springframework.transaction.aspectj;version="[3.0,3.1)",or
+ g.springframework.transaction.jta;version="[3.0,3.1)"
+

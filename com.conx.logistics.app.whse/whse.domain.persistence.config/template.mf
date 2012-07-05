@@ -1,0 +1,7 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX WMS App Pers Config
+Bundle-SymbolicName: com.conx.logistics.app.whse.domain.persistence.config
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Excluded-Imports: com.conx.logistics.app.whse.domain
+

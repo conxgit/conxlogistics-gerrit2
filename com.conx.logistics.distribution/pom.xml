@@ -19,5 +19,6 @@
 			com.conx.logistics.distribution.virgo-osgi-bundles
 		</module>
 		-->
+  		<module>virgo-bundles-sprint1</module>
 	</modules>
 </project>

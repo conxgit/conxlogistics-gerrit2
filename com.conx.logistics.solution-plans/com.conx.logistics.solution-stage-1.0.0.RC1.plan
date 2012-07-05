@@ -16,8 +16,10 @@
 	<!-- Bootstraping Bundles : stage 2 (fragments)-->
 	<!-- Host: com.conx.logistics.kernel.persistence.dynaconfiguration -->
 	<artifact type="bundle" name="com.conx.logistics.mdm.domain" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.domain" version="1.0.0"/>
 	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.domain" version="1.0.0"/>
 	<artifact type="bundle" name="com.conx.logistics.mdm.domain.persistence.config" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.domain.persistence.config" version="1.0.0"/>
 	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.domain.persistence.config" version="1.0.0"/>
 	<artifact type="bundle" name="com.conx.logistics.mdm.dao.services" version="1.0.0"/>
 	<artifact type="bundle" name="com.conx.logistics.mdm.dao.services.impl" version="1.0.0"/>

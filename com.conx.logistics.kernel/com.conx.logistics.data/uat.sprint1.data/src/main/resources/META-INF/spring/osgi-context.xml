@@ -25,6 +25,7 @@
 	<osgi:reference id="countryStateDao" interface="com.conx.logistics.mdm.dao.services.ICountryStateDAOService"/>	
 	<osgi:reference id="dimUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IDimUnitDAOService"/>
 	<osgi:reference id="docTypeDao" interface="com.conx.logistics.mdm.dao.services.documentlibrary.IDocTypeDAOService"/>
+	<osgi:reference id="dockTypeDao" interface="com.conx.logistics.app.whse.dao.services.IDockTypeDAOService"/>
 	<osgi:reference id="entityMetadataDao" interface="com.conx.logistics.mdm.dao.services.IEntityMetadataDAOService"/>
 	<osgi:reference id="orgDao" interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
 	<osgi:reference id="productDao" interface="com.conx.logistics.mdm.dao.services.product.IProductDAOService"/>	

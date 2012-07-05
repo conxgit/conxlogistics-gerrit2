@@ -25,6 +25,7 @@
 		<property name="currencyUnitDaoService" ref="currencyUnitDao"></property>
 		<property name="dimUnitDaoService" ref="dimUnitDao"></property>
 		<property name="docTypeDOAService" ref="docTypeDao"></property>
+		<property name="dockTypeDOAService" ref="dockTypeDao"></property>
 		<property name="entityMetadataDAOService" ref="entityMetadataDao"></property>
 		<property name="orgDaoService" ref="orgDao"></property>
 		<property name="packUnitDaoService" ref="packUnitDao"></property>

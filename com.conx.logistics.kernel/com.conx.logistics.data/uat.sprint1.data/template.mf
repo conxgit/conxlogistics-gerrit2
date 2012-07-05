@@ -24,4 +24,7 @@ Import-Package:
   org.springframework.transaction.support;version="[3.0,3.1)",
   com.conx.logistics.app.whse.rcv.asn.dao.services;version="1.0.0",
   com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0",
+  com.conx.logistics.app.whse.dao.services;version="1.0.0",
+  com.conx.logistics.app.whse.domain;version="1.0.0",
   com.conx.logistics.mdm.domain.referencenumber;version="1.0.0"
+Excluded-Imports: com.conx.logistics.app.whse.domain
