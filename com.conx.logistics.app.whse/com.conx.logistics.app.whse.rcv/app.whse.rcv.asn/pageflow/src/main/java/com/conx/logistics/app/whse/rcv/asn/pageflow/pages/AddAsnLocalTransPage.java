@@ -1176,9 +1176,11 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		}
 		dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
 
-		//Map<String,Object> outParams = new HashMap<String, Object>();
-		this.state.put("asnPickupOut", pickup);	
-		this.state.put("asnDropoffOut", dropOff);
+		Map<String,Object> asnLocalTransMap = new HashMap<String, Object>();
+		asnLocalTransMap.put("asnPickup", pickup);	
+		asnLocalTransMap.put("asnDropoff", dropOff);
+
+		this.state.put("asnLocalTransMapOut", asnLocalTransMap);
 
 		return this.state;
 	}

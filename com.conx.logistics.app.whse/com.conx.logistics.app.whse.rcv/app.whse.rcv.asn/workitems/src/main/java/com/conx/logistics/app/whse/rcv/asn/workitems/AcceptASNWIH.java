@@ -59,14 +59,6 @@ public class AcceptASNWIH implements WorkItemHandler {
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
 		try {
-/*			ASN asnParamsIn = (ASN)workItem.getParameter("asnParamsIn");
-			Set<ReferenceNumber> refNumsCollectionIn = (Set<ReferenceNumber>)workItem.getParameter("refNumsCollectionIn");
-			Set<ASNLine> asnLinesCollectionIn = (Set<ASNLine>)workItem.getParameter("asnLinesCollectionIn");
-			ASNPickup asnPickupIn = (ASNPickup)workItem.getParameter("asnPickupIn");
-			ASNDropOff asnDropoffIn = (ASNDropOff)workItem.getParameter("asnDropoffIn");
-			Set<Product> productsCollectionIn = (Set<Product>)workItem.getParameter("productsCollectionIn");*/
-			
-			
 			ASN asnIn = (ASN)workItem.getParameter("asnIn");
 			
 			Map<String, Object> asnRefNumMapIn = (Map<String, Object>)workItem.getParameter("asnRefNumMapIn");

@@ -13,7 +13,9 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.geolocation.Address;
+import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -443,10 +445,15 @@ public class ConfirmAsnPage extends PageFlowPage {
 	public void setOnStartState(Map<String, Object> state) {
 		this.state = (Map<String, Object>)state.get("Content");
 		if (state != null) {
-			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) this.state.get("refNumsCollection");
-			Set<ASNLine> asnLines = (Set<ASNLine>) this.state.get("asnLinesCollection");
-			ASNPickup pickup = (ASNPickup) this.state.get("asnPickup");
-			ASNDropOff dropOff = (ASNDropOff) this.state.get("asnDropoff");
+			Map<String, Object> asnRefNumMapIn = (Map<String, Object>)this.state.get("asnRefNumMapIn");
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>)asnRefNumMapIn.get("asnRefNumCollection");
+			
+			Map<String, Object> asnASNLineProductMapIn = (Map<String, Object>)this.state.get("asnASNLineProductMapIn");			
+			Set<ASNLine> asnLines = (Set<ASNLine>)asnASNLineProductMapIn.get("asnLinesCollection");
+			
+			Map<String, Object> asnLocalTransMapIn = (Map<String, Object>)this.state.get("asnLocalTransMapIn");			
+			ASNPickup pickup = (ASNPickup)asnLocalTransMapIn.get("asnPickup");
+			ASNDropOff dropOff = (ASNDropOff)asnLocalTransMapIn.get("asnDropoff");
 
 			if (refNumContainer != null && refNums != null) {
 				try {

@@ -1,5 +1,7 @@
 package com.conx.logistics.app.whse.rcv.asn.dao.services.impl;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Set;
 
@@ -17,10 +19,13 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
+import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.IEntityMetadataDAOService;
 import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService;
 import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
+import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
+import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 
 
 /**
@@ -77,45 +82,98 @@ public class ASNDAOImpl implements IASNDAOService {
 	}
 
 	@Override
-	public ASN addLines(Long asnId, Set<ASNLine> lines) {
-		ASN asn = em.getReference(ASN.class, asnId);
-		for (ASNLine line : lines)
-		{
-			line.setParentASN(asn);
-			line = (ASNLine)em.merge(line);
-			asn.getAsnLines().add(line);
-		}
-
-		return update(asn);
+	public ASN addLines(Long asnId, Set<ASNLine> lines) throws Exception {
+		ASN asn = null;
+		try {		
+			asn = em.getReference(ASN.class, asnId);
+			Product prod = null;
+			for (ASNLine line : lines)
+			{
+					line.setParentASN(asn);
+					
+					prod = em.merge(line.getProduct());
+					line.setProduct(prod);
+					
+					line = (ASNLine)em.merge(line);
+					asn.getAsnLines().add(line);
+			}
+	
+			asn = update(asn);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+			
+			throw e;
+		}	
+		
+		return asn;
 	}
 
 	@Override
-	public ASN addRefNums(Long asnId, Set<ReferenceNumber> numbers) {
-		ASN asn = em.getReference(ASN.class, asnId);
-		DefaultEntityMetadata emd = entityMetadataDAOService.provide(ASN.class);
-		for (ReferenceNumber number : numbers)
-		{
-			number.setEntityMetadata(emd);
-			number.setEntityPK(asnId);
-			number = referenceNumberDAOService.add(number);
-			asn.getRefNumbers().add(number);
-		}
-		return update(asn);
+	public ASN addRefNums(Long asnId, Set<ReferenceNumber> numbers) throws Exception {
+		ASN asn = null;
+		try {			
+			asn = em.getReference(ASN.class, asnId);
+			DefaultEntityMetadata emd = entityMetadataDAOService.provide(ASN.class);
+			ReferenceNumberType rnt = null;
+			for (ReferenceNumber number : numbers)
+			{
+				number.setEntityMetadata(emd);
+				number.setEntityPK(asnId);
+				
+				rnt = em.merge(number.getType());
+				number.setType(rnt);
+				
+				number = referenceNumberDAOService.add(number);
+				asn.getRefNumbers().add(number);
+			}
+			asn = update(asn);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+			
+			throw e;
+		}	
+		
+		return asn;		
 	}
 
 	@Override
-	public ASN addLocalTrans(Long asnId, ASNPickup pickUp, ASNDropOff dropOff) {
-		ASN asn = em.getReference(ASN.class, asnId);
+	public ASN addLocalTrans(Long asnId, ASNPickup pickUp, ASNDropOff dropOff) throws Exception {
+		ASN asn = null;
 		
-		pickUp = (ASNPickup)em.merge(pickUp);
-		asn.setPickup(pickUp);
+		try {
+			asn = em.getReference(ASN.class, asnId);
 		
-		dropOff = (ASNDropOff)em.merge(dropOff);
-		asn.setDropOff(dropOff);	
+			if (Validator.isNotNull(pickUp))
+			{
+				pickUp = (ASNPickup)em.merge(pickUp);
+				asn.setPickup(pickUp);
+			}
+			
+			if (Validator.isNotNull(dropOff))
+			{		
+				dropOff = (ASNDropOff)em.merge(dropOff);
+				asn.setDropOff(dropOff);	
+			}
+			
+			asn.setPickup(pickUp);
+			asn.setDropOff(dropOff);
+			
+			asn = update(asn);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+			
+			throw e;
+		}		
 		
-		asn.setPickup(pickUp);
-		asn.setDropOff(dropOff);
-		
-		return update(asn);
+		return asn;
 	}	
 }

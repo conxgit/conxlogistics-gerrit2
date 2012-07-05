@@ -14,11 +14,11 @@ public interface IASNDAOService {
 
 	public ASN add(ASN record);
 	
-	public ASN addLines(Long asnId, Set<ASNLine> lines);	
+	public ASN addLines(Long asnId, Set<ASNLine> lines) throws Exception;	
 	
-	public ASN addRefNums(Long asnId, Set<ReferenceNumber> numbers);	
+	public ASN addRefNums(Long asnId, Set<ReferenceNumber> numbers) throws Exception;	
 	
-	public ASN addLocalTrans(Long asnId, ASNPickup pickUp, ASNDropOff dropOff);
+	public ASN addLocalTrans(Long asnId, ASNPickup pickUp, ASNDropOff dropOff) throws Exception;
 
 	public void delete(ASN record);
 

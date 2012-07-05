@@ -1517,24 +1517,26 @@ public class AddAsnLinesPage extends PageFlowPage {
 
 	@Override
 	public Map<String, Object> getOnCompleteState() {
-		Map<String,Object> outParams = new HashMap<String, Object>();
+		Map<String,Object> asnASNLineProductMapOut = new HashMap<String, Object>();
 		Set<ASNLine> asnLines = new HashSet<ASNLine>();
 		for (Object id : asnLineTable.getItemIds()) {
 			asnLines.add(asnLineContainer.getItem(id).getBean());
 		}
-		this.state.put("asnLinesCollection", asnLines);
-		this.state.put("productsCollection", newProducts);
+		asnASNLineProductMapOut.put("asnLinesCollection", asnLines);
+		asnASNLineProductMapOut.put("productsCollection", newProducts);
 
-		outParams.put("asnVarMapOut", this.state);
+		this.state.put("asnASNLineProductMapOut", this.state);
 		
-		return outParams;
+		return this.state;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
 		this.state = (Map<String, Object>)state.get("Content");
-		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) this.state.get("refNumsCollection");
+		Map<String, Object> asnRefNumMapIn = (Map<String, Object>)this.state.get("asnRefNumMapIn");
+		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) asnRefNumMapIn.get("asnRefNumCollection");
+		
 		Set<ASNLine> asnLines = (Set<ASNLine>) this.state.get("asnLinesCollection");
 		if (refNums != null && refNumBeanContainer != null) {
 			try {

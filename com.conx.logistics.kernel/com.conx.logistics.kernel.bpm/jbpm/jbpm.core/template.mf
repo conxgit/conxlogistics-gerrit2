@@ -85,6 +85,7 @@ Import-Package:
  org.jbpm.task.service.jms;version="[5.3.0,5.4.0)";resolution:=optional,
  org.jbpm.task.service.local;version="[5.3.0,5.4.0)",
  org.jbpm.task.service.mina;version="[5.3.0,5.4.0)",
+ org.jbpm.task.service.responsehandlers;version="[5.3.0,5.4.0)",
  org.jbpm.process.core.context.variable;version="[5.3.0,5.4.0)",
  org.jbpm.bpmn2.core;version="[5.3.0,5.4.0)",
  org.jbpm.workflow.core.impl;version="[5.3.0,5.4.0)",

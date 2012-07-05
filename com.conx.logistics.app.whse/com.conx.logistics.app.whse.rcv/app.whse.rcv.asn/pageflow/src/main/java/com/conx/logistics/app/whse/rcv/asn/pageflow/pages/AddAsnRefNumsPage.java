@@ -484,16 +484,16 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 
 	@Override
 	public Map<String, Object> getOnCompleteState() {
-		Map<String,Object> outParams = new HashMap<String, Object>();
+		Map<String,Object> asnRefNumMapOut = new HashMap<String, Object>();
 		Set<ReferenceNumber> refNums = new HashSet<ReferenceNumber>();
 		for (Object id : referenceIdTable.getItemIds()) {
 			refNums.add(refNumBeanContainer.getItem(id).getBean());
 		}
 
-		this.state.put("refNumsCollection", refNums);
-		this.state.put("refNumTypesCollection", newTypes);
+		asnRefNumMapOut.put("asnRefNumCollection", refNums);
+		asnRefNumMapOut.put("asnRefNumTypeCollection", newTypes);
 		
-		outParams.put("Result", this.state);
+		this.state.put("asnRefNumMapOut", asnRefNumMapOut);
 
 		return this.state;
 	}
