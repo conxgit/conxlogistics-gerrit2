@@ -18,36 +18,26 @@ import org.drools.runtime.process.WorkItem;
 import org.drools.runtime.process.WorkItemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.mdm.dao.services.IOrganizationDAOService;
 import com.conx.logistics.mdm.domain.organization.Organization;
 
+@Transactional
+@Repository
 public class InitNewASNWIH implements WorkItemHandler {
 	private static final Logger logger = LoggerFactory.getLogger(InitNewASNWIH.class);
 	
-	private EntityManagerFactory conxlogisticsEMF;
-	private JndiTemplate jndiTemplate;
+	@Autowired
 	private IASNDAOService asnDao;
+	@Autowired
 	private IOrganizationDAOService orgDao;
 
-	public void setAsnDao(IASNDAOService asnDao) {
-		this.asnDao = asnDao;
-	}
-	
-	public void setOrgDao(IOrganizationDAOService orgDao) {
-		this.orgDao = orgDao;
-	}
-
-	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
-		this.conxlogisticsEMF = conxlogisticsEMF;
-	}
-
-	public void setJndiTemplate(JndiTemplate jndiTemplate) {
-		this.jndiTemplate = jndiTemplate;
-	}
 
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {

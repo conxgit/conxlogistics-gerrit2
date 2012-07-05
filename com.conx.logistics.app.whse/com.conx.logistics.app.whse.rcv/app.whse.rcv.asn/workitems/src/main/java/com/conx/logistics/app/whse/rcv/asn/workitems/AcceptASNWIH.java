@@ -2,12 +2,22 @@ package com.conx.logistics.app.whse.rcv.asn.workitems;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import org.drools.process.instance.WorkItemHandler;
@@ -15,7 +25,14 @@ import org.drools.runtime.process.WorkItem;
 import org.drools.runtime.process.WorkItemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
@@ -24,124 +41,296 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService;
+import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 
+@Transactional
+@Repository
 public class AcceptASNWIH implements WorkItemHandler {
-	private static final Logger logger = LoggerFactory.getLogger(AcceptASNWIH.class);
-	
-	private EntityManagerFactory conxlogisticsEMF;
-	private JndiTemplate jndiTemplate;
+	private static final Logger logger = LoggerFactory
+			.getLogger(AcceptASNWIH.class);
+
+	/**
+	 * Spring will inject a managed JPA {@link EntityManager} into this field.
+	 */
+	@PersistenceContext
+	private EntityManager em;
+
+	@Autowired
 	private IASNDAOService asnDao;
+
+	@Autowired
 	private UserTransaction userTransaction;
+
+	@Autowired
+	private PlatformTransactionManager globalJtaTransactionManager;
+
+	@Autowired
 	private IReferenceNumberDAOService referenceNumberDao;
 
-	public void setAsnDao(IASNDAOService asnDao) {
-		this.asnDao = asnDao;
-	}
-	
-	public IASNDAOService getAsnDao() {
-		return asnDao;
-	}
-
-	public void setUserTransaction(UserTransaction userTransaction) {
-		this.userTransaction = userTransaction;
-	}
-
-	public void setConxlogisticsEMF(EntityManagerFactory conxlogisticsEMF) {
-		this.conxlogisticsEMF = conxlogisticsEMF;
-	}
-
-	public void setJndiTemplate(JndiTemplate jndiTemplate) {
-		this.jndiTemplate = jndiTemplate;
-	}
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
 		try {
-			ASN asnIn = (ASN)workItem.getParameter("asnIn");
-			
-			Map<String, Object> asnRefNumMapIn = (Map<String, Object>)workItem.getParameter("asnRefNumMapIn");
-			Set<ReferenceNumber> refNumsCollectionIn = (Set<ReferenceNumber>)asnRefNumMapIn.get("asnRefNumCollection");
-			Set<ReferenceNumberType> refNumTypesCollectionIn = (Set<ReferenceNumberType>)asnRefNumMapIn.get("asnRefNumTypeCollection");
-			
-			Map<String, Object> asnASNLineProductMapIn = (Map<String, Object>)workItem.getParameter("asnASNLineProductMapIn");			
-			Set<ASNLine> asnLinesCollectionIn = (Set<ASNLine>)asnASNLineProductMapIn.get("asnLinesCollection");
-			Set<Product> productsCollection = (Set<Product>)asnASNLineProductMapIn.get("productsCollection");
-			
-			Map<String, Object> asnLocalTransMapIn = (Map<String, Object>)workItem.getParameter("asnLocalTransMapIn");			
-			ASNPickup asnPickupIn = (ASNPickup)asnLocalTransMapIn.get("asnPickup");
-			ASNDropOff asnDropoffIn = (ASNDropOff)asnLocalTransMapIn.get("asnDropoff");
+			// em.joinTransaction();
+
+			ASN asnIn = (ASN) workItem.getParameter("asnIn");
+
+			Map<String, Object> asnRefNumMapIn = (Map<String, Object>) workItem
+					.getParameter("asnRefNumMapIn");
+			Set<ReferenceNumber> refNumsCollectionIn = (Set<ReferenceNumber>) asnRefNumMapIn
+					.get("asnRefNumCollection");
+			Set<ReferenceNumberType> refNumTypesCollectionIn = (Set<ReferenceNumberType>) asnRefNumMapIn
+					.get("asnRefNumTypeCollection");
+
+			Map<String, Object> asnASNLineProductMapIn = (Map<String, Object>) workItem
+					.getParameter("asnASNLineProductMapIn");
+			Set<ASNLine> asnLinesCollectionIn = (Set<ASNLine>) asnASNLineProductMapIn
+					.get("asnLinesCollection");
+			Set<Product> productsCollection = (Set<Product>) asnASNLineProductMapIn
+					.get("productsCollection");
+
+			Map<String, Object> asnLocalTransMapIn = (Map<String, Object>) workItem
+					.getParameter("asnLocalTransMapIn");
+			ASNPickup asnPickupIn = (ASNPickup) asnLocalTransMapIn
+					.get("asnPickup");
+			ASNDropOff asnDropoffIn = (ASNDropOff) asnLocalTransMapIn
+					.get("asnDropoff");
 
 			/**
 			 * 
 			 * Save ASN
 			 * 
 			 */
-			Map<String, Object> varsOut = new HashMap<String, Object>();
-			
-			ASN asn = asnDao.add(asnIn);
-			varsOut.put("asn", asn);
-			Map<String, Object> output = new HashMap<String, Object>();
-			output.put("asnOut",asn);
-			
-			if (Validator.isNotNull(asnRefNumMapIn) && asnRefNumMapIn.size() > 0)
-			{
-				Map<String, Object> asnRefNumMapOut = new HashMap<String, Object>();
-				asn = asnDao.addRefNums(asn.getId(), refNumsCollectionIn);
-				Set<ReferenceNumber> refNumsCollectionOut = asn.getRefNumbers();
-				asnRefNumMapOut.put("asnRefNumCollection", refNumsCollectionOut);
-				varsOut.put("refNumsCollectionOut",asnRefNumMapOut);
-			}
-			
-			if (Validator.isNotNull(asnASNLineProductMapIn) && asnASNLineProductMapIn.size() > 0)
-			{
-				Map<String, Object> asnASNLineProductMapOut = new HashMap<String, Object>();
-				asn = asnDao.addLines(asn.getId(), asnLinesCollectionIn);
-				Set<ASNLine> asnLinesCollectionOut = asn.getAsnLines();
-				asnASNLineProductMapOut.put("asnLinesCollection", asnLinesCollectionOut);
-				
-				varsOut.put("asnASNLineProductMapOut",asnASNLineProductMapOut);
-			}
+			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+			def.setPropagationBehavior(TransactionDefinition.PROPAGATION_MANDATORY);
+			TransactionStatus status = globalJtaTransactionManager
+					.getTransaction(def);
 
-			if (Validator.isNotNull(asnLocalTransMapIn) && asnLocalTransMapIn.size() > 0)
-			{
-				Map<String, Object> asnLocalTransMapOut = new HashMap<String, Object>();
-				asn = asnDao.addLocalTrans(asn.getId(), asnPickupIn,asnDropoffIn);
-				ASNPickup asnPickupOut = asn.getPickup();
-				ASNDropOff asnDropoffOut = asn.getDropOff();
-				asnLocalTransMapOut.put("asnPickup",asnPickupOut);
-				asnLocalTransMapOut.put("asnDropoff",asnDropoffOut);
-				
-				varsOut.put("asnLocalTransMapOut",asnLocalTransMapOut);
+			Map<String, Object> varsOut = new HashMap<String, Object>();
+			ASN asn = null;
+			try {
+				asn = em.merge(asnIn);
+
+				varsOut.put("asn", asn);
+				Map<String, Object> output = new HashMap<String, Object>();
+				output.put("asnOut", asn);
+
+				if (Validator.isNotNull(asnRefNumMapIn)
+						&& asnRefNumMapIn.size() > 0) {
+					Map<String, Object> asnRefNumMapOut = new HashMap<String, Object>();
+					asn = addRefNums(asn.getId(), refNumsCollectionIn);
+					Set<ReferenceNumber> refNumsCollectionOut = asn
+							.getRefNumbers();
+					asnRefNumMapOut.put("asnRefNumCollection",
+							refNumsCollectionOut);
+					varsOut.put("refNumsCollectionOut", asnRefNumMapOut);
+				}
+
+				if (Validator.isNotNull(asnASNLineProductMapIn)
+						&& asnASNLineProductMapIn.size() > 0) {
+					if (Validator.isNotNull(asnLinesCollectionIn))
+					{
+						Map<String, Object> asnASNLineProductMapOut = new HashMap<String, Object>();
+						asn = addLines(asn.getId(), asnLinesCollectionIn);
+						Set<ASNLine> asnLinesCollectionOut = asn.getAsnLines();
+						asnASNLineProductMapOut.put("asnLinesCollection",
+								asnLinesCollectionOut);
+	
+						varsOut.put("asnASNLineProductMapOut",
+								asnASNLineProductMapOut);
+					}
+				}
+
+				if (Validator.isNotNull(asnLocalTransMapIn)
+						&& asnLocalTransMapIn.size() > 0) {
+					Map<String, Object> asnLocalTransMapOut = new HashMap<String, Object>();
+					asn = addLocalTrans(asn.getId(), asnPickupIn,
+							asnDropoffIn);
+					ASNPickup asnPickupOut = asn.getPickup();
+					ASNDropOff asnDropoffOut = asn.getDropOff();
+					asnLocalTransMapOut.put("asnPickup", asnPickupOut);
+					asnLocalTransMapOut.put("asnDropoff", asnDropoffOut);
+
+					varsOut.put("asnLocalTransMapOut", asnLocalTransMapOut);
+				}
+			} catch (Exception e) {
+				StringWriter sw = new StringWriter();
+				e.printStackTrace(new PrintWriter(sw));
+				String stacktrace = sw.toString();
+				logger.error(stacktrace);
+
+				globalJtaTransactionManager.rollback(status);
+
+				throw new IllegalStateException("AcceptASNWIH:Save New ASN\r\n"
+						+ stacktrace, e);
 			}
+			globalJtaTransactionManager.commit(status);
+
 			manager.completeWorkItem(workItem.getId(), varsOut);
-			//WIUtils.waitTillCompleted(workItem,1000L);
-		}
-		catch (Exception e)
-		{
+			// WIUtils.waitTillCompleted(workItem,1000L);
+		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
 			String stacktrace = sw.toString();
 			logger.error(stacktrace);
-			
-			throw new IllegalStateException("AcceptASNWIH:\r\n"+stacktrace, e);
-		}	
-		catch (Error e)
-		{
+
+			throw new IllegalStateException("AcceptASNWIH:\r\n" + stacktrace, e);
+		} catch (Error e) {
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
 			String stacktrace = sw.toString();
 			logger.error(stacktrace);
-			
-			throw new IllegalStateException("AcceptASNWIH:\r\n"+stacktrace, e);			
+
+			throw new IllegalStateException("AcceptASNWIH:\r\n" + stacktrace, e);
 		}
 	}
 
 	@Override
 	public void abortWorkItem(WorkItem workItem, WorkItemManager manager) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public ASN addLines(Long asnId, Set<ASNLine> lines) throws Exception {
+		ASN asn = null;
+		try {
+			asn = em.getReference(ASN.class, asnId);
+			Product prod = null;
+			for (ASNLine line : lines) {
+				line.setParentASN(asn);
+
+				prod = em.merge(line.getProduct());
+				line.setProduct(prod);
+
+				line = (ASNLine) em.merge(line);
+				asn.getAsnLines().add(line);
+			}
+
+			asn = em.merge(asn);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+
+			throw e;
+		}
+
+		return asn;
+	}
+
+	public ASN addRefNums(Long asnId, Set<ReferenceNumber> numbers)
+			throws Exception {
+		ASN asn = null;
+		try {
+			asn = em.getReference(ASN.class, asnId);
+			DefaultEntityMetadata emd = provideEMD(ASN.class);
+			ReferenceNumberType rnt = null;
+			for (ReferenceNumber number : numbers) {
+				number.setEntityMetadata(emd);
+				number.setEntityPK(asnId);
+
+				//rnt = em.merge(number.getType());
+				//number.setType(rnt);
+
+				number = em.merge(number);
+				asn.getRefNumbers().add(number);
+			}
+			asn = em.merge(asn);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+
+			throw e;
+		}
+
+		return asn;
+	}
+
+	public ASN addLocalTrans(Long asnId, ASNPickup pickUp, ASNDropOff dropOff)
+			throws Exception {
+		ASN asn = null;
+
+		try {
+			asn = em.getReference(ASN.class, asnId);
+
+			if (Validator.isNotNull(pickUp)) {
+				pickUp = (ASNPickup) em.merge(pickUp);
+				asn.setPickup(pickUp);
+			}
+
+			if (Validator.isNotNull(dropOff)) {
+				dropOff = (ASNDropOff) em.merge(dropOff);
+				asn.setDropOff(dropOff);
+			}
+
+			asn.setPickup(pickUp);
+			asn.setDropOff(dropOff);
+
+			asn = em.merge(asn);
+		} catch (Exception e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+
+			throw e;
+		}
+
+		return asn;
+	}
+
+	public DefaultEntityMetadata getByClass(Class entityClass) {
+		DefaultEntityMetadata record = null;
+
+		try {
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+			CriteriaQuery<DefaultEntityMetadata> query = builder
+					.createQuery(DefaultEntityMetadata.class);
+			Root<DefaultEntityMetadata> rootEntity = query
+					.from(DefaultEntityMetadata.class);
+			ParameterExpression<String> p = builder.parameter(String.class);
+			query.select(rootEntity).where(
+					builder.equal(rootEntity.get("entityJavaSimpleType"), p));
+
+			TypedQuery<DefaultEntityMetadata> typedQuery = em
+					.createQuery(query);
+			typedQuery.setParameter(p, entityClass.getSimpleName());
+
+			return typedQuery.getSingleResult();
+			// TypedQuery<DefaultEntityMetadata> q =
+			// em.createQuery("select DISTINCT  o from com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata o WHERE o.entityJavaSimpleType = :entityJavaSimpleType",DefaultEntityMetadata.class);
+			// q.setParameter("entityJavaSimpleType",
+			// entityClass.getSimpleName());
+			// record = q.getSingleResult();
+		} catch (NoResultException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (Error e) {
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+			String stacktrace = sw.toString();
+			logger.error(stacktrace);
+		}
+
+		return record;
+	}
+
+	public DefaultEntityMetadata provideEMD(Class entityClass) {
+		DefaultEntityMetadata existingRecord = getByClass(entityClass);
+		if (Validator.isNull(existingRecord)) {
+			existingRecord = new DefaultEntityMetadata();
+			existingRecord.setDateCreated(new Date());
+			existingRecord.setDateLastUpdated(new Date());
+			existingRecord.setEntityJavaSimpleType(entityClass.getSimpleName());
+			existingRecord.setEntityJavaType(entityClass.getName());
+			existingRecord = em.merge(existingRecord);
+		}
+		return existingRecord;
 	}
 
 }

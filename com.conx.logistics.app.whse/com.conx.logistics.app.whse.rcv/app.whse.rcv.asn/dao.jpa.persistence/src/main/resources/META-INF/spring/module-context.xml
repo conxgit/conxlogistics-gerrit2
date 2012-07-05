@@ -11,19 +11,6 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-	<!-- ========================= TRRANSCTION MANAGEMENT ========================= -->
-	<!-- 
-	<bean id="globalTransactionManagerId" class="org.springframework.transaction.jta.JtaTransactionManager">
-	    <property name="transactionManager" ref="globalTransactionManager" />
-	    <property name="userTransaction" ref="globalTransactionManager" />
-	</bean>
-	 -->
-	
-	<bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-    	<property name="entityManagerFactory" ref="conxLogisticsManagerFactory"/>
-  	</bean>
-	
-
 	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
 
 	<!--

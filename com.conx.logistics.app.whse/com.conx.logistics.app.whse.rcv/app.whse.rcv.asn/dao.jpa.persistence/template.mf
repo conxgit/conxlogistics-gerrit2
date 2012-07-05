@@ -35,6 +35,9 @@ Import-Package:
   org.springframework.orm.jpa.vendor;version="[3.0,3.1)",
   org.springframework.dao;version="[3.0,3.1)",
   org.springframework.dao.support;version="[3.0,3.1)",
-  org.springframework.orm.jpa;version="[3.0,3.1)"
+  org.springframework.orm.jpa;version="[3.0,3.1)",
+  org.springframework.aop;version="[3.0,3.1)",
+   org.aopalliance.aop;version="1.0.0",
+  org.springframework.aop.framework;version="[3.0,3.1)"
 Excluded-Imports: 
   com.conx.logistics.mdm.dao.services.impl

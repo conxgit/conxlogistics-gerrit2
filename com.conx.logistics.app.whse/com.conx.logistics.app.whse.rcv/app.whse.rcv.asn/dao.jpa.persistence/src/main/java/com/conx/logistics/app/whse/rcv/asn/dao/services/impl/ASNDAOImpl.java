@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService;
@@ -67,7 +68,6 @@ public class ASNDAOImpl implements IASNDAOService {
 	@Override
 	public ASN add(ASN record) {
 		record = em.merge(record);
-		
 		return record;
 	}
 
