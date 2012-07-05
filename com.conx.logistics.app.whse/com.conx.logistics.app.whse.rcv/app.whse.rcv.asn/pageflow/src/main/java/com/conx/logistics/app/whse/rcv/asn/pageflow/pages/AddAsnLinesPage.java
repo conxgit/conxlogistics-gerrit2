@@ -1525,7 +1525,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		asnASNLineProductMapOut.put("asnLinesCollection", asnLines);
 		asnASNLineProductMapOut.put("productsCollection", newProducts);
 
-		this.state.put("asnASNLineProductMapOut", this.state);
+		this.state.put("asnASNLineProductMapOut", asnASNLineProductMapOut);
 		
 		return this.state;
 	}

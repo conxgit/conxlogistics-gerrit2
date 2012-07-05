@@ -1,5 +1,6 @@
 package com.conx.logistics.mdm.domain.metadata;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="mdmentitymetadata")
-public class DefaultEntityMetadata {
+public class DefaultEntityMetadata implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

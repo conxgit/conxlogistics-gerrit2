@@ -198,14 +198,30 @@ public class AcceptASNWIH implements WorkItemHandler {
 		try {
 			asn = em.getReference(ASN.class, asnId);
 			Product prod = null;
+			ReferenceNumber number = null;
+			DefaultEntityMetadata emd = provideEMD(ASN.class);
 			for (ASNLine line : lines) {
 				line.setParentASN(asn);
+				
+				number = line.getRefNumber();
+				
+				number = em.merge(number);
+				
+				if (Validator.isNull(number.getId()))
+				{
+					number.setEntityMetadata(emd);
+					number.setEntityPK(number.getId());
+				}
+				line.setRefNumber(number);
+				
 
 				prod = em.merge(line.getProduct());
 				line.setProduct(prod);
 
 				line = (ASNLine) em.merge(line);
+				
 				asn.getAsnLines().add(line);
+				asn.getRefNumbers().add(number);
 			}
 
 			asn = em.merge(asn);
