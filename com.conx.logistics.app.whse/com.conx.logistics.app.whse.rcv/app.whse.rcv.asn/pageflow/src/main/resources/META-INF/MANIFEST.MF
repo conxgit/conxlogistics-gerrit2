@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.pageflow.pages;ver
  sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.c
  onx.logistics.mdm.domain.geolocation,com.conx.logistics.mdm.domain.or
- ganization,com.conx.logistics.mdm.domain.product,com.vaadin.addon.jpa
- container,com.vaadin.data,com.vaadin.data.util,com.vaadin.ui,javax.pe
- rsistence"
+ ganization,com.conx.logistics.mdm.domain.product,com.vaadin.data,com.
+ vaadin.data.util,com.vaadin.ui,javax.persistence,org.springframework.
+ transaction"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -23,6 +23,7 @@ Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
  ",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.data;versi
  on="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.v
  aadin.event;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0
- .0)",javax.persistence;version="0",org.vaadin.teemu.wizards;version="
- 0.4.4"
+ .0)",javax.persistence;version="0",org.springframework.transaction;ve
+ rsion="[3.0,3.1)",org.springframework.transaction.support;version="[3
+ .0,3.1)",org.vaadin.teemu.wizards;version="0.4.4"
 

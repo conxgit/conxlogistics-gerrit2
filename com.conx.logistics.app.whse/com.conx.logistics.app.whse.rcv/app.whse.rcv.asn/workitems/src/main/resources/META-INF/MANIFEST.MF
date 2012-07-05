@@ -1,9 +1,11 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.workitems;version=
  "1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.services,com.c
- onx.logistics.mdm.dao.services,javax.persistence,javax.transaction,or
- g.drools.process.instance,org.drools.runtime.process,org.springframew
- ork.jndi"
+ onx.logistics.app.whse.rcv.asn.domain,com.conx.logistics.mdm.dao.serv
+ ices,com.conx.logistics.mdm.domain.metadata,javax.persistence,org.dro
+ ols.process.instance,org.drools.runtime.process,org.springframework.b
+ eans.factory.annotation,org.springframework.jndi,org.springframework.
+ stereotype,org.springframework.transaction.annotation"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -16,10 +18,22 @@ Import-Package: com.conx.logistics.app.whse.rcv.asn.dao.services;versi
  on="1.0.0",com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0"
  ,com.conx.logistics.common.utils;version="1.0.0",com.conx.logistics.m
  dm.dao.services;version="1.0.0",com.conx.logistics.mdm.dao.services.r
- eferencenumber;version="1.0.0",com.conx.logistics.mdm.domain.organiza
- tion;version="1.0.0",javax.persistence;version="0",javax.transaction;
- version="0",org.drools.process.instance;version="[5.4.0,5.5.0)",org.d
- rools.runtime.process;version="[5.4.0,5.5.0)",org.slf4j;version="[1.6
- .0,1.7.0)",org.springframework.jndi;version="[3.0,3.1)",org.springfra
- mework.transaction;version="[3.0,3.1)"
+ eferencenumber;version="1.0.0",com.conx.logistics.mdm.domain.metadata
+ ;version="1.0.0",com.conx.logistics.mdm.domain.organization;version="
+ 1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.conx
+ .logistics.mdm.domain.referencenumber;version="1.0.0",javax.persisten
+ ce;version="0",javax.persistence.criteria;version="0",javax.transacti
+ on;version="0",org.drools.process.instance;version="[5.4.0,5.5.0)",or
+ g.drools.runtime.process;version="[5.4.0,5.5.0)",org.slf4j;version="[
+ 1.6.0,1.7.0)",org.springframework.beans.factory.annotation;version="[
+ 3.0,3.1)",org.springframework.dao;version="[3.0,3.1)",org.springframe
+ work.dao.annotation;version="[3.0,3.1)",org.springframework.dao.suppo
+ rt;version="[3.0,3.1)",org.springframework.jndi;version="[3.0,3.1)",o
+ rg.springframework.orm.jpa;version="[3.0,3.1)",org.springframework.or
+ m.jpa.vendor;version="[3.0,3.1)",org.springframework.stereotype;versi
+ on="[3.0,3.1)",org.springframework.transaction;version="[3.0,3.1)",or
+ g.springframework.transaction.annotation;version="[3.0,3.1)",org.spri
+ ngframework.transaction.aspectj;version="[3.0,3.1)",org.springframewo
+ rk.transaction.jta;version="[3.0,3.1)",org.springframework.transactio
+ n.support;version="[3.0,3.1)"
 

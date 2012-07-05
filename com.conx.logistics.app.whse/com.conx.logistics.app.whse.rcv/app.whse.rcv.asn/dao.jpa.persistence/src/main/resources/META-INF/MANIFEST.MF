@@ -29,14 +29,16 @@ Import-Package: com.conx.logistics.app.whse.rcv.asn.dao.services;versi
  ",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",com.c
  onx.logistics.mdm.domain.task;version="1.0.0",javax.persistence;versi
  on="0",javax.persistence.criteria;version="0",javax.transaction;versi
- on="0",org.hibernate.hql.ast;version="3.6.0.Final",org.slf4j;version=
- "[1.6.1,1.7.0)",org.springframework.beans.factory.annotation;version=
- "[3.0,3.1)",org.springframework.dao;version="[3.0,3.1)",org.springfra
- mework.dao.annotation;version="[3.0,3.1)",org.springframework.dao.sup
- port;version="[3.0,3.1)",org.springframework.orm.jpa;version="[3.0,3.
- 1)",org.springframework.orm.jpa.vendor;version="[3.0,3.1)",org.spring
- framework.stereotype;version="[3.0,3.1)",org.springframework.transact
- ion;version="[3.0,3.1)",org.springframework.transaction.annotation;ve
- rsion="[3.0,3.1)",org.springframework.transaction.aspectj;version="[3
- .0,3.1)",org.springframework.transaction.jta;version="[3.0,3.1)"
+ on="0",org.aopalliance.aop;version="1.0.0",org.hibernate.hql.ast;vers
+ ion="3.6.0.Final",org.slf4j;version="[1.6.1,1.7.0)",org.springframewo
+ rk.aop;version="[3.0,3.1)",org.springframework.aop.framework;version=
+ "[3.0,3.1)",org.springframework.beans.factory.annotation;version="[3.
+ 0,3.1)",org.springframework.dao;version="[3.0,3.1)",org.springframewo
+ rk.dao.annotation;version="[3.0,3.1)",org.springframework.dao.support
+ ;version="[3.0,3.1)",org.springframework.orm.jpa;version="[3.0,3.1)",
+ org.springframework.orm.jpa.vendor;version="[3.0,3.1)",org.springfram
+ ework.stereotype;version="[3.0,3.1)",org.springframework.transaction;
+ version="[3.0,3.1)",org.springframework.transaction.annotation;versio
+ n="[3.0,3.1)",org.springframework.transaction.aspectj;version="[3.0,3
+ .1)",org.springframework.transaction.jta;version="[3.0,3.1)"
 
