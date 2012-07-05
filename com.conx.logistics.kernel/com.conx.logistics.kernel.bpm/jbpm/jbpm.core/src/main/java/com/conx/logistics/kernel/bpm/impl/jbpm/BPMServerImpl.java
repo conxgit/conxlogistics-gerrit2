@@ -850,7 +850,7 @@ public class BPMServerImpl implements IBPMService {
 	@Override
 	public void completeTask(long taskId, Map<String, Object> data, String userId) {
 		ContentData objectRes = ContentMarshallerHelper.marshal(data,((GenericHTWorkItemHandler)hthandler).getMarshallerContext(),ksession.getEnvironment());	
-		taskManager.completeTask(taskId, data, userId);
+		taskManager.completeTask(taskId, objectRes, userId);
 	}
 
 	@Override

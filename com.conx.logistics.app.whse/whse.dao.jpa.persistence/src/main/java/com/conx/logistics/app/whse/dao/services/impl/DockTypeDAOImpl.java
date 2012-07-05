@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +22,7 @@ import com.conx.logistics.app.whse.dao.services.IDockTypeDAOService;
 import com.conx.logistics.app.whse.domain.constants.DockTypeCustomCONSTANTS;
 import com.conx.logistics.app.whse.domain.docktype.DockType;
 import com.conx.logistics.common.utils.Validator;
+import com.conx.logistics.mdm.domain.organization.Organization;
 
 @Transactional
 @Repository
@@ -49,10 +54,22 @@ public class DockTypeDAOImpl implements IDockTypeDAOService {
 		
 		try
 		{
+			CriteriaBuilder builder = em.getCriteriaBuilder();
+			CriteriaQuery<DockType> query = builder.createQuery(DockType.class);
+			Root<DockType> rootEntity = query.from(DockType.class);
+			ParameterExpression<String> p = builder.parameter(String.class);
+			query.select(rootEntity).where(builder.equal(rootEntity.get("code"), p));
+
+			TypedQuery<DockType> typedQuery = em.createQuery(query);
+			typedQuery.setParameter(p, code);
+			
+			org = typedQuery.getSingleResult();
+			/*
 			TypedQuery<DockType> q = em.createQuery("select o from com.conx.logistics.app.whse.domain.docktype.DockType o WHERE o.code = :code",DockType.class);
 			q.setParameter("code", code);
 						
 			org = q.getSingleResult();
+			*/
 		}
 		catch(NoResultException e){}
 		catch(Exception e)

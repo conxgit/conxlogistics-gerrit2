@@ -78,7 +78,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	public void start() {
 		try 
 		{
-			ProcessInstanceRef pi = bpmService.newInstance("defaultPackage.goat1");
+			//ProcessInstanceRef pi = bpmService.newInstance("defaultPackage.goat1");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
