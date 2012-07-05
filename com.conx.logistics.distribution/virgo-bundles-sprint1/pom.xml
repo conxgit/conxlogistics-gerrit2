@@ -233,5 +233,19 @@
 		<version>2.0.0.RC1</version>
 		<type>war</type>
 	</dependency>
+	<dependency>
+		<groupId>com.conx.logistics</groupId>
+		<artifactId>
+			com.conx.logistics.app.whse.dao.jpa.persistence
+		</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.conx.logistics</groupId>
+		<artifactId>
+			com.conx.logistics.app.whse.dao.services
+		</artifactId>
+		<version>1.0.0</version>
+	</dependency>
 	</dependencies>  
 </project>

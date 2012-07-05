@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.domain.constants;version="
+ 1.0.0";uses:="com.conx.logistics.mdm.domain.constants",com.conx.logis
+ tics.app.whse.domain.docktype;version="1.0.0";uses:="com.conx.logisti
+ cs.mdm.domain,javax.persistence"
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS App Domain Model
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.domain
+

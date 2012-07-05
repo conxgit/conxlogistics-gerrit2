@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS App Pers Config
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.domain.persistence.co
+ nfig
+
