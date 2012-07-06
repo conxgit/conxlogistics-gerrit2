@@ -422,6 +422,8 @@ public class ConfirmAsnPage extends PageFlowPage {
 
 	@Override
 	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+		setExecuted(false);
+		
 		initContainers();
 		initEntityTabSheet();
 		initTableToolStrip();
@@ -437,6 +439,7 @@ public class ConfirmAsnPage extends PageFlowPage {
 	
 	@Override
 	public Map<String, Object> getOnCompleteState() {
+		setExecuted(true);
 		return this.state;
 	}
 

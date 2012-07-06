@@ -1098,6 +1098,7 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 	@Override
 	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+		setExecuted(false);
 		this.emf = emf;
 
 		initContainers();
@@ -1193,7 +1194,7 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		asnLocalTransMap.put("asnDropoff", dropOff);
 
 		this.state.put("asnLocalTransMapOut", asnLocalTransMap);
-
+		setExecuted(true);
 		return this.state;
 	}
 

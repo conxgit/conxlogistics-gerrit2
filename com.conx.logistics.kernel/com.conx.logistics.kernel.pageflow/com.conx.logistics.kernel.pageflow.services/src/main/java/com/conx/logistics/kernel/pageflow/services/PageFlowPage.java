@@ -16,6 +16,7 @@ public abstract class PageFlowPage implements WizardStep {
 	public static final String TASK_NAME = "TASK_NAME"; // Task Name in BPMN
 	
 	private VerticalLayout canvas;
+	private boolean executed;
 	
 	public abstract String getTaskName();
 	public abstract void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm);
@@ -87,5 +88,13 @@ public abstract class PageFlowPage implements WizardStep {
 			return getTaskName().equals(((PageFlowPage)o).getTaskName()); 
 		}
 		return false;
+	}
+	
+	public boolean isExecuted() {
+		return executed;
+	}
+	
+	public void setExecuted(boolean executed) {
+		this.executed = executed;
 	}
 }

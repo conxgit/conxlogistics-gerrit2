@@ -451,6 +451,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 
 	@Override
 	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+		setExecuted(false);
 		this.emf = emf;
 
 		initFields();
@@ -496,7 +497,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 		asnRefNumMapOut.put("asnRefNumTypeCollection", newTypes);
 		
 		this.state.put("asnRefNumMapOut", asnRefNumMapOut);
-
+		setExecuted(true);
 		return this.state;
 	}
 

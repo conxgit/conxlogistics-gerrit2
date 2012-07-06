@@ -158,6 +158,7 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 
 	@Override
 	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+		setExecuted(false);
 		this.emf = emf;
 		
 		initContainers();
@@ -177,6 +178,7 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 	public Map<String, Object> getOnCompleteState() {
 		//Map<String,Object> outParams = new HashMap<String, Object>();
 		//outParams.put("Result", this.state);
+		setExecuted(true);
 		return null;
 	}
 

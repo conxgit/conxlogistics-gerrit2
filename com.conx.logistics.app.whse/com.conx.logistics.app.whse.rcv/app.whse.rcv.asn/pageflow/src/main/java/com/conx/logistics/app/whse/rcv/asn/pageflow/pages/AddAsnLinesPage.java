@@ -1493,6 +1493,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 
 	@Override
 	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+		setExecuted(false);
 		this.emf = emf;
 
 		initFields();
@@ -1528,7 +1529,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		asnASNLineProductMapOut.put("productsCollection", newProducts);
 
 		this.state.put("asnASNLineProductMapOut", asnASNLineProductMapOut);
-		
+		setExecuted(true);
 		return this.state;
 	}
 
