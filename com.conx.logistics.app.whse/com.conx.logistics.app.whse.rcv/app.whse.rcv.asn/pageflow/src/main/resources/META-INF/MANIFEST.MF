@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.pageflow.pages;ver
- sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.services,com.c
- onx.logistics.mdm.domain.geolocation,com.conx.logistics.mdm.domain.or
- ganization,com.conx.logistics.mdm.domain.product,com.vaadin.data,com.
- vaadin.data.util,com.vaadin.ui,javax.persistence,org.springframework.
- transaction"
+ sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.event,com.conx
+ .logistics.kernel.pageflow.services,com.conx.logistics.mdm.domain.geo
+ location,com.conx.logistics.mdm.domain.organization,com.conx.logistic
+ s.mdm.domain.product,com.vaadin.data,com.vaadin.data.util,com.vaadin.
+ ui,javax.persistence,org.springframework.transaction"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -13,17 +13,19 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module PageFlow artifacts
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.pageflow
-Import-Package: com.conx.logistics.app.whse.rcv.asn.domain;version="1.
- 0.0",com.conx.logistics.kernel.pageflow.services;version="1.0.0",com.
- conx.logistics.mdm.domain.commercialrecord;version="1.0.0",com.conx.l
- ogistics.mdm.domain.currency;version="1.0.0",com.conx.logistics.mdm.d
- omain.geolocation;version="1.0.0",com.conx.logistics.mdm.domain.organ
- ization;version="1.0.0",com.conx.logistics.mdm.domain.product;version
- ="1.0.0",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0
- ",com.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.data;versi
- on="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.v
- aadin.event;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0
- .0)",javax.persistence;version="0",org.springframework.transaction;ve
- rsion="[3.0,3.1)",org.springframework.transaction.support;version="[3
- .0,3.1)",org.vaadin.teemu.wizards;version="0.4.4"
+Import-Package: com.conx.logistics.app.whse.domain.docktype;version="[
+ 1.0.0, 2.0.0)",com.conx.logistics.app.whse.rcv.asn.domain;version="1.
+ 0.0",com.conx.logistics.kernel.pageflow.event;version="[1.0.0, 2.0.0)
+ ",com.conx.logistics.kernel.pageflow.services;version="1.0.0",com.con
+ x.logistics.mdm.domain.commercialrecord;version="1.0.0",com.conx.logi
+ stics.mdm.domain.currency;version="1.0.0",com.conx.logistics.mdm.doma
+ in.geolocation;version="1.0.0",com.conx.logistics.mdm.domain.organiza
+ tion;version="1.0.0",com.conx.logistics.mdm.domain.product;version="1
+ .0.0",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",c
+ om.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.data;version=
+ "[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.vaad
+ in.event;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)
+ ",javax.persistence;version="0",org.springframework.transaction;versi
+ on="[3.0,3.1)",org.springframework.transaction.support;version="[3.0,
+ 3.1)",org.vaadin.teemu.wizards;version="0.4.4"
 

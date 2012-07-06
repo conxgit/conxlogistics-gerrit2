@@ -15,10 +15,14 @@ Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm;version="1.0.0
  del,org.jboss.bpm.console.server.integration,org.jbpm.process.audit,o
  rg.jbpm.task,org.jbpm.task.query,org.jbpm.task.service,org.springfram
  ework.transaction"
+Build-Jdk: 1.6.0_32
+Built-By: Mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM Core
 Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.core
 Import-Package: bitronix.tm.jndi;version="[2.1.0,2.2.0)",com.conx.logi
  stics.app.whse.rcv.asn.domain;version="1.0.0",com.conx.logistics.kern
  el.bpm.impl.jbpm.shared.utils;version="1.0.0",com.conx.logistics.kern
@@ -87,5 +91,4 @@ Import-Package: bitronix.tm.jndi;version="[2.1.0,2.2.0)",com.conx.logi
  nstance.node;version="[5.3.0,5.4.0)",org.slf4j;version="[1.6.0,1.7.0)
  ",org.springframework.jndi;version="[3.0,3.1)",org.springframework.tr
  ansaction;version="[3.0,3.1)"
-Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.core
 
