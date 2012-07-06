@@ -30,6 +30,11 @@ public interface IPageFlowManager {
 	 * Given a TaskDefinition and UserId, pageFlowSessionId
 	 */
 	public IPageFlowSession resumePageFlowSession(String userid, Long pageFlowSessionId);
+	/**
+	 * Update process instance variables
+	 */
+	public Map<String,Object> updateProcessInstanceVariables(ITaskWizard tw, Map<String,Object> varsToUpdate) throws Exception;		
+	
 	
 	/**
 	 * Main App

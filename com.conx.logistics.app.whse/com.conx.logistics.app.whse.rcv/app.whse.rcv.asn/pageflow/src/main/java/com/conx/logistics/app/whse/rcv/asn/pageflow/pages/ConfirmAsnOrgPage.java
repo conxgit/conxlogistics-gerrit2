@@ -8,6 +8,8 @@ import javax.persistence.EntityManagerFactory;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.organization.Organization;
 import com.vaadin.addon.jpacontainer.JPAContainer;
@@ -157,7 +159,8 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm,
+			IPageFlowPageChangedEventHandler pfpEventHandler, ITaskWizard wizard) {
 		setExecuted(false);
 		this.emf = emf;
 		

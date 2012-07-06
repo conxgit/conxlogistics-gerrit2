@@ -409,4 +409,31 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 		
 	}
 
+	public Map<String, Object> updateProcessInstanceVariables(UserTransaction ut,
+			Map<String, Object> varsToUpdate) throws Exception {
+		try
+		{
+			ut.begin();
+			bpmService.setProcessInstanceVariables(processInstance.getId(),varsToUpdate);
+			ut.commit();
+		} catch (Exception e) {
+			ut.rollback();
+			throw e;
+		}
+		
+		Map<String, Object> procInstVars = null;
+		try
+		{
+			ut.begin();
+			procInstVars = bpmService.getProcessInstanceVariables(processInstance.getId());
+			processVars = procInstVars;
+			ut.commit();
+		} catch (Exception e) {
+			ut.rollback();
+			throw e;
+		}		
+		
+		return procInstVars;
+	}
+
 }

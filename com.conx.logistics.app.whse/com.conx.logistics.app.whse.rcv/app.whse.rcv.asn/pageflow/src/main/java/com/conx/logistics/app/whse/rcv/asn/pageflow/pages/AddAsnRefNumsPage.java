@@ -9,6 +9,8 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
@@ -450,7 +452,8 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm,
+			IPageFlowPageChangedEventHandler pfpEventHandler, ITaskWizard wizard) {
 		setExecuted(false);
 		this.emf = emf;
 

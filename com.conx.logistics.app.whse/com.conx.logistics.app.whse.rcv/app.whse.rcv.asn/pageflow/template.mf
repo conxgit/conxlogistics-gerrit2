@@ -19,5 +19,6 @@ Import-Package: com.conx.logistics.kernel.pageflow.services;version="1.0.0",
   com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",
   org.springframework.transaction;version="[3.0,3.1)",
   org.springframework.transaction.support;version="[3.0,3.1)",
-  com.conx.logistics.app.whse.domain.docktype;version="[1.0.0, 2.0.0)"
+  com.conx.logistics.app.whse.domain.docktype;version="[1.0.0, 2.0.0)",
+  com.conx.logistics.kernel.pageflow.event;version="[1.0.0, 2.0.0)"
 

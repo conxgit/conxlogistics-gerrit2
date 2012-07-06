@@ -11,6 +11,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
+import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.product.Product;
@@ -421,8 +424,13 @@ public class ConfirmAsnPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm,
+			IPageFlowPageChangedEventHandler pfpEventHandler, ITaskWizard wizard) {
 		setExecuted(false);
+		
+		super.wizard = wizard;
+		super.pfpEventHandler = pfpEventHandler;
+		super.pfpEventHandler.registerForPageFlowPageChanged(this);		
 		
 		initContainers();
 		initEntityTabSheet();
@@ -512,4 +520,9 @@ public class ConfirmAsnPage extends PageFlowPage {
 		}
 	}
 
+	@Override
+	public void onPageChanged(PageFlowPageChangedEvent event) {
+		Map<String, Object> updatedProcVars = event.getChangedVars();
+		//Look for procVars
+	}	
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="com.conx.logistics.solution-stage.plan" version="2.0.0.RC1" scoped="false" atomic="true"
+        xmlns="http://www.eclipse.org/virgo/schema/plan"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+		        http://www.eclipse.org/virgo/schema/plan 
+		        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+
+	<!-- 
+	
+	Bootstrap
+	
+	 -->
+	<!-- Bootstraping Bundles : stage 1 -->
+	<artifact type="bundle" name="com.conx.logistics.common.utils" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.datasource" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.tm.jta" version="1.0.0"/>	
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.services" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.persistence.dynaconfiguration" version="1.0.0"/>
+	
+	<!-- Bootstraping Bundles : stage 2 (fragments)-->
+	<!-- Host: com.conx.logistics.kernel.persistence.dynaconfiguration -->
+	<artifact type="bundle" name="com.conx.logistics.mdm.domain" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.domain" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.domain" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.mdm.domain.persistence.config" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.domain.persistence.config" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.domain.persistence.config" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.mdm.dao.services" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.mdm.dao.services.impl" version="1.0.0"/>
+	
+	<!-- Host: human-task-core -->
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.human-task-core.package.decorator" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.fragment" version="1.0.0"/>
+	
+	
+	<!-- App Components -->
+	<artifact type="bundle" name="com.conx.logistics.kernel.system.dao.services" version="1.0.0"/>
+	
+	<!-- 
+	
+	The rest 
+	
+	-->
+	<artifact type="bundle" name="com.conx.logistics.app.whse.dao.services" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.dao.services" version="1.0.0"/>	
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.services" version="1.0.0"/>		
+	<artifact type="bundle" name="com.conx.logistics.kernel.pageflow.services" version="1.0.0"/>
+	
+	<artifact type="bundle" name="com.conx.logistics.app.whse.dao.jpa.persistence" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.dao.jpa.persistence" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.system.dao.jpa.persistence" version="1.0.0"/>
+		
+	<artifact type="bundle" name="com.conx.logistics.kernel.ui.service" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.ui.common" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.system.ui" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.workspace.ui" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.app.whse.ui" version="1.0.0"/>		
+	
+	<!-- BPM work item handlers -->
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.workitems" version="1.0.0"/> <!-- Registers with BPM core -->
+	
+			
+	<!-- BPM components -->
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.persistence.datasource" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.bpmserver.persistence" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.persistence" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.shared" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.taskserver" version="1.0.0"/>			
+	<artifact type="bundle" name="com.conx.logistics.kernel.bpm.impl.jbpm.core" version="1.0.0"/>	
+
+	<!-- PageFlow applications pages -->
+	<artifact type="bundle" name="com.conx.logistics.app.whse.rcv.asn.pageflow" version="1.0.0"/>  <!-- Registers with PageFlow engine -->
+	
+	<!-- PageFlow components -->
+	<artifact type="bundle" name="com.conx.logistics.kernel.pageflow.engine" version="1.0.0"/>
+	<artifact type="bundle" name="com.conx.logistics.kernel.pageflow.ui" version="1.0.0"/> <!-- TaskWizard: needs engine -->
+
+	<!-- Sprint #1/UAT script -->
+	<artifact type="bundle" name="com.conx.logistics.data.uat.sprint1.data" version="1.0.0"/>
+
+	<!-- Sprint #1/UAT web app : 2.0.0.RC1 -->
+	<artifact type="bundle" name="com.conx.logistics.web.app" version="2.0.0.RC1"/>
+</plan>

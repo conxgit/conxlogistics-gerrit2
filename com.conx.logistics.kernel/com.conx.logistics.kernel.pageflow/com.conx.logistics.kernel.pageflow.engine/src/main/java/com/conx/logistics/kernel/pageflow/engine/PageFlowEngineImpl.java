@@ -22,6 +22,7 @@ import org.vaadin.mvp.presenter.IPresenter;
 
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
@@ -235,7 +236,9 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		wizard.setSizeFull();
 		if (session.getOrderedPageList() != null) {
 			for (PageFlowPage page : session.getOrderedPageList()) {
-				page.initialize(session.getEmf(), globalTransactionManager);
+				page.initialize(session.getEmf(), globalTransactionManager, 
+						        (IPageFlowPageChangedEventHandler)wizard,
+						        (ITaskWizard)wizard);
 				wizard.addStep(page);
 			}
 		}
@@ -282,9 +285,18 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 		}
 		return tw;
 	}
+	
+
+	@Override
+	public Map<String, Object> updateProcessInstanceVariables(ITaskWizard tw,
+			Map<String, Object> varsToUpdate) throws Exception {
+		Map<String, Object> procInstVars = ((TaskWizard)tw).getSession().updateProcessInstanceVariables(this.userTransaction,varsToUpdate);
+		return procInstVars;
+	}	
 
 	@Override
 	public void setMainApplication(IMainApplication mainApp) {
 		this.mainApp = mainApp;
 	}
+
 }

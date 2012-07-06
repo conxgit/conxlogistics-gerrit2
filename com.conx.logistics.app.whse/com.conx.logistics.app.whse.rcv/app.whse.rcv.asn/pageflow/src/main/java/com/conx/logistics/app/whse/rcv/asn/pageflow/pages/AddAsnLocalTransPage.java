@@ -11,6 +11,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import com.conx.logistics.app.whse.domain.docktype.DockType;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.constants.AddressCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.geolocation.Address;
@@ -1097,8 +1099,8 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 	}
 
 	@Override
-	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm) {
-		setExecuted(false);
+	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm,
+			IPageFlowPageChangedEventHandler pfpEventHandler, ITaskWizard wizard) {		setExecuted(false);
 		this.emf = emf;
 
 		initContainers();

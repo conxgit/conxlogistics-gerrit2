@@ -7,19 +7,29 @@ import javax.persistence.EntityManagerFactory;
 import org.vaadin.teemu.wizards.WizardStep;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedListener;
+import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
 
-public abstract class PageFlowPage implements WizardStep {
+public abstract class PageFlowPage implements WizardStep, IPageFlowPageChangedListener {
 	public static final String PROCESS_ID = "PROCESS_ID"; // Process Id in BPMN
 	public static final String TASK_NAME = "TASK_NAME"; // Task Name in BPMN
 	
 	private VerticalLayout canvas;
 	private boolean executed;
 	
+
+	protected ITaskWizard wizard;
+	protected IPageFlowPageChangedEventHandler pfpEventHandler;
+	
 	public abstract String getTaskName();
-	public abstract void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm);
+	public abstract void initialize(EntityManagerFactory emf, 
+			                        PlatformTransactionManager ptm, 
+			                        IPageFlowPageChangedEventHandler pfpEventHandler,
+			                        ITaskWizard wizard);
 	public abstract void setOnStartState(Map<String, Object> params);
 	public abstract Map<String, Object> getOnCompleteState();
 	
@@ -96,5 +106,10 @@ public abstract class PageFlowPage implements WizardStep {
 	
 	public void setExecuted(boolean executed) {
 		this.executed = executed;
+	}
+	
+	@Override
+	public void onPageChanged(PageFlowPageChangedEvent event) {
+
 	}
 }

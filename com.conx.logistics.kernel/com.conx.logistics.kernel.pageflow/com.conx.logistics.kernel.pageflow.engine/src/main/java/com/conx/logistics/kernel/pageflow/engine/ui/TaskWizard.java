@@ -1,7 +1,11 @@
 package com.conx.logistics.kernel.pageflow.engine.ui;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,8 @@ import org.vaadin.teemu.wizards.WizardStep;
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.kernel.pageflow.engine.PageFlowEngineImpl;
 import com.conx.logistics.kernel.pageflow.engine.PageFlowSessionImpl;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedListener;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.kernel.ui.service.contribution.IApplicationViewContribution;
@@ -22,7 +28,7 @@ import com.conx.logistics.mdm.domain.application.Feature;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Window.Notification;
 
-public class TaskWizard extends Wizard implements ITaskWizard {
+public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChangedEventHandler {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private static final long serialVersionUID = 8417208260717324494L;
@@ -33,6 +39,11 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 	private Feature onCompletionCompletionFeature;
 
 	private IPresenter<?, ? extends EventBus> onCompletionCompletionViewPresenter;
+	
+	private final Set<IPageFlowPageChangedListener> pageFlowPageChangedListenerCache = Collections
+			.synchronizedSet(new HashSet<IPageFlowPageChangedListener>());
+
+	private boolean processPageFlowPageChangedEvents;
 	
 	public TaskWizard(PageFlowSessionImpl session, PageFlowEngineImpl engine, Feature onCompletionCompletionFeature, IPresenter<?, ? extends EventBus> onCompletionCompletionViewPresenter) {
 		this.engine = engine;
@@ -180,5 +191,31 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 	public boolean currentStepIsLastStep()
 	{
 		return isLastStep(currentStep);
+	}
+
+	@Override
+	public Map<String, Object> updateProcessVariables(String processInstanceId,
+			Map<String, Object> updatedVars) {
+		
+		
+		
+		return null;
+	}
+
+	@Override
+	public void registerForPageFlowPageChanged(
+			IPageFlowPageChangedListener listener) {
+		pageFlowPageChangedListenerCache.add(listener);
+	}
+
+	@Override
+	public void unregisterForPageFlowPageChanged(
+			IPageFlowPageChangedListener listener) {
+		pageFlowPageChangedListenerCache.remove(listener);
+	}
+
+	@Override
+	public void enablePageFlowPageChangedEventHandling(boolean enable) {
+		this.processPageFlowPageChangedEvents = enable;
 	}
 }
