@@ -428,6 +428,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			line.setDescription(si);
 
 			setPageMode(LIST_PAGE_MODE);
+			showNotification("Asn Line #" + (line.getLineNumber() + 1) + " was edited successfully", "");
 		}
 	}
 
@@ -450,6 +451,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			asnLineContainer.addBean(line);
 			asnLineIndex++;
 			setPageMode(LIST_PAGE_MODE);
+			showNotification("Asn Line #" + asnLineIndex + " was saved successfully", "");
 		}
 	}
 
@@ -562,7 +564,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 				productUnitsOuter.setValue(0);
 				productUnitsOuterPackageType.setValue(null);
 				productDetail.setSelectedTab(productDetailsForm);
-				showNotification("Product saved", "");
+				showNotification("Product was saved successfully", "");
 			}
 		}
 	}

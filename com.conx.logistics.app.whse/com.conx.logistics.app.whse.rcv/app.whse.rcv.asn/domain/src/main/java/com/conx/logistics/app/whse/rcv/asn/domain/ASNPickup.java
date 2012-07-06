@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.conx.logistics.app.whse.domain.docktype.DockType;
 import com.conx.logistics.app.whse.rcv.asn.shared.type.DROPMODE;
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 import com.conx.logistics.mdm.domain.geolocation.Address;
@@ -66,6 +67,10 @@ public class ASNPickup extends MultitenantBaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "S-")
     private Date pickupRequiredBy;
+    
+    @ManyToOne(targetEntity = DockType.class, fetch = FetchType.EAGER)
+    @JoinColumn
+    private DockType dockType;
 
     private String shippersRef;
     
@@ -206,5 +211,13 @@ public class ASNPickup extends MultitenantBaseEntity implements Serializable {
 
 	public void setSealNumber(String sealNumber) {
 		this.sealNumber = sealNumber;
+	}
+
+	public DockType getDockType() {
+		return dockType;
+	}
+
+	public void setDockType(DockType dockType) {
+		this.dockType = dockType;
 	}
 }

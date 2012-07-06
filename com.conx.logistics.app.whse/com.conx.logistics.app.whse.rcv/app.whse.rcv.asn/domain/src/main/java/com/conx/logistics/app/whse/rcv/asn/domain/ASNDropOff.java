@@ -3,13 +3,22 @@ package com.conx.logistics.app.whse.rcv.asn.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.conx.logistics.app.whse.domain.docktype.DockType;
 import com.conx.logistics.app.whse.rcv.asn.shared.type.DROPMODE;
-import com.conx.logistics.mdm.domain.BaseEntity;
 import com.conx.logistics.mdm.domain.MultitenantBaseEntity;
 import com.conx.logistics.mdm.domain.geolocation.Address;
 import com.conx.logistics.mdm.domain.organization.Organization;
@@ -51,6 +60,10 @@ public class ASNDropOff extends MultitenantBaseEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private DROPMODE dropMode;
+    
+    @ManyToOne(targetEntity = DockType.class, fetch = FetchType.EAGER)
+    @JoinColumn
+    private DockType dockType;
 
 	public Organization getCfs() {
 		return cfs;
@@ -122,5 +135,13 @@ public class ASNDropOff extends MultitenantBaseEntity implements Serializable {
 
 	public void setDropMode(DROPMODE dropMode) {
 		this.dropMode = dropMode;
+	}
+
+	public DockType getDockType() {
+		return dockType;
+	}
+
+	public void setDockType(DockType dockType) {
+		this.dockType = dockType;
 	}
 }

@@ -165,6 +165,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			referenceIdField.setValue("");
 			referenceIdType.setValue(null);
 			referenceIdField.focus();
+			showNotification("Reference Number " + ((String) referenceIdField.getValue()) + " was saved successfully", "");
 		}
 	}
 
@@ -182,6 +183,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			refNum.setDescription((String) referenceIdEditorNotes.getValue());
 
 			setPageMode(LIST_PAGE_MODE);
+			showNotification("Reference Number " + refNumValue + " was edited successfully", "");
 		}
 	}
 	
@@ -272,6 +274,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 					addReferenceIdType.setCaption("New Reference Id Type");
 					addStrip.setExpandRatio(referenceIdField, 0.5f);
 					addStrip.setExpandRatio(referenceIdType, 0.5f);
+					showNotification("Reference Number Type " + type.getName() + " was saved successfully", "");
 				}
 			}
 		});
@@ -480,7 +483,6 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	public String getCaption() {
 		return "Add Reference Numbers";
 	}
-
 
 	@Override
 	public Map<String, Object> getOnCompleteState() {

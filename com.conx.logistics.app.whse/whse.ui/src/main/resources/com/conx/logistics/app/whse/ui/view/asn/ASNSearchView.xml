@@ -8,7 +8,6 @@
 			<v:VerticalLayout sizeFull="" ui:field="gridLayout">
 				<v:HorizontalLayout spacing="true" ui:field="buttonLayout">
 					<v:Button caption="New ASN" e:click="createASN" />
-					<v:Button caption="Delete ASN" e:click="removeASN" />
 				</v:HorizontalLayout>
 				<v:Table sizeFull="" ui:field="grid" />
 			</v:VerticalLayout>
