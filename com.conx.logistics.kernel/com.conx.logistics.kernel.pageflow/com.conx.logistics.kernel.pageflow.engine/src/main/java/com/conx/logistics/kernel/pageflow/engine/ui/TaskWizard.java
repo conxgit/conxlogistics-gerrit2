@@ -92,11 +92,18 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 	@Override
 	public void next() {
 		getNextButton().setEnabled(false);
+		getBackButton().setEnabled(false);
+		getCancelButton().setEnabled(false);
 		completeCurrentTaskAndAdvanceToNext();
 		super.next();
 		getNextButton().setEnabled(true);
-		getBackButton().setEnabled(false);
+		getBackButton().setEnabled(true);
 		getCancelButton().setEnabled(false);
+	}
+	
+	@Override
+	public void back() {
+		super.back();
 	}
 	
 	@Override
