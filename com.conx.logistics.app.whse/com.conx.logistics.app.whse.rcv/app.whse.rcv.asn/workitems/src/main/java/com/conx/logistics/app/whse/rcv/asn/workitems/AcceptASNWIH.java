@@ -117,21 +117,20 @@ public class AcceptASNWIH implements WorkItemHandler {
 				Map<String, Object> output = new HashMap<String, Object>();
 				output.put("asnOut", asn);
 
-				if (Validator.isNotNull(asnRefNumMapIn)
-						&& asnRefNumMapIn.size() > 0) {
-					Map<String, Object> asnRefNumMapOut = new HashMap<String, Object>();
-					asn = addRefNums(asn.getId(), refNumsCollectionIn);
-					Set<ReferenceNumber> refNumsCollectionOut = asn
-							.getRefNumbers();
-					asnRefNumMapOut.put("asnRefNumCollection",
-							refNumsCollectionOut);
-					varsOut.put("refNumsCollectionOut", asnRefNumMapOut);
-				}
-
+				
+				Set<ReferenceNumber> attachedRefNums = new HashSet<ReferenceNumber>();
 				if (Validator.isNotNull(asnASNLineProductMapIn)
 						&& asnASNLineProductMapIn.size() > 0) {
 					if (Validator.isNotNull(asnLinesCollectionIn))
 					{
+						for (ASNLine line_ : asnLinesCollectionIn)
+						{
+							if (line_.getRefNumber() != null)
+							{
+								attachedRefNums.add(line_.getRefNumber());
+							}
+						}
+						
 						Map<String, Object> asnASNLineProductMapOut = new HashMap<String, Object>();
 						asn = addLines(asn.getId(), asnLinesCollectionIn);
 						Set<ASNLine> asnLinesCollectionOut = asn.getAsnLines();
@@ -141,6 +140,21 @@ public class AcceptASNWIH implements WorkItemHandler {
 						varsOut.put("asnASNLineProductMapOut",
 								asnASNLineProductMapOut);
 					}
+				}
+				
+				 
+				
+				if (Validator.isNotNull(asnRefNumMapIn)
+						&& asnRefNumMapIn.size() > 0) {
+					Map<String, Object> asnRefNumMapOut = new HashMap<String, Object>();
+					
+					refNumsCollectionIn = removeAll(attachedRefNums,refNumsCollectionIn);
+					asn = addRefNums(asn.getId(), refNumsCollectionIn);
+					Set<ReferenceNumber> refNumsCollectionOut = asn
+							.getRefNumbers();
+					asnRefNumMapOut.put("asnRefNumCollection",
+							refNumsCollectionOut);
+					varsOut.put("refNumsCollectionOut", asnRefNumMapOut);
 				}
 
 				if (Validator.isNotNull(asnLocalTransMapIn)
@@ -185,6 +199,27 @@ public class AcceptASNWIH implements WorkItemHandler {
 
 			throw new IllegalStateException("AcceptASNWIH:\r\n" + stacktrace, e);
 		}
+	}
+
+	private Set<ReferenceNumber> removeAll(Set<ReferenceNumber> attachedRefNums,
+			Set<ReferenceNumber> refNumsCollectionIn) {
+		Set<ReferenceNumber> res = new HashSet<ReferenceNumber>();
+		boolean found = false;
+		for (ReferenceNumber rn : refNumsCollectionIn)
+		{
+			for (ReferenceNumber arn : attachedRefNums)
+			{
+				if (Validator.equals(rn.getValue(),arn.getValue()) && Validator.equals(rn.getType().getCode(),arn.getType().getCode()))
+				{
+					found = true;
+					break;
+				}
+			}
+			
+			if (!found)
+				res.add(rn);
+		}
+		return res;
 	}
 
 	@Override
@@ -247,11 +282,31 @@ public class AcceptASNWIH implements WorkItemHandler {
 			for (ReferenceNumber number : numbers) {
 				number.setEntityMetadata(emd);
 				number.setEntityPK(asnId);
-
-				//rnt = em.merge(number.getType());
-				//number.setType(rnt);
-
+				
+/*				if (Validator.isNull(number.getType().getId()))
+				{
+					rnt = new ReferenceNumberType();
+					rnt.setCode(number.getType().getCode());
+					rnt.setName(number.getType().getName());
+					rnt.setDateCreated(new Date());
+					rnt.setDateLastUpdated(new Date());
+					rnt = em.merge(rnt);
+					em.flush();
+					
+					number.setType(null);
+					number = em.merge(number);
+					
+					number.setType(rnt);
+					number = em.merge(number);
+				}
+				else
+				{
+					number = em.merge(number);
+				}*/
+				
 				number = em.merge(number);
+				em.flush();
+				
 				asn.getRefNumbers().add(number);
 			}
 			asn = em.merge(asn);

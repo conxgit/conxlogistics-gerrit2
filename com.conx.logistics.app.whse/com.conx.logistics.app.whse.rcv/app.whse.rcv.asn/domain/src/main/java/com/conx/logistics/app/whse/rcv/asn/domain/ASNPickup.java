@@ -3,6 +3,7 @@ package com.conx.logistics.app.whse.rcv.asn.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -68,7 +69,7 @@ public class ASNPickup extends MultitenantBaseEntity implements Serializable {
     @DateTimeFormat(style = "S-")
     private Date pickupRequiredBy;
     
-    @ManyToOne(targetEntity = DockType.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = DockType.class, cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinColumn
     private DockType dockType;
 

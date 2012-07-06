@@ -1199,6 +1199,7 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
+		this.state = new HashMap<String, Object>();
 	}
 
 }

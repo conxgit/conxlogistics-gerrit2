@@ -29,7 +29,7 @@ public class ReferenceNumber extends MultitenantBaseEntity implements Serializab
     @JoinColumn
     private ReferenceNumber parentReferenceNumber;
 
-    @ManyToOne(targetEntity = ReferenceNumberType.class)
+    @ManyToOne(targetEntity = ReferenceNumberType.class,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn
     private ReferenceNumberType type;
     
