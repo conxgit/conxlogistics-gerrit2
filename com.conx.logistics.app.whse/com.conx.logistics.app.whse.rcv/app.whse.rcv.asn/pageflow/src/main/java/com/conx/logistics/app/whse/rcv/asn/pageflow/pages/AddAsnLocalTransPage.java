@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.conx.logistics.app.whse.domain.docktype.DockType;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
@@ -89,13 +90,14 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 	private EntityManagerFactory emf;
 	private Label pickupLocationAddressLabel;
 	private Button cancelButton;
-
 	private Map<String, Object> state;
+	private JPAContainer<DockType> dockTypeContainer;
 
 	private void initContainers() {
 		pickupLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 		pickupCarrierOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 		dropOffLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
+		dockTypeContainer = JPAContainerFactory.make(DockType.class, this.emf.createEntityManager());
 	}
 
 	public void initPickupLocation() {
@@ -255,8 +257,10 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 		pickupLocationDockType = new ComboBox();
 		pickupLocationDockType.setInputPrompt("Dock Type");
-		pickupLocationDockType.setEnabled(false);
 		pickupLocationDockType.setWidth("100%");
+		pickupLocationDockType.setNullSelectionAllowed(false);
+		pickupLocationDockType.setItemCaptionPropertyId("name");
+		pickupLocationDockType.setContainerDataSource(dockTypeContainer);
 
 		Label pickupLocationDockTypeLabel = new Label();
 		pickupLocationDockTypeLabel.setValue("Dock Type");
@@ -722,8 +726,10 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 		dropOffLocationDockType = new ComboBox();
 		dropOffLocationDockType.setInputPrompt("Dock Type");
-		dropOffLocationDockType.setEnabled(false);
 		dropOffLocationDockType.setWidth("100%");
+		dropOffLocationDockType.setNullSelectionAllowed(false);
+		dropOffLocationDockType.setItemCaptionPropertyId("name");
+		dropOffLocationDockType.setContainerDataSource(dockTypeContainer);
 
 		Label dropOffLocationDockTypeLabel = new Label();
 		dropOffLocationDockTypeLabel.setValue("Dock Type");
@@ -1156,7 +1162,10 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		pickup.setBolNumber((String) pickupCarrierBolNum.getValue());
 		pickup.setVehicleId((String) pickupCarrierSealNum.getValue());
 		pickup.setEstimatedPickup((Date) expectedPickupDate.getValue());
-
+		if (pickupLocationDockType.getValue() != null) {
+			pickup.setDockType(dockTypeContainer.getItem(pickupLocationDockType.getValue()).getEntity());
+		}
+		
 		dropOff.setDropOffAt(dropOffLocOrg);
 		selectedAddress = (String) dropOffLocationAddress.getValue();
 		if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
@@ -1175,6 +1184,9 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 			dropOff.setDropOffAtAddress(pickupCarrierOrg.getMainAddress());
 		}
 		dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
+		if (dropOffLocationDockType.getValue() != null) {
+			pickup.setDockType(dockTypeContainer.getItem(dropOffLocationDockType.getValue()).getEntity());
+		}
 
 		Map<String,Object> asnLocalTransMap = new HashMap<String, Object>();
 		asnLocalTransMap.put("asnPickup", pickup);	
@@ -1187,7 +1199,6 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
-		this.state = (Map<String, Object>)state.get("Content");
 	}
 
 }

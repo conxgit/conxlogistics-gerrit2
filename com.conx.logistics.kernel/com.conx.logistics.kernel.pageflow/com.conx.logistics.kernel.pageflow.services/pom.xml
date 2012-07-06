@@ -41,13 +41,6 @@
 		<dependency>
 			<groupId>com.conx.logistics</groupId>
 			<artifactId>
-				com.conx.logistics.kernel.pageflow.services
-			</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.conx.logistics</groupId>
-			<artifactId>
 				com.conx.logistics.kernel.ui.services
 			</artifactId>
 			<version>1.0.0</version>

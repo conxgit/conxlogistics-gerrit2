@@ -1,14 +1,12 @@
 package com.conx.logistics.kernel.pageflow.engine.ui;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.presenter.IPresenter;
-import org.vaadin.mvp.presenter.IPresenterFactory;
 import org.vaadin.teemu.wizards.Wizard;
 import org.vaadin.teemu.wizards.WizardStep;
 
@@ -17,13 +15,12 @@ import com.conx.logistics.kernel.pageflow.engine.PageFlowEngineImpl;
 import com.conx.logistics.kernel.pageflow.engine.PageFlowSessionImpl;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
-import com.conx.logistics.kernel.ui.service.IUIContributionManager;
 import com.conx.logistics.kernel.ui.service.contribution.IApplicationViewContribution;
 import com.conx.logistics.kernel.ui.service.contribution.IMainApplication;
 import com.conx.logistics.kernel.ui.service.contribution.IViewContribution;
 import com.conx.logistics.mdm.domain.application.Feature;
-import com.vaadin.Application;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.Window.Notification;
 
 public class TaskWizard extends Wizard implements ITaskWizard {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -94,8 +91,12 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 	
 	@Override
 	public void next() {
+		getNextButton().setEnabled(false);
 		completeCurrentTaskAndAdvanceToNext();
 		super.next();
+		getNextButton().setEnabled(true);
+		getBackButton().setEnabled(false);
+		getCancelButton().setEnabled(false);
 	}
 	
 	@Override
@@ -145,7 +146,7 @@ public class TaskWizard extends Wizard implements ITaskWizard {
     	}
     	
     	super.finish();
-    }	
+    }
 
 	private void completeCurrentTaskAndAdvanceToNext() {
 		PageFlowPage currentPage, nextPage;
@@ -156,7 +157,7 @@ public class TaskWizard extends Wizard implements ITaskWizard {
 			params = currentPage.getOnCompleteState(); // Completes current task with
 			params = engine.executeTaskWizard(this, params).getProperties();
 		} catch (Exception e) {
-			getWindow().showNotification("Could not complete this task");
+			getWindow().showNotification("Could not complete this task", "", Notification.TYPE_ERROR_MESSAGE);
 			// TODO Exception Handing
 			e.printStackTrace();
 			return;

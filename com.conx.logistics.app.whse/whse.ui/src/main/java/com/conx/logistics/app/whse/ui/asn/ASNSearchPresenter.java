@@ -465,8 +465,6 @@ public class ASNSearchPresenter extends
 		this.view.getSearchGrid().setColumnHeader("dateLastUpdated", "Date Last Updated");
 		this.view.getSearchGrid().setVisibleColumns(
 				new Object[] { "dateCreated", "dateLastUpdated"});
-		
-		this.view.getRemoveASN().setEnabled(false);
 
 		// -- Init detail form
 //		Collection<?> visibleProps = java.util.Arrays.asList(new Object[] {
