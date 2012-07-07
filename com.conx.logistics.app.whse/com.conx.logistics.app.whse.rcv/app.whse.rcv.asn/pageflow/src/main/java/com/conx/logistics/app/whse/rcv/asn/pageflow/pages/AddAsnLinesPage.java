@@ -1536,8 +1536,12 @@ public class AddAsnLinesPage extends PageFlowPage {
 		}
 		asnASNLineProductMapOut.put("asnLinesCollection", asnLines);
 		asnASNLineProductMapOut.put("productsCollection", newProducts);
-
-		this.state.put("asnASNLineProductMapOut", asnASNLineProductMapOut);
+		
+		if (isExecuted()) {
+			this.state.put("asnASNLineProductMap", asnASNLineProductMapOut);
+		} else {
+			this.state.put("asnASNLineProductMapOut", asnASNLineProductMapOut);
+		}
 		setExecuted(true);
 		return this.state;
 	}
@@ -1567,9 +1571,21 @@ public class AddAsnLinesPage extends PageFlowPage {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onPageChanged(PageFlowPageChangedEvent event) {
 		Map<String, Object> updatedProcVars = event.getChangedVars();
-		//Look for updated refNums
+		Map<String, Object> asnRefNumMap = (Map<String, Object>) updatedProcVars.get("asnRefNumMap");
+		if (asnRefNumMap != null) {
+			Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) asnRefNumMap.get("asnRefNumCollection");
+			if (refNums != null && refNumBeanContainer != null) {
+				refNumBeanContainer.removeAllItems();
+				try {
+					refNumBeanContainer.addAll(refNums);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}	
 }

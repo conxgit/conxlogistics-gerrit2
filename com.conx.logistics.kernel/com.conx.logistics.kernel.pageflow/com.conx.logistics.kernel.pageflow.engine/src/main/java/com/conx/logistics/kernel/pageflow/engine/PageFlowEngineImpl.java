@@ -23,6 +23,7 @@ import org.vaadin.mvp.presenter.IPresenter;
 import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
+import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowManager;
 import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
@@ -291,6 +292,7 @@ public class PageFlowEngineImpl implements IPageFlowManager {
 	public Map<String, Object> updateProcessInstanceVariables(ITaskWizard tw,
 			Map<String, Object> varsToUpdate) throws Exception {
 		Map<String, Object> procInstVars = ((TaskWizard)tw).getSession().updateProcessInstanceVariables(this.userTransaction,varsToUpdate);
+		((TaskWizard) tw).fireOnPageFlowChanged(new PageFlowPageChangedEvent(procInstVars));
 		return procInstVars;
 	}	
 

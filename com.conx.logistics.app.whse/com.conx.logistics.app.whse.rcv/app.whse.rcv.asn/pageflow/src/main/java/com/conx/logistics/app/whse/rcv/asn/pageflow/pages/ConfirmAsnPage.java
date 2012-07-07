@@ -1,6 +1,5 @@
 package com.conx.logistics.app.whse.rcv.asn.pageflow.pages;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,9 +15,7 @@ import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.mdm.domain.geolocation.Address;
-import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
-import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumberType;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;

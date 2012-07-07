@@ -9,5 +9,4 @@ public interface ITaskWizard extends IPageFlowListener {
 	public Component getComponent();
 	public Feature getOnCompletionFeature();
 	public Map<String,Object> getProperties();
-	public Map<String,Object> updateProcessVariables(String processInstanceId, Map<String,Object> updatedVars);
 }

@@ -19,6 +19,7 @@ import com.conx.logistics.kernel.pageflow.engine.PageFlowEngineImpl;
 import com.conx.logistics.kernel.pageflow.engine.PageFlowSessionImpl;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedListener;
+import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.kernel.ui.service.contribution.IApplicationViewContribution;
@@ -105,7 +106,13 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 		getNextButton().setEnabled(false);
 		getBackButton().setEnabled(false);
 		getCancelButton().setEnabled(false);
-		completeCurrentTaskAndAdvanceToNext();
+		try {
+			completeCurrentTaskAndAdvanceToNext();
+		} catch (Exception e) {
+			e.printStackTrace();
+			getWindow().showNotification("There was an unexpected error on the next page", "</br>Try to continue again. If the problem persists, contact your Administrator", Notification.TYPE_ERROR_MESSAGE);
+			return;
+		}
 		super.next();
 		getNextButton().setEnabled(true);
 		getBackButton().setEnabled(true);
@@ -119,8 +126,13 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 	
 	@Override
     public void finish() {
-		completeCurrentTaskAndAdvanceToNext();
-		
+		try {
+			completeCurrentTaskAndAdvanceToNext();
+		} catch (Exception e) {
+			e.printStackTrace();
+			getWindow().showNotification("There was an unexpected error on the next page", "</br>Try to continue again. If the problem persists, contact your Administrator", Notification.TYPE_ERROR_MESSAGE);
+			return;
+		}
 		
     	IMainApplication mainApp = this.engine.getMainApp();
     	if (Validator.isNotNull(mainApp))
@@ -166,40 +178,35 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
     	super.finish();
     }
 
-	private void completeCurrentTaskAndAdvanceToNext() {
+	private void completeCurrentTaskAndAdvanceToNext() throws Exception {
 		PageFlowPage currentPage, nextPage;
 		Map<String, Object> params = null;
 		currentPage = (PageFlowPage) currentStep;
-		// Complete current task and get input variables for the next task
-		try {
-			params = currentPage.getOnCompleteState(); // Completes current task with
-			params = engine.executeTaskWizard(this, params).getProperties();
-		} catch (Exception e) {
-			getWindow().showNotification("Could not complete this task", "", Notification.TYPE_ERROR_MESSAGE);
-			// TODO Exception Handing
-			e.printStackTrace();
-			return;
-		}
-		// Start the next task (if it exists) with input variables from previous task
-		int index = steps.indexOf(currentStep);
-		if ((index + 1) < steps.size()) {
-			nextPage = (PageFlowPage) steps.get(index + 1);
-			nextPage.setOnStartState(params);
+		if (currentPage.isExecuted()) {
+			engine.updateProcessInstanceVariables(this, currentPage.getOnCompleteState());
+		} else {
+			// Complete current task and get input variables for the next task
+			try {
+				params = currentPage.getOnCompleteState(); // Completes current task with
+				params = engine.executeTaskWizard(this, params).getProperties();
+			} catch (Exception e) {
+				getWindow().showNotification("Could not complete this task", "", Notification.TYPE_ERROR_MESSAGE);
+				// TODO Exception Handing
+				e.printStackTrace();
+				return;
+			}
+			// Start the next task (if it exists) with input variables from previous task
+			int index = steps.indexOf(currentStep);
+			if ((index + 1) < steps.size()) {
+				nextPage = (PageFlowPage) steps.get(index + 1);
+				nextPage.setOnStartState(params);
+			}
 		}
 	}
 	
 	public boolean currentStepIsLastStep()
 	{
 		return isLastStep(currentStep);
-	}
-
-	@Override
-	public Map<String, Object> updateProcessVariables(String processInstanceId,
-			Map<String, Object> updatedVars) {
-		
-		
-		
-		return null;
 	}
 
 	@Override
@@ -217,5 +224,12 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 	@Override
 	public void enablePageFlowPageChangedEventHandling(boolean enable) {
 		this.processPageFlowPageChangedEvents = enable;
+	}
+
+	@Override
+	public void fireOnPageFlowChanged(PageFlowPageChangedEvent event) {
+		for (IPageFlowPageChangedListener listener : pageFlowPageChangedListenerCache) {
+			listener.onPageChanged(event);
+		}
 	}
 }

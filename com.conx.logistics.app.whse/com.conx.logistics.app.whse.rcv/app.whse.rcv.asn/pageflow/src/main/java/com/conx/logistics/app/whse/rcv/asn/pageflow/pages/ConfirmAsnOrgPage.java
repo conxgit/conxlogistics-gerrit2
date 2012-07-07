@@ -182,7 +182,7 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 		//Map<String,Object> outParams = new HashMap<String, Object>();
 		//outParams.put("Result", this.state);
 		setExecuted(true);
-		return null;
+		return new HashMap<String, Object>();
 	}
 
 	@Override

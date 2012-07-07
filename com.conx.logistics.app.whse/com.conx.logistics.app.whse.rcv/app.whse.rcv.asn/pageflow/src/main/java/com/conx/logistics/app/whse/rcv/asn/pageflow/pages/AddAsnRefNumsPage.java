@@ -499,7 +499,11 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 		asnRefNumMapOut.put("asnRefNumCollection", refNums);
 		asnRefNumMapOut.put("asnRefNumTypeCollection", newTypes);
 		
-		this.state.put("asnRefNumMapOut", asnRefNumMapOut);
+		if (isExecuted()) {
+			this.state.put("asnRefNumMap", asnRefNumMapOut);
+		} else {
+			this.state.put("asnRefNumMapOut", asnRefNumMapOut);
+		}
 		setExecuted(true);
 		return this.state;
 	}

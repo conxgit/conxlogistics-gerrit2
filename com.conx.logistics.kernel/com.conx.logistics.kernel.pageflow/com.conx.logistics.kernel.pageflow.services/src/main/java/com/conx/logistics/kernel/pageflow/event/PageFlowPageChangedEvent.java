@@ -8,6 +8,10 @@ public class PageFlowPageChangedEvent {
 	public PageFlowPageChangedEvent(){
 	}
 	
+	public PageFlowPageChangedEvent(Map<String,Object> changedVars) {
+		this.changedVars = changedVars;
+	}
+	
 	public Map<String, Object> getChangedVars() {
 		return changedVars;
 	}

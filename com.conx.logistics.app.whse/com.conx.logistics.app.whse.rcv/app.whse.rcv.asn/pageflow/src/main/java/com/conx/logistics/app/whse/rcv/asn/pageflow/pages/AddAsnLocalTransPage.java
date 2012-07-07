@@ -1195,7 +1195,11 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		asnLocalTransMap.put("asnPickup", pickup);	
 		asnLocalTransMap.put("asnDropoff", dropOff);
 
-		this.state.put("asnLocalTransMapOut", asnLocalTransMap);
+		if (isExecuted()) {
+			this.state.put("asnLocalTransMap", asnLocalTransMap);
+		} else {
+			this.state.put("asnLocalTransMapOut", asnLocalTransMap);
+		}
 		setExecuted(true);
 		return this.state;
 	}

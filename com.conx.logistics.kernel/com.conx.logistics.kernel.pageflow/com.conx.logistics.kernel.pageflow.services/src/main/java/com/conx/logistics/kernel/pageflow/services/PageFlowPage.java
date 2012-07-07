@@ -21,7 +21,6 @@ public abstract class PageFlowPage implements WizardStep, IPageFlowPageChangedLi
 	private VerticalLayout canvas;
 	private boolean executed;
 	
-
 	protected ITaskWizard wizard;
 	protected IPageFlowPageChangedEventHandler pfpEventHandler;
 	
