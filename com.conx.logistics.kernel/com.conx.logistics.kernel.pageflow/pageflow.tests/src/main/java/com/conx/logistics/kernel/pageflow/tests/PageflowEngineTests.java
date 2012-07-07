@@ -71,6 +71,17 @@ public class PageflowEngineTests {
 			res = wiz.getProperties();
 			res = (HashMap<String,Object>)res.get("Content");
 			
+			/***
+			 * Change VARS
+			 */
+			rn.setCode("ABCD");
+			HashMap<String, Object> procVarMap = new HashMap<String, Object>();
+			procVarMap.put("asnRefNumMap", asnRefNumMap);
+			Map<String, Object> procInstVars = defaultPageFlowEngine.updateProcessInstanceVariables(wiz, procVarMap);
+			procVarMap = (HashMap<String, Object>)procInstVars.get("asnRefNumMap");
+			HashSet<ReferenceNumber> refSet = (HashSet<ReferenceNumber>)procVarMap.get("asnRefNumCollection");
+			rn = refSet.iterator().next();
+			
 			//-- 4. Complete ASN Lines Human and get vars
 			HashMap<String, Object> asnASNLineProductMap = new HashMap<String, Object>();
 			outParams = new HashMap<String, Object>();

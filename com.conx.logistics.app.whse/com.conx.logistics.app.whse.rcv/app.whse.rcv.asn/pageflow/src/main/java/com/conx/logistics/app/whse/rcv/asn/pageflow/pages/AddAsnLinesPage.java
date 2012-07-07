@@ -48,7 +48,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 public class AddAsnLinesPage extends PageFlowPage {
-	private static final String VIEW_HEIGHT = "450px";
+	private static final String VIEW_HEIGHT = "100%";
 
 	private int pageMode;
 

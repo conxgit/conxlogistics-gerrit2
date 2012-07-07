@@ -32,7 +32,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
 public class ConfirmAsnPage extends PageFlowPage {
-	private static final String VIEW_HEIGHT = "450px";
+	private static final String VIEW_HEIGHT = "100%";
 
 	private TabSheet entityTabSheet;
 	private Button saveButton;
