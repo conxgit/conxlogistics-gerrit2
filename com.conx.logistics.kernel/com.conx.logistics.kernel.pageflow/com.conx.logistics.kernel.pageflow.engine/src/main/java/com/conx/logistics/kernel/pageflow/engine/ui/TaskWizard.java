@@ -43,6 +43,9 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 	
 	private final Set<IPageFlowPageChangedListener> pageFlowPageChangedListenerCache = Collections
 			.synchronizedSet(new HashSet<IPageFlowPageChangedListener>());
+	
+	private boolean nextButtonBlocked = false;
+	private boolean backButtonBlocked = false;
 
 	private boolean processPageFlowPageChangedEvents;
 	
@@ -51,6 +54,9 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 		this.session = session;
 		this.onCompletionCompletionFeature = onCompletionCompletionFeature;
 		this.onCompletionCompletionViewPresenter = onCompletionCompletionViewPresenter;
+		
+		getNextButton().setImmediate(true);
+		getBackButton().setImmediate(true);
 	}
 
 	public PageFlowSessionImpl getSession() {
@@ -114,8 +120,8 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 			return;
 		}
 		super.next();
-		getNextButton().setEnabled(true);
-		getBackButton().setEnabled(true);
+		getNextButton().setEnabled(!nextButtonBlocked);
+		getBackButton().setEnabled(!backButtonBlocked);
 		getCancelButton().setEnabled(false);
 	}
 	
@@ -231,5 +237,27 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 		for (IPageFlowPageChangedListener listener : pageFlowPageChangedListenerCache) {
 			listener.onPageChanged(event);
 		}
+	}
+
+	@Override
+	public void setNextEnabled(boolean isEnabled) {
+		getNextButton().setEnabled(isEnabled);
+		nextButtonBlocked = !isEnabled;
+	}
+
+	@Override
+	public boolean isNextEnabled() {
+		return !nextButtonBlocked;
+	}
+
+	@Override
+	public void setBackEnabled(boolean isEnabled) {
+		getBackButton().setEnabled(isEnabled);
+		backButtonBlocked = !isEnabled;
+	}
+
+	@Override
+	public boolean isBackEnabled() {
+		return !backButtonBlocked;
 	}
 }

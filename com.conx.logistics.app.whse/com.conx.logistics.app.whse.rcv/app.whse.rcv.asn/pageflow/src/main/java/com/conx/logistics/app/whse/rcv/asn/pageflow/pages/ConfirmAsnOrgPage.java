@@ -63,7 +63,7 @@ public class ConfirmAsnOrgPage extends PageFlowPage {
 		organization.isReadOnly();
 		organization.setWidth("100%");
 		organization.setValue(organizationContainer.firstItemId());
-		organization.setEnabled(false);
+//		organization.setEnabled(false);
 		
 		organizationLabel = new Label();
 		organizationLabel.setValue("Organization");

@@ -152,6 +152,8 @@ public class AddAsnLinesPage extends PageFlowPage {
 		reset();
 		switch (mode) {
 		case LIST_PAGE_MODE:
+			this.wizard.setNextEnabled(true);
+			this.wizard.setBackEnabled(true);
 			newButton.setEnabled(true);
 			saveButton.setEnabled(false);
 			cancelButton.setEnabled(false);
@@ -164,6 +166,8 @@ public class AddAsnLinesPage extends PageFlowPage {
 			listView.setVisible(true);
 			break;
 		case EDIT_PAGE_MODE:
+			this.wizard.setNextEnabled(false);
+			this.wizard.setBackEnabled(false);
 			newButton.setEnabled(false);
 			saveButton.setEnabled(true);
 			deleteButton.setEnabled(false);
@@ -175,6 +179,8 @@ public class AddAsnLinesPage extends PageFlowPage {
 			newView.setVisible(true);
 			break;
 		case NEW_PAGE_MODE:
+			this.wizard.setNextEnabled(false);
+			this.wizard.setBackEnabled(false);
 			newButton.setEnabled(false);
 			saveButton.setEnabled(true);
 			deleteButton.setEnabled(false);
@@ -248,7 +254,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 //			}
 
 			if (message.length() != 0) {
-				showNotification("Could Not Add Asn Line Number", message.toString());
+				showWarningNotification("Could Not Add Asn Line Number", message.toString());
 				return false;
 			} else {
 				return true;
@@ -310,7 +316,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 //			}
 
 			if (message.length() != 0) {
-				showNotification("Could Not Edit Asn Line", message.toString());
+				showWarningNotification("Could Not Edit Asn Line", message.toString());
 				return false;
 			} else {
 				return true;
@@ -613,6 +619,8 @@ public class AddAsnLinesPage extends PageFlowPage {
 				numberUnit.setValue(currentProduct.getCommercialRecord().getCommercialValue().getCurrency().getId());
 			}
 		}
+		
+		showNotification("Product \"" + currentProduct.getName() + "\" attached successfully", "");
 	}
 
 	private boolean isInteger(String string) {
@@ -687,7 +695,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		}
 
 		if (message.length() != 0) {
-			showNotification("Could Not Save New Product", message.toString());
+			showWarningNotification("Could Not Save New Product", message.toString());
 			return false;
 		} else {
 			return true;
@@ -744,7 +752,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		asnLineTable.setColumnHeader("product.weightUnit.name", "Weight Unit");
 		asnLineTable.setColumnHeader("expectedTotalVolume", "Total Volume");
 		asnLineTable.setColumnHeader("product.volUnit.name", "Volume Unit");
-		asnLineTable.setColumnHeader("expectedOuterPackCount", "Expected Quantity");
+		asnLineTable.setColumnHeader("expectedOuterPackCount", "Outer Pack Count");
 		asnLineTable.addListener(new Table.ValueChangeListener() {
 			private static final long serialVersionUID = 4696828026010510338L;
 

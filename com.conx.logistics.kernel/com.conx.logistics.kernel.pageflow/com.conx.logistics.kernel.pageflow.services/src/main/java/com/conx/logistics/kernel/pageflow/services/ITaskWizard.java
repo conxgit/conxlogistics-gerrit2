@@ -9,4 +9,8 @@ public interface ITaskWizard extends IPageFlowListener {
 	public Component getComponent();
 	public Feature getOnCompletionFeature();
 	public Map<String,Object> getProperties();
+	public void setNextEnabled(boolean isEnabled);
+	public boolean isNextEnabled();
+	public void setBackEnabled(boolean isEnabled);
+	public boolean isBackEnabled();
 }

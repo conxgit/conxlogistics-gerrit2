@@ -101,6 +101,23 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		dropOffLocationOrganizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
 		dockTypeContainer = JPAContainerFactory.make(DockType.class, this.emf.createEntityManager());
 	}
+	
+	private boolean validate() {
+		StringBuffer message = new StringBuffer();
+		if (expectedPickupDate.getValue() == null) {
+			message.append("</br>Expected Pick-Up Date & Time were not provided.");
+		}
+		if (expectedWhArrivalDate.getValue() == null) {
+			message.append("</br>Expected Warehouse Arrival Date & Time were not provided.");
+		}
+
+		if (message.length() != 0) {
+			showWarningNotification("Could Not Save Local Transportation", message.toString());
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public void initPickupLocation() {
 		pickupLocationOrganization = new ComboBox();
@@ -780,13 +797,16 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 	public void initTableToolStrip() {
 		saveButton = new Button("Save");
-		saveButton.setEnabled(false);
+		saveButton.setEnabled(true);
 		saveButton.setWidth("100%");
 		saveButton.addListener(new ClickListener() {
 			private static final long serialVersionUID = 500312301678L;
 
 			public void buttonClick(ClickEvent event) {
-
+				if (validate()) {
+					wizard.setNextEnabled(true);
+					saveButton.setEnabled(false);
+				}
 			}
 		});
 
@@ -1102,7 +1122,8 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 	public void initialize(EntityManagerFactory emf, PlatformTransactionManager ptm,
 			IPageFlowPageChangedEventHandler pfpEventHandler, ITaskWizard wizard) {		setExecuted(false);
 		this.emf = emf;
-
+		this.wizard = wizard;
+		
 		initContainers();
 		initEntityTabSheet();
 		initTableToolStrip();
@@ -1207,6 +1228,8 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
 		this.state = new HashMap<String, Object>();
+		this.wizard.setNextEnabled(false);
+		this.wizard.setBackEnabled(true);
 	}
 
 }

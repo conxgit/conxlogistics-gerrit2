@@ -72,6 +72,8 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 	private void setPageMode(int mode) {
 		switch (mode) {
 		case LIST_PAGE_MODE:
+			this.wizard.setNextEnabled(true);
+			this.wizard.setBackEnabled(true);
 			referenceIdField.setValue("");
 			referenceIdType.setValue(null);
 
@@ -89,8 +91,10 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			listView.setVisible(true);
 			break;
 		case EDIT_PAGE_MODE:
+			this.wizard.setNextEnabled(false);
+			this.wizard.setBackEnabled(false);
 			ReferenceNumber refNum = refNumBeanContainer.getItem(referenceIdTable.getValue()).getBean();
-			referenceIdEditorType.setValue(refNum.getType().getId());
+			referenceIdEditorType.setValue(refNum.getType().getName());
 			referenceIdEditorField.setValue(refNum.getValue());
 			if (refNum.getDescription() != null && !refNum.getDescription().isEmpty()) {
 				referenceIdEditorNotes.setValue(refNum.getDescription());
@@ -120,7 +124,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			}
 
 			if (message.length() != 0) {
-				showNotification("Could Not Add Reference Number", message.toString());
+				showWarningNotification("Could Not Add Reference Number", message.toString());
 				return false;
 			} else {
 				return true;
@@ -134,7 +138,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			}
 
 			if (message.length() != 0) {
-				showNotification("Could Not Edit Reference Number", message.toString());
+				showWarningNotification("Could Not Edit Reference Number", message.toString());
 				return false;
 			} else {
 				return true;
@@ -327,11 +331,11 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 
 	public void initEditView() {
 		referenceIdEditorField = new TextField();
-		referenceIdEditorField.setInputPrompt("Reference Id");
+		referenceIdEditorField.setInputPrompt("Reference Id Editor");
 		referenceIdEditorField.setWidth("100%");
 
 		referenceIdEditorType = new ComboBox();
-		referenceIdEditorType.setInputPrompt("Reference Id Type");
+		referenceIdEditorType.setInputPrompt("Reference Id Type Editor");
 		referenceIdEditorType.setContainerDataSource(refNumTypeContainer);
 		referenceIdEditorType.setItemCaptionPropertyId("name");
 		referenceIdEditorType.setNullSelectionAllowed(false);
@@ -456,6 +460,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 			IPageFlowPageChangedEventHandler pfpEventHandler, ITaskWizard wizard) {
 		setExecuted(false);
 		this.emf = emf;
+		this.wizard = wizard;
 
 		initFields();
 		initContainers();

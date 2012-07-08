@@ -53,6 +53,17 @@ public abstract class PageFlowPage implements WizardStep, IPageFlowPageChangedLi
 		}
 	}
 	
+	public void showWarningNotification(String caption, String message) {
+		if (canvas != null) {
+			if (canvas.getWindow() != null) {
+				canvas.getWindow().showNotification(
+	                    (String) caption,
+	                    (String) message,
+	                    Notification.TYPE_WARNING_MESSAGE);
+			}
+		}
+	}
+	
 	public void showErrorNotification(String caption, String message) {
 		if (canvas != null) {
 			if (canvas.getWindow() != null) {
