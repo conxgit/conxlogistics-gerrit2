@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ConX Logistics Vaadin Frontend
 Bundle-SymbolicName: com.conx.logistics.web.app
-Bundle-Version: 2.0.0.RC1
+Bundle-Version: 2.0.0.RC2
 Bundle-ClassPath: .,WEB-INF/classes
 Web-ContextPath: logistics2.0.0.RC1
 Import-Template: 
