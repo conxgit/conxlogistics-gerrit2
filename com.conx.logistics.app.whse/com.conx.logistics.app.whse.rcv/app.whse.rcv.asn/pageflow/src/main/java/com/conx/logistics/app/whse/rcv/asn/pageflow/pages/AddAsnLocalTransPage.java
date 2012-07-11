@@ -804,8 +804,10 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 			public void buttonClick(ClickEvent event) {
 				if (validate()) {
-					wizard.setNextEnabled(true);
-					saveButton.setEnabled(false);
+					if (wizard != null) {
+						wizard.setNextEnabled(true);
+						saveButton.setEnabled(false);
+					}
 				}
 			}
 		});

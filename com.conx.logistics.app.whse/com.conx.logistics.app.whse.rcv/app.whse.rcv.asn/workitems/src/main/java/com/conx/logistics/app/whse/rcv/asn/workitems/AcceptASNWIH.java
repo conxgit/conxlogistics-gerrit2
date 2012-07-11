@@ -34,6 +34,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.conx.logistics.app.whse.domain.docktype.DockType;
 import com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNDropOff;
@@ -41,6 +42,8 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService;
+import com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService;
+import com.conx.logistics.mdm.domain.constants.ReferenceNumberTypeCustomCONSTANTS;
 import com.conx.logistics.mdm.domain.metadata.DefaultEntityMetadata;
 import com.conx.logistics.mdm.domain.product.Product;
 import com.conx.logistics.mdm.domain.referencenumber.ReferenceNumber;
@@ -69,6 +72,9 @@ public class AcceptASNWIH implements WorkItemHandler {
 
 	@Autowired
 	private IReferenceNumberDAOService referenceNumberDao;
+	
+	@Autowired
+	private IReferenceNumberTypeDAOService referenceNumberTypeDao;
 
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
@@ -81,6 +87,18 @@ public class AcceptASNWIH implements WorkItemHandler {
 					.getParameter("asnRefNumMapIn");
 			Set<ReferenceNumber> refNumsCollectionIn = (Set<ReferenceNumber>) asnRefNumMapIn
 					.get("asnRefNumCollection");
+			if (Validator.isNull(refNumsCollectionIn) || refNumsCollectionIn.size() == 0)
+			{
+//				ReferenceNumberType rnt = referenceNumberTypeDao.getByCode(ReferenceNumberTypeCustomCONSTANTS.TYPE_NO_REF);
+//				ReferenceNumber rn = new ReferenceNumber();
+//				rn.setType(rnt);
+//				rn.setValue("Dummy");
+//				rn = em.merge(rn);
+//				em.flush();
+				
+				refNumsCollectionIn = new HashSet<ReferenceNumber>();
+//				refNumsCollectionIn.add(rn);
+			}
 			Set<ReferenceNumberType> refNumTypesCollectionIn = (Set<ReferenceNumberType>) asnRefNumMapIn
 					.get("asnRefNumTypeCollection");
 
@@ -145,7 +163,8 @@ public class AcceptASNWIH implements WorkItemHandler {
 				 
 				
 				if (Validator.isNotNull(asnRefNumMapIn)
-						&& asnRefNumMapIn.size() > 0) {
+						&& asnRefNumMapIn.size() > 0 
+						&& refNumsCollectionIn.size() > 0) {
 					Map<String, Object> asnRefNumMapOut = new HashMap<String, Object>();
 					
 					refNumsCollectionIn = removeAll(attachedRefNums,refNumsCollectionIn);
@@ -240,21 +259,24 @@ public class AcceptASNWIH implements WorkItemHandler {
 				
 				number = line.getRefNumber();
 				
-				number = em.merge(number);
-				
-				if (Validator.isNull(number.getId()))
-				{
-					number.setEntityMetadata(emd);
-					number.setEntityPK(number.getId());
-				}
-				line.setRefNumber(number);
-				
+				line = (ASNLine) em.merge(line);
+				em.flush();
 
+				if (Validator.isNotNull(number))
+				{
+					if (Validator.isNull(number.getId()))
+					{
+						number.setEntityMetadata(emd);
+						number.setEntityPK(number.getId());
+					}
+					line.setRefNumber(number);
+				}
+				
 				prod = em.merge(line.getProduct());
 				line.setProduct(prod);
-
-				line = (ASNLine) em.merge(line);
 				
+				line = (ASNLine) em.merge(line);
+
 				asn.getAsnLines().add(line);
 				asn.getRefNumbers().add(number);
 			}
@@ -330,11 +352,21 @@ public class AcceptASNWIH implements WorkItemHandler {
 			asn = em.getReference(ASN.class, asnId);
 
 			if (Validator.isNotNull(pickUp)) {
+				DockType dockType = pickUp.getDockType();
+				if (dockType != null) {
+					dockType = em.merge(dockType);
+					pickUp.setDockType(dockType);
+				}
 				pickUp = (ASNPickup) em.merge(pickUp);
 				asn.setPickup(pickUp);
 			}
 
 			if (Validator.isNotNull(dropOff)) {
+				DockType dockType = dropOff.getDockType();
+				if (dockType != null) {
+					dockType = em.merge(dockType);
+					dropOff.setDockType(dockType);
+				}
 				dropOff = (ASNDropOff) em.merge(dropOff);
 				asn.setDropOff(dropOff);
 			}

@@ -112,15 +112,13 @@ public class ConfirmAsnPage extends PageFlowPage {
 		asnLineTable.setSizeFull();
 		asnLineTable.setSelectable(true);
 		asnLineTable.setContainerDataSource(asnLineContainer);
-		asnLineTable.setVisibleColumns(new Object[] { "product.name", "refNumber.value", "expectedTotalWeight", "product.weightUnit.name", "expectedTotalVolume", "product.volUnit.name", "expectedOuterPackCount" });
+		asnLineTable.setVisibleColumns(new Object[] { "product.name", "expectedTotalWeight", "product.weightUnit.name", "expectedTotalVolume", "product.volUnit.name", "expectedOuterPackCount" });
 		asnLineTable.setColumnHeader("product.name", "Product Name");
-		asnLineTable.setColumnHeader("refNumber.value", "Reference Number");
 		asnLineTable.setColumnHeader("expectedTotalWeight", "Total Weight");
 		asnLineTable.setColumnHeader("product.weightUnit.name", "Weight Unit");
 		asnLineTable.setColumnHeader("expectedTotalVolume", "Total Volume");
 		asnLineTable.setColumnHeader("product.volUnit.name", "Volume Unit");
-		asnLineTable.setColumnHeader("expectedOuterPackCount", "Expected Quantity");
-
+		asnLineTable.setColumnHeader("expectedOuterPackCount", "Outer Pack Count");
 
 		asnLineLayout = new VerticalLayout();
 		asnLineLayout.setSizeFull();

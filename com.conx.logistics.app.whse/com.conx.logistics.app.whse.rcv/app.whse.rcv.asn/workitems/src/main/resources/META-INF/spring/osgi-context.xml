@@ -64,4 +64,5 @@
 	<osgi:reference id="asnDao"  interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService"/>
 	<osgi:reference id="orgDao"  interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
 	<osgi:reference id="referenceNumberDao"  interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService"/>
+	<osgi:reference id="referenceNumberTypeDao"  interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService"/>
 </beans>

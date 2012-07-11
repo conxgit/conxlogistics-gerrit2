@@ -123,6 +123,7 @@ public class ASN extends MultitenantBaseEntity {
     private Date dateLastImportUpdated;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(nullable = true)
     private Set<ReferenceNumber> refNumbers = new java.util.HashSet<ReferenceNumber>();
 
     /**

@@ -11,7 +11,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.conx.logistics.app.whse.rcv.asn.domain.ASNLine;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
-import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedListener;
 import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
@@ -27,10 +26,16 @@ import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
 import com.vaadin.data.Container.Filter;
 import com.vaadin.data.Item;
+import com.vaadin.data.Property.ConversionException;
+import com.vaadin.data.Property.ReadOnlyException;
 import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.event.FieldEvents.BlurEvent;
+import com.vaadin.event.FieldEvents.BlurListener;
+import com.vaadin.event.FieldEvents.FocusEvent;
+import com.vaadin.event.FieldEvents.FocusListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -237,21 +242,21 @@ public class AddAsnLinesPage extends PageFlowPage {
 			if (unitsOuterPackageType.getValue() == null) {
 				message.append("</br>Units Outer Package Type was not provided");
 			}
-			if (unitsInner.getValue() == null || ((String) unitsInner.getValue()).isEmpty()) {
-				message.append("</br>Units Inner was not provided");
-			}
-			if (unitsInnerPackageType.getValue() == null) {
-				message.append("</br>Units Inner Package Type was not provided");
-			}
+//			if (unitsInner.getValue() == null || ((String) unitsInner.getValue()).isEmpty()) {
+//				message.append("</br>Units Inner was not provided");
+//			}
+//			if (unitsInnerPackageType.getValue() == null) {
+//				message.append("</br>Units Inner Package Type was not provided");
+//			}
 			if (number.getValue() == null || ((String) number.getValue()).isEmpty()) {
 				message.append("</br>Value was not provided");
 			}
 			if (numberUnit.getValue() == null) {
 				message.append("</br>Value Currency was not provided");
 			}
-//			if (referenceId.getValue() == null) {
-//				message.append("</br>Reference Number was not provided");
-//			}
+			//			if (referenceId.getValue() == null) {
+			//				message.append("</br>Reference Number was not provided");
+			//			}
 
 			if (message.length() != 0) {
 				showWarningNotification("Could Not Add Asn Line Number", message.toString());
@@ -299,21 +304,21 @@ public class AddAsnLinesPage extends PageFlowPage {
 			if (unitsOuterPackageType.getValue() == null) {
 				message.append("</br>Units Outer Package Type was not provided");
 			}
-			if (unitsInner.getValue() == null || ((String) unitsInner.getValue()).isEmpty()) {
-				message.append("</br>Units Inner was not provided");
-			}
-			if (unitsInnerPackageType.getValue() == null) {
-				message.append("</br>Units Inner Package Type was not provided");
-			}
+//			if (unitsInner.getValue() == null || ((String) unitsInner.getValue()).isEmpty()) {
+//				message.append("</br>Units Inner was not provided");
+//			}
+//			if (unitsInnerPackageType.getValue() == null) {
+//				message.append("</br>Units Inner Package Type was not provided");
+//			}
 			if (number.getValue() == null || ((String) number.getValue()).isEmpty()) {
 				message.append("</br>Value was not provided");
 			}
 			if (numberUnit.getValue() == null) {
 				message.append("</br>Value Currency was not provided");
 			}
-//			if (referenceId.getValue() == null) {
-//				message.append("</br>Reference Number was not provided");
-//			}
+			//			if (referenceId.getValue() == null) {
+			//				message.append("</br>Reference Number was not provided");
+			//			}
 
 			if (message.length() != 0) {
 				showWarningNotification("Could Not Edit Asn Line", message.toString());
@@ -329,34 +334,36 @@ public class AddAsnLinesPage extends PageFlowPage {
 		switch (pageMode) {
 		case EDIT_PAGE_MODE:
 			ASNLine line = asnLineContainer.getItem(asnLineTable.getValue()).getBean();
-			referenceId.setValue(line.getRefNumber().getValue());
+			if (line.getRefNumber() != null) {
+				referenceId.setValue(line.getRefNumber().getValue());
+			}
 			productMaster.setValue(line.getProduct().getId());
 			currentProduct = line.getProduct();
 			currentProduct = productContainer.getItem(productMaster.getValue()).getBean();
 			selectedProductLabel.setValue(currentProduct.getName());
 			bindProductButton.setEnabled(false);
-			totalWeight.setValue(currentProduct.getWeight());
+			totalWeight.setValue(String.valueOf(currentProduct.getWeight()));
 			totalWeightUnit.setValue(currentProduct.getWeightUnit().getId());
-			totalVolume.setValue(currentProduct.getVolume());
+			totalVolume.setValue(String.valueOf(currentProduct.getVolume()));
 			totalVolumeUnit.setValue(currentProduct.getVolUnit().getId());
-			length.setValue(currentProduct.getLen());
+			length.setValue(String.valueOf(currentProduct.getLen()));
 			lengthUnit.setValue(currentProduct.getDimUnit().getId());
-			width.setValue(currentProduct.getWidth());
+			width.setValue(String.valueOf(currentProduct.getWidth()));
 			widthUnit.setValue(currentProduct.getDimUnit().getId());
-			height.setValue(currentProduct.getHeight());
+			height.setValue(String.valueOf(currentProduct.getHeight()));
 			heightUnit.setValue(currentProduct.getDimUnit().getId());
 			if (currentProduct.getInnerPackCount() == null) {
-				unitsInner.setValue(0);
+				unitsInner.setValue(String.valueOf(0));
 			} else {
-				unitsInner.setValue(currentProduct.getInnerPackCount());
+				unitsInner.setValue(String.valueOf(currentProduct.getInnerPackCount()));
 			}
 			if (currentProduct.getInnerPackUnit() != null) {
 				unitsInnerPackageType.setValue(currentProduct.getInnerPackUnit().getId());
 			}
 			if (currentProduct.getOuterPackCount() == null) {
-				unitsOuter.setValue(0);
+				unitsOuter.setValue(String.valueOf(0));
 			} else {
-				unitsOuter.setValue(currentProduct.getOuterPackCount());
+				unitsOuter.setValue(String.valueOf(currentProduct.getOuterPackCount()));
 			}
 			if (currentProduct.getOuterPackUnit() != null) {
 				unitsOuterPackageType.setValue(currentProduct.getOuterPackUnit().getId());
@@ -364,7 +371,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			if (currentProduct.getCommercialRecord() != null && 
 					currentProduct.getCommercialRecord().getCommercialValue() != null) {
 				if (currentProduct.getCommercialRecord().getCommercialValue().getValue() != null) {
-					number.setValue(currentProduct.getCommercialRecord().getCommercialValue().getValue());
+					number.setValue(String.valueOf(currentProduct.getCommercialRecord().getCommercialValue().getValue()));
 				}
 				if (currentProduct.getCommercialRecord().getCommercialValue().getCurrency() != null && 
 						currentProduct.getCommercialRecord().getCommercialValue().getCurrency().getId() != null) {
@@ -382,21 +389,21 @@ public class AddAsnLinesPage extends PageFlowPage {
 			productDetail.setEnabled(false);
 			bindProductButton.setEnabled(false);
 			selectedProductLabel.setValue("<i>No Product Currently Selected</i>");
-			totalWeight.setValue(0);
+			totalWeight.setValue("0");
 			totalWeightUnit.setValue(null);
-			totalVolume.setValue(0.0);
+			totalVolume.setValue("0.0");
 			totalVolumeUnit.setValue(null);
-			length.setValue(0.0);
+			length.setValue("0.0");
 			lengthUnit.setValue(null);
-			width.setValue(0.0);
+			width.setValue("0.0");
 			widthUnit.setValue(null);
-			height.setValue(0.0);
+			height.setValue("0.0");
 			heightUnit.setValue(null);
-			unitsOuter.setValue(0);
+			unitsOuter.setValue("0");
 			unitsOuterPackageType.setValue(null);
-			unitsInner.setValue(0);
+			unitsInner.setValue("0");
 			unitsInnerPackageType.setValue(null);
-			number.setValue(0.0);
+			number.setValue("0.0");
 			numberUnit.setValue(null);
 			specialInstructions.setValue("");
 			entityTabSheet.setSelectedTab(referenceIdLayout);
@@ -408,10 +415,21 @@ public class AddAsnLinesPage extends PageFlowPage {
 		if (validate()) {
 			BeanItem<ASNLine> item = this.asnLineContainer.getItem(asnLineTable.getValue()); 
 			ASNLine line = item.getBean();
-			ReferenceNumber rn = refNumBeanContainer.getItem(referenceId.getValue()).getBean();
-			Integer eipc = Integer.parseInt((String) unitsInner.getValue());
-			Integer eopc = Integer.parseInt((String) unitsInner.getValue());
+			ReferenceNumber rn = null;
+			if (referenceId.getValue() != null) {
+				rn = refNumBeanContainer.getItem(referenceId.getValue()).getBean();
+			}
+			Integer eipc = null;
+			if (unitsInner.getValue() != null && unitsInner.getValue().equals("")) {
+				try {
+					eipc = Integer.parseInt((String) unitsInner.getValue());
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
+			}
+			Integer eopc = Integer.parseInt((String) unitsOuter.getValue());
 			Double etv = Double.parseDouble((String) totalVolume.getValue());
+			
 			Double etw = Double.parseDouble((String) totalWeight.getValue());
 			Double l = Double.parseDouble((String) length.getValue());
 			Double w = Double.parseDouble((String) width.getValue());
@@ -421,8 +439,10 @@ public class AddAsnLinesPage extends PageFlowPage {
 			line.setProduct(currentProduct);
 			line.setRefNumber(rn);
 			item.getItemProperty("refNumber.value").setValue(rn.getValue());
-			line.setExpectedInnerPackCount(eipc);
-			item.getItemProperty("expectedInnerPackCount").setValue(eipc);
+			if (eipc != null) {
+				line.setExpectedInnerPackCount(eipc);
+				item.getItemProperty("expectedInnerPackCount").setValue(eipc);
+			}
 			line.setExpectedOuterPackCount(eopc);
 			item.getItemProperty("expectedOuterPackCount").setValue(eopc);
 			line.setExpectedTotalWeight(etw);
@@ -583,18 +603,18 @@ public class AddAsnLinesPage extends PageFlowPage {
 		currentProduct = productContainer.getItem(productMaster.getValue()).getBean();
 		selectedProductLabel.setValue(currentProduct.getName());
 		bindProductButton.setEnabled(false);
-		totalWeight.setValue(currentProduct.getWeight());
+		totalWeight.setValue(String.valueOf(currentProduct.getWeight()));
 		totalWeightUnit.setValue(currentProduct.getWeightUnit().getId());
-		totalVolume.setValue(currentProduct.getVolume());
+		totalVolume.setValue(String.valueOf(currentProduct.getVolume()));
 		totalVolumeUnit.setValue(currentProduct.getVolUnit().getId());
-		length.setValue(currentProduct.getLen());
+		length.setValue(String.valueOf(currentProduct.getLen()));
 		lengthUnit.setValue(currentProduct.getDimUnit().getId());
-		width.setValue(currentProduct.getWidth());
+		width.setValue(String.valueOf(currentProduct.getWidth()));
 		widthUnit.setValue(currentProduct.getDimUnit().getId());
-		height.setValue(currentProduct.getHeight());
+		height.setValue(String.valueOf(currentProduct.getHeight()));
 		heightUnit.setValue(currentProduct.getDimUnit().getId());
 		if (currentProduct.getInnerPackCount() == null) {
-			unitsInner.setValue(0);
+			unitsInner.setValue(String.valueOf(0));
 		} else {
 			unitsInner.setValue(currentProduct.getInnerPackCount());
 		}
@@ -602,7 +622,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			unitsInnerPackageType.setValue(currentProduct.getInnerPackUnit().getId());
 		}
 		if (currentProduct.getOuterPackCount() == null) {
-			unitsOuter.setValue(0);
+			unitsOuter.setValue(String.valueOf(0));
 		} else {
 			unitsOuter.setValue(currentProduct.getOuterPackCount());
 		}
@@ -612,14 +632,14 @@ public class AddAsnLinesPage extends PageFlowPage {
 		if (currentProduct.getCommercialRecord() != null && 
 				currentProduct.getCommercialRecord().getCommercialValue() != null) {
 			if (currentProduct.getCommercialRecord().getCommercialValue().getValue() != null) {
-				number.setValue(currentProduct.getCommercialRecord().getCommercialValue().getValue());
+				number.setValue(String.valueOf(currentProduct.getCommercialRecord().getCommercialValue().getValue()));
 			}
 			if (currentProduct.getCommercialRecord().getCommercialValue().getCurrency() != null && 
 					currentProduct.getCommercialRecord().getCommercialValue().getCurrency().getId() != null) {
 				numberUnit.setValue(currentProduct.getCommercialRecord().getCommercialValue().getCurrency().getId());
 			}
 		}
-		
+
 		showNotification("Product \"" + currentProduct.getName() + "\" attached successfully", "");
 	}
 
@@ -747,7 +767,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		asnLineTable.setContainerDataSource(asnLineContainer);
 		asnLineTable.setVisibleColumns(new Object[] { "product.name", /* "refNumber.value", */"expectedTotalWeight", "product.weightUnit.name", "expectedTotalVolume", "product.volUnit.name", "expectedOuterPackCount" });
 		asnLineTable.setColumnHeader("product.name", "Product Name");
-//		asnLineTable.setColumnHeader("refNumber.value", "Reference Number");
+		//		asnLineTable.setColumnHeader("refNumber.value", "Reference Number");
 		asnLineTable.setColumnHeader("expectedTotalWeight", "Total Weight");
 		asnLineTable.setColumnHeader("product.weightUnit.name", "Weight Unit");
 		asnLineTable.setColumnHeader("expectedTotalVolume", "Total Volume");
@@ -783,7 +803,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label totalProductWeightLabel = new Label();
 		totalProductWeightLabel.setValue("Total Weight");
 
-		totalProductWeight = new TextField(new ObjectProperty<Double>(0.0));
+		totalProductWeight = new TextField();
 		totalProductWeight.setInputPrompt("Total Weight");
 		totalProductWeight.setWidth("100%");
 
@@ -820,7 +840,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label productHeightLabel = new Label();
 		productHeightLabel.setValue("Height");
 
-		totalProductVolume = new TextField(new ObjectProperty<Double>(0.0));
+		totalProductVolume = new TextField();
 		totalProductVolume.setInputPrompt("Total Volume");
 		totalProductVolume.setWidth("100%");
 
@@ -831,7 +851,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		totalProductVolumeUnit.setWidth("100%");
 		totalProductVolumeUnit.setNullSelectionAllowed(false);
 
-		productLength = new TextField(new ObjectProperty<Double>(0.0));
+		productLength = new TextField();
 		productLength.setInputPrompt("Length");
 		productLength.setWidth("100%");
 
@@ -842,7 +862,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		productLengthUnit.setWidth("100%");
 		productLengthUnit.setNullSelectionAllowed(false);
 
-		productWidth = new TextField(new ObjectProperty<Double>(0.0));
+		productWidth = new TextField();
 		productWidth.setInputPrompt("Width");
 		productWidth.setWidth("100%");
 
@@ -853,7 +873,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		productWidthUnit.setWidth("100%");
 		productWidthUnit.setNullSelectionAllowed(false);
 
-		productHeight = new TextField(new ObjectProperty<Double>(0.0));
+		productHeight = new TextField();
 		productHeight.setInputPrompt("Height");
 		productHeight.setWidth("100%");
 
@@ -893,7 +913,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label productUnitsInnerLabel = new Label();
 		productUnitsInnerLabel.setValue("Units Inner");
 
-		productUnitsOuter = new TextField(new ObjectProperty<Integer>(0));
+		productUnitsOuter = new TextField();
 		productUnitsOuter.setInputPrompt("Units Outer");
 		productUnitsOuter.setWidth("100%");
 
@@ -904,7 +924,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		productUnitsOuterPackageType.setWidth("100%");
 		productUnitsOuterPackageType.setNullSelectionAllowed(false);
 
-		productUnitsInner = new TextField(new ObjectProperty<Integer>(0));
+		productUnitsInner = new TextField();
 		productUnitsInner.setInputPrompt("Units Inner");
 		productUnitsInner.setWidth("100%");
 
@@ -1155,9 +1175,29 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label totalWeightLabel = new Label();
 		totalWeightLabel.setValue("Total Weight");
 
-		totalWeight = new TextField(new ObjectProperty<Double>(0.0));
+		totalWeight = new TextField();
 		totalWeight.setInputPrompt("Total Weight");
 		totalWeight.setWidth("100%");
+		totalWeight.setImmediate(true);
+		totalWeight.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (totalWeight.getValue() == null || totalWeight.getValue().equals("")) {
+					totalWeight.setValue("0.0");
+				}
+			}
+		});
+		totalWeight.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (totalWeight.getValue() != null && (totalWeight.getValue().equals("0.0") || totalWeight.getValue().equals("0")))
+					totalWeight.setValue("");
+			}
+		});
 
 		totalWeightUnit = new ComboBox();
 		totalWeightUnit.setInputPrompt("Units");
@@ -1194,9 +1234,29 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label heightLabel = new Label();
 		heightLabel.setValue("Height");
 
-		totalVolume = new TextField(new ObjectProperty<Double>(0.0));
+		totalVolume = new TextField();
 		totalVolume.setInputPrompt("Total Volume");
 		totalVolume.setWidth("100%");
+		totalVolume.setImmediate(true);
+		totalVolume.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (totalVolume.getValue() == null || totalVolume.getValue().equals("")) {
+					totalVolume.setValue("0.0");
+				}
+			}
+		});
+		totalVolume.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (totalVolume.getValue() != null && (totalVolume.getValue().equals("0.0") || totalVolume.getValue().equals("0")))
+					totalVolume.setValue("");
+			}
+		});
 
 		totalVolumeUnit = new ComboBox();
 		totalVolumeUnit.setInputPrompt("Units");
@@ -1205,9 +1265,37 @@ public class AddAsnLinesPage extends PageFlowPage {
 		totalVolumeUnit.setWidth("100%");
 		totalVolumeUnit.setNullSelectionAllowed(false);
 
-		length = new TextField(new ObjectProperty<Double>(0.0));
+		length = new TextField();
 		length.setInputPrompt("Length");
 		length.setWidth("100%");
+		length.setImmediate(true);
+		length.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (length.getValue() == null || length.getValue().equals("")) {
+					length.setValue("0.0");
+				}
+			}
+		});
+		length.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (length.getValue() != null && (length.getValue().equals("0.0") || length.getValue().equals("0")))
+					length.setValue("");
+			}
+		});
+		length.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 1902394853L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				calculateVolume();
+			}
+		});
 
 		lengthUnit = new ComboBox();
 		lengthUnit.setInputPrompt("Units");
@@ -1216,9 +1304,37 @@ public class AddAsnLinesPage extends PageFlowPage {
 		lengthUnit.setWidth("100%");
 		lengthUnit.setNullSelectionAllowed(false);
 
-		width = new TextField(new ObjectProperty<Double>(0.0));
+		width = new TextField();
 		width.setInputPrompt("Width");
+		width.setImmediate(true);
 		width.setWidth("100%");
+		width.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (width.getValue() == null || width.getValue().equals("")) {
+					width.setValue("0.0");
+				}
+			}
+		});
+		width.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (width.getValue() != null && (width.getValue().equals("0.0") || width.getValue().equals("0")))
+					width.setValue("");
+			}
+		});
+		width.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 1902394853L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				calculateVolume();
+			}
+		});
 
 		widthUnit = new ComboBox();
 		widthUnit.setInputPrompt("Units");
@@ -1227,9 +1343,37 @@ public class AddAsnLinesPage extends PageFlowPage {
 		widthUnit.setWidth("100%");
 		widthUnit.setNullSelectionAllowed(false);
 
-		height = new TextField(new ObjectProperty<Double>(0.0));
+		height = new TextField();
 		height.setInputPrompt("Height");
 		height.setWidth("100%");
+		height.setImmediate(true);
+		height.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (height.getValue() == null || height.getValue().equals("")) {
+					height.setValue("0.0");
+				}
+			}
+		});
+		height.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (height.getValue() != null && (height.getValue().equals("0.0") || height.getValue().equals("0")))
+					height.setValue("");
+			}
+		});
+		height.addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = 1902394853L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				calculateVolume();
+			}
+		});
 
 		heightUnit = new ComboBox();
 		heightUnit.setInputPrompt("Units");
@@ -1272,9 +1416,29 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label unitsInnerLabel = new Label();
 		unitsInnerLabel.setValue("Units Inner");
 
-		unitsOuter = new TextField(new ObjectProperty<Integer>(0));
+		unitsOuter = new TextField();
 		unitsOuter.setInputPrompt("Units Outer");
 		unitsOuter.setWidth("100%");
+		unitsOuter.setImmediate(true);
+		unitsOuter.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (unitsOuter.getValue() == null || unitsOuter.getValue().equals("")) {
+					unitsOuter.setValue("0");
+				}
+			}
+		});
+		unitsOuter.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (unitsOuter.getValue() != null && (unitsOuter.getValue().equals("0.0") || unitsOuter.getValue().equals("0")))
+					unitsOuter.setValue("");
+			}
+		});
 
 		unitsOuterPackageType = new ComboBox();
 		unitsOuterPackageType.setInputPrompt("Package Type");
@@ -1283,9 +1447,29 @@ public class AddAsnLinesPage extends PageFlowPage {
 		unitsOuterPackageType.setWidth("100%");
 		unitsOuterPackageType.setNullSelectionAllowed(false);
 
-		unitsInner = new TextField(new ObjectProperty<Integer>(0));
+		unitsInner = new TextField();
 		unitsInner.setInputPrompt("Units Inner");
 		unitsInner.setWidth("100%");
+		unitsInner.setImmediate(true);
+		unitsInner.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (unitsInner.getValue() == null || unitsInner.getValue().equals("")) {
+					unitsInner.setValue("0");
+				}
+			}
+		});
+		unitsInner.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (unitsInner.getValue() != null && (unitsInner.getValue().equals("0.0") || unitsInner.getValue().equals("0")))
+					unitsInner.setValue("");
+			}
+		});
 
 		unitsInnerPackageType = new ComboBox();
 		unitsInnerPackageType.setInputPrompt("Package Type");
@@ -1328,9 +1512,29 @@ public class AddAsnLinesPage extends PageFlowPage {
 		Label numberLabel = new Label();
 		numberLabel.setValue("Value");
 
-		number = new TextField(new ObjectProperty<Double>(0.0));
+		number = new TextField();
 		number.setInputPrompt("Value");
 		number.setWidth("100%");
+		number.setImmediate(true);
+		number.addListener(new BlurListener() {
+			private static final long serialVersionUID = 104805728L;
+
+			@Override
+			public void blur(BlurEvent event) {
+				if (number.getValue() == null || number.getValue().equals("")) {
+					number.setValue("0.0");
+				}
+			}
+		});
+		number.addListener(new FocusListener() {
+			private static final long serialVersionUID = 11111092339L;
+
+			@Override
+			public void focus(FocusEvent event) {
+				if (number.getValue() != null && (number.getValue().equals("0.0") || number.getValue().equals("0")))
+					number.setValue("");
+			}
+		});
 
 		numberUnit = new ComboBox();
 		numberUnit.setInputPrompt("Currency");
@@ -1493,6 +1697,33 @@ public class AddAsnLinesPage extends PageFlowPage {
 		toolStrip.setComponentAlignment(toolstripRightButtonPanel, Alignment.MIDDLE_RIGHT);
 	}
 
+	private void calculateVolume() {
+		String w, h, l;
+		Double dw, dl, dh;
+
+		w = (String) width.getValue();
+		h = (String) height.getValue();
+		l = (String) length.getValue();
+
+		try {
+			dw = Double.parseDouble(w);
+			dh = Double.parseDouble(h);
+			dl = Double.parseDouble(l);
+
+			if (dw != null && dh != null && dl != null) {
+				totalVolume.setValue(String.valueOf(dw * dh * dl));
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (ReadOnlyException e) {
+			e.printStackTrace();
+		} catch (ConversionException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public String getTaskName() {
 		return "AddAsnLines";
@@ -1512,7 +1743,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		this.wizard = wizard;
 		this.pfpEventHandler = pfpEventHandler;
 		this.pfpEventHandler.registerForPageFlowPageChanged(this);
-		
+
 		initFields();
 		initContainers();
 		initListView();
@@ -1544,7 +1775,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		}
 		asnASNLineProductMapOut.put("asnLinesCollection", asnLines);
 		asnASNLineProductMapOut.put("productsCollection", newProducts);
-		
+
 		if (isExecuted()) {
 			this.state.put("asnASNLineProductMap", asnASNLineProductMapOut);
 		} else {
@@ -1560,7 +1791,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 		this.state = (Map<String, Object>)state.get("Content");
 		Map<String, Object> asnRefNumMapIn = (Map<String, Object>)this.state.get("asnRefNumMapIn");
 		Set<ReferenceNumber> refNums = (Set<ReferenceNumber>) asnRefNumMapIn.get("asnRefNumCollection");
-		
+
 		Set<ASNLine> asnLines = (Set<ASNLine>) this.state.get("asnLinesCollection");
 		if (refNums != null && refNumBeanContainer != null) {
 			try {
@@ -1578,7 +1809,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onPageChanged(PageFlowPageChangedEvent event) {
