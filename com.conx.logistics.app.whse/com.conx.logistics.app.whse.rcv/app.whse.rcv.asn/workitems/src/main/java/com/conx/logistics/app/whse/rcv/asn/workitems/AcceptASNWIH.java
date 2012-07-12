@@ -127,13 +127,14 @@ public class AcceptASNWIH implements WorkItemHandler {
 					.getTransaction(def);
 
 			Map<String, Object> varsOut = new HashMap<String, Object>();
-			ASN asn = null;
+			//ASN asn = null;
 			try {
-				asn = em.merge(asnIn);
+				asnIn = em.merge(asnIn);
+				em.flush();
 
-				varsOut.put("asn", asn);
+				varsOut.put("asn", asnIn);
 				Map<String, Object> output = new HashMap<String, Object>();
-				output.put("asnOut", asn);
+				output.put("asnOut", asnIn);
 
 				
 				Set<ReferenceNumber> attachedRefNums = new HashSet<ReferenceNumber>();
@@ -150,8 +151,8 @@ public class AcceptASNWIH implements WorkItemHandler {
 						}
 						
 						Map<String, Object> asnASNLineProductMapOut = new HashMap<String, Object>();
-						asn = addLines(asn.getId(), asnLinesCollectionIn);
-						Set<ASNLine> asnLinesCollectionOut = asn.getAsnLines();
+						asnIn = addLines(asnIn.getId(), asnLinesCollectionIn);
+						Set<ASNLine> asnLinesCollectionOut = asnIn.getAsnLines();
 						asnASNLineProductMapOut.put("asnLinesCollection",
 								asnLinesCollectionOut);
 	
@@ -168,8 +169,8 @@ public class AcceptASNWIH implements WorkItemHandler {
 					Map<String, Object> asnRefNumMapOut = new HashMap<String, Object>();
 					
 					refNumsCollectionIn = removeAll(attachedRefNums,refNumsCollectionIn);
-					asn = addRefNums(asn.getId(), refNumsCollectionIn);
-					Set<ReferenceNumber> refNumsCollectionOut = asn
+					asnIn = addRefNums(asnIn.getId(), refNumsCollectionIn);
+					Set<ReferenceNumber> refNumsCollectionOut = asnIn
 							.getRefNumbers();
 					asnRefNumMapOut.put("asnRefNumCollection",
 							refNumsCollectionOut);
@@ -179,10 +180,10 @@ public class AcceptASNWIH implements WorkItemHandler {
 				if (Validator.isNotNull(asnLocalTransMapIn)
 						&& asnLocalTransMapIn.size() > 0) {
 					Map<String, Object> asnLocalTransMapOut = new HashMap<String, Object>();
-					asn = addLocalTrans(asn.getId(), asnPickupIn,
+					asnIn = addLocalTrans(asnIn.getId(), asnPickupIn,
 							asnDropoffIn);
-					ASNPickup asnPickupOut = asn.getPickup();
-					ASNDropOff asnDropoffOut = asn.getDropOff();
+					ASNPickup asnPickupOut = asnIn.getPickup();
+					ASNDropOff asnDropoffOut = asnIn.getDropOff();
 					asnLocalTransMapOut.put("asnPickup", asnPickupOut);
 					asnLocalTransMapOut.put("asnDropoff", asnDropoffOut);
 
@@ -264,12 +265,15 @@ public class AcceptASNWIH implements WorkItemHandler {
 
 				if (Validator.isNotNull(number))
 				{
+					number = em.merge(number);
 					if (Validator.isNull(number.getId()))
 					{
 						number.setEntityMetadata(emd);
 						number.setEntityPK(number.getId());
 					}
 					line.setRefNumber(number);
+					
+					asn.getRefNumbers().add(number);
 				}
 				
 				prod = em.merge(line.getProduct());
@@ -278,7 +282,6 @@ public class AcceptASNWIH implements WorkItemHandler {
 				line = (ASNLine) em.merge(line);
 
 				asn.getAsnLines().add(line);
-				asn.getRefNumbers().add(number);
 			}
 
 			asn = em.merge(asn);
@@ -354,7 +357,7 @@ public class AcceptASNWIH implements WorkItemHandler {
 			if (Validator.isNotNull(pickUp)) {
 				DockType dockType = pickUp.getDockType();
 				if (dockType != null) {
-					dockType = em.merge(dockType);
+					dockType = em.getReference(DockType.class, dockType.getId());
 					pickUp.setDockType(dockType);
 				}
 				pickUp = (ASNPickup) em.merge(pickUp);
@@ -364,7 +367,7 @@ public class AcceptASNWIH implements WorkItemHandler {
 			if (Validator.isNotNull(dropOff)) {
 				DockType dockType = dropOff.getDockType();
 				if (dockType != null) {
-					dockType = em.merge(dockType);
+					dockType = em.getReference(DockType.class, dockType.getId());
 					dropOff.setDockType(dockType);
 				}
 				dropOff = (ASNDropOff) em.merge(dropOff);

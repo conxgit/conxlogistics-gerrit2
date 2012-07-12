@@ -419,6 +419,13 @@ public class ASNSearchPresenter extends
 							if (asnLineContainer != null) {
 								try {
 									asnLineContainer.removeAllItems();
+									for (ASNLine line : asn.getAsnLines())
+									{
+										if (line.getRefNumber() == null)
+										{
+											line.setRefNumber(new ReferenceNumber());
+										}
+									}
 									asnLineContainer.addAll(asn.getAsnLines());
 								} catch (Exception e) {
 									e.printStackTrace();
