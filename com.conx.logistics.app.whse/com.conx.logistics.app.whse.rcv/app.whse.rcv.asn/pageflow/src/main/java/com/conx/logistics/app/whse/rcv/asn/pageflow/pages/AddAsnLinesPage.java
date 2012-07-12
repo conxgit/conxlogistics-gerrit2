@@ -212,29 +212,38 @@ public class AddAsnLinesPage extends PageFlowPage {
 			if (totalWeightUnit.getValue() == null) {
 				message.append("</br>Total Weight Unit was not provided");
 			}
-			if (totalVolume.getValue() == null || ((String) totalVolume.getValue()).isEmpty()) {
-				message.append("</br>Total Volume was not provided");
+			if (totalVolume.getValue() == null || ((String) totalVolume.getValue()).isEmpty() || totalVolumeUnit.getValue() == null) {
+				if (length.getValue() == null || ((String) length.getValue()).isEmpty()) {
+					message.append("</br>Length was not provided");
+				}
+				if (lengthUnit.getValue() == null) {
+					message.append("</br>Length Unit was not provided");
+				}
+				if ((width.getValue() == null || ((String) width.getValue()).isEmpty())) {
+					message.append("</br>Width was not provided");
+				}
+				if (widthUnit.getValue() == null) {
+					message.append("</br>Width Unit was not provided");
+				}
+				if (height.getValue() == null || ((String) height.getValue()).isEmpty()) {
+					message.append("</br>Height was not provided");
+				}
+				if (heightUnit.getValue() == null) {
+					message.append("</br>Height Unit was not provided");
+				}
 			}
-			if (totalVolumeUnit.getValue() == null) {
-				message.append("</br>Total Volume Unit was not provided");
-			}
-			if (length.getValue() == null || ((String) length.getValue()).isEmpty()) {
-				message.append("</br>Length was not provided");
-			}
-			if (lengthUnit.getValue() == null) {
-				message.append("</br>Length Unit was not provided");
-			}
-			if ((width.getValue() == null || ((String) width.getValue()).isEmpty())) {
-				message.append("</br>Width was not provided");
-			}
-			if (widthUnit.getValue() == null) {
-				message.append("</br>Width Unit was not provided");
-			}
-			if (height.getValue() == null || ((String) height.getValue()).isEmpty()) {
-				message.append("</br>Height was not provided");
-			}
-			if (heightUnit.getValue() == null) {
-				message.append("</br>Height Unit was not provided");
+			if ((length.getValue() == null || ((String) length.getValue()).isEmpty()) ||
+					lengthUnit.getValue() == null ||
+					(width.getValue() == null || ((String) width.getValue()).isEmpty()) ||
+					widthUnit.getValue() == null ||
+					(height.getValue() == null || ((String) height.getValue()).isEmpty()) ||
+					heightUnit.getValue() == null) {
+				if (totalVolume.getValue() == null || ((String) totalVolume.getValue()).isEmpty()) {
+					message.append("</br>Total Volume was not provided");
+				}
+				if (totalVolumeUnit.getValue() == null) {
+					message.append("</br>Total Volume Unit was not provided");
+				}
 			}
 			if (unitsOuter.getValue() == null || ((String) unitsOuter.getValue()).isEmpty()) {
 				message.append("</br>Units Outer was not provided");
@@ -1622,6 +1631,7 @@ public class AddAsnLinesPage extends PageFlowPage {
 
 			public void buttonClick(ClickEvent event) {
 				asnLineTable.removeItem(asnLineTable.getValue());
+				deleteButton.setEnabled(false);
 				if (pageMode == EDIT_PAGE_MODE) {
 					setPageMode(LIST_PAGE_MODE);
 				}

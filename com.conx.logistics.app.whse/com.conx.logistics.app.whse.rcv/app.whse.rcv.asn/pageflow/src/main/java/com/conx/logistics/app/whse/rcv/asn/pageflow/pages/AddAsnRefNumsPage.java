@@ -389,6 +389,7 @@ public class AddAsnRefNumsPage extends PageFlowPage {
 
 			public void buttonClick(ClickEvent event) {
 				referenceIdTable.removeItem(referenceIdTable.getValue());
+				deleteButton.setEnabled(false);
 				if (pageMode == EDIT_PAGE_MODE) {
 					referenceIdTable.removeItem(referenceIdTable.getValue());
 					setPageMode(LIST_PAGE_MODE);

@@ -259,6 +259,10 @@ public class AcceptASNWIH implements WorkItemHandler {
 				line.setParentASN(asn);
 				
 				number = line.getRefNumber();
+				if (Validator.isNotNull(number)) {
+					number = em.merge(number);
+					line.setRefNumber(number);
+				}
 				
 				line = (ASNLine) em.merge(line);
 				em.flush();

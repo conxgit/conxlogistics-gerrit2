@@ -482,6 +482,11 @@ public class ConfirmAsnPage extends PageFlowPage {
 				pickupLocationAddress.setValue((addressToXhtml(pickup.getPickUpFromAddress())));
 				pickupLocationContactName.setValue((pickup.getPickUpFrom().getMainContact().getFirstName() + " " + pickup.getPickUpFrom().getMainContact().getLastName()));
 				pickupLocationContactPhone.setValue((pickup.getPickUpFrom().getMainContact().getCellPhoneNumber()));
+				if (pickup.getDockType() != null) {
+					pickupLocationDockType.setValue(dropOff.getDockType().getName());
+				} else {
+					pickupLocationDockType.setValue("N/A");
+				}
 				
 				inboundCarrierOrg.setValue((pickup.getLocalTrans().getName()));
 				inboundCarrierAddress.setValue((addressToXhtml(pickup.getLocalTransAddress())));
@@ -511,13 +516,16 @@ public class ConfirmAsnPage extends PageFlowPage {
 				dropOffLocationAddress.setValue((addressToXhtml(dropOff.getDropOffAtAddress())));
 				dropOffLocationContactName.setValue((dropOff.getDropOffAt().getMainContact().getFirstName() + " " + dropOff.getDropOffAt().getMainContact().getLastName()));
 				dropOffLocationContactPhone.setValue((dropOff.getDropOffAt().getMainContact().getCellPhoneNumber()));
+				if (dropOff.getDockType() != null) {
+					dropOffLocationDockType.setValue(dropOff.getDockType().getName());
+				} else {
+					dropOffLocationDockType.setValue("N/A");
+				}
 			}
 		}
 	}
 
 	@Override
 	public void onPageChanged(PageFlowPageChangedEvent event) {
-		Map<String, Object> updatedProcVars = event.getChangedVars();
-		//Look for procVars
 	}	
 }

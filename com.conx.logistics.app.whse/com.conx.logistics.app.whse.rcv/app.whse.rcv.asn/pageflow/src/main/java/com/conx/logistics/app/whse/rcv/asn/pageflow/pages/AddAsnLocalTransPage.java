@@ -1146,7 +1146,7 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 
 		Organization pickupLocOrg = this.pickupLocationOrganizationContainer.getItem(pickupLocationOrganization.getValue()).getEntity();
 		Organization pickupCarrierOrg = this.pickupCarrierOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
-		Organization dropOffLocOrg = this.dropOffLocationOrganizationContainer.getItem(pickupCarrierOrganization.getValue()).getEntity();
+		Organization dropOffLocOrg = this.dropOffLocationOrganizationContainer.getItem(dropOffLocationOrganization.getValue()).getEntity();
 
 		pickup.setPickUpFrom(pickupLocOrg);
 		String selectedAddress = (String) pickupLocationAddress.getValue();
@@ -1195,23 +1195,23 @@ public class AddAsnLocalTransPage extends PageFlowPage {
 		dropOff.setDropOffAt(dropOffLocOrg);
 		selectedAddress = (String) dropOffLocationAddress.getValue();
 		if (selectedAddress.equals(AddressCustomCONSTANTS.ADHOC_ADDRESS)) {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getAdHocAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getAdHocAddress());
 		} else if (selectedAddress.equals(AddressCustomCONSTANTS.SHIPPING_ADDRESS)) {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getShippingAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getShippingAddress());
 		} else if (selectedAddress.equals(AddressCustomCONSTANTS.RECEIVING_ADDRESS)) {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getReceivingAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getReceivingAddress());
 		} else if (selectedAddress.equals(AddressCustomCONSTANTS.BILLING_ADDRESS)) {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getBillingAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getBillingAddress());
 		} else if (selectedAddress.equals(AddressCustomCONSTANTS.PICKUP_ADDRESS)) {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getPickupAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getPickupAddress());
 		} else if (selectedAddress.equals(AddressCustomCONSTANTS.DELIVERY_ADDRESS)) {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getDeliveryAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getDeliveryAddress());
 		} else {
-			dropOff.setDropOffAtAddress(pickupCarrierOrg.getMainAddress());
+			dropOff.setDropOffAtAddress(dropOffLocOrg.getMainAddress());
 		}
 		dropOff.setEstimatedDropOff((Date) expectedWhArrivalDate.getValue());
 		if (dropOffLocationDockType.getValue() != null) {
-			pickup.setDockType(dockTypeContainer.getItem(dropOffLocationDockType.getValue()).getEntity());
+			dropOff.setDockType(dockTypeContainer.getItem(dropOffLocationDockType.getValue()).getEntity());
 		}
 
 		Map<String,Object> asnLocalTransMap = new HashMap<String, Object>();
