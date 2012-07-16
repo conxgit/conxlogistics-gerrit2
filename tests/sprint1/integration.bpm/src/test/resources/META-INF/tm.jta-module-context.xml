@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Application context definition for GreenPages JPA. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- Activates a load-time weaver for the context. Any bean within the context 
+		that implements LoadTimeWeaverAware (such as LocalContainerEntityManagerFactoryBean) 
+		will receive a reference to the autodetected load-time weaver. -->
+	<context:load-time-weaver aspectj-weaving="on" />
+
+	<!-- Bitronix Transaction Manager embedded configuration -->
+	<bean id="btmConfig" factory-method="getConfiguration"
+		class="bitronix.tm.TransactionManagerServices">
+		<property name="allowMultipleLrc" value="true" />
+		<!-- <property name="serverId" value="spring-btm" /> <property name="logPart1Filename" 
+			value="btm1.tlog"/> <property name="logPart2Filename" value="btm2.tlog"/> -->
+	</bean>
+
+	<!-- create BTM transaction manager -->
+	<bean id="BitronixTransactionManager" factory-method="getTransactionManager"
+		class="bitronix.tm.TransactionManagerServices" depends-on="btmConfig"
+		destroy-method="shutdown" />
+
+	<!-- Spring JtaTransactionManager -->
+	<bean id="JtaTransactionManager"
+		class="org.springframework.transaction.jta.JtaTransactionManager">
+		<property name="transactionManager" ref="BitronixTransactionManager" />
+		<property name="userTransaction" ref="BitronixTransactionManager" />
+	</bean>
+
+	<!-- Context Lookup jndiTemplate -->
+	<bean id="tmJndiTemplate" class="org.springframework.jndi.JndiTemplate"
+		lazy-init="true">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">bitronix.tm.jndi.BitronixInitialContextFactory</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
