@@ -29,7 +29,7 @@ public class CountryStateDAOImpl implements ICountryStateDAOService {
     /**
      * Spring will inject a managed JPA {@link EntityManager} into this field.
      */
-    @PersistenceContext
+    @PersistenceContext(unitName="pu")
     private EntityManager em;	
     
     @Autowired

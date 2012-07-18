@@ -96,8 +96,9 @@
 
 		<!-- Hibernate -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.thirdparty.hibernate.core</artifactId>
+			<version>3.6.0.Final</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -81,7 +81,7 @@ public class HumanTaskServer implements IBPMTaskService {
 			localTaskService = new LocalTaskService(taskService);
 
 			// Add users
-			Map vars = new HashMap();
+/*			Map vars = new HashMap();
 			Reader reader;
 
 			URL usersURL = HumanTaskServer.class.getClassLoader().getResource(
@@ -102,7 +102,7 @@ public class HumanTaskServer implements IBPMTaskService {
 			for (Group group : groups.values()) {
 				taskSession.addGroup(group);
 			}
-			
+			*/
 
 			//ut.commit();			
 			

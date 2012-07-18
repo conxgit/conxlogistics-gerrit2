@@ -288,19 +288,33 @@ public class BPMServerImpl implements IBPMService {
 			// Add users
 			Map vars = new HashMap();
 			Reader reader;
-
-			URL usersURL = BPMServerImpl.class.getClassLoader().getResource(
-					"LoadUsers.mvel");
-			reader = new FileReader(new File(usersURL.toURI()));
+			URL usersURL;
+			try {
+				usersURL = BPMServerImpl.class.getClassLoader().getResource(
+						"LoadUsers.mvel");
+				reader = new FileReader(new File(usersURL.toURI()));
+			} catch (IllegalArgumentException e1) {
+				File file = new File("LoadUsers.mvel");
+				reader = new FileReader(file);
+			}
 
 			Map<String, User> users = (Map<String, User>) eval(reader, vars);
 			for (User user : users.values()) {
 				ts.addUser(user);
 			}
 
-			URL grpsURL = BPMServerImpl.class.getClassLoader().getResource(
-					"LoadGroups.mvel");
-			reader = new FileReader(new File(grpsURL.toURI()));
+			URL grpsURL = null;
+			
+			try {
+				grpsURL = BPMServerImpl.class.getClassLoader().getResource(
+						"LoadGroups.mvel");
+				reader = new FileReader(new File(grpsURL.toURI()));
+			} catch (IllegalArgumentException e) {
+				grpsURL = BPMServerImpl.class.getClassLoader().getResource(
+						"/LoadGroups.mvel");
+				File file = new File(Thread.currentThread().getContextClassLoader().getResource("/LoadGroups.mvel").getFile());
+				reader = new FileReader(file);				
+			}
 
 			Map<String, Group> groups = (Map<String, Group>) eval(reader, vars);
 			for (Group group : groups.values()) {

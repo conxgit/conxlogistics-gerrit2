@@ -9,9 +9,9 @@
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 	<context:load-time-weaver aspectj-weaving="on" />
 	<!-- JBPM TASK JPA EntityManagerFactory -->
-	<bean id="jbpmTaskPersistenceJpaEntityManagerFactory" 
+	<bean id="jbpmPersistenceJpaEntityManagerFactory" 
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-		p:dataSource-ref="bpmPersistenceJpaDataSource" p:persistenceUnitName="org.jbpm.task" depends-on="btmConfig">
+		p:dataSource-ref="bpmPersistenceJpaDataSource" p:persistenceUnitName="org.jbpm.persistence.jpa" depends-on="btmConfig">
 		<property name="jpaVendorAdapter">
 			<bean id="jpaTaskVendorAdapter"
 				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
@@ -20,7 +20,7 @@
 			</bean>
 		</property>
 		<property name="persistenceXmlLocation">
-			<value>classpath:/META-INF/jbpm-task-server-persistence.xml</value>
+			<value>classpath:/META-INF/jbpm.bpmserver-persistence.xml</value>
  		</property> 
 	</bean>	
 </beans>

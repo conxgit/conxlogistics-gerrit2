@@ -20,7 +20,7 @@
 			</bean>
 		</property>
 		<property name="persistenceXmlLocation">
-			<value>classpath:/META-INF/jbpm-task-server-persistence.xml</value>
+			<value>classpath:/META-INF/jbpm.taskserver-persistence.xml</value>
  		</property> 
 	</bean>	
 </beans>

@@ -11,7 +11,7 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-	<bean id="humanTaskServer" class="com.conx.logistics.data.uat.sprint1.data.TestDataManager" init-method="start" destroy-method="stop">
+	<bean id="sprint1UATTestManager" class="com.conx.logistics.data.uat.sprint1.data.TestDataManager" init-method="start" destroy-method="stop">
 		<property name="conxlogisticsEMF" ref="conxLogisticsManagerFactory"></property>
 		<property name="globalTransactionManager" ref="JtaTransactionManager"></property>
 				

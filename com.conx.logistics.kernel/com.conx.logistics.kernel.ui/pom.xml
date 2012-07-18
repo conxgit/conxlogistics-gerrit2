@@ -14,5 +14,7 @@
   	<module>com.conx.logistics.kernel.ui.services</module>
   	<!--<module>com.conx.logistics.kernel.ui.manager</module>-->
   	<module>kernel.ui.common</module>
+  	<module>kernel.ui.forms</module>
+  	<module>kernel.ui.editors</module>
   </modules>
 </project>

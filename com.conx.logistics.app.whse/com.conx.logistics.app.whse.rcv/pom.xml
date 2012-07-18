@@ -13,5 +13,6 @@
   <modules>
   	<module>com.conx.logistics.app.whse.rcv.pwy</module>
   	<module>app.whse.rcv.asn</module>
+  	<module>app.whse.rcv.rcv</module>
   </modules>
 </project>

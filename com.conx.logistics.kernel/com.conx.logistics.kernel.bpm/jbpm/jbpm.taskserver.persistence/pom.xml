@@ -102,14 +102,24 @@
 
 		<!-- Hibernate -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.thirdparty.hibernate.core</artifactId>
 			<version>3.6.0.Final</version>
-		</dependency>
+			<scope>test</scope>
+		</dependency>	
+		
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.thirdparty.hibernate.entitymanager</artifactId>
+			<version>3.6.0.Final</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>			
+		</dependency>	
 	</dependencies>
 	<build>
 		<plugins>

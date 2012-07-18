@@ -38,7 +38,7 @@ public class ASNPickupDAOImpl implements IASNPickupDAOService {
     /**
      * Spring will inject a managed JPA {@link EntityManager} into this field.
      */
-    @PersistenceContext
+    @PersistenceContext(unitName="pu")
     private EntityManager em;	
     
 	public void setEm(EntityManager em) {

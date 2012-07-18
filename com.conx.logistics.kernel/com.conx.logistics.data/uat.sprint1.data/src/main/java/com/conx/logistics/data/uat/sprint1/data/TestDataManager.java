@@ -178,8 +178,10 @@ public class TestDataManager {
 		TransactionStatus status = this.globalTransactionManager.getTransaction(def);			
 		try {
 			Organization record = this.orgDaoService.getByCode("TESCUS1");
+			logger.info("Checking Sprint # 1 UAT data");
 			if (record == null)
 			{
+				logger.info("Generating Sprint # 1 UAT ");
 				/**
 				 * Org Data: TD ORG 1.0, 4.0, 6.0, 7.0
 				 */

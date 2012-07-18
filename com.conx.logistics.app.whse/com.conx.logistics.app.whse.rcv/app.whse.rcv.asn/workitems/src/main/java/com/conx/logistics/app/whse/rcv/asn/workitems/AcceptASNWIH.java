@@ -58,7 +58,7 @@ public class AcceptASNWIH implements WorkItemHandler {
 	/**
 	 * Spring will inject a managed JPA {@link EntityManager} into this field.
 	 */
-	@PersistenceContext
+	@PersistenceContext(unitName="pu")
 	private EntityManager em;
 
 	@Autowired
@@ -67,7 +67,6 @@ public class AcceptASNWIH implements WorkItemHandler {
 	@Autowired
 	private UserTransaction userTransaction;
 
-	@Autowired
 	private PlatformTransactionManager globalJtaTransactionManager;
 
 	@Autowired
@@ -75,6 +74,13 @@ public class AcceptASNWIH implements WorkItemHandler {
 	
 	@Autowired
 	private IReferenceNumberTypeDAOService referenceNumberTypeDao;
+	
+	
+
+	public void setGlobalJtaTransactionManager(
+			PlatformTransactionManager globalJtaTransactionManager) {
+		this.globalJtaTransactionManager = globalJtaTransactionManager;
+	}
 
 	@Override
 	public void executeWorkItem(WorkItem workItem, WorkItemManager manager) {
