@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>com.conx.logistics.parent</artifactId>
+    <groupId>com.conx.logistics</groupId>
+    <version>1.0.0</version>
+    <relativePath>../com.conx.logistics.parent</relativePath>
+  </parent>
+  <artifactId>com.conx.logistics.app.tms</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>tms.domain</module>
+  </modules>
+</project>

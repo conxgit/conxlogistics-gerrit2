@@ -13,7 +13,7 @@
 
 	<bean id="sprint1UATTestManager" class="com.conx.logistics.data.uat.sprint1.data.TestDataManager" init-method="start" destroy-method="stop">
 		<property name="conxlogisticsEMF" ref="conxLogisticsManagerFactory"></property>
-		<property name="globalTransactionManager" ref="JtaTransactionManager"></property>
+		<property name="globalTransactionManager" ref="globalJtaTransactionManager"></property>
 				
 		<property name="addressDaoService" ref="addressDao"></property>
 		<property name="asnDaoService" ref="asnDao"></property>

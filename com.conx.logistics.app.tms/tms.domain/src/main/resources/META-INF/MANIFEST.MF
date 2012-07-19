@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.tms.domain.types;version="1.0.0
+ "
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Build-Jdk: 1.6.0_33
+Built-By: mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX TMS App Domain Model
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.tms.domain
+

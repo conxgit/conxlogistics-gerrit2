@@ -122,6 +122,7 @@ public class TaskManagement implements org.jboss.bpm.console.server.integration.
 		connect();
 		service.claimNextAvailable(userId, "");
 	}
+
 	
     public List<Task> getCreatedTasksByProcessId(Long processInstanceId) {
     	String query = "select t from org.jbpm.task.Task t  where t.archived = 0 and t.taskData.status = '"+org.jbpm.task.Status.Ready+"' and t.taskData.processInstanceId = "+processInstanceId+" and t.taskData.expirationTime is null";

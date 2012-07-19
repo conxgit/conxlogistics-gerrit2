@@ -20,6 +20,7 @@ import org.jboss.bpm.console.client.model.DiagramNodeInfo;
 import org.jbpm.process.audit.NodeInstanceLog;
 import org.jbpm.process.audit.ProcessInstanceLog;
 import org.jbpm.workflow.core.node.HumanTaskNode;
+import org.jbpm.workflow.core.node.Split;
 import org.jbpm.workflow.core.node.StartNode;
 
 import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
@@ -192,12 +193,114 @@ public class ProcessGraphManagement {
 		return null;
 	}
 	
+	
+	public boolean humanTaskNodeIsGatewayDriver(String taskname, String definitionId) {
+		boolean res = false;
+		
+		Node node = findHumanTaskNodeForTask(taskname,definitionId);
+
+		Node nextNode = getNextSplitNode(taskname, node);
+		
+		return (nextNode != null);
+	}
+
+	public Node getNextSplitNode(String taskname, Node node) {
+		Node splitNode = null;
+		
+		//Ask the question
+		if (node == null) {
+			throw new IllegalArgumentException("HumanTask node for Task ["+taskname+"] not found");
+		}			
+		if (!(node instanceof HumanTaskNode)) {
+			throw new IllegalArgumentException("Task ["+taskname+"] is not of HumanTaskNode type");
+		}
+		List<Connection> connections = null;
+		connections = node.getOutgoingConnections("DROOLS_DEFAULT");
+		if (connections != null && connections.size() > 0) {
+			node = node.getOutgoingConnections("DROOLS_DEFAULT").get(0).getTo();
+			if (node instanceof Split)
+			{
+				splitNode = node;
+			}
+		} else {
+			throw new IllegalArgumentException("Task ["+taskname+"] node has zero outgoing connections");
+		}
+		return splitNode;
+	}	
+	
+	public HumanTaskNode findHumanTaskNodeForTask(String taskname, String definitionId) {
+		Node res = null;
+		org.drools.definition.process.Process proc = bpmService.getKsession().getKnowledgeBase().getProcess(definitionId);		
+		if (proc != null) {
+			Node[] nodes = ((WorkflowProcess) proc).getNodes();
+			Node node = null;
+			List<Connection> connections = null;
+			//Find task node
+			for (Node n : nodes) {
+				if (n instanceof StartNode) {
+					node = n;
+					while (node != null) {
+						if (node.getName().equals(taskname))
+						{
+							res = node;
+							break;
+						}
+						connections = null;
+						connections = node.getOutgoingConnections("DROOLS_DEFAULT");
+						if (connections != null && connections.size() > 0) {
+							node = node.getOutgoingConnections("DROOLS_DEFAULT").get(0).getTo();
+						} else {
+							break;
+						}						
+					}
+				}
+			}
+		}
+		return (HumanTaskNode)res;
+	}
+	
+	public List<HumanTaskNode> findAllHumanTaskNodesAfterTask(String taskname, String definitionId) {
+		
+		Node node_ = findHumanTaskNodeForTask(taskname,definitionId);
+		
+		List<HumanTaskNode> list = getProcessHumanTaskNodes(definitionId);
+		
+		//Grab all HT's after index (excl.)
+		int index = list.indexOf(node_);
+		
+		return list.subList(index, list.size()-1);
+	}
+	
+	public List<HumanTaskNode> findAllHumanTaskNodesBeforeTask(String taskname, String definitionId) {
+		
+		Node node_ = findHumanTaskNodeForTask(taskname,definitionId);
+		
+		List<HumanTaskNode> list = new ArrayList<HumanTaskNode>();
+
+		Node node = node_;
+		List<Connection> connections;
+		while (node != null) {
+			if (node instanceof HumanTaskNode) {
+				list.add((HumanTaskNode)node);
+			}
+			connections = null;
+			connections = node.getIncomingConnections("DROOLS_DEFAULT");
+			if (connections != null && connections.size() > 0) {
+				node = node.getIncomingConnections("DROOLS_DEFAULT").get(0).getTo();
+			} else {
+				break;
+			}
+		}
+		
+		return list;
+	}	
+
 	public List<Node> getActiveNode(String instanceId) {
 		ProcessInstanceLog processInstanceLog = jpaDbLog.findProcessInstance(new Long(instanceId));
 		if (processInstanceLog != null) {
 			Map<String, NodeInstanceLog> nodeInstanceLogs = new HashMap<String, NodeInstanceLog>();
 			List<Node> result = new ArrayList<Node>();
-			for (NodeInstanceLog nodeInstance: jpaDbLog.findNodeInstances(new Long(instanceId))) {
+			for (NodeInstanceLog nodeInstance: getAllNodeInstances(instanceId)) {
 				if (nodeInstance.getType() == NodeInstanceLog.TYPE_ENTER) {
 					nodeInstanceLogs.put(nodeInstance.getNodeInstanceId(), nodeInstance);
 				} else {
@@ -218,5 +321,26 @@ public class ProcessGraphManagement {
 			return result;
 		}
 		return null;
+	}
+	
+	public List<NodeInstanceLog> getAllNodeInstances(String instanceId) {
+		Map<String, NodeInstanceLog> nodeInstanceLogs = new HashMap<String, NodeInstanceLog>();
+		List<NodeInstanceLog> result = new ArrayList<NodeInstanceLog>();
+		
+		ProcessInstanceLog processInstanceLog = jpaDbLog.findProcessInstance(new Long(instanceId));
+		if (processInstanceLog != null) {
+			for (NodeInstanceLog nodeInstance: jpaDbLog.findNodeInstances(new Long(instanceId))) {
+				if (nodeInstance.getType() == NodeInstanceLog.TYPE_ENTER) {
+					nodeInstanceLogs.put(nodeInstance.getNodeInstanceId(), nodeInstance);
+				} else {
+					nodeInstanceLogs.remove(nodeInstance.getNodeInstanceId());
+				}
+			}		
+			for (NodeInstanceLog nodeInstanceLog : nodeInstanceLogs.values()) {
+				result.add(nodeInstanceLog);
+			}
+		}
+		
+		return result;
 	}
 }

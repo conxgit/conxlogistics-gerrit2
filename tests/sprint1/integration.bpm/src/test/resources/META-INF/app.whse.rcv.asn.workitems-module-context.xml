@@ -27,7 +27,7 @@
 		Instruct Spring to perform declarative transaction management
 		automatically on annotated classes.
 	-->
-	<tx:annotation-driven mode="aspectj" transaction-manager="JtaTransactionManager"/>
+	<tx:annotation-driven mode="aspectj" transaction-manager="globalJtaTransactionManager"/>
 
 	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
 		
@@ -42,6 +42,6 @@
 	<bean id="acceptASNLocalTransWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNLocalTransWIH"/>
 	
 	<bean id="acceptASNWIH" class="com.conx.logistics.app.whse.rcv.asn.workitems.AcceptASNWIH">
-		<property name="globalJtaTransactionManager" ref="JtaTransactionManager"/>
+		<property name="globalJtaTransactionManager" ref="globalJtaTransactionManager"/>
 	</bean>
 </beans>

@@ -1,0 +1,16 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX TMS App Domain Model
+Bundle-SymbolicName: com.conx.logistics.app.tms.domain
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Excluded-Imports:   javax.persistence,
+  com.conx.logistics.mdm.domain,
+  com.conx.logistics.mdm.domain.constants,
+  com.conx.logistics.mdm.domain.commercialrecord,
+  com.conx.logistics.mdm.domain.geolocation,
+  com.conx.logistics.mdm.domain.organization,
+  com.conx.logistics.mdm.domain.product,
+  com.conx.logistics.mdm.domain.referencenumber,
+  com.conx.logistics.mdm.domain.constants,
+  org.springframework.format.annotation
+

@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.rcv.rcv.pageflow.pages;ver
+ sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.event,com.conx
+ .logistics.kernel.pageflow.services,com.vaadin.ui,javax.persistence,o
+ rg.springframework.transaction"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS RCV RCVSub-Module PageFlow artifacts
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.rcv.pageflow
+Import-Package: com.conx.logistics.app.whse.domain.docktype;version="[
+ 1.0.0, 2.0.0)",com.conx.logistics.app.whse.rcv.asn.domain;version="1.
+ 0.0",com.conx.logistics.kernel.pageflow.event;version="[1.0.0, 2.0.0)
+ ",com.conx.logistics.kernel.pageflow.services;version="1.0.0",com.con
+ x.logistics.mdm.domain.commercialrecord;version="1.0.0",com.conx.logi
+ stics.mdm.domain.currency;version="1.0.0",com.conx.logistics.mdm.doma
+ in.geolocation;version="1.0.0",com.conx.logistics.mdm.domain.organiza
+ tion;version="1.0.0",com.conx.logistics.mdm.domain.product;version="1
+ .0.0",com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",c
+ om.vaadin.addon.jpacontainer;version="2.0.0",com.vaadin.data;version=
+ "[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com.vaad
+ in.event;version="[6.7.0,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)
+ ",javax.persistence;version="0",org.springframework.transaction;versi
+ on="[3.0,3.1)",org.springframework.transaction.support;version="[3.0,
+ 3.1)",org.vaadin.teemu.wizards;version="0.4.4"
+

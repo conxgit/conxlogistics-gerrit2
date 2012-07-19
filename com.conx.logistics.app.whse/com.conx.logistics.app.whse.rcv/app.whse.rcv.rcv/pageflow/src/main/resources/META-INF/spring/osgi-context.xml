@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<osgi:service ref="findReceivePage"  interface="com.conx.logistics.kernel.pageflow.services.PageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0"/>
+			<entry key="TASK_NAME" value="FindReceive"/>
+		  </osgi:service-properties>		
+	</osgi:service>	
+	<osgi:service ref="confirmReceivePage"  interface="com.conx.logistics.kernel.pageflow.services.PageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0"/>
+			<entry key="TASK_NAME" value="ConfirmReceivePage"/>
+		  </osgi:service-properties>		
+	</osgi:service>		
+	<osgi:service ref="processArrivalReceipts"  interface="com.conx.logistics.kernel.pageflow.services.PageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0"/>
+			<entry key="TASK_NAME" value="ProcessArrivalReceiptsPage"/>
+		  </osgi:service-properties>		
+	</osgi:service>		
+	<osgi:service ref="createDynamicReceiveFromBOLPage"  interface="com.conx.logistics.kernel.pageflow.services.PageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0"/>
+			<entry key="TASK_NAME" value="CreateDynamicReceiveFromBOLPage"/>
+		  </osgi:service-properties>		
+	</osgi:service>	
+	<osgi:service ref="processDynamicArrivalReceiptsPage"  interface="com.conx.logistics.kernel.pageflow.services.PageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0"/>
+			<entry key="TASK_NAME" value="ProcessDynamicArrivalReceiptsPage"/>
+		  </osgi:service-properties>		
+	</osgi:service>
+	<osgi:service ref="confirmArrivalPage"  interface="com.conx.logistics.kernel.pageflow.services.PageFlowPage">
+		<osgi:service-properties>
+			<entry key="PROCESS_ID" value="whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0"/>
+			<entry key="TASK_NAME" value="ConfirmArrivalPage"/>
+		  </osgi:service-properties>		
+	</osgi:service>
+</beans>

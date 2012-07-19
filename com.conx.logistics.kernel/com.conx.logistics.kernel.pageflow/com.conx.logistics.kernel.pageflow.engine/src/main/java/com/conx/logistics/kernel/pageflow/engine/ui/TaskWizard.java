@@ -72,6 +72,16 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 		return this;
 	}
 	
+	public WizardStep getCurrentStep()
+	{
+		return currentStep;
+	}
+	
+	public void setCurrentStep(WizardStep step)
+	{
+		currentStep = step;
+	}	
+	
 	@Override
     public void addStep(WizardStep step) {
 		if (getSteps().size() == 0)//First page

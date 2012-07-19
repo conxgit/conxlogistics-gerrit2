@@ -1,0 +1,18 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX WMS RCV RCV Sub-Module Domain Model
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcvrcv.domain
+Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
+Import-Package: com.conx.logistics.app.whse.domain.docktype;version="[1.0.0, 2.0.0)"
+Excluded-Imports:   javax.persistence,
+  com.conx.logistics.mdm.domain,
+  com.conx.logistics.mdm.domain.commercialrecord,
+  com.conx.logistics.mdm.domain.geolocation,
+  com.conx.logistics.mdm.domain.organization,
+  com.conx.logistics.mdm.domain.product,
+  com.conx.logistics.mdm.domain.referencenumber,
+  com.conx.logistics.app.tms.domain.types,
+  com.conx.logistics.app.whse.domain.warehouse,
+  com.conx.logistics.app.whse.rcv.asn.domain,  
+  org.springframework.format.annotation
+

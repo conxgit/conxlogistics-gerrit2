@@ -77,6 +77,7 @@ import org.jboss.bpm.console.client.model.ProcessInstanceRef.RESULT;
 import org.jboss.bpm.console.client.model.ProcessInstanceRef.STATE;
 import org.jboss.bpm.console.client.model.TaskRef;
 import org.jbpm.process.audit.JPAWorkingMemoryDbLogger;
+import org.jbpm.process.audit.NodeInstanceLog;
 import org.jbpm.process.audit.VariableInstanceLog;
 import org.jbpm.process.workitem.wsht.CommandBasedWSHumanTaskHandler;
 import org.jbpm.process.workitem.wsht.GenericHTWorkItemHandler;
@@ -807,6 +808,36 @@ public class BPMServerImpl implements IBPMService {
 	}
 	
 	@Override
+	public boolean humanTaskNodeIsGatewayDriver(String taskname, String definitionId) {
+		return processGraphManager.humanTaskNodeIsGatewayDriver(taskname, definitionId);
+	}
+	
+	@Override
+	public List<HumanTaskNode> findAllHumanTaskNodesAfterTask(String taskname, String definitionId) {
+		return processGraphManager.findAllHumanTaskNodesAfterTask(taskname, definitionId);
+	}	
+	
+	@Override
+	public List<HumanTaskNode> findAllHumanTaskNodesBeforeTask(String taskname, String definitionId) {
+		return processGraphManager.findAllHumanTaskNodesBeforeTask(taskname, definitionId);
+	}		
+
+	@Override
+	public Node getNextSplitNode(String taskname, Node node) {
+		return processGraphManager.getNextSplitNode(taskname, node);
+	}
+	
+	@Override
+	public HumanTaskNode findHumanTaskNodeForTask(String taskname, String definitionId) {
+		return processGraphManager.findHumanTaskNodeForTask(taskname, definitionId);
+	}	
+	
+	@Override
+	public List<NodeInstanceLog> getAllNodeInstances(String instanceId) {
+		return processGraphManager.getAllNodeInstances(instanceId);
+	}
+	
+	@Override
     public Map<String, Object> getProcessInstanceVariables(String processInstanceId)
     {
     	return getProcessManager().getProcessInstanceVariables(processInstanceId);
@@ -913,6 +944,19 @@ public class BPMServerImpl implements IBPMService {
 	public HumanTaskService getHumanTaskManager() {
 		return humanTaskManager;
 	}
+	
+	@Override
+	public List<TaskSummary> getCreatedTaskSummariesByProcessId(Long processInstanceId) {
+		//return taskManager.getCreatedTasksByProcessId(processInstanceId);
+		String query = "select new org.jbpm.task.query.TaskSummary( t.id, t.taskData.processInstanceId, name.text, subject.text, description.text, t.taskData.status, t.priority, t.taskData.skipable, t.taskData.actualOwner, t.taskData.createdBy, t.taskData.createdOn, t.taskData.activationTime, t.taskData.expirationTime, t.taskData.processId, t.taskData.processSessionId) from Task t  left join t.taskData.createdBy left join t.subjects as subject left join t.descriptions as description left join t.names as name where t.archived = 0 and t.taskData.status = :status and t.taskData.processInstanceId = :processId and ( name.language = :language or t.names.size = 0 ) and  ( subject.language = :language or t.subjects.size = 0 ) and  ( description.language = :language or t.descriptions.size = 0 ) and  t.taskData.expirationTime is null";
+		//Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createQuery("TasksByStatusAndProcessId");
+		Query emQuery = getHumanTaskManager().getLocalService().createSession().getTaskPersistenceManager().createNewQuery(query);
+		emQuery.setParameter("status", org.jbpm.task.Status.Created);
+		emQuery.setParameter("processId", processInstanceId);
+		emQuery.setParameter("language", "en-UK");
+		List<TaskSummary> result = emQuery.getResultList();
+		return result;
+	}	
 
 	@Override
 	public List<Task> getCreatedTasksByProcessId(Long processInstanceId) {

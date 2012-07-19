@@ -19,6 +19,7 @@ import org.jbpm.task.AccessType;
 import org.jbpm.task.Status;
 import org.jbpm.task.Task;
 import org.jbpm.task.service.ContentData;
+import org.jbpm.workflow.core.node.HumanTaskNode;
 
 import com.conx.logistics.common.utils.Validator;
 import com.conx.logistics.kernel.bpm.services.IBPMProcessInstance;
@@ -40,6 +41,8 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 	private List<org.jbpm.workflow.core.node.HumanTaskNode> tasks;
 	private Task currentTask;
 	private EntityManagerFactory emf;
+	private boolean currentTaskIsChoiceSelector = false;
+	private boolean updateTaskWizWithPages = false;
 
 	private Map<String, Object> processVars;
 
@@ -63,20 +66,30 @@ public class PageFlowSessionImpl implements IPageFlowSession {
 		orderedPageList = orderPagesPerOrderedHumanTasks(this.tasks);
 		this.emf = emf;
 		try {
+			//Get current task
 			currentTask = waitForNextTask();
-			// Map<String, Object> vars =
-			// bpmService.getProcessInstanceVariables(processInstance.getId());
-			// processVars =
-			// bpmService.findVariableInstances(Long.valueOf(processInstance.getId()));
-			// Object res = this.bpmService.getTaskContentObject(currentTask);
-			// String asnId = (String)res;
-			// Set<String> varNames = vars.keySet();
+			
+			//Get task name
+			HashMap<String,Object> res = (HashMap<String,Object>)this.bpmService.getTaskContentObject(currentTask);
+			String taskName = (String)res.get("TaskName");
+			
+			//Nominate task
 			bpmService.nominate(currentTask.getId(), userId);
-			//bpmService.getTaskById(currentTask.getId());
-			// bpmService.az(currentTask.getId(), userId);
-/*			processVars = bpmService
-					.getProcessInstanceVariables(processInstance.getId());*/
-			Object res = this.bpmService.getTaskContentObject(currentTask);
+
+			
+			//Is this task a gateway driver?
+			currentTaskIsChoiceSelector = this.bpmService.humanTaskNodeIsGatewayDriver(taskName, processInstance.getDefinitionId());
+			if (currentTaskIsChoiceSelector)
+			{
+				HumanTaskNode htTaskNode = this.bpmService.findHumanTaskNodeForTask(taskName, processInstance.getDefinitionId());
+				this.tasks = new ArrayList<HumanTaskNode>();
+				this.tasks.add(htTaskNode);
+			}
+			else
+			{
+				this.tasks = this.bpmService.findAllHumanTaskNodesAfterTask(taskName, processInstance.getDefinitionId());
+			}			
+			
 			processVars = new HashMap<String,Object>();
 			processVars.put("Content", res);
 			// processVars.put(key, value)

@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.app.whse.rcv.rcv.workitems;version=
+ "1.0.0";uses:="org.drools.process.instance,org.drools.runtime.process
+ ,org.springframework.beans.factory.annotation,org.springframework.ste
+ reotype,org.springframework.transaction.annotation"
+Build-Jdk: 1.6.0_29
+Built-By: dev
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WMS RCV RCV Sub-Module WorkItemHandler artifacts
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.rcv.workitems
+Import-Package: com.conx.logistics.app.whse.domain.docktype;version="[
+ 1.0.0, 2.0.0)",com.conx.logistics.app.whse.rcv.rcv.dao.services;versi
+ on="1.0.0",com.conx.logistics.app.whse.rcv.rcv.domain;version="1.0.0"
+ ,com.conx.logistics.common.utils;version="1.0.0",com.conx.logistics.m
+ dm.dao.services;version="1.0.0",com.conx.logistics.mdm.dao.services.r
+ eferencenumber;version="1.0.0",com.conx.logistics.mdm.domain.metadata
+ ;version="1.0.0",com.conx.logistics.mdm.domain.organization;version="
+ 1.0.0",com.conx.logistics.mdm.domain.product;version="1.0.0",com.conx
+ .logistics.mdm.domain.referencenumber;version="1.0.0",javax.persisten
+ ce;version="0",javax.persistence.criteria;version="0",javax.transacti
+ on;version="0",org.drools.process.instance;version="[5.4.0,5.5.0)",or
+ g.drools.runtime.process;version="[5.4.0,5.5.0)",org.slf4j;version="[
+ 1.6.0,1.7.0)",org.springframework.beans.factory.annotation;version="[
+ 3.0,3.1)",org.springframework.dao;version="[3.0,3.1)",org.springframe
+ work.dao.annotation;version="[3.0,3.1)",org.springframework.dao.suppo
+ rt;version="[3.0,3.1)",org.springframework.jndi;version="[3.0,3.1)",o
+ rg.springframework.orm.jpa;version="[3.0,3.1)",org.springframework.or
+ m.jpa.vendor;version="[3.0,3.1)",org.springframework.stereotype;versi
+ on="[3.0,3.1)",org.springframework.transaction;version="[3.0,3.1)",or
+ g.springframework.transaction.annotation;version="[3.0,3.1)",org.spri
+ ngframework.transaction.aspectj;version="[3.0,3.1)",org.springframewo
+ rk.transaction.jta;version="[3.0,3.1)",org.springframework.transactio
+ n.support;version="[3.0,3.1)"
+

@@ -10,5 +10,8 @@
   <packaging>pom</packaging>
   <modules>
   	<module>sprint1</module>
+  	<module>common</module>
+  	<module>common.pom</module>
+  	<module>sprint2</module>
   </modules>
 </project>

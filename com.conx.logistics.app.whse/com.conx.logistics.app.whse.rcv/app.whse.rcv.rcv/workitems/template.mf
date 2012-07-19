@@ -1,0 +1,34 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: ConX WMS RCV RCV Sub-Module WorkItemHandler artifacts
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.rcv.workitems
+Import-Package: com.conx.logistics.app.whse.rcv.rcv.domain;version="1.0.0",
+  org.drools.process.instance;version="[5.4.0,5.5.0)",
+  org.drools.runtime.process;version="[5.4.0,5.5.0)",
+  com.conx.logistics.app.whse.rcv.rcv.dao.services;version="1.0.0",
+  com.conx.logistics.mdm.dao.services;version="1.0.0",
+  com.conx.logistics.mdm.dao.services.referencenumber;version="1.0.0",
+  com.conx.logistics.mdm.domain.organization;version="1.0.0",
+  com.conx.logistics.mdm.domain.metadata;version="1.0.0",
+  com.conx.logistics.mdm.domain.product;version="1.0.0",
+  com.conx.logistics.mdm.domain.referencenumber;version="1.0.0",
+  com.conx.logistics.common.utils;version="1.0.0",
+  com.conx.logistics.app.whse.domain.docktype;version="[1.0.0, 2.0.0)",
+  javax.persistence;version="0",
+  javax.persistence.criteria;version="0",
+  org.springframework.jndi;version="[3.0,3.1)",
+  org.springframework.dao.annotation;version="[3.0,3.1)",
+  org.springframework.transaction;version="[3.0,3.1)",
+  org.springframework.transaction.jta;version="[3.0,3.1)",
+  org.springframework.transaction.aspectj;version="[3.0,3.1)",
+  org.springframework.stereotype;version="[3.0,3.1)",
+  org.springframework.transaction.annotation;version="[3.0,3.1)",
+  org.springframework.beans.factory.annotation;version="[3.0,3.1)",
+  org.springframework.orm.jpa.vendor;version="[3.0,3.1)",
+  org.springframework.dao;version="[3.0,3.1)",
+  org.springframework.dao.support;version="[3.0,3.1)",
+  org.springframework.orm.jpa;version="[3.0,3.1)",
+  org.springframework.transaction.support;version="[3.0,3.1)",
+  org.slf4j;version="[1.6.0,1.7.0)"
+  
+

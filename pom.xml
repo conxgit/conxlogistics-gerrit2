@@ -20,5 +20,6 @@
 		<module>com.conx.logistics.distribution</module>
 		<module>com.conx.logistics.reference</module>
 		<module>tests</module>
+		<module>com.conx.logistics.app.tms</module>
 	</modules>
 </project>
