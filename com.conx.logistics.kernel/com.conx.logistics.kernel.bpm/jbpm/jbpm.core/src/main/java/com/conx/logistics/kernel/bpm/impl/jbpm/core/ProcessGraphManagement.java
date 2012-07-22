@@ -190,7 +190,10 @@ public class ProcessGraphManagement {
 	public Map<String, List<Node>> findAllNodePaths(
 			String definitionId) {
 		Map<String, List<Node>> paths = new HashMap<String, List<Node>>();
+		Map<String, List<Node>> finalizedPaths = new HashMap<String, List<Node>>();
 		List<Node> list = new ArrayList<Node>();
+		List<Node> finalizedList = null;
+		Node startNode = null;
 		org.drools.definition.process.Process proc = bpmService.getKsession()
 				.getKnowledgeBase().getProcess(definitionId);
 		if (proc != null) {
@@ -199,11 +202,21 @@ public class ProcessGraphManagement {
 			List<Connection> connections;
 			for (Node n : nodes) {
 				if (n instanceof StartNode) {
-							createNodePaths(paths,"",list,n);
-							break;
+					startNode = n;
+					createNodePaths(paths,"",list,n);
+					break;
 				}
 			}
-			return paths;
+			// Add Start node to all paths
+			for (String key : paths.keySet())
+			{
+				list = paths.get(key);
+				finalizedList = new ArrayList<Node>();
+				finalizedList.add(startNode);
+				finalizedList.addAll(list);
+				finalizedPaths.put("Start-->"+key, finalizedList);
+			}
+			return finalizedPaths;
 		}
 		return null;
 	}
@@ -221,9 +234,13 @@ public class ProcessGraphManagement {
 			connections = node
 					.getOutgoingConnections("DROOLS_DEFAULT");
 			if (connections != null && connections.size() > 0) {
+				String path = null;
+				nodeList = new ArrayList<Node>();
+				nodeList.addAll(pathNodeList);
+				
+				//Create paths for each OUT connection
 				for (Connection cs : connections) {
 					n = cs.getTo();
-					String path = null;
 					if (!"Unknown".equals(getNodeName(n)))
 					{
 						path = (pathName.length() > 0)?pathName+"-->"+getNodeName(n):getNodeName(n);
@@ -233,6 +250,10 @@ public class ProcessGraphManagement {
 						path = pathName;					
 					createNodePaths(paths,path,pathNodeList,n);
 				}
+				
+				//Also, add a Splitter Path for e.g. PageFlow purposes
+				path = pathName;
+				paths.put(path, nodeList);
 			}
 		}	
 		else
