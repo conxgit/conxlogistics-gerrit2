@@ -100,4 +100,8 @@ public interface IBPMService {
 	public Node getNextSplitNode(String taskname, Node node);
 	public Node findHumanTaskNodeForTask(String taskname, String definitionId);
 	public List<NodeInstanceLog> getAllNodeInstances(String instanceId);
+	public Map<String, List<HumanTaskNode>> findAllHumanTaskPaths(String definitionId);
+	public Map<String, List<Node>> findAllNodePaths(String definitionId);
+
+	
 }

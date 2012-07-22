@@ -808,6 +808,18 @@ public class BPMServerImpl implements IBPMService {
 	}
 	
 	@Override
+	public Map<String, List<HumanTaskNode>> findAllHumanTaskPaths(
+			String definitionId)
+	{
+		return processGraphManager.findAllHumanTaskPaths(definitionId);
+	}
+	
+	@Override
+	public Map<String, List<Node>> findAllNodePaths(String definitionId) {
+		return processGraphManager.findAllNodePaths(definitionId);
+	}
+	
+	@Override
 	public boolean humanTaskNodeIsGatewayDriver(String taskname, String definitionId) {
 		return processGraphManager.humanTaskNodeIsGatewayDriver(taskname, definitionId);
 	}
@@ -1031,5 +1043,6 @@ public class BPMServerImpl implements IBPMService {
  
         logger.info(" >>> Object = "+readObject);
         return readObject;
-    }		
+    }
+		
 }
