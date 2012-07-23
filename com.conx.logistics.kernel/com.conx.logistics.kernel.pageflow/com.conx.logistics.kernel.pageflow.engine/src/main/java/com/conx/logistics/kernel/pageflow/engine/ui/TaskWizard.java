@@ -20,6 +20,7 @@ import com.conx.logistics.kernel.pageflow.engine.PageFlowSessionImpl;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedListener;
 import com.conx.logistics.kernel.pageflow.event.PageFlowPageChangedEvent;
+import com.conx.logistics.kernel.pageflow.services.IPageFlowSession;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
 import com.conx.logistics.kernel.ui.service.contribution.IApplicationViewContribution;
@@ -34,7 +35,7 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 	
 	private static final long serialVersionUID = 8417208260717324494L;
 	
-	private PageFlowSessionImpl session;
+	private IPageFlowSession session;
 	private PageFlowEngineImpl engine;
 
 	private Feature onCompletionCompletionFeature;
@@ -49,7 +50,7 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 
 	private boolean processPageFlowPageChangedEvents;
 	
-	public TaskWizard(PageFlowSessionImpl session, PageFlowEngineImpl engine, Feature onCompletionCompletionFeature, IPresenter<?, ? extends EventBus> onCompletionCompletionViewPresenter) {
+	public TaskWizard(IPageFlowSession session) {
 		this.engine = engine;
 		this.session = session;
 		this.onCompletionCompletionFeature = onCompletionCompletionFeature;
@@ -57,9 +58,21 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 		
 		getNextButton().setImmediate(true);
 		getBackButton().setImmediate(true);
+		
+		
+		//Init steps
+		if (session.getPages() != null) {
+			for (PageFlowPage page : session.getPages()) {
+				page.initialize(session.getConXEntityManagerfactory(), 
+							    session.getJTAGlobalTransactionManager(), 
+						        (IPageFlowPageChangedEventHandler)this,
+						        (ITaskWizard)this);
+				addStep(page);
+			}
+		}		
 	}
 
-	public PageFlowSessionImpl getSession() {
+	public IPageFlowSession getSession() {
 		return session;
 	}
 
@@ -269,5 +282,24 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 	@Override
 	public boolean isBackEnabled() {
 		return !backButtonBlocked;
+	}
+
+	public void onPagesChanged() {
+		//Remove steps
+		for (WizardStep step_ : steps)
+		{
+			removeStep(step_);
+		}
+		
+		//Add pages from path
+		if (session.getPages() != null) {
+			for (PageFlowPage page : session.getPages()) {
+				page.initialize(session.getConXEntityManagerfactory(), 
+							    session.getJTAGlobalTransactionManager(), 
+						        (IPageFlowPageChangedEventHandler)this,
+						        (ITaskWizard)this);
+				addStep(page);
+			}
+		}	
 	}
 }

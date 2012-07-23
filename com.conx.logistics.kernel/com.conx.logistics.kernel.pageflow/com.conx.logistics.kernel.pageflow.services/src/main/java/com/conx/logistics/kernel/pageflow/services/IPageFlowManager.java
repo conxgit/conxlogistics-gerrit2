@@ -3,6 +3,11 @@ package com.conx.logistics.kernel.pageflow.services;
 
 import java.util.Map;
 
+import javax.persistence.EntityManagerFactory;
+
+import org.springframework.transaction.PlatformTransactionManager;
+
+import com.conx.logistics.kernel.bpm.services.IBPMService;
 import com.conx.logistics.kernel.ui.service.contribution.IMainApplication;
 import com.conx.logistics.mdm.domain.task.TaskDefinition;
 
@@ -40,4 +45,12 @@ public interface IPageFlowManager {
 	 * Main App
 	 */
 	public void setMainApplication(IMainApplication mainApp);
+	
+	
+	/**
+	 * Other
+	 */
+	public EntityManagerFactory getConXEntityManagerfactory();
+	public PlatformTransactionManager getJTAGlobalTransactionManager();
+	public IBPMService getBPMService();
 }
