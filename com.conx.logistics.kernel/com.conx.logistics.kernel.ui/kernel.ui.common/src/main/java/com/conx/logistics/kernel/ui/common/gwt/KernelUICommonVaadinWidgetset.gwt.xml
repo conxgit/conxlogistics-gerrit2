@@ -9,4 +9,6 @@
     <inherits name="org.vaadin.csstools.CssToolsWidgetset" />
 
     <inherits name="org.vaadin.weelayout.WeelayoutWidgetset" />
+
+    <inherits name="org.vaadin.teemu.wizards.WizardsforvaadinWidgetset" />
 </module>

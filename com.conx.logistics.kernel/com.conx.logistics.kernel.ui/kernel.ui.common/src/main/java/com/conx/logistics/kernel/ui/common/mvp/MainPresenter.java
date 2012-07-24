@@ -51,8 +51,6 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 
 	private IPresenter<?, ? extends EventBus> contentPresenter;
 
-	private TabSheet mainTabSheet;
-
 	private EntityManagerFactory kernelSystemEntityManagerFactory;
 
 	private EntityManager kernelSystemEntityManager;
@@ -87,7 +85,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 			 * this.view.getAppSelection(
 			 * ).setContainerDataSource(this.launchableAppsContainer);
 			 */
-			this.view.getAppSelection().addListener(MainPresenter.this);
+			this.view.addAppSelectionListener(MainPresenter.this);
 			// set the applications main windows (the view)
 			this.application.setMainWindow((Window) this.view);
 
@@ -111,9 +109,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 			appSelectionContainer.addContainerProperty("launchable", Component.class, null);
 			Filter filter = new Not(new SimpleStringFilter("id","KERNEL.WORKSPACE", true, false));
 			appSelectionContainer.addContainerFilter(filter);
-			this.view.getAppSelection().setContainerDataSource(appSelectionContainer);
-			this.view.getAppSelection().setItemCaptionPropertyId("name");
-			this.view.getAppSelection().setItemIconPropertyId("icon");
+			this.view.setAppSelectionContainer(appSelectionContainer, "id", "name", "icon");
 			AppMenuEntry[] menuEntries = this.application.createAppMenuEntries();	
 			updateAppSelectContainer(menuEntries);
 			this.initialized  = true;
@@ -178,7 +174,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 
 	private void removeAppComponent(String caption) {
 		Tab tab = appTabMap.get(caption);
-		mainTabSheet.removeTab(tab);
+		this.view.getApplicationTabSheet().removeTab(tab);
 	}
 
 	/**
@@ -229,7 +225,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 			wsEventBus.start(this.application);
 			Component ws = (Component) appPresenter.getView();
 			((Layout) ws).setSizeFull();
-			Tab appTab = mainTabSheet.addTab(ws, name, new ThemeResource(iconPath));
+			Tab appTab = this.view.getApplicationTabSheet().addTab(ws, name, new ThemeResource(iconPath));
 			appTab.setClosable(closable);
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -244,12 +240,12 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 		try {
 			if (appTabMap.containsKey(name)) {
 				Tab selectedTab = appTabMap.get(name);
-				mainTabSheet.setSelectedTab(selectedTab.getComponent());
+				this.view.getApplicationTabSheet().setSelectedTab(selectedTab.getComponent());
 			} else {
 				appComponent.setSizeFull();
-				Tab newTab = mainTabSheet.addTab(appComponent, name, new ThemeResource(iconPath));
+				Tab newTab = this.view.getApplicationTabSheet().addTab(appComponent, name, new ThemeResource(iconPath));
 				newTab.setClosable(closable);
-				mainTabSheet.setSelectedTab(appComponent);
+				this.view.getApplicationTabSheet().setSelectedTab(appComponent);
 			}
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
@@ -265,19 +261,6 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>
 
 	@Override
 	public void bind() {
-		/**
-		 * Add workspace view
-		 */
-		mainTabSheet = new TabSheet();
-		mainTabSheet.setSizeFull();
-
-		// this.view.getMainLayout().setHeight(Sizeable.SIZE_UNDEFINED, 0); //
-		// Default
-		// this.view.getMainLayout().setHeight("500px");
-		// this.view.getMainLayout().addComponent(bar);
-		this.view.getMainLayout().addComponent(mainTabSheet);
-		this.view.getMainLayout().setExpandRatio(mainTabSheet, 1);
-		mainTabSheet.setStyleName("main-split");
 	}
 
 	/**
