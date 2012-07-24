@@ -7,7 +7,8 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.conx.logistics.app.whse.rcv.asn.domain.ASN;
+
+import com.conx.logistics.app.whse.rcv.rcv.domain.Receive;
 import com.conx.logistics.kernel.pageflow.event.IPageFlowPageChangedEventHandler;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
@@ -48,7 +49,7 @@ public class FindReceivePage extends PageFlowPage {
 
 	private Map<String, Object> state;
 
-	private ASN asn;
+	private Receive receive;
 	
 	private void initContainers() {
 		organizationContainer = JPAContainerFactory.make(Organization.class, this.emf.createEntityManager());
@@ -56,7 +57,7 @@ public class FindReceivePage extends PageFlowPage {
 	
 	public void initConfirmOrg() {
 		organization = new ComboBox();
-		organization.setInputPrompt("Default Organization");
+		organization.setInputPrompt("Default Receive");
 		organization.setContainerDataSource(organizationContainer);
 		organization.setItemCaptionPropertyId("name");
 		organization.setNullSelectionAllowed(false);
@@ -66,7 +67,7 @@ public class FindReceivePage extends PageFlowPage {
 //		organization.setEnabled(false);
 		
 		organizationLabel = new Label();
-		organizationLabel.setValue("Organization");
+		organizationLabel.setValue("Receive");
 		
 		Label organizationLayoutLabel = new Label();
 		organizationLayoutLabel.setContentMode(Label.CONTENT_XHTML);
@@ -155,7 +156,7 @@ public class FindReceivePage extends PageFlowPage {
 
 	@Override
 	public String getCaption() {
-		return "Confirm Asn Organization";
+		return "Find Receive";
 	}
 
 	@Override
@@ -187,7 +188,6 @@ public class FindReceivePage extends PageFlowPage {
 
 	@Override
 	public void setOnStartState(Map<String, Object> state) {
-		this.asn = (ASN)state.get("Content");
 		if (state != null) {
 			this.orgId = (String) state.get("orgId");
 			this.userId = (String) state.get("userId");
