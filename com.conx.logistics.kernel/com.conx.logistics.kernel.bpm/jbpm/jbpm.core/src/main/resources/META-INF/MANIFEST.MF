@@ -3,20 +3,21 @@ Export-Package: com.conx.logistics.kernel.bpm.impl.jbpm;version="1.0.0
  ";uses:="com.conx.logistics.kernel.bpm.impl.jbpm.bam,com.conx.logisti
  cs.kernel.bpm.impl.jbpm.core,com.conx.logistics.kernel.bpm.services,j
  avax.naming,javax.persistence,javax.transaction,org.drools,org.drools
- .agent,org.drools.event,org.drools.process.instance,org.drools.runtim
- e,org.jboss.bpm.console.client.model,org.jbpm.task,org.jbpm.task.serv
- ice,org.springframework.jndi,org.springframework.transaction",com.con
- x.logistics.kernel.bpm.impl.jbpm.bam;version="1.0.0";uses:="javax.per
- sistence,javax.transaction,org.jbpm.process.audit",com.conx.logistics
- .kernel.bpm.impl.jbpm.core;version="1.0.0";uses:="com.conx.logistics.
- kernel.bpm.impl.jbpm,javax.persistence,org.drools,org.drools.agent,or
- g.drools.command,org.drools.command.impl,org.drools.definition.proces
- s,org.drools.event,org.drools.runtime,org.jboss.bpm.console.client.mo
- del,org.jboss.bpm.console.server.integration,org.jbpm.process.audit,o
- rg.jbpm.task,org.jbpm.task.query,org.jbpm.task.service,org.springfram
- ework.transaction"
-Build-Jdk: 1.6.0_32
-Built-By: Mdu
+ .agent,org.drools.definition.process,org.drools.event,org.drools.proc
+ ess.instance,org.drools.runtime,org.jboss.bpm.console.client.model,or
+ g.jbpm.task,org.jbpm.task.service,org.jbpm.workflow.core.node,org.spr
+ ingframework.jndi,org.springframework.transaction",com.conx.logistics
+ .kernel.bpm.impl.jbpm.bam;version="1.0.0";uses:="javax.persistence,ja
+ vax.transaction,org.jbpm.process.audit",com.conx.logistics.kernel.bpm
+ .impl.jbpm.core;version="1.0.0";uses:="com.conx.logistics.kernel.bpm.
+ impl.jbpm,javax.persistence,org.drools,org.drools.agent,org.drools.co
+ mmand,org.drools.command.impl,org.drools.definition.process,org.drool
+ s.event,org.drools.runtime,org.jboss.bpm.console.client.model,org.jbo
+ ss.bpm.console.server.integration,org.jbpm.process.audit,org.jbpm.tas
+ k,org.jbpm.task.query,org.jbpm.task.service,org.jbpm.workflow.core.no
+ de,org.springframework.transaction"
+Build-Jdk: 1.6.0_33
+Built-By: mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM Core

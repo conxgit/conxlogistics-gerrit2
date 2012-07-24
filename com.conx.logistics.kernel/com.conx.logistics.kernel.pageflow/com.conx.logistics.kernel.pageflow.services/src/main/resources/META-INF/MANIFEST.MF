@@ -4,8 +4,8 @@ Export-Package: com.conx.logistics.kernel.pageflow.event;version="1.0.
  "com.conx.logistics.kernel.bpm.services,com.conx.logistics.kernel.pag
  eflow.event,com.conx.logistics.kernel.ui.service.contribution,com.con
  x.logistics.mdm.domain.application,com.conx.logistics.mdm.domain.task
- ,com.vaadin.ui,javax.persistence,org.springframework.transaction,org.
- vaadin.teemu.wizards"
+ ,com.vaadin.ui,javax.persistence,javax.transaction,org.springframewor
+ k.transaction,org.vaadin.teemu.wizards"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -18,6 +18,7 @@ Import-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
  ,com.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.
  0.0)",com.conx.logistics.mdm.domain.application;version="1.0.0",com.c
  onx.logistics.mdm.domain.task;version="1.0.0",com.vaadin.ui;version="
- [6.7.0,7.0.0)",javax.persistence;version="0",org.springframework.tran
- saction;version="[3.0,3.1)",org.vaadin.teemu.wizards;version="0.4.4"
+ [6.7.0,7.0.0)",javax.persistence;version="0",javax.transaction;versio
+ n="0",org.springframework.transaction;version="[3.0,3.1)",org.vaadin.
+ teemu.wizards;version="0.4.4"
 

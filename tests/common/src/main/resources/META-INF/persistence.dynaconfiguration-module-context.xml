@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Application context definition for GreenPages JPA. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<context:load-time-weaver aspectj-weaving="on" />
+	<!-- hibernateProperties Properties -->
+	<bean id="hibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+	            <prop key="hibernate.transaction.manager_lookup_class">com.conx.logistics.kernel.persistence.dynaconfiguration.CustomBTMTransactionManagerLookup</prop>
+	            <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+	            <prop key="hibernate.current_session_context_class">jta</prop>
+	            <prop key="hibernate.connection.release_mode">after_statement</prop>
+	            <prop key="hibernate.hbm2ddl.auto">create</prop>	
+	            <prop key="hibernate.connection.autocommit">false</prop>
+	            <prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+
+    <bean id="conxLogisticsManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="globalBitronixTransactionManagerConfig">
+        <property name="persistenceUnitName" value="pu"/>
+        <property name="persistenceUnitManager" ref="pusPersistenceUnitManager"/>
+        <property name="jpaVendorAdapter" ref="vendorAdapter"/>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+        <property name="jpaProperties" ref="hibernateProperties"/>
+    </bean>  
+    
+	<bean id="vendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:databasePlatform="org.hibernate.dialect.MySQLDialect" p:showSql="true">
+		<property name="generateDdl" value="false" />
+	</bean> 
+	
+    <bean id="pusPersistenceUnitManager"
+          class="com.conx.logistics.kernel.persistence.orm.jpa.multipu.MultiConfigAwarePersistenceUnitManager">
+        <property name="persistenceXmlLocations">
+            <list>
+                <value>classpath:/bootstrapping/bootstrap-persistence.xml</value>
+                <value>classpath*:META-INF/jpa/persistence.xml</value>
+            </list>
+        </property>
+        <property name="defaultDataSource" ref="kernelPersistenceJpaDataSource"/>
+        <property name="persistenceUnitPostProcessors" ref="persistenceUnitPostProcessor"/>
+    </bean>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>	
+    
+    <bean id="persistenceUnitPostProcessor" class="com.conx.logistics.kernel.persistence.orm.jpa.multipu.JtaPersistenceUnitPostProcessor">
+        <property name="dataSource" ref="kernelPersistenceJpaDataSource"/>
+        <property name="jtaEnabled" value="true"/>
+    </bean>       	
+</beans>

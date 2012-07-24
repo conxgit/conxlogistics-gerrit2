@@ -2,7 +2,11 @@ Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.domain.constants;version="
  1.0.0";uses:="com.conx.logistics.mdm.domain.constants",com.conx.logis
  tics.app.whse.domain.docktype;version="1.0.0";uses:="com.conx.logisti
- cs.mdm.domain,javax.persistence"
+ cs.mdm.domain,javax.persistence",com.conx.logistics.app.whse.domain.l
+ ocation;version="1.0.0";uses:="com.conx.logistics.mdm.domain,javax.pe
+ rsistence",com.conx.logistics.app.whse.domain.types;version="1.0.0",c
+ om.conx.logistics.app.whse.domain.warehouse;version="1.0.0";uses:="co
+ m.conx.logistics.mdm.domain,javax.persistence"
 Fragment-Host: com.conx.logistics.kernel.persistence.dynaconfiguration
 Build-Jdk: 1.6.0_32
 Built-By: Mdu

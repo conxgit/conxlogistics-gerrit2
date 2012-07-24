@@ -6,8 +6,8 @@ Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a
  pplication"
-Build-Jdk: 1.6.0_32
-Built-By: Mdu
+Build-Jdk: 1.6.0_33
+Built-By: mdu
 Bundle-Version: 1.0.0
 Tool: Bundlor 1.1.0.BUILD-20101220120024
 Bundle-Name: JBPM TaskServer Persistence in Hibernate

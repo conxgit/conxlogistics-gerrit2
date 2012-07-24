@@ -5,7 +5,8 @@ Export-Package: com.conx.logistics.app.whse.rcv.asn.workitems;version=
  ices,com.conx.logistics.mdm.domain.metadata,javax.persistence,org.dro
  ols.process.instance,org.drools.runtime.process,org.springframework.b
  eans.factory.annotation,org.springframework.jndi,org.springframework.
- stereotype,org.springframework.transaction.annotation"
+ stereotype,org.springframework.transaction,org.springframework.transa
+ ction.annotation"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
@@ -14,7 +15,8 @@ Bundle-Name: ConX WMS RCV ASN Sub-Module WorkItemHandler artifacts
 Bundle-ManifestVersion: 2
 Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.asn.workitems
-Import-Package: com.conx.logistics.app.whse.rcv.asn.dao.services;versi
+Import-Package: com.conx.logistics.app.whse.domain.docktype;version="[
+ 1.0.0, 2.0.0)",com.conx.logistics.app.whse.rcv.asn.dao.services;versi
  on="1.0.0",com.conx.logistics.app.whse.rcv.asn.domain;version="1.0.0"
  ,com.conx.logistics.common.utils;version="1.0.0",com.conx.logistics.m
  dm.dao.services;version="1.0.0",com.conx.logistics.mdm.dao.services.r

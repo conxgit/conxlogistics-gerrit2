@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for GreenPages JPA.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="findReceivePage" class="com.conx.logistics.app.whse.rcv.rcv.pageflow.pages.FindReceivePage"/>		
+	<bean id="confirmReceivePage" class="com.conx.logistics.app.whse.rcv.rcv.pageflow.pages.ConfirmReceivePage"/>
+	<bean id="processArrivalReceipts" class="com.conx.logistics.app.whse.rcv.rcv.pageflow.pages.ProcessArrivalReceiptsPage"/>
+	<bean id="createDynamicReceiveFromBOLPage" class="com.conx.logistics.app.whse.rcv.rcv.pageflow.pages.CreateDynamicReceiveFromBOLPage"/>
+	<bean id="processDynamicArrivalReceiptsPage" class="com.conx.logistics.app.whse.rcv.rcv.pageflow.pages.ProcessDynamicArrivalReceiptsPage"/>
+	<bean id="confirmArrivalPage" class="com.conx.logistics.app.whse.rcv.rcv.pageflow.pages.ConfirmArrivalPage"/>
+</beans>

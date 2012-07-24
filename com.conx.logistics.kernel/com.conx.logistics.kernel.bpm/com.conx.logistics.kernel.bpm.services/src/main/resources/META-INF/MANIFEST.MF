@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.bpm.services;version="1.0.0"
- ;uses:="javax.persistence,org.jboss.bpm.console.client.model,org.jbpm
- .task,org.jbpm.task.service,org.jbpm.task.service.local"
+ ;uses:="javax.persistence,org.drools.definition.process,org.jboss.bpm
+ .console.client.model,org.jbpm.task,org.jbpm.task.service,org.jbpm.ta
+ sk.service.local"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0
