@@ -1,9 +1,11 @@
 package com.conx.logistics.tests.sprint2.integration.bpm;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +56,7 @@ import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
         "/META-INF/app.whse.rcv.rcv.pageflow-module-context.xml",
         "/META-INF/app.whse.rcv.rcv.workitems-module-context.xml"
         })
-public class Sprint2PageFlowSessionTests extends AbstractTestNGSpringContextTests {
+public class DynamicArrivalProcessingTests extends AbstractTestNGSpringContextTests {
 	private static final String PROCESS_ID = "whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0";
 	
 	
@@ -155,15 +157,83 @@ public class Sprint2PageFlowSessionTests extends AbstractTestNGSpringContextTest
 	}
 	
     @Test
-    public void testCreateTaskWizard() throws Exception {
+    public void testDynamicArrival() throws Exception {
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("processId", "whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0");
 		params.put("userId", "john");
 		
 		//-- 1. Start Proc
 		ITaskWizard wiz = pageFlowImpl.createTaskWizard(params);	
-		Iterator<WizardStep> stepIt = ((TaskWizard)wiz).getSteps().iterator();
+		List<WizardStep> steps = ((TaskWizard)wiz).getSteps();
+		Assert.assertEquals(steps.size(), 1);
 		Map<String, Object> res = wiz.getProperties();	
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();	
+		org.h2.tools.Script.execute("jdbc:h2:mem:conxjbpm5;MODE=MySQL","sa", "sasa",out);
+		String dbOut = null;
+		try {
+		    dbOut = new String(out.toByteArray(), "UTF-8");
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}	
+		
+		//-- 2. Complete ConfirmASNOrg Task and get vars
+		logger.info("Current Step: "+((TaskWizard)wiz).getCurrentStep());
+		HashMap<String,Object> outParams = new HashMap<String, Object>();
+		outParams.putAll(res);
+		wiz = pageFlowImpl.executeTaskWizard(wiz, null);
+		
+		//Assert step/page count
+		steps = ((TaskWizard)wiz).getSteps();
+		Assert.assertEquals(steps.size(), 4);
+		
+		//Assert step names
+		List<String> stepNames = Collections.emptyList();
+		stepNames.add("FindReceive");
+		stepNames.add("CreateDynamicReceiveFromBOL");
+		stepNames.add("ProcessDynamicArrivalReceipts");
+		stepNames.add("ConfirmArrival");
+		for (PageFlowPage pf : ((TaskWizard)wiz).getSession().getPages())
+		{
+			Assert.assertEquals(stepNames.contains(pf.getTaskName()), "true");
+		}
+		
+		res = wiz.getProperties();
+		res = (HashMap<String,Object>)res.get("Content");	
+    }	
+	
+    @Test
+    public void testArrival() throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("processId", "whse.rcv.arrivalproc.ProcessCarrierArrivalV1.0");
+		params.put("userId", "john");
+		
+		//-- 1. Start Proc
+		ITaskWizard wiz = pageFlowImpl.createTaskWizard(params);	
+		List<WizardStep> steps = ((TaskWizard)wiz).getSteps();
+		Assert.assertEquals(steps.size(), 1);
+		Map<String, Object> res = wiz.getProperties();	
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();	
+		org.h2.tools.Script.execute("jdbc:h2:mem:conxjbpm5;MODE=MySQL","sa", "sasa",out);
+		String dbOut = null;
+		try {
+		    dbOut = new String(out.toByteArray(), "UTF-8");
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}	
+		
+		//-- 2. Complete ConfirmASNOrg Task and get vars
+		logger.info("Current Step: "+((TaskWizard)wiz).getCurrentStep());
+		HashMap<String,Object> outParams = new HashMap<String, Object>();
+		outParams.putAll(res);
+		wiz = pageFlowImpl.executeTaskWizard(wiz, null);
+		
+		steps = ((TaskWizard)wiz).getSteps();
+		Assert.assertEquals(steps.size(), 4);
+		
+		res = wiz.getProperties();
+		res = (HashMap<String,Object>)res.get("Content");	
     }
     	
 	

@@ -235,25 +235,28 @@ public class ProcessGraphManagement {
 					.getOutgoingConnections("DROOLS_DEFAULT");
 			if (connections != null && connections.size() > 0) {
 				String path = null;
-				nodeList = new ArrayList<Node>();
-				nodeList.addAll(pathNodeList);
+				ArrayList<Node> rootNodeList = new ArrayList<Node>();
+				rootNodeList.addAll(pathNodeList);
 				
 				//Create paths for each OUT connection
 				for (Connection cs : connections) {
+					nodeList = new ArrayList<Node>();
+					nodeList.addAll(pathNodeList);
+					
 					n = cs.getTo();
 					if (!"Unknown".equals(getNodeName(n)))
 					{
 						path = (pathName.length() > 0)?pathName+"-->"+getNodeName(n):getNodeName(n);
-						pathNodeList.add(n);
+						nodeList.add(n);
 					}		
 					else
 						path = pathName;					
-					createNodePaths(paths,path,pathNodeList,n);
+					createNodePaths(paths,path,nodeList,n);
 				}
 				
 				//Also, add a Splitter Path for e.g. PageFlow purposes
 				path = pathName;
-				paths.put(path, nodeList);
+				paths.put(path, rootNodeList);
 			}
 		}	
 		else
@@ -609,37 +612,32 @@ public class ProcessGraphManagement {
 
 	public HumanTaskNode findHumanTaskNodeForTask(String taskname,
 			String definitionId) {
-		Node res = null;
-		org.drools.definition.process.Process proc = bpmService.getKsession()
-				.getKnowledgeBase().getProcess(definitionId);
-		if (proc != null) {
-			Node[] nodes = ((WorkflowProcess) proc).getNodes();
-			Node node = null;
-			List<Connection> connections = null;
-			// Find task node
-			for (Node n : nodes) {
-				if (n instanceof StartNode) {
-					node = n;
-					while (node != null) {
-						if (node.getName().equals(taskname)) {
-							res = node;
-							break;
-						}
-						connections = null;
-						connections = node
-								.getOutgoingConnections("DROOLS_DEFAULT");
-						if (connections != null && connections.size() > 0) {
-							node = node
-									.getOutgoingConnections("DROOLS_DEFAULT")
-									.get(0).getTo();
-						} else {
-							break;
-						}
-					}
-				}
+		HumanTaskNode res = null;
+
+		List<HumanTaskNode> htnodes = extractHumanTaskNodes(findAllNodePaths(definitionId));	
+		for (HumanTaskNode htnode : htnodes)
+		{
+			if (taskname.equals(htnode.getName()))
+				res = htnode;
+				
+		}
+		
+		return (HumanTaskNode) res;
+	}
+
+	private List<HumanTaskNode> extractHumanTaskNodes(
+			Map<String, List<Node>> nodePaths) {
+		List<HumanTaskNode> res = new ArrayList<HumanTaskNode>();
+		for (String path_ : nodePaths.keySet())
+		{
+			List<Node> nList = nodePaths.get(path_);
+			for (Node n : nList)
+			{
+				if (n instanceof HumanTaskNode)
+					res.add((HumanTaskNode)n);
 			}
 		}
-		return (HumanTaskNode) res;
+		return res;
 	}
 
 	public List<HumanTaskNode> findAllHumanTaskNodesAfterTask(String taskname,

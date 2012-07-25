@@ -1,12 +1,15 @@
 package com.conx.logistics.kernel.pageflow.engine.ui;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.mvel2.optimizers.impl.refl.nodes.ArrayLength;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vaadin.mvp.eventbus.EventBus;
@@ -285,8 +288,10 @@ public class TaskWizard extends Wizard implements ITaskWizard, IPageFlowPageChan
 	}
 
 	public void onPagesChanged() {
+		List<WizardStep> stepsCopy = new ArrayList<WizardStep>();
+		stepsCopy.addAll(steps);
 		//Remove steps
-		for (WizardStep step_ : steps)
+		for (WizardStep step_ : stepsCopy)
 		{
 			removeStep(step_);
 		}

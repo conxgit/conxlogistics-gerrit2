@@ -9,7 +9,7 @@
   <artifactId>com.conx.logistics.kernel.ui.editors</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>com.conx.logistics.kernel.ui.editors.domain</module>
-  	<module>com.conx.logistics.kernel.ui.editors.dao.services</module>
+  	<module>domain</module>
+  	<module>dao.services</module>
   </modules>
 </project>

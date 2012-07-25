@@ -23,6 +23,7 @@ import com.conx.logistics.app.whse.rcv.asn.domain.ASNPickup;
 import com.conx.logistics.kernel.bpm.impl.jbpm.BPMServerImpl;
 import com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.HumanTaskServer;
 import com.conx.logistics.kernel.pageflow.engine.PageFlowEngineImpl;
+import com.conx.logistics.kernel.pageflow.engine.PathBasedPageFlowEngineImpl;
 import com.conx.logistics.kernel.pageflow.engine.ui.TaskWizard;
 import com.conx.logistics.kernel.pageflow.services.ITaskWizard;
 import com.conx.logistics.kernel.pageflow.services.PageFlowPage;
@@ -63,7 +64,7 @@ public class PageFlowSessionTests extends AbstractTestNGSpringContextTests {
 	private BPMServerImpl bpmServer;	
 	
 	@Autowired
-	private PageFlowEngineImpl pageFlowImpl;
+	private PathBasedPageFlowEngineImpl pageFlowImpl;
 	
 	@Autowired
 	private IOrganizationDAOService orgDao;

@@ -164,15 +164,15 @@ public class ConfirmReceivePage extends PageFlowPage {
 		setExecuted(false);
 		this.emf = emf;
 		
-		initContainers();
+/*		initContainers();
 		initEntityTabSheet();
-		initTableToolStrip();
+		initTableToolStrip();*/
 		
 		VerticalLayout canvas = new VerticalLayout();
 		canvas.setSizeFull();
-		canvas.addComponent(entityTabSheet);
+/*		canvas.addComponent(entityTabSheet);
 		canvas.addComponent(toolStrip);
-		canvas.setExpandRatio(entityTabSheet, 1.0f);
+		canvas.setExpandRatio(entityTabSheet, 1.0f);*/
 		
 		this.setCanvas(canvas);
 	}
