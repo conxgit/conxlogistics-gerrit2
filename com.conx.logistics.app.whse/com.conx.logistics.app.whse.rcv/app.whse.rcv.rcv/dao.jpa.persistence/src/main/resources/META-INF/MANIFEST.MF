@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_33
+Built-By: mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX WHSE RCV RCV JPA Persistence
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.app.whse.rcv.rcv.dao.jpa.persi
+ stence
+Import-Package: com.conx.logistics.app.whse.rcv.rcv.domain;version="1.
+ 0.0"
+
