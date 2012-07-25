@@ -1,4 +1,4 @@
-package com.example.whse_rcv_asn;
+package com.conx.logistics.kernel.ui.common.ui.ext;
 
 import java.util.ArrayList;
 

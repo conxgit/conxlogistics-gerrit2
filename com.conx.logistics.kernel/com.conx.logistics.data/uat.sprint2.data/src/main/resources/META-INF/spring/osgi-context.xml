@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<osgi:reference id="globalTransManager" interface="org.springframework.transaction.PlatformTransactionManager" filter="(module=KERNEL.TM.JTA)">
+	</osgi:reference>
+	<tx:annotation-driven transaction-manager="globalTransManager"/>
+	
+	<osgi:reference id="conxlogisticsEMF" interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL)">
+	</osgi:reference>
+	
+	<!-- BUSINESS SERVICES -->
+	<osgi:reference id="addressDao" interface="com.conx.logistics.mdm.dao.services.IAddressDAOService"/>
+	<osgi:reference id="asnDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDAOService"/>
+	<osgi:reference id="asnPickupDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNPickupDAOService"/>
+	<osgi:reference id="asnDropOffDao" interface="com.conx.logistics.app.whse.rcv.asn.dao.services.IASNDropOffDAOService"/>
+	<osgi:reference id="contactDao" interface="com.conx.logistics.mdm.dao.services.IContactDAOService"/>		
+	<osgi:reference id="countryDao" interface="com.conx.logistics.mdm.dao.services.ICountryDAOService"/>
+	<osgi:reference id="currencyUnitDao" interface="com.conx.logistics.mdm.dao.services.currency.ICurrencyUnitDAOService"/>	
+	<osgi:reference id="countryStateDao" interface="com.conx.logistics.mdm.dao.services.ICountryStateDAOService"/>	
+	<osgi:reference id="dimUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IDimUnitDAOService"/>
+	<osgi:reference id="docTypeDao" interface="com.conx.logistics.mdm.dao.services.documentlibrary.IDocTypeDAOService"/>
+	<osgi:reference id="dockTypeDao" interface="com.conx.logistics.app.whse.dao.services.IDockTypeDAOService"/>
+	<osgi:reference id="entityMetadataDao" interface="com.conx.logistics.mdm.dao.services.IEntityMetadataDAOService"/>
+	<osgi:reference id="orgDao" interface="com.conx.logistics.mdm.dao.services.IOrganizationDAOService"/>
+	<osgi:reference id="productDao" interface="com.conx.logistics.mdm.dao.services.product.IProductDAOService"/>	
+	<osgi:reference id="packUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IPackUnitDAOService"/>
+	<osgi:reference id="productTypeDao" interface="com.conx.logistics.mdm.dao.services.product.IProductTypeDAOService"/>
+	<osgi:reference id="referenceNumberTypeDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberTypeDAOService"/>
+	<osgi:reference id="referenceNumberDao" interface="com.conx.logistics.mdm.dao.services.referencenumber.IReferenceNumberDAOService"/>
+	<osgi:reference id="unlocoDao" interface="com.conx.logistics.mdm.dao.services.IUnlocoDAOService"/>
+	<osgi:reference id="weightUnitDao" interface="com.conx.logistics.mdm.dao.services.product.IWeightUnitDAOService"/>
+</beans>

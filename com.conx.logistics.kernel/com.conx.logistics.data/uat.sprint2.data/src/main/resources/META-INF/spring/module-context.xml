@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for GreenPages JPA.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="humanTaskServer" class="com.conx.logistics.data.uat.sprint2.data.TestDataManager" init-method="start" destroy-method="stop">
+		<property name="conxlogisticsEMF" ref="conxlogisticsEMF"></property>
+		<property name="globalTransactionManager" ref="globalTransManager"></property>
+				
+		<property name="addressDaoService" ref="addressDao"></property>
+		<property name="asnDaoService" ref="asnDao"></property>
+		<property name="asnPickupDAOService" ref="asnPickupDao"></property>
+		<property name="asnDropOffDAOService" ref="asnDropOffDao"></property>
+		<property name="contactDAOService" ref="contactDao"></property>
+		<property name="countryDaoService" ref="countryDao"></property>
+		<property name="countryStateDaoService" ref="countryStateDao"></property>
+		<property name="currencyUnitDaoService" ref="currencyUnitDao"></property>
+		<property name="dimUnitDaoService" ref="dimUnitDao"></property>
+		<property name="docTypeDOAService" ref="docTypeDao"></property>
+		<property name="dockTypeDOAService" ref="dockTypeDao"></property>
+		<property name="entityMetadataDAOService" ref="entityMetadataDao"></property>
+		<property name="orgDaoService" ref="orgDao"></property>
+		<property name="packUnitDaoService" ref="packUnitDao"></property>
+		<property name="productDaoService" ref="productDao"></property>
+		<property name="productTypeDaoService" ref="productTypeDao"></property>
+		<property name="referenceNumberTypeDaoService" ref="referenceNumberTypeDao"></property>
+		<property name="referenceNumberDaoService" ref="referenceNumberDao"></property>
+		<property name="unlocoDaoService" ref="unlocoDao"></property>
+		<property name="weightUnitDaoService" ref="weightUnitDao"></property>
+	</bean>
+</beans>
