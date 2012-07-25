@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_33
+Built-By: mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX UI Forms DAO Services
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.forms.dao.services
+Import-Package: com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+ javax.persistence;version="0"
+

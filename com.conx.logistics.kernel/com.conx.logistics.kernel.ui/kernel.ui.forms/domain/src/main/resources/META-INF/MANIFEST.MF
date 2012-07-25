@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.ui.forms.domain.model;versio
+ n="1.0.0";uses:="com.conx.logistics.kernel.ui.forms.shared.form,com.c
+ onx.logistics.mdm.domain,javax.persistence",com.conx.logistics.kernel
+ .ui.forms.domain.model.graph;version="1.0.0",com.conx.logistics.kerne
+ l.ui.forms.domain.model.items;version="1.0.0";uses:="com.conx.logisti
+ cs.kernel.ui.forms.domain.model,com.conx.logistics.kernel.ui.forms.sh
+ ared.form,javax.persistence",com.conx.logistics.kernel.ui.forms.share
+ d.form;version="1.0.0";uses:="com.conx.logistics.kernel.ui.forms.doma
+ in.model",com.conx.logistics.kernel.ui.forms.shared.menu;version="1.0
+ .0";uses:="com.conx.logistics.kernel.ui.forms.domain.model,com.conx.l
+ ogistics.kernel.ui.forms.shared.form"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_33
+Built-By: mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX UI Forms Domain
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.forms.domain
+Import-Package: com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+ javax.persistence;version="0"
+
