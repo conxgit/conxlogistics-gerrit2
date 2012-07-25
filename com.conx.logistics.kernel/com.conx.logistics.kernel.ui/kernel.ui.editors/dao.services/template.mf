@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConX UI Editors DAO Services
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.editors.dao.services
+Bundle-Vendor: ConX
+Bundle-Version: 1.0.0
+Import-Package: com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+  javax.persistence;version="0"

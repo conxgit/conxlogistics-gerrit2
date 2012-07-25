@@ -1717,6 +1717,12 @@
 				<groupId>org.drools</groupId>
 				<artifactId>knowledge-api</artifactId>
 				<version>${drools.version}</version>
+				<exclusions>
+				    <exclusion>
+				        <groupId>org.eclipse.jdt.core.compiler</groupId>
+				        <artifactId>ecj</artifactId>
+				    </exclusion>
+				</exclusions>				
 			</dependency>
 			<dependency>
 				<groupId>org.drools</groupId>
@@ -1734,6 +1740,12 @@
 				<groupId>org.drools</groupId>
 				<artifactId>knowledge-internal-api</artifactId>
 				<version>${drools.version}</version>
+				<exclusions>
+				    <exclusion>
+				        <groupId>org.eclipse.jdt.core.compiler</groupId>
+				        <artifactId>ecj</artifactId>
+				    </exclusion>
+				</exclusions>				
 			</dependency>
 			<dependency>
 				<groupId>org.drools</groupId>

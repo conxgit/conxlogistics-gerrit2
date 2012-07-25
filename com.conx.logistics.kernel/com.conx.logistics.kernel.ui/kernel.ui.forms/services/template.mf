@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConX UI Forms Services
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.forms.services
+Bundle-Vendor: ConX
+Bundle-Version: 1.0.0
