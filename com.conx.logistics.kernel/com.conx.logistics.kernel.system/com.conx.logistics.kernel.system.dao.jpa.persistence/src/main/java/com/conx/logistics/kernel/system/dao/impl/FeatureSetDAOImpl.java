@@ -32,7 +32,7 @@ public class FeatureSetDAOImpl implements IFeatureSetDAOService {
     /**
      * Spring will inject a managed JPA {@link EntityManager} into this field.
      */
-    @PersistenceContext(unitName="pu")
+    @PersistenceContext
     private EntityManager em;	
 
 	public List<FeatureSet> getFeatureSets() {

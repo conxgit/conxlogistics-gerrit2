@@ -27,7 +27,7 @@ public class FeatureDAOImpl implements IFeatureDAOService {
     /**
      * Spring will inject a managed JPA {@link EntityManager} into this field.
      */
-    @PersistenceContext(unitName="pu")
+    @PersistenceContext
     private EntityManager em;	
 
 	@Override
