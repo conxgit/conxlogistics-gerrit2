@@ -16,5 +16,7 @@
   	<module>kernel.ui.common</module>
   	<module>kernel.ui.forms</module>
   	<module>kernel.ui.editors</module>
+  	<module>kernel.ui.ext</module>
+  	<module>kernel.ui.vaadin.addons</module>
   </modules>
 </project>

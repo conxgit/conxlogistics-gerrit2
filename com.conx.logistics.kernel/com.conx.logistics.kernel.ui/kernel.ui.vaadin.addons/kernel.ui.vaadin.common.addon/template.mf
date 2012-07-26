@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConX kernel UI Common Vaadin Addon
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.vaadin.common.addon
+Bundle-Vendor: ConX
+Bundle-Version: 1.0.0
+Vaadin-Widgetsets: com.conx.logistics.kernel.ui.common.gwt.KernelUICommonWidgetset
+Import-Package: 
+  com.vaadin;version="[6.7.0,7.0.0)",
+  com.vaadin.terminal;version="[6.7.0,7.0.0)",
+  com.vaadin.terminal.gwt.client;version="[6.7.0,7.0.0)",
+  com.vaadin.terminal.gwt.client.ui;version="[6.7.0,7.0.0)",
+  com.vaadin.ui;version="[6.7.0,7.0.0)",
+  com.vaadin.data;version="[6.7.0,7.0.0)",
+  com.vaadin.data.util;version="[6.7.0,7.0.0)",
+  com.vaadin.event;version="[6.7.0,7.0.0)"
+Excluded-Imports: com.google.gwt.core.client,
+  com.google.gwt.dom.client,
+  com.google.gwt.event.dom.client,
+  com.google.gwt.event.logical.shared,
+  com.google.gwt.event.shared,
+  com.google.gwt.user.client,
+  com.google.gwt.user.client.ui,
+  com.conx.logistics,
+  com.conx.logistics.gwt.client

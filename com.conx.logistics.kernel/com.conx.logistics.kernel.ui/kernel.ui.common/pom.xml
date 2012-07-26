@@ -32,7 +32,14 @@
 				com.conx.logistics.kernel.pageflow.services
 			</artifactId>
 			<version>${project.version}</version>
-		</dependency>			
+		</dependency>	
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.kernel.ui.vaadin.common.addon</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>		
+				
 		<!-- GWT/Vaadin -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -155,7 +162,12 @@
 					<include>**/view/**/*.xml</include>
 				</includes>
 			</resource>
-			
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/VAADIN/**/*.*</exclude>
+				</excludes>
+			</resource>			
 		</resources>
 		<plugins>
 			<plugin>

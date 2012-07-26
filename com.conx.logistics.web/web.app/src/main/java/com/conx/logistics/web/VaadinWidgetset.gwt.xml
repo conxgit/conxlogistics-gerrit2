@@ -17,4 +17,8 @@
     <inherits name="org.vaadin.teemu.wizards.WizardsforvaadinWidgetset" />
     
     
+
+    
+
+    <inherits name="com.conx.logistics.kernel.ui.common.gwt.KernelUICommonWidgetset" />
 </module>

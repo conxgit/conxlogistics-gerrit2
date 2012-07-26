@@ -1,2 +1,0 @@
-# Module com.conx.logistics.client.web.app.VaadinWidgetset
-# RPC service class, partial path of RPC policy file

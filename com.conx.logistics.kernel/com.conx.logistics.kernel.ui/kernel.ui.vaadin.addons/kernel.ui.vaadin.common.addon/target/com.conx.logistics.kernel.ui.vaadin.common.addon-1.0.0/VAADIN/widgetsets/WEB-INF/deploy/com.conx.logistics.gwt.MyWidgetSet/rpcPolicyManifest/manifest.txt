@@ -1,0 +1,2 @@
+# Module com.conx.logistics.gwt.MyWidgetSet
+# RPC service class, partial path of RPC policy file

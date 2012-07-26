@@ -1,7 +1,9 @@
 package com.conx.logistics.kernel.ui.common.mvp.view;
 
-import com.conx.logistics.kernel.ui.common.ui.ext.ConXFooter;
-import com.conx.logistics.kernel.ui.common.ui.ext.ConXHeader;
+import com.conx.logistics.kernel.ui.common.gwt.client.ui.ConXFooter;
+import com.conx.logistics.kernel.ui.common.gwt.client.ui.ConXHeader;
+import com.conx.logistics.kernel.ui.common.gwt.client.ui.VConXMenuBar;
+import com.conx.logistics.kernel.ui.common.gwt.client.ui.VConXQuickLaunchBox;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.HierarchicalContainer;
@@ -21,6 +23,9 @@ public class MainView extends Window implements IMainView {
 	private ConXHeader headerStrip;
 	private ConXFooter footerStrip;
 	private TabSheet applicationTabSheet;
+	
+	private VConXMenuBar dummy1;
+	private VConXQuickLaunchBox dummy2;
 	
 	@Override
 	public VerticalLayout getMainLayout() {

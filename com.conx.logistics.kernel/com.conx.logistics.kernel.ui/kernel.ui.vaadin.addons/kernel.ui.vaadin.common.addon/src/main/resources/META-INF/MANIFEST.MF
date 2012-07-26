@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics;version="1.0.0";uses:="com.vaadin,c
+ om.vaadin.terminal,com.vaadin.ui",com.conx.logistics.gwt.client;versi
+ on="1.0.0";uses:="com.google.gwt.user.client.ui,com.vaadin.terminal.g
+ wt.client",com.conx.logistics.kernel.ui.common.gwt.client;version="1.
+ 0.0";uses:="com.google.gwt.event.dom.client,com.google.gwt.user.clien
+ t.ui,com.vaadin.terminal,com.vaadin.terminal.gwt.client,com.vaadin.te
+ rminal.gwt.client.ui,com.vaadin.ui",com.conx.logistics.kernel.ui.comm
+ on.gwt.client.ui;version="1.0.0";uses:="com.google.gwt.core.client,co
+ m.google.gwt.event.dom.client,com.google.gwt.event.logical.shared,com
+ .google.gwt.user.client,com.google.gwt.user.client.ui,com.vaadin.data
+ ,com.vaadin.data.util,com.vaadin.event,com.vaadin.terminal,com.vaadin
+ .terminal.gwt.client,com.vaadin.terminal.gwt.client.ui,com.vaadin.ui"
+Implementation-Title: Vaadin Widget
+Implementation-Version: 1.0.0
+Built-By: mdu
+Vaadin-Widgetsets: com.conx.logistics.kernel.ui.common.gwt.KernelUICom
+ monWidgetset
+Class-Path: vaadin-6.7.5.jar
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX kernel UI Common Vaadin Addon
+Created-By: Maven Integration for Eclipse
+Bundle-Vendor: ConX
+Implementation-Vendor-Id: com.conx.logistics
+Vaadin-Package-Version: 1
+Build-Jdk: 1.6.0_33
+Bundle-Version: 1.0.0
+Bundle-ManifestVersion: 2
+Import-Package: com.vaadin;version="[6.7.0,7.0.0)",com.vaadin.data;ver
+ sion="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)",com
+ .vaadin.event;version="[6.7.0,7.0.0)",com.vaadin.terminal;version="[6
+ .7.0,7.0.0)",com.vaadin.terminal.gwt.client;version="[6.7.0,7.0.0)",c
+ om.vaadin.terminal.gwt.client.ui;version="[6.7.0,7.0.0)",com.vaadin.u
+ i;version="[6.7.0,7.0.0)"
+Bundle-SymbolicName: com.conx.logistics.kernel.ui.vaadin.common.addon
+

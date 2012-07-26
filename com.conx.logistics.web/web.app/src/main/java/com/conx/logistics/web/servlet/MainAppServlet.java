@@ -1,7 +1,6 @@
 package com.conx.logistics.web.servlet;
 
 import com.conx.logistics.kernel.ui.common.mvp.MainMVPApplication;
-import com.conx.logistics.web.client.MyVaadinApplication;
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
 import javax.persistence.EntityManagerFactory;
