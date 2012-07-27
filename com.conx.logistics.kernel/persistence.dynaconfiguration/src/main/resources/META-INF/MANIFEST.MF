@@ -1,16 +1,15 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.persistence.dynaconfiguratio
- n;version="1.0.0";uses:="com.conx.logistics.kernel.persistence.servic
- es,javax.sql,javax.transaction,org.hibernate,org.hibernate.transactio
- n,org.osgi.framework,org.slf4j,org.springframework.beans.factory",com
- .conx.logistics.kernel.persistence.orm.jpa;version="1.0.0";uses:="com
- .conx.logistics.kernel.persistence.services,javax.persistence,javax.s
- ql,org.springframework.beans.factory,org.springframework.beans.factor
- y.annotation,org.springframework.context,org.springframework.context.
- weaving,org.springframework.orm.jpa,org.springframework.orm.jpa.persi
- stenceunit",com.conx.logistics.kernel.persistence.orm.jpa.multipu;ver
- sion="1.0.0";uses:="javax.sql,org.springframework.beans.factory.annot
- ation,org.springframework.orm.jpa.persistenceunit"
+ n;version="1.0.0";uses:="javax.sql,javax.transaction,org.hibernate,or
+ g.hibernate.transaction,org.osgi.framework,org.slf4j,org.springframew
+ ork.beans.factory",com.conx.logistics.kernel.persistence.orm.jpa;vers
+ ion="1.0.0";uses:="javax.persistence,javax.sql,org.springframework.be
+ ans.factory,org.springframework.beans.factory.annotation,org.springfr
+ amework.context,org.springframework.context.weaving,org.springframewo
+ rk.orm.jpa,org.springframework.orm.jpa.persistenceunit",com.conx.logi
+ stics.kernel.persistence.orm.jpa.multipu;version="1.0.0";uses:="javax
+ .sql,org.springframework.beans.factory.annotation,org.springframework
+ .orm.jpa.persistenceunit"
 Import-Bundle: com.conx.logistics.thirdparty.hibernate.core;version="3
  .6.0.Final";import-scope:="application",com.conx.logistics.thirdparty
  .hibernate.annotations.commons;version="3.2.0.Final";import-scope:="a

@@ -2,22 +2,19 @@ Manifest-Version: 1.0
 Export-Package: com.conx.logistics.kernel.system.data;version="1.0.0";
  uses:="com.vaadin.addon.jpacontainer,javax.persistence",com.conx.logi
  stics.kernel.system.ui;version="1.0.0";uses:="com.conx.logistics.kern
- el.ui.common.mvp,com.conx.logistics.kernel.ui.common.ui.feature,com.c
- onx.logistics.mdm.domain.application,com.vaadin.addon.jpacontainer,co
- m.vaadin.event,com.vaadin.ui,org.vaadin.mvp.eventbus.annotation,org.v
- aadin.mvp.presenter,org.vaadin.mvp.presenter.annotation",com.conx.log
- istics.kernel.system.ui.contribution;version="1.0.0";uses:="com.conx.
- logistics.kernel.ui.service.contribution,com.vaadin,com.vaadin.ui,org
- .vaadin.mvp.uibinder",com.conx.logistics.kernel.system.ui.navigation;
- version="1.0.0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.co
- nx.logistics.mdm.domain.application,com.vaadin.addon.jpacontainer,com
- .vaadin.data,com.vaadin.ui,org.vaadin.mvp.eventbus,org.vaadin.mvp.eve
- ntbus.annotation,org.vaadin.mvp.presenter,org.vaadin.mvp.presenter.an
- notation",com.conx.logistics.kernel.system.ui.navigation.view;version
- ="1.0.0";uses:="com.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.
- uibinder.annotation",com.conx.logistics.kernel.system.ui.view;version
- ="1.0.0";uses:="com.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.
- uibinder.annotation"
+ el.ui.common.mvp,com.vaadin.ui,org.vaadin.mvp.eventbus.annotation,org
+ .vaadin.mvp.presenter,org.vaadin.mvp.presenter.annotation",com.conx.l
+ ogistics.kernel.system.ui.contribution;version="1.0.0";uses:="com.con
+ x.logistics.kernel.ui.service.contribution,com.vaadin,com.vaadin.ui,o
+ rg.vaadin.mvp.uibinder",com.conx.logistics.kernel.system.ui.navigatio
+ n;version="1.0.0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.
+ vaadin.ui,org.vaadin.mvp.eventbus,org.vaadin.mvp.eventbus.annotation,
+ org.vaadin.mvp.presenter,org.vaadin.mvp.presenter.annotation",com.con
+ x.logistics.kernel.system.ui.navigation.view;version="1.0.0";uses:="c
+ om.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.uibinder.annotati
+ on",com.conx.logistics.kernel.system.ui.view;version="1.0.0";uses:="c
+ om.vaadin.ui,org.vaadin.mvp.uibinder,org.vaadin.mvp.uibinder.annotati
+ on"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0

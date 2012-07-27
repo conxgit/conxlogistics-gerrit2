@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.rcv.pageflow.pages;ver
  sion="1.0.0";uses:="com.conx.logistics.kernel.pageflow.event,com.conx
- .logistics.kernel.pageflow.services,com.vaadin.ui,javax.persistence,o
- rg.springframework.transaction"
+ .logistics.kernel.pageflow.services,javax.persistence,org.springframe
+ work.transaction"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0

@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.data.uat.sprint1.data;version="1.0.
  0";uses:="com.conx.logistics.app.whse.dao.services,com.conx.logistics
- .app.whse.rcv.asn.dao.services,com.conx.logistics.mdm.dao.services,co
- m.conx.logistics.mdm.dao.services.currency,com.conx.logistics.mdm.dao
- .services.documentlibrary,com.conx.logistics.mdm.dao.services.product
- ,com.conx.logistics.mdm.dao.services.referencenumber,javax.persistenc
- e,org.springframework.transaction"
+ .mdm.dao.services,com.conx.logistics.mdm.dao.services.currency,com.co
+ nx.logistics.mdm.dao.services.documentlibrary,com.conx.logistics.mdm.
+ dao.services.product,com.conx.logistics.mdm.dao.services.referencenum
+ ber,javax.persistence,org.springframework.transaction"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_29
 Built-By: dev

@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.dao.services.impl;version=
- "1.0.0";uses:="com.conx.logistics.app.whse.dao.services,com.conx.logi
- stics.app.whse.domain.docktype,javax.persistence,org.springframework.
- stereotype,org.springframework.transaction.annotation"
+ "1.0.0";uses:="com.conx.logistics.app.whse.dao.services,javax.persist
+ ence,org.springframework.stereotype,org.springframework.transaction.a
+ nnotation"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_32
 Built-By: Mdu

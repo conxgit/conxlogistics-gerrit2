@@ -1,0 +1,27 @@
+Bundle-ManifestVersion: 2
+Bundle-Version: 1.0.0
+Bundle-Name: JBPM packages for Mina
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserver.mina.fragment
+Fragment-Host: com.springsource.org.apache.mina.core
+Import-Package: org.jbpm.eventmessaging;version="5.3.0.Final",
+  org.jbpm.process.workitem.wsht;version="5.3.0.Final",
+  org.jbpm.task;version="5.3.0.Final",
+  org.jbpm.task.admin;version="5.3.0.Final",
+  org.jbpm.task.event;version="5.3.0.Final",
+  org.jbpm.task.query;version="5.3.0.Final",
+  org.jbpm.task.service;version="5.3.0.Final",
+  org.jbpm.task.service.local;version="5.3.0.Final",
+  org.jbpm.task.service.persistence;version="5.3.0.Final",
+  org.jbpm.task.service.responsehandlers;version="5.3.0.Final",
+  org.jbpm.task.utils;version="5.3.0.Final"
+Excluded-Exports: 
+ org.jbpm.task.service,
+ org.jbpm.task.service.persistence,
+ org.mvel2
+Excluded-Imports: 
+  javax.persistence,
+  org.drools,
+  org.drools.persistence,
+  org.drools.persistence.jta,
+  org.mvel2,
+  org.slf4j

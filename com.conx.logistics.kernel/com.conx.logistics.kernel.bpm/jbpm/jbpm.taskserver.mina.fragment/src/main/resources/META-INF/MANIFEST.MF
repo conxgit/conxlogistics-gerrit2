@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Fragment-Host: com.springsource.org.apache.mina.core
+Bundle-Version: 2.0.2
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: JBPM packages for Mina
+Bundle-ManifestVersion: 2
+Import-Package: org.jbpm.eventmessaging;version="5.3.0.Final",org.jbpm
+ .process.workitem.wsht;version="5.3.0.Final",org.jbpm.task;version="5
+ .3.0.Final",org.jbpm.task.admin;version="5.3.0.Final",org.jbpm.task.e
+ vent;version="5.3.0.Final",org.jbpm.task.query;version="5.3.0.Final",
+ org.jbpm.task.service;version="5.3.0.Final",org.jbpm.task.service.loc
+ al;version="5.3.0.Final",org.jbpm.task.service.persistence;version="5
+ .3.0.Final",org.jbpm.task.service.responsehandlers;version="5.3.0.Fin
+ al",org.jbpm.task.utils;version="5.3.0.Final"
+Bundle-SymbolicName: com.conx.logistics.kernel.bpm.impl.jbpm.taskserve
+ r.mina.fragment
+

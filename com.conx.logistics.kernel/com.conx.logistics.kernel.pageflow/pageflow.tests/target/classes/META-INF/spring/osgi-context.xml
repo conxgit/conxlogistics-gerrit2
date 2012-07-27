@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	xmlns:osgi="http://www.springframework.org/schema/osgi">
+
+	<osgi:reference id="conxLogisticsManagerFactory" interface="javax.persistence.EntityManagerFactory" filter="(module=KERNEL)">
+	</osgi:reference>		
+	
+	<!-- KERNEL.TM.JTA Transaction Manager -->
+	<osgi:reference id="globalJtaTransactionManager" interface="org.springframework.transaction.PlatformTransactionManager" filter="(module=KERNEL.TM.JTA)">
+	</osgi:reference>		
+	
+	<!-- KERNEL.TM Transaction Manager -->
+	<osgi:reference id="globalTransactionManager" interface="javax.transaction.TransactionManager" filter="(module=KERNEL.TM)">
+	</osgi:reference>	
+	
+	<osgi:reference id="kernelSystemTransManager" interface="org.springframework.transaction.PlatformTransactionManager" filter="(module=KERNEL.TM.JTA)"/>
+
+	<osgi:reference id="defaultPageFlowEngine" cardinality="1..1" interface="com.conx.logistics.kernel.pageflow.services.IPageFlowManager">		
+	</osgi:reference>			
+</beans>

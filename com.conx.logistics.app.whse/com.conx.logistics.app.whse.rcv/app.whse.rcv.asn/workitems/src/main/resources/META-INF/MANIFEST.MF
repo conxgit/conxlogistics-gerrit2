@@ -1,12 +1,11 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.workitems;version=
  "1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.services,com.c
- onx.logistics.app.whse.rcv.asn.domain,com.conx.logistics.mdm.dao.serv
- ices,com.conx.logistics.mdm.domain.metadata,javax.persistence,org.dro
- ols.process.instance,org.drools.runtime.process,org.springframework.b
- eans.factory.annotation,org.springframework.jndi,org.springframework.
- stereotype,org.springframework.transaction,org.springframework.transa
- ction.annotation"
+ onx.logistics.mdm.dao.services,javax.persistence,org.drools.process.i
+ nstance,org.drools.runtime.process,org.springframework.beans.factory.
+ annotation,org.springframework.jndi,org.springframework.stereotype,or
+ g.springframework.transaction,org.springframework.transaction.annotat
+ ion"
 Build-Jdk: 1.6.0_29
 Built-By: dev
 Bundle-Version: 1.0.0

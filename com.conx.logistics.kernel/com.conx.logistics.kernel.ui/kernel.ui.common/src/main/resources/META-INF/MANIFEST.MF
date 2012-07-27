@@ -4,25 +4,22 @@ Export-Package: com.conx.logistics.kernel.ui.common;version="1.0.0";us
  common.data.container;version="1.0.0";uses:="com.vaadin.addon.jpacont
  ainer,com.vaadin.data,javax.persistence",com.conx.logistics.kernel.ui
  .common.mvp;version="1.0.0";uses:="com.conx.logistics.kernel.pageflow
- .services,com.conx.logistics.kernel.system.dao.services.application,c
- om.conx.logistics.kernel.ui.common.data.container,com.conx.logistics.
- kernel.ui.common.ui.menu.app,com.conx.logistics.kernel.ui.service,com
- .conx.logistics.kernel.ui.service.contribution,com.vaadin,com.vaadin.
- data,com.vaadin.data.util,com.vaadin.ui,javax.persistence,org.springf
- ramework.transaction,org.vaadin.mvp.eventbus,org.vaadin.mvp.eventbus.
- annotation,org.vaadin.mvp.presenter,org.vaadin.mvp.presenter.annotati
- on,org.vaadin.mvp.uibinder",com.conx.logistics.kernel.ui.common.mvp.v
- iew;version="1.0.0";uses:="com.vaadin.data,com.vaadin.data.util,com.v
- aadin.ui",com.conx.logistics.kernel.ui.common.mvp.view.feature;versio
- n="1.0.0";uses:="com.conx.logistics.kernel.ui.common.mvp,com.conx.log
- istics.mdm.domain.application,com.vaadin.ui,org.vaadin.mvp.presenter"
- ,com.conx.logistics.kernel.ui.common.ui.feature;version="1.0.0";uses:
- ="com.vaadin.data.util,com.vaadin.ui",com.conx.logistics.kernel.ui.co
- mmon.ui.form.field;version="1.0.0";uses:="com.conx.logistics.kernel.u
- i.common.data.container,com.vaadin.data,com.vaadin.ui",com.conx.logis
- tics.kernel.ui.common.ui.menu;version="1.0.0",com.conx.logistics.kern
- el.ui.common.ui.menu.app;version="1.0.0";uses:="com.conx.logistics.ke
- rnel.ui.common.ui.menu,com.vaadin.ui"
+ .services,com.conx.logistics.kernel.ui.service,com.conx.logistics.ker
+ nel.ui.service.contribution,com.vaadin,com.vaadin.data,com.vaadin.dat
+ a.util,com.vaadin.ui,javax.persistence,org.springframework.transactio
+ n,org.vaadin.mvp.eventbus,org.vaadin.mvp.eventbus.annotation,org.vaad
+ in.mvp.presenter,org.vaadin.mvp.presenter.annotation,org.vaadin.mvp.u
+ ibinder",com.conx.logistics.kernel.ui.common.mvp.view;version="1.0.0"
+ ;uses:="com.vaadin.data,com.vaadin.data.util,com.vaadin.ui",com.conx.
+ logistics.kernel.ui.common.mvp.view.feature;version="1.0.0";uses:="co
+ m.conx.logistics.kernel.ui.common.mvp,com.vaadin.ui,org.vaadin.mvp.pr
+ esenter",com.conx.logistics.kernel.ui.common.ui.feature;version="1.0.
+ 0";uses:="com.vaadin.data.util,com.vaadin.ui",com.conx.logistics.kern
+ el.ui.common.ui.form.field;version="1.0.0";uses:="com.conx.logistics.
+ kernel.ui.common.data.container,com.vaadin.data,com.vaadin.ui",com.co
+ nx.logistics.kernel.ui.common.ui.menu;version="1.0.0",com.conx.logist
+ ics.kernel.ui.common.ui.menu.app;version="1.0.0";uses:="com.conx.logi
+ stics.kernel.ui.common.ui.menu,com.vaadin.ui"
 Build-Jdk: 1.6.0_33
 Built-By: mdu
 Bundle-Version: 1.0.0
@@ -33,23 +30,19 @@ Created-By: Maven Integration for Eclipse
 Bundle-SymbolicName: com.conx.logistics.kernel.ui.common
 Import-Package: com.conx.logistics.common.utils;version="[1.0.0,2.0.0)
  ",com.conx.logistics.kernel.pageflow.services;version="[1.0.0,2.0.0)"
- ,com.conx.logistics.kernel.system.dao.services.application;version="[
- 1.0.0,2.0.0)",com.conx.logistics.kernel.ui.common.gwt.client.ui;versi
- on="[1.0.0,2.0.0)",com.conx.logistics.kernel.ui.service;version="[1.0
- .0,2.0.0)",com.conx.logistics.kernel.ui.service.contribution;version=
- "[1.0.0,2.0.0)",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)"
- ,com.conx.logistics.mdm.domain.application;version="[1.0.0,2.0.0)",co
- m.vaadin;version="[6.7.0,7.0.0)",com.vaadin.addon.jpacontainer;versio
- n="2.0.0",com.vaadin.addon.jpacontainer.provider;version="2.0.0",com.
- vaadin.data;version="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.
- 7.0,7.0.0)",com.vaadin.data.util.filter;version="[6.7.0,7.0.0)",com.v
- aadin.terminal;version="[6.7.4,7.0.0)",com.vaadin.terminal.gwt.server
- ;version="[6.7.4,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)",javax.
- persistence;version="[1.0.0, 3.0.0)",org.slf4j;version="[1.6.1,1.6.1]
- ",org.springframework.transaction;version="[3.0,3.1)",org.springframe
- work.transaction.support;version="[3.0, 3.1)",org.vaadin.mvp.eventbus
- ;version="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.annotation;version=
- "0.9.2.SNAPSHOT",org.vaadin.mvp.presenter;version="0.9.2.SNAPSHOT",or
- g.vaadin.mvp.presenter.annotation;version="0.9.2.SNAPSHOT",org.vaadin
- .mvp.uibinder;version="0.9.2.SNAPSHOT"
+ ,com.conx.logistics.kernel.ui.common.gwt.client.ui;version="[1.0.0,2.
+ 0.0)",com.conx.logistics.kernel.ui.service;version="[1.0.0,2.0.0)",co
+ m.conx.logistics.kernel.ui.service.contribution;version="[1.0.0,2.0.0
+ )",com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",com.vaadin;v
+ ersion="[6.7.0,7.0.0)",com.vaadin.addon.jpacontainer;version="2.0.0",
+ com.vaadin.addon.jpacontainer.provider;version="2.0.0",com.vaadin.dat
+ a;version="[6.7.0,7.0.0)",com.vaadin.data.util;version="[6.7.0,7.0.0)
+ ",com.vaadin.terminal;version="[6.7.4,7.0.0)",com.vaadin.terminal.gwt
+ .server;version="[6.7.4,7.0.0)",com.vaadin.ui;version="[6.7.0,7.0.0)"
+ ,javax.persistence;version="[1.0.0, 3.0.0)",org.slf4j;version="[1.6.1
+ ,1.6.1]",org.springframework.transaction;version="[3.0,3.1)",org.vaad
+ in.mvp.eventbus;version="0.9.2.SNAPSHOT",org.vaadin.mvp.eventbus.anno
+ tation;version="0.9.2.SNAPSHOT",org.vaadin.mvp.presenter;version="0.9
+ .2.SNAPSHOT",org.vaadin.mvp.presenter.annotation;version="0.9.2.SNAPS
+ HOT",org.vaadin.mvp.uibinder;version="0.9.2.SNAPSHOT"
 

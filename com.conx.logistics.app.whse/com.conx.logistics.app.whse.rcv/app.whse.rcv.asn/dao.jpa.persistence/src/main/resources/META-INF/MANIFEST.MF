@@ -1,9 +1,8 @@
 Manifest-Version: 1.0
 Export-Package: com.conx.logistics.app.whse.rcv.asn.dao.services.impl;
- version="1.0.0";uses:="com.conx.logistics.app.whse.rcv.asn.dao.servic
- es,com.conx.logistics.app.whse.rcv.asn.domain,javax.persistence,org.s
- pringframework.beans.factory.annotation,org.springframework.stereotyp
- e,org.springframework.transaction.annotation"
+ version="1.0.0";uses:="javax.persistence,org.springframework.beans.fa
+ ctory.annotation,org.springframework.stereotype,org.springframework.t
+ ransaction.annotation"
 Bundle-Vendor: ConX
 Build-Jdk: 1.6.0_32
 Built-By: Mdu
