@@ -31,7 +31,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiConditionalBlockRepresentation")
+@Table(name="sysfmconditionalblockrepresentation")
 public class ConditionalBlockRepresentation extends FormItemRepresentation {
 
     private FormItemRepresentation ifBlock;

@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiFlowPanelRepresentation")
+@Table(name="sysfmflowpanelrepresentation")
 public class FlowPanelRepresentation extends FormItemRepresentation {
 
     private String cssClassName;

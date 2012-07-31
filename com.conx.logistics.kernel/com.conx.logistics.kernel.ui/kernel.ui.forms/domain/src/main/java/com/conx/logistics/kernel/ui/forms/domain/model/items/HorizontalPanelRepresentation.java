@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiHorizontalPanelRepresentation")
+@Table(name="sysfmhorizontalpanelrepresentation")
 public class HorizontalPanelRepresentation extends FormItemRepresentation {
 
     private Integer borderWidth;
@@ -95,14 +95,6 @@ public class HorizontalPanelRepresentation extends FormItemRepresentation {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
     
     public List<FormItemRepresentation> getItems() {

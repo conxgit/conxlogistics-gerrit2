@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConX Query Domain
+Bundle-SymbolicName: com.conx.logistics.kernel.metamodel.domain
+Bundle-Vendor: ConX
+Bundle-Version: 1.0.0
+Import-Package: com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+  com.conx.logistics.mdm.domain.product;version="[1.0.0,2.0.0)",
+  org.springframework.format.annotation;version="[1.0.0,2.0.0)",
+  javax.persistence;version="0",
+  javax.persistence.criteria;version="0",
+  javax.persistence.metamodel;version="0"
+  
+  

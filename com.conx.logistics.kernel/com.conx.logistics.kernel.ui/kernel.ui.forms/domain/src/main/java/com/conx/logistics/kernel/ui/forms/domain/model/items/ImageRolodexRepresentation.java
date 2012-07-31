@@ -31,7 +31,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiImageRolodexRepresentation")
+@Table(name="sysfmimagerolodexrepresentation")
 public class ImageRolodexRepresentation extends FormItemRepresentation {
 
     private List<String> imageUrls = new ArrayList<String>();

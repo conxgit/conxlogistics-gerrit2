@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiCanvasRepresentation")
+@Table(name="sysfmcanvasrepresentation")
 public class CanvasRepresentation extends FormItemRepresentation {
 
     private String cssClassName;

@@ -27,7 +27,7 @@
 			<props>
 				<prop key="user">sa</prop>
 				<prop key="password">sasa</prop>
-				<prop key="URL">jdbc:h2:mem:conxlogistics;MODE=MySQL</prop>
+				<prop key="URL">jdbc:h2:mem:conxlogistics;MODE=MySQL;TRACE_LEVEL_SYSTEM_OUT=3</prop>
 			</props>
 		</property>
 	</bean>

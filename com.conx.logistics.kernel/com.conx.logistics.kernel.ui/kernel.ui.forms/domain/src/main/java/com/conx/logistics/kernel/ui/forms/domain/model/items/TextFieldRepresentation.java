@@ -28,7 +28,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiTextFieldRepresentation")
+@Table(name="sysfmtextfieldrepresentation")
 public class TextFieldRepresentation extends FormItemRepresentation {
 
     private String defaultValue;

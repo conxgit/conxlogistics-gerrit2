@@ -7,6 +7,13 @@
     <relativePath>..</relativePath>
   </parent>
   <artifactId>com.conx.logistics.kernel.ui.editors.domain</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.mdm.domain</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>  
 	<build>
 		<plugins>
 			<plugin>

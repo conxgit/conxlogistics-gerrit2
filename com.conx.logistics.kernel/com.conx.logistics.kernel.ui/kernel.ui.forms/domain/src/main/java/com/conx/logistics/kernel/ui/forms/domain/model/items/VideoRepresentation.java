@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiVideoRepresentation")
+@Table(name="sysfmvideorepresentation")
 public class VideoRepresentation extends FormItemRepresentation {
 
     private String cssClassName;

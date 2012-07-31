@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiPasswordFieldRepresentation")
+@Table(name="sysfmpasswordfieldrepresentation")
 public class PasswordFieldRepresentation extends FormItemRepresentation {
 
     private String defaultValue;
@@ -55,14 +55,6 @@ public class PasswordFieldRepresentation extends FormItemRepresentation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Integer getMaxLength() {

@@ -32,7 +32,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiSummaryRepresentation")
+@Table(name="sysfmsummaryrepresentation")
 public class SummaryRepresentation extends FormItemRepresentation {
 
     private String cssClassName;
@@ -62,15 +62,7 @@ public class SummaryRepresentation extends FormItemRepresentation {
     public void setDir(String dir) {
         this.dir = dir;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    
     public int getScrollLeft() {
         return scrollLeft;
     }

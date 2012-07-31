@@ -30,7 +30,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiImageRepresentation")
+@Table(name="sysfmimagerepresentation")
 public class ImageRepresentation extends FormItemRepresentation {
 
     private String altText;
@@ -57,15 +57,7 @@ public class ImageRepresentation extends FormItemRepresentation {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    
     public Map<String, String> getI18n() {
         return i18n;
     }

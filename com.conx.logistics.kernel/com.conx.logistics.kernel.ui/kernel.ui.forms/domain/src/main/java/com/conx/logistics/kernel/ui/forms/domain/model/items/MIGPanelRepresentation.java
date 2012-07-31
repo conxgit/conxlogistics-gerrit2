@@ -34,7 +34,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiMIGPanelRepresentation")
+@Table(name="sysfmmigpanelrepresentation")
 public class MIGPanelRepresentation extends FormItemRepresentation {
 
     class Cell {

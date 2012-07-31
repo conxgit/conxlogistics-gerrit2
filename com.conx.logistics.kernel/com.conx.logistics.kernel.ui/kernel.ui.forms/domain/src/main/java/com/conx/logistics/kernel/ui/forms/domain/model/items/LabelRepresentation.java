@@ -30,7 +30,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiLabelRepresentation")
+@Table(name="sysfmlabelrepresentation")
 public class LabelRepresentation extends FormItemRepresentation {
 
     private String value;
@@ -49,14 +49,6 @@ public class LabelRepresentation extends FormItemRepresentation {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getCssName() {

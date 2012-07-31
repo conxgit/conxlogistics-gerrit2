@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiFileInputRepresentation")
+@Table(name="sysfmfileinputrepresentation")
 public class FileInputRepresentation extends FormItemRepresentation {
 
     private String name;
@@ -46,14 +46,6 @@ public class FileInputRepresentation extends FormItemRepresentation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getAccept() {

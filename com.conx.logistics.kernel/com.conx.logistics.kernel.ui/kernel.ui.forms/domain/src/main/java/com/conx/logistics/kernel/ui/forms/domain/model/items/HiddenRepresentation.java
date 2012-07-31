@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiHiddenRepresentation")
+@Table(name="sysfmhiddenrepresentation")
 public class HiddenRepresentation extends FormItemRepresentation {
 
     private String id;

@@ -19,7 +19,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiabsolutepanelrepresentation")
+@Table(name="sysfmabsolutepanelrepresentation")
 public class AbsolutePanelRepresentation extends FormItemRepresentation {
 
     public static class Position {

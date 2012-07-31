@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiNumberFieldRepresentation")
+@Table(name="sysfmnumberfieldrepresentation")
 public class NumberFieldRepresentation extends FormItemRepresentation {
 
     private Double defaultValue;
@@ -63,14 +63,6 @@ public class NumberFieldRepresentation extends FormItemRepresentation {
 
     public void setMaxLength(Integer maxLength) {
         this.maxLength = maxLength;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override

@@ -30,7 +30,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingFactory;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiLoopBlockRepresentation")
+@Table(name="sysfmloopblockrepresentation")
 public class LoopBlockRepresentation extends FormItemRepresentation {
 
     private String inputName;

@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiUploadWithProgressBarRepresentation")
+@Table(name="sysfmuploadwithprogressbarrepresentation")
 public class UploadWithProgressBarRepresentation extends FormItemRepresentation {
 
     private boolean autoSubmit;

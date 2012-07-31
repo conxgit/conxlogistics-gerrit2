@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>com.conx.logistics.kernel.metamodel</artifactId>
+    <groupId>com.conx.logistics</groupId>
+    <version>1.0.0</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>com.conx.logistics.kernel.metamodel.dao.services</artifactId>
+	<dependencies>
+		<!-- ConX -->
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.mdm.domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.conx.logistics</groupId>
+			<artifactId>com.conx.logistics.kernel.metamodel.domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.springsource.bundlor</groupId>
+				<artifactId>com.springsource.bundlor.maven</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<failOnWarnings>true</failOnWarnings>
+					<!-- used to properly set-up versions for system packages -->
+					<osgiProfilePath>${basedir}/../../../java6-server.profile</osgiProfilePath>
+					<bundleVersion>${project.version}</bundleVersion>
+					<!-- point to a different output path - so manifest will be regenerated 
+						on each build and can be eyeballed if desired. Also for eclipse use, where 
+						manifest is always needed -->
+					<outputPath>${bundlor.manifest.output.path}</outputPath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-manifest</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>  
+</project>

@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiCompleteButtonRepresentation")
+@Table(name="sysfmcompletebuttonrepresentation")
 public class CompleteButtonRepresentation extends FormItemRepresentation {
 
     private String text;
@@ -64,14 +64,6 @@ public class CompleteButtonRepresentation extends FormItemRepresentation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public FBScript getOnClickScript() {

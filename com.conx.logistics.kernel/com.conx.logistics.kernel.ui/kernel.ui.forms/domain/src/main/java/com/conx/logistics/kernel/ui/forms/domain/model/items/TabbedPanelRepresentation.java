@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingFactory;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiTabbedPanelRepresentation")
+@Table(name="sysfmtabbedpanelrepresentation")
 public class TabbedPanelRepresentation extends FormItemRepresentation {
 
     public class IndexedString {

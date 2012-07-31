@@ -15,13 +15,11 @@
  */
 package com.conx.logistics.kernel.ui.forms.domain.model;
 
-import com.google.gwt.user.client.ui.Widget;
-
 /**
  * Helper to create visually attractive components for 
  * generating javascript editors
  */
-public interface FBScriptHelper extends Mappable {
+public interface FBScriptHelper {
 
     /**
      * Transform any UI loaded content into a script implementation
@@ -33,7 +31,7 @@ public interface FBScriptHelper extends Mappable {
      * Returns a UI component that implements visual contents
      * @return
      */
-    Widget draw();
+    //Widget draw();
     
     /**
      * Returns the name of the UI script helper

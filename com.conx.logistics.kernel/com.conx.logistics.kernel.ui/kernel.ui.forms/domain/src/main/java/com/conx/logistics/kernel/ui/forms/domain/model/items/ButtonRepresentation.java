@@ -32,7 +32,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiButtonRepresentation")
+@Table(name="sysfmbuttonrepresentation")
 public class ButtonRepresentation extends FormItemRepresentation {
 
     private String text;

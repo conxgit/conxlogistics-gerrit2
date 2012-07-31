@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiMenuPanelRepresentation")
+@Table(name="sysfmmenupanelrepresentation")
 public class MenuPanelRepresentation extends FormItemRepresentation {
 
     private String type;
@@ -60,14 +60,6 @@ public class MenuPanelRepresentation extends FormItemRepresentation {
 
     public void setCssClassName(String cssClassName) {
         this.cssClassName = cssClassName;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getDir() {

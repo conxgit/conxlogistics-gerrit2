@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiTextAreaRepresentation")
+@Table(name="sysfmtextarearepresentation")
 public class TextAreaRepresentation extends FormItemRepresentation {
 
     private String name;
@@ -72,14 +72,6 @@ public class TextAreaRepresentation extends FormItemRepresentation {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override

@@ -34,7 +34,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiComboBoxRepresentation")
+@Table(name="sysfmcomboboxrepresentation")
 public class ComboBoxRepresentation extends FormItemRepresentation {
 
     private List<OptionRepresentation> elements;
@@ -68,14 +68,6 @@ public class ComboBoxRepresentation extends FormItemRepresentation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
     
     @Override

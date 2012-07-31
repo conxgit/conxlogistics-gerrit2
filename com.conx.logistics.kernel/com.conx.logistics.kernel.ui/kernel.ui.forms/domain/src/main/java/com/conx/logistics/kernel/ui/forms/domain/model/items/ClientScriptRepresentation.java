@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiClientScriptRepresentation")
+@Table(name="sysfmclientscriptrepresentation")
 public class ClientScriptRepresentation extends FormItemRepresentation {
 
     private String type;

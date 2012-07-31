@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiLineGraphRepresentation")
+@Table(name="sysfmlinegraphrepresentation")
 public class LineGraphRepresentation extends FormItemRepresentation {
 
     private List<List<String>> dataTable = new ArrayList<List<String>>();

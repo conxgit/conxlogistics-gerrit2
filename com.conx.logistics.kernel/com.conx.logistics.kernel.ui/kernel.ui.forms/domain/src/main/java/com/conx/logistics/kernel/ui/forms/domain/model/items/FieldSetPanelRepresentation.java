@@ -34,7 +34,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiFieldSetPanelRepresentation")
+@Table(name="sysfmfieldsetpanelrepresentation")
 public class FieldSetPanelRepresentation extends FormItemRepresentation {
 
     private String cssClassName;

@@ -5,4 +5,5 @@ Bundle-SymbolicName: com.conx.logistics.kernel.ui.editors.domain
 Bundle-Vendor: ConX
 Bundle-Version: 1.0.0
 Import-Package: com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+  com.conx.logistics.mdm.domain.metadata;version="[1.0.0,2.0.0)",
   javax.persistence;version="0"

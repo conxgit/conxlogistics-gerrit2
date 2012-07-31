@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.domain.model.FormItemRepresentation;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiBorderPanelRepresentation")
+@Table(name="sysfmborderpanelrepresentation")
 public class BorderPanelRepresentation extends FormItemRepresentation {
 
     public static enum Position {

@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiOptionRepresentation")
+@Table(name="sysfmoptionrepresentation")
 public class OptionRepresentation extends FormItemRepresentation {
 
     private String label;

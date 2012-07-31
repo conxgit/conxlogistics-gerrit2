@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.metamodel.dao.services;versi
+ on="1.0.0";uses:="com.conx.logistics.kernel.metamodel.domain,javax.pe
+ rsistence.metamodel"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_33
+Built-By: mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX MetaModel
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.metamodel.dao.services
+Import-Package: com.conx.logistics.kernel.metamodel.domain;version="1.
+ 0.0",javax.persistence;version="0",javax.persistence.metamodel;versio
+ n="0"
+

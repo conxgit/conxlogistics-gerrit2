@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Export-Package: com.conx.logistics.kernel.metamodel.domain;version="1.
+ 0.0";uses:="javax.persistence,javax.persistence.metamodel,org.springf
+ ramework.format.annotation"
+Bundle-Vendor: ConX
+Build-Jdk: 1.6.0_33
+Built-By: mdu
+Bundle-Version: 1.0.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: ConX Query Domain
+Bundle-ManifestVersion: 2
+Created-By: Maven Integration for Eclipse
+Bundle-SymbolicName: com.conx.logistics.kernel.metamodel.domain
+Import-Package: com.conx.logistics.mdm.domain;version="[1.0.0,2.0.0)",
+ com.conx.logistics.mdm.domain.product;version="[1.0.0,2.0.0)",javax.p
+ ersistence;version="0",javax.persistence.criteria;version="0",javax.p
+ ersistence.metamodel;version="0",org.springframework.format.annotatio
+ n;version="[1.0.0,2.0.0)"
+

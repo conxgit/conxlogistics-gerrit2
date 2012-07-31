@@ -28,7 +28,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiCheckBoxRepresentation")
+@Table(name="sysfmcheckboxrepresentation")
 public class CheckBoxRepresentation extends FormItemRepresentation {
 
     private String formValue;

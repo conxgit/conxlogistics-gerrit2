@@ -33,7 +33,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormRepresentationDecoder;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiCSSPanelRepresentation")
+@Table(name="sysfmcsspanelrepresentation")
 public class CSSPanelRepresentation extends FormItemRepresentation {
 
     private String cssClassName;
@@ -59,14 +59,6 @@ public class CSSPanelRepresentation extends FormItemRepresentation {
 
     public void setCssStylesheetUrl(String cssStylesheetUrl) {
         this.cssStylesheetUrl = cssStylesheetUrl;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public List<FormItemRepresentation> getItems() {

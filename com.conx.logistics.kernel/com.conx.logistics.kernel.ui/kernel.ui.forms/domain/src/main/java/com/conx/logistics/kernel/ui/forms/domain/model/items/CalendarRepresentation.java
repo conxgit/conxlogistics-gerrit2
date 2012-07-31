@@ -29,7 +29,7 @@ import com.conx.logistics.kernel.ui.forms.shared.form.FormEncodingException;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="uiCalendarRepresentation")
+@Table(name="sysfmcalendarrepresentation")
 public class CalendarRepresentation extends FormItemRepresentation {
 
     private String iconUrl;
